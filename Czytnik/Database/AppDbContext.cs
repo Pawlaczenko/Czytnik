@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Czytnik.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Czytnik.Database
 {
@@ -8,5 +9,8 @@ namespace Czytnik.Database
         : base(options)
         {
         }
+
+        public DbSet<Book> Books { get; set; }
+
     }
 }
