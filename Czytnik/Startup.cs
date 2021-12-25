@@ -1,4 +1,4 @@
-using Czytnik.Database;
+using Czytnik_DataAccess.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
