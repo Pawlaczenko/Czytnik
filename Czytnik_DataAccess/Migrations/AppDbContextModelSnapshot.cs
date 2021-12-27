@@ -387,6 +387,9 @@ namespace Czytnik_DataAccess.Migrations
                     b.Property<short>("Rating")
                         .HasColumnType("smallint");
 
+                    b.Property<DateTime>("ReviewDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ReviewText")
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");

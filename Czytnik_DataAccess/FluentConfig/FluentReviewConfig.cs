@@ -15,6 +15,7 @@ namespace Czytnik_DataAccess.FluentConfig
         {
             modelBuilder.Property(i => i.Rating).IsRequired();
             modelBuilder.Property(i => i.ReviewText).HasMaxLength(1000);
+            modelBuilder.Property(i => i.ReviewDate).IsRequired();
 
             modelBuilder.HasOne(i => i.Book).WithMany(i => i.Reviews).HasForeignKey(i => i.BookId);
             modelBuilder.HasOne(i => i.User).WithMany(i => i.Reviews).HasForeignKey(i => i.UserId);
