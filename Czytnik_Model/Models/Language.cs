@@ -8,7 +8,7 @@ namespace Czytnik_Model.Models
 {
     public class Language
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public ICollection<Book> OriginalBooks { get; set; }
         public ICollection<Book> EditionBooks { get; set; }
