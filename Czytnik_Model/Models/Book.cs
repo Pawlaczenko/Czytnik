@@ -10,8 +10,8 @@ namespace Czytnik_Model.Models
         public decimal Price { get; set; }
         public string? Description { get; set; }
         public string Cover { get; set; }
-        public string? OriginalLanguageId { get; set; }
-        public string? EditionLanguageId { get; set; }
+        public int? OriginalLanguageId { get; set; }
+        public int? EditionLanguageId { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string IssueNumber { get; set; }
         public short PageQuantity { get; set; }
@@ -19,8 +19,9 @@ namespace Czytnik_Model.Models
         public int CategoryId { get; set; }
         public int? SeriesId { get; set; }
         public int PublisherId { get; set; }
-        public short? Rating { get; set; }
+        public decimal? Rating { get; set; }
         public bool? IsInStock { get; set; }
+        public short? NumberOfCopiesSold { get; set; }
 
         public Language OriginalLanguage { get; set; }
         public Language EditionLanguage { get; set; }

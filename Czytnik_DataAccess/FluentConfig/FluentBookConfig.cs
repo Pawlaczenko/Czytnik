@@ -20,7 +20,7 @@ namespace Czytnik_DataAccess.FluentConfig
             modelBuilder.Property(i => i.IssueNumber).HasMaxLength(2).IsRequired().HasDefaultValue("I");
             modelBuilder.Property(i => i.CategoryId).IsRequired();
             modelBuilder.Property(i => i.PublisherId).IsRequired();
-            modelBuilder.Property(i => i.Rating).HasDefaultValue(null);
+            modelBuilder.Property(i => i.Rating).HasDefaultValue(null).HasColumnType("decimal(2,2)");
             modelBuilder.Property(i => i.IsInStock).IsRequired().HasDefaultValue(true);
 
             modelBuilder.HasOne(i => i.OriginalLanguage).WithMany(i => i.OriginalBooks).HasForeignKey(i => i.OriginalLanguageId);
