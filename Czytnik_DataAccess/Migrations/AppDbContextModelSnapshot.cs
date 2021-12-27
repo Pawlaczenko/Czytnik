@@ -112,8 +112,8 @@ namespace Czytnik_DataAccess.Migrations
                     b.Property<string>("Dimensions")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EditionLanguageId")
-                        .HasColumnType("nvarchar(2)");
+                    b.Property<int?>("EditionLanguageId")
+                        .HasColumnType("int");
 
                     b.Property<bool?>("IsInStock")
                         .IsRequired()
@@ -128,8 +128,11 @@ namespace Czytnik_DataAccess.Migrations
                         .HasColumnType("nvarchar(2)")
                         .HasDefaultValue("I");
 
-                    b.Property<string>("OriginalLanguageId")
-                        .HasColumnType("nvarchar(2)");
+                    b.Property<short?>("NumberOfCopiesSold")
+                        .HasColumnType("smallint");
+
+                    b.Property<int?>("OriginalLanguageId")
+                        .HasColumnType("int");
 
                     b.Property<short>("PageQuantity")
                         .HasColumnType("smallint");
@@ -140,8 +143,8 @@ namespace Czytnik_DataAccess.Migrations
                     b.Property<int>("PublisherId")
                         .HasColumnType("int");
 
-                    b.Property<short?>("Rating")
-                        .HasColumnType("smallint");
+                    b.Property<decimal?>("Rating")
+                        .HasColumnType("decimal(2,2)");
 
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
@@ -294,9 +297,11 @@ namespace Czytnik_DataAccess.Migrations
 
             modelBuilder.Entity("Czytnik_Model.Models.Language", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .HasMaxLength(50)
