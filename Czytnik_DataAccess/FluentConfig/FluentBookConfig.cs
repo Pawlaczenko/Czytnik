@@ -22,7 +22,7 @@ namespace Czytnik_DataAccess.FluentConfig
             modelBuilder.Property(i => i.PublisherId).IsRequired();
             modelBuilder.Property(i => i.Rating).HasDefaultValue(null).HasColumnType("decimal(4,2)");
             modelBuilder.Property(i => i.IsInStock).IsRequired().HasDefaultValue(true);
-            modelBuilder.Property(i => i.Id).ValueGeneratedNever();
+            
             modelBuilder.HasOne(i => i.OriginalLanguage).WithMany(i => i.OriginalBooks).HasForeignKey(i => i.OriginalLanguageId);
             modelBuilder.HasOne(i => i.EditionLanguage).WithMany(i => i.EditionBooks).HasForeignKey(i => i.EditionLanguageId);
             modelBuilder.HasOne(i => i.Category).WithMany(i => i.Books).HasForeignKey(i => i.CategoryId);

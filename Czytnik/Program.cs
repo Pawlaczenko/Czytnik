@@ -25,10 +25,16 @@ namespace Czytnik
             using (AppDbContext context = new AppDbContext(optionsBuilder.Options))
             {
                 context.Database.EnsureCreated();
-                    /// Tu wrzuc dane
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Languages ON");
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Authors ON");
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Books ON");
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Categories ON");
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Publishers ON");
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Series ON");
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Translators ON");
                 context.SaveChanges();
             }
-            #endregion    */
+            #endregion*/
             CreateHostBuilder(args).Build().Run();
         }
 
