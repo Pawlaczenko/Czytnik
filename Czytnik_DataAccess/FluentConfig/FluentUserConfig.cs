@@ -25,6 +25,7 @@ namespace Czytnik_DataAccess.FluentConfig
             modelBuilder.Property(i => i.Email).IsRequired().HasMaxLength(100);
             modelBuilder.Property(i => i.PhoneNumber).HasMaxLength(9);
             modelBuilder.Property(i => i.IsActive).IsRequired().HasDefaultValue(true);
+            modelBuilder.Property(i => i.Id).ValueGeneratedNever();
         }
     }
 }

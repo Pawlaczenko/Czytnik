@@ -15,6 +15,7 @@ namespace Czytnik_DataAccess.FluentConfig
         {
             modelBuilder.HasIndex(i => i.Name).IsUnique();
             modelBuilder.Property(i => i.Name).IsRequired().HasMaxLength(100);
+            modelBuilder.Property(i => i.Id).ValueGeneratedNever();
         }
     }
 }

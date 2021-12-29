@@ -13,16 +13,16 @@ namespace Czytnik_DataAccess.FluentConfig
     {
         public void Configure(EntityTypeBuilder<Book> modelBuilder)
         {
-            modelBuilder.Property(i => i.Title).IsRequired().HasMaxLength(100);
+            modelBuilder.Property(i => i.Title).IsRequired().HasMaxLength(200);
             modelBuilder.Property(i => i.Price).IsRequired().HasColumnType("decimal(18,2)");
             modelBuilder.Property(i => i.Description).HasMaxLength(8000);
-            modelBuilder.Property(i => i.Cover).HasMaxLength(200).IsRequired();
-            modelBuilder.Property(i => i.IssueNumber).HasMaxLength(2).IsRequired().HasDefaultValue("I");
+            modelBuilder.Property(i => i.Cover).HasMaxLength(500).IsRequired();
+            modelBuilder.Property(i => i.IssueNumber).HasMaxLength(10).IsRequired().HasDefaultValue("I");
             modelBuilder.Property(i => i.CategoryId).IsRequired();
             modelBuilder.Property(i => i.PublisherId).IsRequired();
-            modelBuilder.Property(i => i.Rating).HasDefaultValue(null).HasColumnType("decimal(2,2)");
+            modelBuilder.Property(i => i.Rating).HasDefaultValue(null).HasColumnType("decimal(4,2)");
             modelBuilder.Property(i => i.IsInStock).IsRequired().HasDefaultValue(true);
-
+            modelBuilder.Property(i => i.Id).ValueGeneratedNever();
             modelBuilder.HasOne(i => i.OriginalLanguage).WithMany(i => i.OriginalBooks).HasForeignKey(i => i.OriginalLanguageId);
             modelBuilder.HasOne(i => i.EditionLanguage).WithMany(i => i.EditionBooks).HasForeignKey(i => i.EditionLanguageId);
             modelBuilder.HasOne(i => i.Category).WithMany(i => i.Books).HasForeignKey(i => i.CategoryId);
