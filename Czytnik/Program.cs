@@ -23,16 +23,26 @@ namespace Czytnik
 
             #region CustomSeeding
             using (AppDbContext context = new AppDbContext(optionsBuilder.Options))
+            using (var transaction = context.Database.BeginTransaction())
             {
-                context.Database.EnsureCreated();
-                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Languages ON");
-                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Authors ON");
-                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Books ON");
-                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Categories ON");
-                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Publishers ON");
-                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Series ON");
-                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Translators ON");
-                context.SaveChanges();
+                //context.Database.EnsureCreated();
+                //context.Database.OpenConnection();
+                try
+                {
+                    //Dodaj tutaj
+
+                    
+
+                    //Tutaj skończ
+                    //context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Reviews ON;");
+                    context.SaveChanges();
+                   // context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Reviews OFF;");
+                    transaction.Commit();
+                }
+                finally
+                {
+                    context.Database.CloseConnection();
+                }
             }
             #endregion*/
             CreateHostBuilder(args).Build().Run();
