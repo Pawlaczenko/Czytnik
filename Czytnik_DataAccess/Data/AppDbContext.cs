@@ -11,6 +11,8 @@ namespace Czytnik_DataAccess.Database
         {
         }
 
+        //public virtual Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade DatabaseF { get; }
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<Series> Series { get; set; }
         public DbSet<Book> Books { get; set; }
@@ -51,6 +53,8 @@ namespace Czytnik_DataAccess.Database
             modelBuilder.ApplyConfiguration(new FluentTranslatorConfig());
             modelBuilder.ApplyConfiguration(new FluentUserConfig());
         }
+
+
     }
 
     
