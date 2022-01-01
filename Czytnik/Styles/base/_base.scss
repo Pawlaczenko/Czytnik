@@ -8,11 +8,17 @@
 
 html {
   // This define 1rem
-  font-size: 62.5%; /* font-size: 62.5%; % dobra praktyka 62.5% jest 10px z 16px */
-  //Ostatnia deklaracja jest przypisywana jeśli jest więcej pasujących max-width
+  font-size: 62.5%;
 }
 
 body {
   box-sizing: border-box;
-  padding: 3rem;
+  padding: 0;
+  margin: 0;
+}
+
+input,
+button {
+  background-color: transparent;
+  border: none;
 }
