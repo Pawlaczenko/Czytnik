@@ -7,18 +7,20 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <nav>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main">
-            @RenderBody()
-        </main>
+    <div class="wrapper">
+        <header>
+            <vc:navigation />
+        </header>
+        <div class="container">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer>
+        </footer>
     </div>
 
-    <footer>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
