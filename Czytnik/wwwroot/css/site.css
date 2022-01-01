@@ -36,12 +36,20 @@ button {
   background-color: transparent;
   border: none; }
 
+a {
+  text-decoration: none;
+  color: currentColor; }
+
+button:hover {
+  cursor: pointer; }
+
 * {
   font-family: Montserrat; }
 
 .wrapper {
-  max-width: 123rem;
-  margin: 0 auto; }
+  max-width: 130rem;
+  margin: 0 auto;
+  padding: 0 5rem; }
 
 .navigation {
   display: flex;
@@ -58,13 +66,13 @@ button {
   align-items: center;
   height: 4.6rem;
   width: 66rem;
-  margin: 0 auto;
+  margin: 0 10rem;
   padding: 0.5rem 1rem;
   background-color: #f5f5f5;
   border-radius: 10px; }
   .navigation__search-input {
     width: 90%;
-    padding-left: 5rem;
+    padding-left: 2.5rem;
     font-size: 1.8rem;
     font-weight: 700;
     color: #c4c4c4; }
@@ -84,8 +92,6 @@ button {
   .navigation__search-icon {
     height: 100%;
     fill: #c4c4c4; }
-    .navigation__search-icon:hover {
-      cursor: pointer; }
 
 .navigation__buttons {
   display: flex;
@@ -115,4 +121,5 @@ button {
     background-color: #ffc533;
     border-radius: 50%;
     font-size: 1.2rem;
+    line-height: 1.5;
     font-weight: 700; }
