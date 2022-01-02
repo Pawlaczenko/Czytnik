@@ -48,7 +48,8 @@ body {
 input,
 button {
   background-color: transparent;
-  border: none; }
+  border: none;
+  color: currentColor; }
 
 a {
   text-decoration: none;
@@ -66,9 +67,51 @@ button:hover {
   padding: 0 5rem; }
 
 .navigation {
+  margin-top: 4rem; }
+
+.navigation__controls {
+  display: flex;
+  align-items: center; }
+
+.navigation__links {
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-top: 4rem; }
+  .navigation__links-item {
+    color: var(--color-grey-light); }
+    .navigation__links-item:hover {
+      color: var(--color-secondary);
+      transition: 0.2s color; }
+    .navigation__links-item + .navigation__links-item {
+      margin-left: 3rem; }
+    .navigation__links-item--active {
+      position: relative;
+      color: var(--color-secondary); }
+      .navigation__links-item--active::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -60%;
+        transform: translateX(-50%);
+        width: 7px;
+        height: 7px;
+        background-color: var(--color-secondary);
+        border-radius: 50%; }
+    .navigation__links-item--active > .navigation__links-link {
+      cursor: default; }
+  .navigation__links-link {
+    font-weight: 700;
+    font-size: 1.4rem; }
+  .navigation__links-list {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.4rem; }
+  .navigation__links-list-icon {
+    fill: currentColor;
+    width: 12px;
+    margin-left: 1rem; }
 
 .navigation__logo {
   font-size: 3.6rem;
@@ -88,7 +131,7 @@ button:hover {
     width: 90%;
     padding-left: 2.5rem;
     font-size: 1.8rem;
-    font-weight: 400;
+    font-weight: 600;
     color: var(--color-grey); }
     .navigation__search-input:focus {
       outline: none; }
