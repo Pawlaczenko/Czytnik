@@ -132,6 +132,8 @@ button:hover {
     background-color: var(--color-white-dark);
     width: 66rem;
     transition: 0.5s left, 0.5s 0.5s width, 0.7s background-color; }
+  .navigation__search:focus-within .navigation__search-input {
+    display: block; }
   .navigation__search-input {
     display: none;
     width: 90%;

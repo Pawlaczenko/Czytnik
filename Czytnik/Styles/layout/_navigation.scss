@@ -103,15 +103,13 @@
   }
 
   &:focus-within &-input {
-    // display: block;
+    display: block;
   }
 
   &-input {
     display: none;
 
     width: 90%;
-
-    // padding-left: 2.5rem;
 
     font-size: 1.8rem;
     font-weight: 600;
