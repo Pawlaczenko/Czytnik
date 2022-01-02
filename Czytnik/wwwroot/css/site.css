@@ -16,6 +16,20 @@
 * 1em = 16px
 */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+:root {
+  --color-primary: #ffc533;
+  --color-primary-light: #FFDF68;
+  --color-primary-dark: #F8974E;
+  --color-secondary: #609BFB;
+  --color-secondary-dark: #283F66;
+  --color-grey: #898787;
+  --color-grey-light: #C4C4C4;
+  --color-grey-lightest: #E5E5E5;
+  --color-white: #FFFFFF;
+  --color-white-dark: #F5F5F5;
+  --color-black: #000000;
+  --color-google: #3F7EE8; }
+
 *,
 *::after,
 *::before {
@@ -59,7 +73,7 @@ button:hover {
 .navigation__logo {
   font-size: 3.6rem;
   font-weight: 900;
-  color: #ffc533; }
+  color: var(--color-primary); }
 
 .navigation__search {
   display: flex;
@@ -68,30 +82,30 @@ button:hover {
   width: 66rem;
   margin: 0 10rem;
   padding: 0.5rem 1rem;
-  background-color: #f5f5f5;
+  background-color: var(--color-white-dark);
   border-radius: 10px; }
   .navigation__search-input {
     width: 90%;
     padding-left: 2.5rem;
     font-size: 1.8rem;
-    font-weight: 700;
-    color: #c4c4c4; }
+    font-weight: 400;
+    color: var(--color-grey); }
     .navigation__search-input:focus {
       outline: none; }
     .navigation__search-input::placeholder {
-      color: #c4c4c4;
+      color: var(--color-grey-light);
       opacity: 1; }
     .navigation__search-input:-ms-input-placeholder {
-      color: #c4c4c4; }
+      color: var(--color-grey-light); }
     .navigation__search-input::-ms-input-placeholder {
-      color: #c4c4c4; }
+      color: var(--color-grey-light); }
   .navigation__search-button {
     margin-left: auto;
     width: 20px;
     height: 20px; }
   .navigation__search-icon {
     height: 100%;
-    fill: #c4c4c4; }
+    fill: var(--color-grey-light); }
 
 .navigation__buttons {
   display: flex;
@@ -99,7 +113,7 @@ button:hover {
   height: 100%; }
   .navigation__buttons-login {
     padding: 0.6rem 3rem;
-    background-color: #ffc533;
+    background-color: var(--color-primary);
     border-radius: 8px;
     font-weight: 700;
     font-size: 1.2rem;
@@ -111,14 +125,14 @@ button:hover {
     height: 32px; }
   .navigation__buttons-cart-icon {
     width: 100%;
-    fill: #c4c4c4; }
+    fill: var(--color-grey-light); }
   .navigation__buttons-cart-quantity {
     position: absolute;
     bottom: -25%;
     right: -25%;
     width: 2rem;
     height: 2rem;
-    background-color: #ffc533;
+    background-color: var(--color-primary);
     border-radius: 50%;
     font-size: 1.2rem;
     line-height: 1.5;
