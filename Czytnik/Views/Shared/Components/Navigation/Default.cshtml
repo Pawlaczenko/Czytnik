@@ -1,4 +1,10 @@
 ﻿<nav class="navigation">
+  <button class="navigation__burger">
+    <div class="navigation__burger-line"></div>
+    <div class="navigation__burger-line"></div>
+    <div class="navigation__burger-line"></div>
+  </button>
+
   <div class="navigation__logo">
     <a href="/">Czytnik</a>
   </div>
@@ -24,15 +30,6 @@
   </div>
 
   <div class="navigation__buttons">
-    <div class="navigation__search">
-      <input type="text" class="navigation__search-input" placeholder="Wyszukaj..." />
-      <button class="navigation__search-button">
-        <svg class="navigation__search-icon" viewBox="0 0 32 32">
-          <use xlink:href="/assets/sprite.svg#icon-search"></use>
-        </svg>
-      </button>
-    </div>
-
     <button class="navigation__buttons-login">
       Zaloguj
     </button>
@@ -42,7 +39,14 @@
       </svg>
       <div class="navigation__buttons-cart-quantity">2</div>
     </button>
+
+    <div class="navigation__search">
+      <input type="text" class="navigation__search-input" placeholder="Wyszukaj..." />
+      <button class="navigation__search-button">
+        <svg class="navigation__search-icon" viewBox="0 0 32 32">
+          <use xlink:href="/assets/sprite.svg#icon-search"></use>
+        </svg>
+      </button>
+    </div>
   </div>
-
-
 </nav>
