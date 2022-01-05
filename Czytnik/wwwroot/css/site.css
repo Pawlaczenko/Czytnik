@@ -134,15 +134,6 @@ li {
   .navigation__links-link {
     font-weight: 700;
     font-size: 1.4rem; }
-  .navigation__links-list {
-    display: flex;
-    align-items: center;
-    font-weight: 700;
-    font-size: 1.4rem; }
-  .navigation__links-list-icon {
-    fill: currentColor;
-    width: 12px;
-    margin-left: 1rem; }
 
 .navigation__logo {
   font-size: 3.6rem;
@@ -223,12 +214,18 @@ li {
     padding: 0.6rem 3rem;
     background-color: var(--color-primary);
     border-radius: 8px;
+    border: 2px solid transparent;
     font-weight: 700;
     font-size: 1.2rem;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    transition: all 0.2s; }
     @media only screen and (max-width: 900px) {
       .navigation__buttons-login {
         display: none; } }
+    .navigation__buttons-login:hover {
+      color: var(--color-grey);
+      background-color: var(--color-white);
+      border: 2px solid var(--color-primary); }
   .navigation__buttons-cart {
     position: relative;
     margin-left: 2.5rem;
@@ -236,7 +233,10 @@ li {
     height: 32px; }
   .navigation__buttons-cart-icon {
     width: 100%;
-    fill: var(--color-grey-light); }
+    fill: var(--color-grey-light);
+    transition: fill 0.2s; }
+    .navigation__buttons-cart-icon:hover {
+      fill: var(--color-secondary); }
   .navigation__buttons-cart-quantity {
     position: absolute;
     bottom: -25%;
@@ -256,7 +256,7 @@ li {
   z-index: 20;
   transition: all 0.4s;
   height: 100vh;
-  width: 320px;
+  width: 100vw;
   padding-top: 6rem;
   background-color: var(--color-white);
   transition: left 0.3s ease-in-out; }
