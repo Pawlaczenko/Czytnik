@@ -17,7 +17,7 @@ namespace Czytnik_DataAccess.FluentConfig
             modelBuilder.Property(i => i.Price).IsRequired().HasColumnType("decimal(18,2)");
             modelBuilder.Property(i => i.Description).HasMaxLength(8000);
             modelBuilder.Property(i => i.Cover).HasMaxLength(500).IsRequired();
-            modelBuilder.Property(i => i.IssueNumber).HasMaxLength(10).IsRequired().HasDefaultValue("I");
+            modelBuilder.Property(i => i.IssueNumber).HasMaxLength(10);
             modelBuilder.Property(i => i.CategoryId).IsRequired();
             modelBuilder.Property(i => i.PublisherId).IsRequired();
             modelBuilder.Property(i => i.Rating).HasDefaultValue(null).HasColumnType("decimal(4,2)");

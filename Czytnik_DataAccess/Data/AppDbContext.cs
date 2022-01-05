@@ -27,6 +27,8 @@ namespace Czytnik_DataAccess.Database
         public DbSet<Template> Templates { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<BookDiscount> BooksDiscounts { get; set; }
         public DbSet<BookAuthor> BooksAuthors { get; set; }
@@ -52,6 +54,8 @@ namespace Czytnik_DataAccess.Database
             modelBuilder.ApplyConfiguration(new FluentTemplateConfig());
             modelBuilder.ApplyConfiguration(new FluentTranslatorConfig());
             modelBuilder.ApplyConfiguration(new FluentUserConfig());
+            modelBuilder.ApplyConfiguration(new FluentOrderConfig());
+            modelBuilder.ApplyConfiguration(new FluentOrderItemConfig());
         }
 
 

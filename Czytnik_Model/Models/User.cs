@@ -21,6 +21,7 @@ namespace Czytnik_Model.Models
         public ICollection<CartItem> CartItems { get; set; }
         public ICollection<Favourite> Favourites { get; set; }
         public ICollection<Template> Templates { get; set; }
+        public ICollection<Order> Orders { get; set; }
 
 
     }
