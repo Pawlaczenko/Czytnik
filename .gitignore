@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Compiled Css
+Czytnik/wwwroot/css/site.css
+Czytnik/wwwroot/css/site.min.css
