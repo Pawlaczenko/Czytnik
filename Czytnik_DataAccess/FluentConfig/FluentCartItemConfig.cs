@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Czytnik_DataAccess.FluentConfig
 {
-    public class FluentCartConfig : IEntityTypeConfiguration<Cart>
+    public class FluentCartItemConfig : IEntityTypeConfiguration<CartItem>
     {
-        public void Configure(EntityTypeBuilder<Cart> modelBuilder)
+        public void Configure(EntityTypeBuilder<CartItem> modelBuilder)
         {
             modelBuilder.Property(i => i.Quantity).IsRequired().HasDefaultValue(1);
 
             modelBuilder.HasKey(i => new { i.BookId, i.UserId });
-            modelBuilder.HasOne(i => i.Book).WithMany(i => i.Carts).HasForeignKey(i => i.BookId);
-            modelBuilder.HasOne(i => i.User).WithMany(i => i.Carts).HasForeignKey(i => i.UserId);
+            modelBuilder.HasOne(i => i.Book).WithMany(i => i.CartItems).HasForeignKey(i => i.BookId);
+            modelBuilder.HasOne(i => i.User).WithMany(i => i.CartItems).HasForeignKey(i => i.UserId);
         }
     }
 }

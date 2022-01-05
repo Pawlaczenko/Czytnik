@@ -32,7 +32,7 @@ namespace Czytnik_Model.Models
         public ICollection<BookAuthor> BookAuthors { get; set; }
         public ICollection<BookTranslator> BookTranslators { get; set; }
         public ICollection<Review> Reviews { get; set; }
-        public ICollection<Cart> Carts { get; set; }
+        public ICollection<CartItem> CartItems { get; set; }
         public ICollection<Favourite> Favourites { get; set; }
     }
 }

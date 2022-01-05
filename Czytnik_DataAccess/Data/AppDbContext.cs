@@ -20,7 +20,7 @@ namespace Czytnik_DataAccess.Database
         public DbSet<Author> Authors { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Favourite> Favourites { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<User> Users { get; set; }
@@ -40,7 +40,7 @@ namespace Czytnik_DataAccess.Database
             modelBuilder.ApplyConfiguration(new FluentBookConfig());
             modelBuilder.ApplyConfiguration(new FluentBookDiscountConfig());
             modelBuilder.ApplyConfiguration(new FluentBookTranslatorConfig());
-            modelBuilder.ApplyConfiguration(new FluentCartConfig());
+            modelBuilder.ApplyConfiguration(new FluentCartItemConfig());
             modelBuilder.ApplyConfiguration(new FluentCategoryConfig());
             modelBuilder.ApplyConfiguration(new FluentDiscountConfig());
             modelBuilder.ApplyConfiguration(new FluentFavouriteConfig());

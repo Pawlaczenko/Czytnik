@@ -1,6 +1,6 @@
 ﻿namespace Czytnik_Model.Models
 {
-    public class Cart
+    public class CartItem
     {
         public int BookId { get; set; }
         public int UserId { get; set; }
