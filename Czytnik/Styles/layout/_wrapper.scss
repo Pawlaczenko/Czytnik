@@ -1,10 +1,4 @@
 ﻿.wrapper {
-  max-width: 130rem;
+  width: Min(90vw,130rem);
   margin: 0 auto;
-  padding: 0 5rem;
-
-  @media only screen and (max-width: 900px) {
-    max-width: 70rem;
-    padding: 0 2rem;
-  }
 }

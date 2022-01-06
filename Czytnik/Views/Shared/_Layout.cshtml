@@ -11,17 +11,13 @@
 <body>
     <div class="blur js-blur"></div>
 
-    <div class="wrapper">
-        <vc:navigation />
-        <div class="container">
-            <main role="main">
-                @RenderBody()
-            </main>
-        </div>
-
-        <footer>
-        </footer>
+    <vc:navigation />
+    <div class="container">
+        <main role="main">
+            @RenderBody()
+        </main>
     </div>
+    <vc:footer />
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/mobileNavigation.js" asp-append-version="true"></script>
