@@ -54,7 +54,7 @@ namespace Czytnik_DataAccess.Database
             modelBuilder.ApplyConfiguration(new FluentTemplateConfig());
             modelBuilder.ApplyConfiguration(new FluentTranslatorConfig());
             modelBuilder.ApplyConfiguration(new FluentUserConfig());
-            modelBuilder.ApplyConfiguration(new FluentOrderConfig());
+           modelBuilder.ApplyConfiguration(new FluentOrderConfig());
             modelBuilder.ApplyConfiguration(new FluentOrderItemConfig());
         }
 

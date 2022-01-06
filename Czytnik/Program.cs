@@ -18,7 +18,8 @@ namespace Czytnik
         public static void Main(string[] args)
         {
             /// Kod do wrzucania danych
-            /*var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            /*
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             optionsBuilder.UseSqlServer("Data Source=czytnikdbserver.database.windows.net;Initial Catalog=Czytnik_db;User ID=baqardo;Password=zaq1@WSX;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
             #region CustomSeeding
@@ -31,12 +32,14 @@ namespace Czytnik
                 {
                     //Dodaj tutaj
 
-                    
+                    {
+
+                    }
 
                     //Tutaj skończ
-                    //context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Reviews ON;");
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Orders ON;");
                     context.SaveChanges();
-                   // context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Reviews OFF;");
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Orders OFF;");
                     transaction.Commit();
                 }
                 finally

@@ -16,7 +16,6 @@ namespace Czytnik_DataAccess.FluentConfig
             modelBuilder.Property(i => i.UserId).IsRequired();
             modelBuilder.Property(i => i.OrderDate).IsRequired();
 
-            modelBuilder.HasKey(i => new { i.UserId });
             modelBuilder.HasOne(i => i.User).WithMany(i => i.Orders).HasForeignKey(i => i.UserId);
         }
     }

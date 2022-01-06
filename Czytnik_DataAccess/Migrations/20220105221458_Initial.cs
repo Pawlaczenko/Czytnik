@@ -178,7 +178,7 @@ namespace Czytnik_DataAccess.Migrations
                     OriginalLanguageId = table.Column<int>(type: "int", nullable: true),
                     EditionLanguageId = table.Column<int>(type: "int", nullable: true),
                     ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IssueNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false, defaultValue: "I"),
+                    IssueNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     PageQuantity = table.Column<short>(type: "smallint", nullable: false),
                     Dimensions = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
@@ -186,7 +186,7 @@ namespace Czytnik_DataAccess.Migrations
                     PublisherId = table.Column<int>(type: "int", nullable: false),
                     Rating = table.Column<decimal>(type: "decimal(4,2)", nullable: true),
                     IsInStock = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    NumberOfCopiesSold = table.Column<short>(type: "smallint", nullable: true)
+                    NumberOfCopiesSold = table.Column<short>(type: "smallint", nullable: false, defaultValue: (short)0)
                 },
                 constraints: table =>
                 {
@@ -326,7 +326,7 @@ namespace Czytnik_DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Carts",
+                name: "CartItems",
                 columns: table => new
                 {
                     BookId = table.Column<int>(type: "int", nullable: false),
@@ -335,15 +335,15 @@ namespace Czytnik_DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Carts", x => new { x.BookId, x.UserId });
+                    table.PrimaryKey("PK_CartItems", x => new { x.BookId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_Carts_Books_BookId",
+                        name: "FK_CartItems_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Carts_Users_UserId",
+                        name: "FK_CartItems_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -456,8 +456,8 @@ namespace Czytnik_DataAccess.Migrations
                 column: "TranslatorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Carts_UserId",
-                table: "Carts",
+                name: "IX_CartItems_UserId",
+                table: "CartItems",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -542,7 +542,7 @@ namespace Czytnik_DataAccess.Migrations
                 name: "BooksTranslators");
 
             migrationBuilder.DropTable(
-                name: "Carts");
+                name: "CartItems");
 
             migrationBuilder.DropTable(
                 name: "Favourites");
