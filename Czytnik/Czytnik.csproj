@@ -52,8 +52,8 @@
 
 	<ItemGroup>
 		<!-- extends watching group to include *.js files -->
-		<Watch Include="Styles\components\*.scss" />
-		<Watch Include="**\*.scss" />
+		<!-- <Watch Include="Styles\components\*.scss" />
+		<Watch Include="**\*.scss" /> -->
 		<Watch Include="**\*.cshtml" />
 	</ItemGroup>
 
