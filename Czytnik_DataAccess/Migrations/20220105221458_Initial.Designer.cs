@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Czytnik_DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211227174600_ChangeBookRatingToDecimal")]
-    partial class ChangeBookRatingToDecimal
+    [Migration("20220105221458_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -104,8 +104,8 @@ namespace Czytnik_DataAccess.Migrations
 
                     b.Property<string>("Cover")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(8000)
@@ -124,14 +124,13 @@ namespace Czytnik_DataAccess.Migrations
                         .HasDefaultValue(true);
 
                     b.Property<string>("IssueNumber")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)")
-                        .HasDefaultValue("I");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
-                    b.Property<short?>("NumberOfCopiesSold")
-                        .HasColumnType("smallint");
+                    b.Property<short>("NumberOfCopiesSold")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint")
+                        .HasDefaultValue((short)0);
 
                     b.Property<int?>("OriginalLanguageId")
                         .HasColumnType("int");
@@ -146,7 +145,7 @@ namespace Czytnik_DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal?>("Rating")
-                        .HasColumnType("decimal(2,2)");
+                        .HasColumnType("decimal(4,2)");
 
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
@@ -156,8 +155,8 @@ namespace Czytnik_DataAccess.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
@@ -219,7 +218,7 @@ namespace Czytnik_DataAccess.Migrations
                     b.ToTable("BooksTranslators");
                 });
 
-            modelBuilder.Entity("Czytnik_Model.Models.Cart", b =>
+            modelBuilder.Entity("Czytnik_Model.Models.CartItem", b =>
                 {
                     b.Property<int>("BookId")
                         .HasColumnType("int");
@@ -236,7 +235,7 @@ namespace Czytnik_DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("Czytnik_Model.Models.Category", b =>
@@ -318,6 +317,45 @@ namespace Czytnik_DataAccess.Migrations
                     b.ToTable("Languages");
                 });
 
+            modelBuilder.Entity("Czytnik_Model.Models.Order", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Czytnik_Model.Models.OrderItem", b =>
+                {
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
+                    b.HasKey("BookId", "OrderId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItems");
+                });
+
             modelBuilder.Entity("Czytnik_Model.Models.Post", b =>
                 {
                     b.Property<int>("Id")
@@ -388,6 +426,9 @@ namespace Czytnik_DataAccess.Migrations
 
                     b.Property<short>("Rating")
                         .HasColumnType("smallint");
+
+                    b.Property<DateTime>("ReviewDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ReviewText")
                         .HasMaxLength(1000)
@@ -674,16 +715,16 @@ namespace Czytnik_DataAccess.Migrations
                     b.Navigation("Translator");
                 });
 
-            modelBuilder.Entity("Czytnik_Model.Models.Cart", b =>
+            modelBuilder.Entity("Czytnik_Model.Models.CartItem", b =>
                 {
                     b.HasOne("Czytnik_Model.Models.Book", "Book")
-                        .WithMany("Carts")
+                        .WithMany("CartItems")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Czytnik_Model.Models.User", "User")
-                        .WithMany("Carts")
+                        .WithMany("CartItems")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -710,6 +751,36 @@ namespace Czytnik_DataAccess.Migrations
                     b.Navigation("Book");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Czytnik_Model.Models.Order", b =>
+                {
+                    b.HasOne("Czytnik_Model.Models.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Czytnik_Model.Models.OrderItem", b =>
+                {
+                    b.HasOne("Czytnik_Model.Models.Book", "Book")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Czytnik_Model.Models.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Czytnik_Model.Models.Post", b =>
@@ -771,9 +842,11 @@ namespace Czytnik_DataAccess.Migrations
 
                     b.Navigation("BookTranslators");
 
-                    b.Navigation("Carts");
+                    b.Navigation("CartItems");
 
                     b.Navigation("Favourites");
+
+                    b.Navigation("OrderItems");
 
                     b.Navigation("Reviews");
                 });
@@ -795,6 +868,11 @@ namespace Czytnik_DataAccess.Migrations
                     b.Navigation("OriginalBooks");
                 });
 
+            modelBuilder.Entity("Czytnik_Model.Models.Order", b =>
+                {
+                    b.Navigation("OrderItems");
+                });
+
             modelBuilder.Entity("Czytnik_Model.Models.Publisher", b =>
                 {
                     b.Navigation("Books");
@@ -812,9 +890,11 @@ namespace Czytnik_DataAccess.Migrations
 
             modelBuilder.Entity("Czytnik_Model.Models.User", b =>
                 {
-                    b.Navigation("Carts");
+                    b.Navigation("CartItems");
 
                     b.Navigation("Favourites");
+
+                    b.Navigation("Orders");
 
                     b.Navigation("Reviews");
 
