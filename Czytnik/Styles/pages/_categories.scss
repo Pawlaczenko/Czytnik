@@ -1,0 +1,35 @@
+.categories {
+    margin-top: 6rem;
+    @media only screen and (max-width: 900px) {
+        margin-top: 12rem;
+    }
+
+    &__nav {
+        max-width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--color-secondary);
+        text-transform: uppercase;
+
+        background-color: var(--color-white-dark);
+        border-bottom: 2px solid var(--color-grey-light);
+        padding: 1rem 2rem;
+        margin: 0 auto;
+
+        a:not(:last-child) {
+            margin-right: .7rem;
+        }
+        @media only screen and (max-width: 900px) {
+            width: 100%;
+        }
+    }
+
+    &__list {
+
+    }
+}
