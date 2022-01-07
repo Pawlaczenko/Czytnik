@@ -300,9 +300,6 @@ li {
       transform: rotate(-45deg) translateY(-7px) translateX(7px); }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100vw;
   background-color: var(--color-secondary-dark);
   color: var(--color-white);
