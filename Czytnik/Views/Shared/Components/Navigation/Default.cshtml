@@ -6,21 +6,21 @@
   </button>
 
   <div class="navigation__logo">
-    <a href="/">Czytnik</a>
+      <a asp-controller="Home" asp-action="Index">Czytnik</a>
   </div>
 
   <div class="navigation__links">
-    <div class="navigation__links-item navigation__links-item--active">
-      <a href="/" class="navigation__links-link">Strona Główna</a>
+      <div class="navigation__links-item navigation__links-item--active">
+          <a class="navigation__links-link" asp-controller="Home" asp-action="Index">Strona Główna</a>
+      </div>
+      <div class="navigation__links-item">
+          <a class="navigation__links-link" asp-controller="Categories" asp-action="Index">Kategorie</a>
+      </div>
+    <div class="navigation__links-item">
+        <a class="navigation__links-link" asp-controller="Home" asp-action="Kontakt">Kontakt</a>
     </div>
     <div class="navigation__links-item">
-      <a href="/" class="navigation__links-link">Kategorie</a>
-    </div>
-    <div class="navigation__links-item">
-      <a href="/" class="navigation__links-link">Kontakt</a>
-    </div>
-    <div class="navigation__links-item">
-      <a href="/" class="navigation__links-link">Blog</a>
+        <a class="navigation__links-link" asp-controller="Blog" asp-action="Index">Blog</a>
     </div>
   </div>
 
@@ -39,11 +39,11 @@
 
     <div class="navigation__search">
       <input type="text" class="navigation__search-input" placeholder="Wyszukaj..." />
-      <button class="navigation__search-button">
+      <a class="navigation__search-button" asp-controller="Cart" asp-action="Index">
         <svg class="navigation__search-icon" viewBox="0 0 32 32">
           <use xlink:href="/assets/svg/sprite.svg#icon-search"></use>
         </svg>
-      </button>
+      </a>
     </div>
   </div>
 </nav>

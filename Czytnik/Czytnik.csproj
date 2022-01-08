@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
+    <Content Remove="Views\Categories\Index.cshtml" />
     <Content Remove="Views\Shared\Components\Footer\Default.cshtml" />
     <Content Remove="Views\Shared\Components\Navigation\Default.cshtml" />
   </ItemGroup>
@@ -41,6 +42,7 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="Views\Categories\Index.cshtml" />
     <None Include="Views\Shared\Components\Footer\Default.cshtml" />
     <None Include="Views\Shared\Components\Navigation\Default.cshtml" />
   </ItemGroup>
@@ -58,6 +60,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Watch Remove="Views\Categories\Index.cshtml" />
 	  <Watch Remove="Views\Shared\Components\Footer\Default.cshtml" />
 	</ItemGroup>
 

@@ -1,3 +1,4 @@
+using Czytnik.Services;
 using Czytnik_DataAccess.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,8 @@ namespace Czytnik
                 config => config.UseSqlServer(Configuration.GetConnectionString("Application"))
             );
             services.AddControllersWithViews();
+
+            services.AddTransient<ICategoryService, CategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
