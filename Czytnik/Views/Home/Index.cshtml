@@ -2,25 +2,72 @@
     ViewData["Title"] = "Home Page";
 }
 
-<header class="header">
-    <div class="header__container wrapper">
-        <div class="header__cta">
-            <h1 class="header__heading">Twoje ulubione historie i wiedza w zasięgu kliknięcia.</h1>
-            <p class="header__text">Zapraszamy do księgarni internetowej Czytnik. W naszej ofercie znajdziesz szeroki
+<header class="home-header">
+    <div class="home-header__container wrapper">
+        <div class="home-header__cta">
+            <h1 class="home-header__heading">Twoje ulubione historie i wiedza w zasięgu kliknięcia.</h1>
+            <p class="home-header__text">Zapraszamy do księgarni internetowej Czytnik. W naszej ofercie znajdziesz
+                szeroki
                 asortyment książek i e-booków.</p>
-            <div class="header__button">
+            <div class="home-header__button">
                 <button class="button button--medium button--secondary">
                     Znajdź książkę
                 </button>
             </div>
         </div>
-        <div class="header__covers">
-            <img src="/assets/img/covers.png" alt="covers" class="header__image">
+        <div class="home-header__covers">
+            <img src="/assets/img/covers.png" alt="covers" class="home-header__image">
         </div>
 
-        <div class="header__decoration">
-            <img src="/assets/svg/blob.svg" alt="" class="header__decoration-image">
+        <div class="home-header__decoration">
+            <img src="/assets/svg/blob.svg" alt="" class="home-header__decoration-image">
         </div>
     </div>
 
 </header>
+
+<section class="home-categories wrapper">
+    <div class="home-categories__header">
+        <h1 class="home-categories__title">Kategorie:</h1>
+        <a href="/Categories" class="home-categories__more">Zobacz wszystkie</a>
+    </div>
+
+    <div class="home-categories__content">
+        <a href="/Search?categoryId=56" class="home-categories__item">
+            <img src="/assets/img/horror_category.png" alt="horror" class="home-categories__item-image">
+            <p class="home-categories__item-title">Horror</p>
+        </a>
+        <a href="/Search?categoryId=43" class="home-categories__item">
+            <img src="/assets/img/romans_category.png" alt="romans" class="home-categories__item-image">
+            <p class="home-categories__item-title">Romans</p>
+        </a>
+        <a href="/Search?categoryId=14" class="home-categories__item">
+            <img src="/assets/img/fantasy_category.png" alt="fantasy" class="home-categories__item-image">
+            <p class="home-categories__item-title">Fantasy</p>
+        </a>
+        <a href="/Search?categoryId=123" class="home-categories__item">
+            <img src="/assets/img/history_category.png" alt="historia" class="home-categories__item-image">
+            <p class="home-categories__item-title">Historia</p>
+        </a>
+        <a href="/Search?categoryId=6" class="home-categories__item">
+            <img src="/assets/img/biography_category.png" alt="biografia" class="home-categories__item-image">
+            <p class="home-categories__item-title">Biografia</p>
+        </a>
+        <a href="/Search?categoryId=109" class="home-categories__item">
+            <img src="/assets/img/for_kids_category.png" alt="dla dzieci" class="home-categories__item-image">
+            <p class="home-categories__item-title">Dla dzieci</p>
+        </a>
+    </div>
+</section>
+
+<section class="home-top-books wrapper">
+    <div class="home-top-books__header">
+        <h1 class="home-top-books__title">To najczęściej<br />czytano w Listopadzie:</h1>
+    </div>
+
+    <div class="home-top-books__content">
+        <div class="home-top-books__item">
+            <img src="/assets/img/for_kids_category.png" alt="" class="home-top-books__item-image">
+        </div>
+    </div>
+</section>
