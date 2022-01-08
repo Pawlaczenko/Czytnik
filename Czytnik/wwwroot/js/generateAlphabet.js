@@ -15,8 +15,9 @@ const createCategoryBoxElement = (letter, categoriesByLetter) => {
     listItem.id = letter;
     listItem.className = "categories__list-item categoryBox";
 
-    let itemHeader = document.createElement("h3");
+    let itemHeader = document.createElement("a");
     itemHeader.className = "categoryBox__header";
+    itemHeader.setAttribute("href",`#${letter}`);
     itemHeader.textContent = letter;
 
     let itemList = document.createElement("ul");
@@ -27,7 +28,7 @@ const createCategoryBoxElement = (letter, categoriesByLetter) => {
         itemCategory.className = "categoryBox__list-item";
 
         let itemAnchor = document.createElement("a");
-        itemAnchor.setAttribute("href", `/Search?categoryId=${category.category.id}`); //TODO: zrobiæ dzia³aj¹cy link
+        itemAnchor.setAttribute("href", `/Search?categoryId=${category.category.id}`); //TODO: zrobiï¿½ dziaï¿½ajï¿½cy link
         itemAnchor.className = "categoryBox__list-link";
         itemAnchor.textContent = `${category.category.name} (${category.bookCount})`;
 
