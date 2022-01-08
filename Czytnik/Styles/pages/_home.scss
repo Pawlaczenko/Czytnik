@@ -122,7 +122,7 @@
       width: 5.8rem;
       height: 2.5rem;
 
-      background-image: url('../assets/img/title_decoration.png');
+      background-image: url('../assets/svg/title_decoration.svg');
       background-repeat: no-repeat;
       background-size: contain;
     }
@@ -152,7 +152,7 @@
     display: flex;
 
     @media screen and(max-width: 600px) {
-      max-height: 150px;
+      max-height: 19rem;
     }
   }
 
@@ -173,5 +173,127 @@
     font-size: 2.4rem;
     color: var(--color-white);
     white-space: nowrap;
+  }
+}
+
+.home-top-books {
+  margin-top: 10rem;
+
+  &__header {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__title {
+    position: relative;
+
+    font-weight: 700;
+    font-size: 2.4rem;
+    text-align: center;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: calc(1em - 5px);
+
+      content: '';
+      width: 8rem;
+      height: 5px;
+
+      background-color: var(--color-secondary);
+    }
+
+    &::before {
+      left: -4rem;
+    }
+    &::after {
+      right: -4rem;
+    }
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 2rem 5rem;
+
+    margin-top: 5rem;
+
+    @media screen and(max-width: 900px) {
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    }
+  }
+
+  &__item-image {
+    width: 100%;
+
+    object-fit: cover;
+
+    @media screen and(max-width: 600px) {
+      max-height: 19rem;
+    }
+  }
+
+  &__item-title {
+    font-weight: 700;
+    font-size: 1.8rem;
+  }
+
+  &__item-author {
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: var(--color-grey);
+  }
+
+  &__item-category {
+    margin-top: 1rem;
+
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: var(--color-secondary);
+  }
+
+  &__item-rating {
+    display: flex;
+    align-items: center;
+
+    margin-top: 1rem;
+  }
+
+  &__item-star {
+    width: 3rem;
+  }
+
+  &__item-rate {
+    margin-left: 0.6rem;
+
+    font-weight: 400;
+    font-size: 1.8rem;
+    color: var(--color-grey);
+  }
+
+  &__item-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+
+    background-color: var(--color-secondary);
+    border-radius: 5px;
+
+    color: var(--color-white);
+  }
+
+  &__item-buy {
+    font-weight: 400;
+    font-size: 1.3rem;
+  }
+
+  &__item-price {
+    font-weight: 700;
+    font-size: 1.3rem;
   }
 }
