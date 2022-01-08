@@ -25,12 +25,14 @@
   </div>
 
   <div class="navigation__buttons">
-    <button class="navigation__buttons-login">
-      Zaloguj
-    </button>
+    <div class="navigation__buttons-login">
+      <button class="button">
+        Zaloguj
+      </button>
+    </div>
     <button class="navigation__buttons-cart">
       <svg class="navigation__buttons-cart-icon" viewBox="0 0 32 32">
-        <use xlink:href="/assets/sprite.svg#icon-cart"></use>
+        <use xlink:href="/assets/svg/sprite.svg#icon-cart"></use>
       </svg>
       <div class="navigation__buttons-cart-quantity">2</div>
     </button>
@@ -39,7 +41,7 @@
       <input type="text" class="navigation__search-input" placeholder="Wyszukaj..." />
       <button class="navigation__search-button">
         <svg class="navigation__search-icon" viewBox="0 0 32 32">
-          <use xlink:href="/assets/sprite.svg#icon-search"></use>
+          <use xlink:href="/assets/svg/sprite.svg#icon-search"></use>
         </svg>
       </button>
     </div>
@@ -75,7 +77,10 @@
     </li>
   </ul>
 
-  <button class="navigation__mobile-login navigation__buttons-login">
-    Zaloguj
-  </button>
+  <div class="navigation__mobile-login">
+    <button class="button button--big">
+      Zaloguj
+    </button>
+  </div>
+
 </nav>

@@ -1,0 +1,98 @@
+.header {
+  &__container {
+    position: relative;
+    display: flex;
+
+    background-color: var(--color-primary-light-opacity);
+    border-radius: 2.4rem;
+
+    margin-bottom: 7rem;
+    padding: 4rem 6rem;
+
+    @media only screen and (max-width: 900px) {
+      flex-direction: column;
+    }
+
+    @media only screen and (max-width: 600px) {
+      padding: 4rem Min(2rem, 5vw);
+    }
+  }
+
+  &__cta {
+    flex-basis: 55%;
+
+    color: var(--color-black);
+
+    @media only screen and (max-width: 900px) {
+      flex-basis: 100%;
+      text-align: center;
+    }
+  }
+
+  &__heading {
+    margin-bottom: 2rem;
+
+    font-weight: 700;
+    font-size: 3.2rem;
+  }
+
+  &__text {
+    margin-bottom: 4rem;
+
+    font-weight: 400;
+    font-size: 1.8rem;
+  }
+
+  &__button {
+    color: var(--color-white);
+  }
+
+  &__covers {
+    position: relative;
+    top: 0;
+
+    display: flex;
+
+    margin-left: 4rem;
+
+    @media only screen and (max-width: 600px) {
+      display: none;
+    }
+  }
+
+  &__image {
+    position: absolute;
+
+    width: clamp(320px, 30vw, 380px);
+
+    @media only screen and (max-width: 900px) {
+      width: 120px;
+
+      top: -60px;
+      left: 80%;
+    }
+  }
+
+  &__decoration {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    z-index: -10;
+
+    width: 420px;
+
+    @media only screen and (max-width: 900px) {
+      width: 120px;
+      top: initial;
+      bottom: 0;
+    }
+    @media only screen and (max-width: 600px) {
+      display: none;
+    }
+  }
+
+  &__decoration-image {
+    width: 100%;
+  }
+}

@@ -13,6 +13,10 @@ html {
   @media only screen and (max-width: 1080px) {
     font-size: 56.25%; //* 1rem = 9px
   }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 50%; //* 1rem = 8px
+  }
 }
 
 body {
