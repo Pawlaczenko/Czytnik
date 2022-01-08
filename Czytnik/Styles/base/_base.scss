@@ -9,6 +9,7 @@
 html {
   // This define 1rem = 10px
   font-size: 62.5%;
+  max-width: 100%;
 
   @media only screen and (max-width: 1080px) {
     font-size: 56.25%; //* 1rem = 9px
