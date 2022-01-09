@@ -9,26 +9,26 @@
       <a asp-controller="Home" asp-action="Index">Czytnik</a>
   </div>
 
-  <div class="navigation__links">
-      <div class="navigation__links-item navigation__links-item--active">
+  <ul class="navigation__links">
+      <li class="navigation__links-item @Html.ActiveClass("Home", "Index")">
           <a class="navigation__links-link" asp-controller="Home" asp-action="Index">Strona Główna</a>
-      </div>
-      <div class="navigation__links-item">
+      </li>
+      <li class="navigation__links-item @Html.ActiveClass("Categories", "Index")">
           <a class="navigation__links-link" asp-controller="Categories" asp-action="Index">Kategorie</a>
-      </div>
-    <div class="navigation__links-item">
+      </li>
+    <li class="navigation__links-item @Html.ActiveClass("Home", "Kontakt")">
         <a class="navigation__links-link" asp-controller="Home" asp-action="Kontakt">Kontakt</a>
-    </div>
-    <div class="navigation__links-item">
+    </li>
+    <li class="navigation__links-item @Html.ActiveClass("Blog", "Index")">
         <a class="navigation__links-link" asp-controller="Blog" asp-action="Index">Blog</a>
-    </div>
-  </div>
+    </li>
+  </ul>
 
   <div class="navigation__buttons">
     <div class="navigation__buttons-login">
-      <button class="button">
+      <a class="button" href="/Zaloguj">
         Zaloguj
-      </button>
+      </a>
     </div>
     <button class="navigation__buttons-cart">
       <svg class="navigation__buttons-cart-icon" viewBox="0 0 32 32">
@@ -36,8 +36,8 @@
       </svg>
       <div class="navigation__buttons-cart-quantity">2</div>
     </button>
-
-    <div class="navigation__search">
+  </div>
+      <div class="navigation__search">
       <input type="text" class="navigation__search-input" placeholder="Wyszukaj..." />
       <a class="navigation__search-button" asp-controller="Cart" asp-action="Index">
         <svg class="navigation__search-icon" viewBox="0 0 32 32">
@@ -45,7 +45,6 @@
         </svg>
       </a>
     </div>
-  </div>
 </nav>
 
 <nav class="navigation__mobile js-navigation__mobile">
@@ -61,26 +60,26 @@
       </a>
     </li>
     <li class="navigation__mobile-item">
-      <a href="/" class="navigation__mobile-link navigation__links-link">
+      <a href="/Kategorie" class="navigation__mobile-link navigation__links-link">
         Kategorie
       </a>
     </li>
     <li class="navigation__mobile-item">
-      <a href="/" class="navigation__mobile-link navigation__links-link">
+      <a href="/Home/Kontakt" class="navigation__mobile-link navigation__links-link">
         Kontakt
       </a>
     </li>
     <li class="navigation__mobile-item">
-      <a href="/" class="navigation__mobile-link navigation__links-link">
+      <a href="/Blog" class="navigation__mobile-link navigation__links-link">
         Blog
       </a>
     </li>
   </ul>
 
   <div class="navigation__mobile-login">
-    <button class="button button--big">
+    <a class="button button--big">
       Zaloguj
-    </button>
+    </a>
   </div>
 
 </nav>
