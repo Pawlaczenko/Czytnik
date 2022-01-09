@@ -16,6 +16,8 @@
     @media only screen and (max-width: 600px) {
       padding: 4rem Min(2rem, 5vw);
     }
+
+    @include blob_decoration(0, 0, right, top);
   }
 
   &__cta {
@@ -49,7 +51,7 @@
 
   &__covers {
     position: relative;
-    top: 0;
+    top: 1rem;
 
     display: flex;
 
@@ -71,29 +73,6 @@
       top: -60px;
       left: 80%;
     }
-  }
-
-  &__decoration {
-    position: absolute;
-    right: 0;
-    top: 0;
-
-    z-index: -10;
-
-    width: 420px;
-
-    @media only screen and (max-width: 900px) {
-      width: 120px;
-      top: initial;
-      bottom: 0;
-    }
-    @media only screen and (max-width: 600px) {
-      display: none;
-    }
-  }
-
-  &__decoration-image {
-    width: 100%;
   }
 }
 
@@ -135,6 +114,8 @@
   }
 
   &__content {
+    position: relative;
+
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 2rem;
@@ -142,6 +123,8 @@
     @media screen and(max-width: 900px) {
       grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
     }
+
+    @include blob_decoration(-5rem, clamp(1rem, 4vw, 10rem), left, top, 32rem, 180deg);
   }
 
   &__item {
@@ -334,6 +317,8 @@
   }
 
   &__content {
+    position: relative;
+
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(5, 9rem);
@@ -344,6 +329,8 @@
     @media screen and(max-width: 900px) {
       grid-template-rows: repeat(3, min-content);
     }
+
+    @include blob_decoration(-15rem, -10rem, right, top, 32rem, 135deg);
   }
 
   &__item {

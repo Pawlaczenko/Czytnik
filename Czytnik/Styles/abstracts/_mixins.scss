@@ -1,3 +1,27 @@
+@mixin blob_decoration($h-value, $v-value, $h-side: left, $v-side: top, $width: 38rem, $rotate: 0deg) {
+  &::after {
+    position: absolute;
+    #{$h-side}: $h-value;
+    #{$v-side}: $v-value;
+
+    z-index: -20;
+
+    content: '';
+    width: $width;
+    height: $width;
+
+    background-image: url('../assets/svg/blob.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    transform: rotate($rotate);
+
+    @media screen and(max-width: 900px) {
+      display: none;
+    }
+  }
+}
+
 @mixin clearfix {
   &::after {
     content: '';
