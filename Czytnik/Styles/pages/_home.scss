@@ -221,8 +221,6 @@
   &__item-link {
     display: block;
     overflow: hidden;
-
-    border-radius: 5px;
   }
 
   &__item-image {
@@ -458,5 +456,147 @@
   &__item-author {
     margin-top: 0.5em;
     font-size: 1em;
+  }
+}
+
+.home-blog {
+  margin-top: 13rem;
+  margin-bottom: 10rem;
+
+  &__header {
+    position: relative;
+    width: max-content;
+
+    z-index: -10;
+
+    margin-left: -10rem;
+    margin-bottom: -10rem;
+
+    padding-top: 3.5rem;
+    padding-left: 10rem;
+    padding-right: 10rem;
+    padding-bottom: 10rem;
+
+    background-color: var(--color-primary);
+
+    @media screen and (max-width: 600px) {
+      width: Max(46rem, 90%);
+      padding-right: 5rem;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5rem;
+
+      z-index: -10;
+
+      width: 15rem;
+      height: 13rem;
+
+      background-image: url(../assets/svg/dots.svg);
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+
+  &__title {
+    position: relative;
+
+    width: max-content;
+
+    font-weight: 700;
+    font-size: 3.6rem;
+
+    @media screen and (max-width: 600px) {
+      font-size: 2.6rem;
+      width: auto;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: -6rem;
+      bottom: calc(0.5em - 0.3rem);
+
+      height: 0.6rem;
+      width: 5.5rem;
+
+      background-color: var(--color-white);
+
+      @media screen and (max-width: 600px) {
+        display: none;
+      }
+    }
+  }
+
+  &__description {
+    max-width: 45rem;
+
+    margin-top: 4rem;
+
+    font-weight: 300;
+    font-size: 1.8rem;
+    line-height: 1.6;
+
+    @media screen and (max-width: 600px) {
+      font-size: 1.4rem;
+    }
+  }
+
+  &__posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 0.8fr));
+    grid-gap: 5.5rem;
+
+    margin-top: 3rem;
+    padding-left: 5rem;
+  }
+
+  &__posts-item {
+    display: block;
+  }
+
+  &__posts-image {
+    width: 100%;
+  }
+
+  &__posts-title {
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.6;
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  &__posts-author {
+    display: flex;
+    align-items: center;
+
+    margin-top: 1rem;
+
+    &-avatar {
+      width: 5rem;
+      height: 5rem;
+
+      border-radius: 50%;
+    }
+
+    &-name {
+      margin-left: 1rem;
+
+      font-weight: 300;
+      font-size: 1.4rem;
+
+      overflow: hidden;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
   }
 }
