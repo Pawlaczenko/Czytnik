@@ -6,12 +6,9 @@
   z-index: 100;
   background-color: var(--color-white);
 
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-
   padding: 4rem 0;
-  transition: padding .2s ease-in-out;
+
+  transition: padding 0.2s ease-in-out;
 
   &.isSticky {
     padding: 1.5rem 0;
@@ -21,13 +18,22 @@
   @media only screen and (max-width: 900px) {
     position: unset;
     padding: 4rem 0 !important;
+  }
+}
 
+.navigation__content {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  @media only screen and (max-width: 900px) {
     display: grid;
     grid-template-columns: max-content 1fr max-content;
     row-gap: 2rem;
-    grid-template-areas: 
-    "burger logo cart"
-    "search search search";
+    grid-template-areas:
+      'burger logo cart'
+      'search search search';
   }
 }
 
@@ -45,7 +51,7 @@
 
   &-line {
     width: 3rem;
-    height: .5rem;
+    height: 0.5rem;
 
     background-color: var(--color-grey-light);
     border-radius: 4px;
@@ -53,7 +59,7 @@
     transition: background-color 0.2s;
 
     & + & {
-      margin-top: .5rem;
+      margin-top: 0.5rem;
     }
   }
 }
@@ -156,8 +162,10 @@
     &:focus-within {
       right: 50%;
       transform: translateX(51%);
-      background-color: var(--color-white-dark);
+
       width: clamp(400px, 51vw, 660px);
+
+      background-color: var(--color-white-dark);
 
       transition: 0.5s transform, 0.5s right, 0.5s width, 0.7s background-color;
     }

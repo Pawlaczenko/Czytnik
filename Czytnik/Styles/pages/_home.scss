@@ -128,22 +128,34 @@
   }
 
   &__item {
-    display: block;
-
     position: relative;
-
     display: flex;
+
+    overflow: hidden;
+
+    border-radius: 5px;
 
     @media screen and(max-width: 600px) {
       max-height: 19rem;
     }
   }
 
+  &__item:hover &__item-image {
+    height: 120%;
+  }
+
   &__item-image {
     width: 100%;
+    height: 100%;
     object-fit: cover;
 
     border-radius: 5px;
+
+    transition: height 0.3s;
+
+    &:hover {
+      height: 120%;
+    }
   }
 
   &__item-title {
@@ -206,6 +218,13 @@
     }
   }
 
+  &__item-link {
+    display: block;
+    overflow: hidden;
+
+    border-radius: 5px;
+  }
+
   &__item-image {
     width: 100%;
 
@@ -213,6 +232,11 @@
 
     @media screen and(max-width: 600px) {
       max-height: 19rem;
+    }
+
+    transition: transform 0.3s;
+    &:hover {
+      transform: scale(1.2);
     }
   }
 
@@ -265,9 +289,17 @@
     padding: 0.5rem 1rem;
 
     background-color: var(--color-secondary);
+    border: 1px solid transparent;
     border-radius: 5px;
 
     color: var(--color-white);
+
+    transition: all 0.3s;
+    &:hover {
+      color: var(--color-secondary);
+      background-color: var(--color-white);
+      border: 1px solid var(--color-secondary);
+    }
   }
 
   &__item-buy {
@@ -336,6 +368,10 @@
   &__item {
     position: relative;
 
+    display: block;
+
+    overflow: hidden;
+
     font-weight: 700;
     color: var(--color-white);
 
@@ -378,6 +414,10 @@
     }
   }
 
+  &__item:hover &__item-image {
+    transform: scale(1.2);
+  }
+
   &__item-image {
     position: absolute;
     left: 0;
@@ -388,6 +428,8 @@
     object-fit: cover;
 
     z-index: -10;
+
+    transition: transform 0.3s;
   }
 
   &__item-position {

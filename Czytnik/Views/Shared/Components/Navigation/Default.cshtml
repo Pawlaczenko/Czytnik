@@ -1,50 +1,52 @@
-﻿<nav class="navigation wrapper">
-  <button class="navigation__burger js-navigation__burger">
-    <div class="navigation__burger-line"></div>
-    <div class="navigation__burger-line"></div>
-    <div class="navigation__burger-line"></div>
-  </button>
+﻿<nav class="navigation">
+  <div class="navigation__content wrapper">
+    <button class="navigation__burger js-navigation__burger">
+      <div class="navigation__burger-line"></div>
+      <div class="navigation__burger-line"></div>
+      <div class="navigation__burger-line"></div>
+    </button>
 
-  <div class="navigation__logo">
+    <div class="navigation__logo">
       <a asp-controller="Home" asp-action="Index">Czytnik</a>
-  </div>
+    </div>
 
-  <ul class="navigation__links">
+    <ul class="navigation__links">
       <li class="navigation__links-item @Html.ActiveClass("Home", "Index")">
-          <a class="navigation__links-link" asp-controller="Home" asp-action="Index">Strona Główna</a>
+        <a class="navigation__links-link" asp-controller="Home" asp-action="Index">Strona Główna</a>
       </li>
       <li class="navigation__links-item @Html.ActiveClass("Categories", "Index")">
-          <a class="navigation__links-link" asp-controller="Categories" asp-action="Index">Kategorie</a>
+        <a class="navigation__links-link" asp-controller="Categories" asp-action="Index">Kategorie</a>
       </li>
-    <li class="navigation__links-item @Html.ActiveClass("Home", "Kontakt")">
+      <li class="navigation__links-item @Html.ActiveClass("Home", "Kontakt")">
         <a class="navigation__links-link" asp-controller="Home" asp-action="Kontakt">Kontakt</a>
-    </li>
-    <li class="navigation__links-item @Html.ActiveClass("Blog", "Index")">
+      </li>
+      <li class="navigation__links-item @Html.ActiveClass("Blog", "Index")">
         <a class="navigation__links-link" asp-controller="Blog" asp-action="Index">Blog</a>
-    </li>
-  </ul>
+      </li>
+    </ul>
 
-  <div class="navigation__buttons">
-    <div class="navigation__buttons-login">
-      <a class="button" href="/Zaloguj">
-        Zaloguj
+    <div class="navigation__buttons">
+      <div class="navigation__buttons-login">
+        <a class="button" href="/Zaloguj">
+          Zaloguj
+        </a>
+      </div>
+      <a class="navigation__buttons-cart" asp-controller="Cart" asp-action="Index">
+        <svg class="navigation__buttons-cart-icon" viewBox="0 0 32 32">
+          <use xlink:href="/assets/svg/sprite.svg#icon-cart"></use>
+        </svg>
+        <div class="navigation__buttons-cart-quantity">2</div>
       </a>
     </div>
-    <button class="navigation__buttons-cart">
-      <svg class="navigation__buttons-cart-icon" viewBox="0 0 32 32">
-        <use xlink:href="/assets/svg/sprite.svg#icon-cart"></use>
-      </svg>
-      <div class="navigation__buttons-cart-quantity">2</div>
-    </button>
-  </div>
-      <div class="navigation__search">
+    <div class="navigation__search">
       <input type="text" class="navigation__search-input" placeholder="Wyszukaj..." />
-      <a class="navigation__search-button" asp-controller="Cart" asp-action="Index">
+      <button class="navigation__search-button">
         <svg class="navigation__search-icon" viewBox="0 0 32 32">
           <use xlink:href="/assets/svg/sprite.svg#icon-search"></use>
         </svg>
-      </a>
+      </button>
     </div>
+  </div>
 </nav>
 
 <nav class="navigation__mobile js-navigation__mobile">
@@ -54,7 +56,7 @@
   </button>
 
   <ul class="navigation__mobile-links">
-    <li class="navigation__mobile-item navigation__mobile-item--active">
+    <li class="navigation__mobile-itemO">
       <a href="/" class="navigation__mobile-link navigation__links-link">
         Strona Główna
       </a>
