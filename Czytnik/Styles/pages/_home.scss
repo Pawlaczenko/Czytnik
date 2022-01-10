@@ -239,6 +239,8 @@
   }
 
   &__item-title {
+    margin-top: 1rem;
+
     font-weight: 700;
     font-size: 1.8rem;
   }
@@ -498,6 +500,7 @@
       background-image: url(../assets/svg/dots.svg);
       background-repeat: no-repeat;
       background-size: contain;
+      background-position-x: -5px;
     }
   }
 
@@ -558,8 +561,18 @@
     display: block;
   }
 
+  &__articles-item:hover &__articles-image {
+    transform: scale(1.2);
+  }
+
   &__articles-image {
     width: 100%;
+
+    transition: transform 0.3s;
+
+    &-wrapper {
+      overflow: hidden;
+    }
   }
 
   &__articles-title {
