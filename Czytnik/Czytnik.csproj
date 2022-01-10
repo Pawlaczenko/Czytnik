@@ -16,6 +16,7 @@
     <Content Remove="Views\Categories\Index.cshtml" />
     <Content Remove="Views\Shared\Components\Footer\Default.cshtml" />
     <Content Remove="Views\Shared\Components\Navigation\Default.cshtml" />
+    <Content Remove="Views\Shared\Partials\_LoadingSpinner.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +46,7 @@
     <None Include="Views\Categories\Index.cshtml" />
     <None Include="Views\Shared\Components\Footer\Default.cshtml" />
     <None Include="Views\Shared\Components\Navigation\Default.cshtml" />
+    <None Include="Views\Shared\Partials\_LoadingSpinner.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,6 +64,7 @@
 	<ItemGroup>
 	  <Watch Remove="Views\Categories\Index.cshtml" />
 	  <Watch Remove="Views\Shared\Components\Footer\Default.cshtml" />
+	  <Watch Remove="Views\Shared\Partials\_LoadingSpinner.cshtml" />
 	</ItemGroup>
 
 </Project>
