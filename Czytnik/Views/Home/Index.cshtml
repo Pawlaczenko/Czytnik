@@ -2,239 +2,242 @@
     ViewData["Title"] = "Home Page";
 }
 
-<header class="home-header">
-    <div class="home-header__container wrapper">
-        <div class="home-header__cta">
-            <h1 class="home-header__heading">Twoje ulubione historie i wiedza w zasięgu kliknięcia.</h1>
-            <p class="home-header__text">Zapraszamy do księgarni internetowej Czytnik. W naszej ofercie znajdziesz
-                szeroki
-                asortyment książek i e-booków.</p>
-            <div class="home-header__button">
-                <a class="button button--medium button--secondary">
-                    Znajdź książkę
+<main class="home-main">
+    <header class="home-header">
+        <div class="home-header__container wrapper">
+            <div class="home-header__cta">
+                <h1 class="home-header__heading">Twoje ulubione historie i wiedza w zasięgu kliknięcia.</h1>
+                <p class="home-header__text">Zapraszamy do księgarni internetowej Czytnik. W naszej ofercie znajdziesz
+                    szeroki
+                    asortyment książek i e-booków.</p>
+                <div class="home-header__button">
+                    <a class="button button--medium button--secondary">
+                        Znajdź książkę
+                    </a>
+                </div>
+            </div>
+            <div class="home-header__covers">
+                <img src="/assets/img/covers.png" alt="covers" class="home-header__image">
+            </div>
+
+            @* <div class="home-header__decoration">
+                <img src="/assets/svg/blob.svg" alt="" class="home-header__decoration-image">
+                </div> *@
+        </div>
+
+    </header>
+
+    <section class="home-categories wrapper">
+        <div class="home-categories__header">
+            <h1 class="home-categories__title">Kategorie:</h1>
+            <a href="/Categories" class="home-categories__more">Zobacz wszystkie</a>
+        </div>
+
+        <div class="home-categories__content">
+            <a href="/Search?categoryId=56" class="home-categories__item">
+                <img src="/assets/img/horror_category.png" alt="horror" class="home-categories__item-image">
+                <p class="home-categories__item-title">Horror</p>
+            </a>
+            <a href="/Search?categoryId=43" class="home-categories__item">
+                <img src="/assets/img/romans_category.png" alt="romans" class="home-categories__item-image">
+                <p class="home-categories__item-title">Romans</p>
+            </a>
+            <a href="/Search?categoryId=14" class="home-categories__item">
+                <img src="/assets/img/fantasy_category.png" alt="fantasy" class="home-categories__item-image">
+                <p class="home-categories__item-title">Fantasy</p>
+            </a>
+            <a href="/Search?categoryId=123" class="home-categories__item">
+                <img src="/assets/img/history_category.png" alt="historia" class="home-categories__item-image">
+                <p class="home-categories__item-title">Historia</p>
+            </a>
+            <a href="/Search?categoryId=6" class="home-categories__item">
+                <img src="/assets/img/biography_category.png" alt="biografia" class="home-categories__item-image">
+                <p class="home-categories__item-title">Biografia</p>
+            </a>
+            <a href="/Search?categoryId=109" class="home-categories__item">
+                <img src="/assets/img/for_kids_category.png" alt="dla dzieci" class="home-categories__item-image">
+                <p class="home-categories__item-title">Dla dzieci</p>
+            </a>
+        </div>
+    </section>
+
+    <section class="home-top-books wrapper">
+        <div class="home-top-books__header">
+            <h1 class="home-top-books__title">To najczęściej<br />czytano w Listopadzie:</h1>
+        </div>
+
+        <div class="home-top-books__content">
+            <div class="home-top-books__item">
+                <a href="/Book/1" class="home-top-books__item-link">
+                    <img src="/assets/img/for_kids_category.png" alt="book" class="home-top-books__item-image">
+                </a>
+                <p class="home-top-books__item-title">Psycho</p>
+                <p class="home-top-books__item-author">Robert Bloch</p>
+                <p class="home-top-books__item-category">Horror</p>
+                <div class="home-top-books__item-rating">
+                    <svg class="home-top-books__item-star" viewBox="0 0 32 32">
+                        <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
+                    </svg>
+                    <p class="home-top-books__item-rate">4.80</p>
+                </div>
+                <a href="/Buy" class="home-top-books__item-button">
+                    <span class="home-top-books__item-buy">Kup teraz</span>
+                    <span class="home-top-books__item-price">12,65 zł</span>
+                </a>
+            </div>
+            <div class="home-top-books__item">
+                <a href="/Book/1" class="home-top-books__item-link">
+                    <img src="/assets/img/for_kids_category.png" alt="book" class="home-top-books__item-image">
+                </a>
+                <p class="home-top-books__item-title">Psycho</p>
+                <p class="home-top-books__item-author">Robert Bloch</p>
+                <p class="home-top-books__item-category">Horror</p>
+                <div class="home-top-books__item-rating">
+                    <svg class="home-top-books__item-star" viewBox="0 0 32 32">
+                        <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
+                    </svg>
+                    <p class="home-top-books__item-rate">4.80</p>
+                </div>
+                <a href="/Buy" class="home-top-books__item-button">
+                    <span class="home-top-books__item-buy">Kup teraz</span>
+                    <span class="home-top-books__item-price">12,65 zł</span>
+                </a>
+            </div>
+            <div class="home-top-books__item">
+                <a href="/Book/1" class="home-top-books__item-link">
+                    <img src="/assets/img/for_kids_category.png" alt="book" class="home-top-books__item-image">
+                </a>
+                <p class="home-top-books__item-title">Psycho</p>
+                <p class="home-top-books__item-author">Robert Bloch</p>
+                <p class="home-top-books__item-category">Horror</p>
+                <div class="home-top-books__item-rating">
+                    <svg class="home-top-books__item-star" viewBox="0 0 32 32">
+                        <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
+                    </svg>
+                    <p class="home-top-books__item-rate">4.80</p>
+                </div>
+                <a href="/Buy" class="home-top-books__item-button">
+                    <span class="home-top-books__item-buy">Kup teraz</span>
+                    <span class="home-top-books__item-price">12,65 zł</span>
+                </a>
+            </div>
+            <div class="home-top-books__item">
+                <a href="/Book/1" class="home-top-books__item-link">
+                    <img src="/assets/img/for_kids_category.png" alt="book" class="home-top-books__item-image">
+                </a>
+                <p class="home-top-books__item-title">Psycho</p>
+                <p class="home-top-books__item-author">Robert Bloch</p>
+                <p class="home-top-books__item-category">Horror</p>
+                <div class="home-top-books__item-rating">
+                    <svg class="home-top-books__item-star" viewBox="0 0 32 32">
+                        <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
+                    </svg>
+                    <p class="home-top-books__item-rate">4.80</p>
+                </div>
+                <a href="/Buy" class="home-top-books__item-button">
+                    <span class="home-top-books__item-buy">Kup teraz</span>
+                    <span class="home-top-books__item-price">12,65 zł</span>
+                </a>
+            </div>
+            <div class="home-top-books__item">
+                <a href="/Book/1" class="home-top-books__item-link">
+                    <img src="/assets/img/for_kids_category.png" alt="book" class="home-top-books__item-image">
+                </a>
+                <p class="home-top-books__item-title">Psycho</p>
+                <p class="home-top-books__item-author">Robert Bloch</p>
+                <p class="home-top-books__item-category">Horror</p>
+                <div class="home-top-books__item-rating">
+                    <svg class="home-top-books__item-star" viewBox="0 0 32 32">
+                        <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
+                    </svg>
+                    <p class="home-top-books__item-rate">4.80</p>
+                </div>
+                <a href="/Buy" class="home-top-books__item-button">
+                    <span class="home-top-books__item-buy">Kup teraz</span>
+                    <span class="home-top-books__item-price">12,65 zł</span>
                 </a>
             </div>
         </div>
-        <div class="home-header__covers">
-            <img src="/assets/img/covers.png" alt="covers" class="home-header__image">
+    </section>
+
+    <section class="home-best-books wrapper">
+        <div class="home-best-books__header">
+            <h1 class="home-best-books__title">Najlepsze<br />książki wszechczasów:</h1>
         </div>
 
-        @* <div class="home-header__decoration">
-            <img src="/assets/svg/blob.svg" alt="" class="home-header__decoration-image">
-            </div> *@
-    </div>
-
-</header>
-
-<section class="home-categories wrapper">
-    <div class="home-categories__header">
-        <h1 class="home-categories__title">Kategorie:</h1>
-        <a href="/Categories" class="home-categories__more">Zobacz wszystkie</a>
-    </div>
-
-    <div class="home-categories__content">
-        <a href="/Search?categoryId=56" class="home-categories__item">
-            <img src="/assets/img/horror_category.png" alt="horror" class="home-categories__item-image">
-            <p class="home-categories__item-title">Horror</p>
-        </a>
-        <a href="/Search?categoryId=43" class="home-categories__item">
-            <img src="/assets/img/romans_category.png" alt="romans" class="home-categories__item-image">
-            <p class="home-categories__item-title">Romans</p>
-        </a>
-        <a href="/Search?categoryId=14" class="home-categories__item">
-            <img src="/assets/img/fantasy_category.png" alt="fantasy" class="home-categories__item-image">
-            <p class="home-categories__item-title">Fantasy</p>
-        </a>
-        <a href="/Search?categoryId=123" class="home-categories__item">
-            <img src="/assets/img/history_category.png" alt="historia" class="home-categories__item-image">
-            <p class="home-categories__item-title">Historia</p>
-        </a>
-        <a href="/Search?categoryId=6" class="home-categories__item">
-            <img src="/assets/img/biography_category.png" alt="biografia" class="home-categories__item-image">
-            <p class="home-categories__item-title">Biografia</p>
-        </a>
-        <a href="/Search?categoryId=109" class="home-categories__item">
-            <img src="/assets/img/for_kids_category.png" alt="dla dzieci" class="home-categories__item-image">
-            <p class="home-categories__item-title">Dla dzieci</p>
-        </a>
-    </div>
-</section>
-
-<section class="home-top-books wrapper">
-    <div class="home-top-books__header">
-        <h1 class="home-top-books__title">To najczęściej<br />czytano w Listopadzie:</h1>
-    </div>
-
-    <div class="home-top-books__content">
-        <div class="home-top-books__item">
-            <a href="/Book/1" class="home-top-books__item-link">
-                <img src="/assets/img/for_kids_category.png" alt="book" class="home-top-books__item-image">
+        <div class="home-best-books__content">
+            <a href="/Book/1" class="home-best-books__item home-best-books__item--first">
+                <img src="/assets/img/first_best_book.png" alt="Książka na pierwszym miejscu"
+                    class="home-best-books__item-image" />
+                <p class="home-best-books__item-position">#1</p>
+                <p class="home-best-books__item-title">Harry Potter and the Chamber of Secrets</p>
+                <p class="home-best-books__item-author">J.K Rowling</p>
             </a>
-            <p class="home-top-books__item-title">Psycho</p>
-            <p class="home-top-books__item-author">Robert Bloch</p>
-            <p class="home-top-books__item-category">Horror</p>
-            <div class="home-top-books__item-rating">
-                <svg class="home-top-books__item-star" viewBox="0 0 32 32">
-                    <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                </svg>
-                <p class="home-top-books__item-rate">4.80</p>
+            <a href="/Book/1" class="home-best-books__item home-best-books__item--second">
+                <img src="/assets/img/second_best_book.png" alt="Książka na pierwszym miejscu"
+                    class="home-best-books__item-image" />
+                <p class="home-best-books__item-position">#2</p>
+                <p class="home-best-books__item-title">I Know Why the Caged Bird Sings</p>
+                <p class="home-best-books__item-author">Maya Angelou</p>
+            </a>
+            <a href="/Book/1" class="home-best-books__item home-best-books__item--third">
+                <img src="/assets/img/third_best_book.png" alt="Książka na pierwszym miejscu"
+                    class="home-best-books__item-image" />
+                <p class="home-best-books__item-position">#3</p>
+                <p class="home-best-books__item-title">the Catcher in the Rye</p>
+                <p class="home-best-books__item-author">J. D. Salinger</p>
+            </a>
+        </div>
+    </section>
+
+    <section class="home-blog">
+        <div class="home-blog__content wrapper">
+            <div class="home-blog__header">
+                <h1 class="home-blog__title">Poznaj naszego bloga</h1>
+                <p class="home-blog__description">Chcesz jeszcze bardziej wgłębić się w świat książek? Zajrzyj na nasz
+                    blog,
+                    gdzie przeczytasz o najnowszych trendach oraz
+                    poznasz lepiej nasz skład.</p>
             </div>
-            <a href="/Buy" class="home-top-books__item-button">
-                <span class="home-top-books__item-buy">Kup teraz</span>
-                <span class="home-top-books__item-price">12,65 zł</span>
-            </a>
-        </div>
-        <div class="home-top-books__item">
-            <a href="/Book/1" class="home-top-books__item-link">
-                <img src="/assets/img/for_kids_category.png" alt="book" class="home-top-books__item-image">
-            </a>
-            <p class="home-top-books__item-title">Psycho</p>
-            <p class="home-top-books__item-author">Robert Bloch</p>
-            <p class="home-top-books__item-category">Horror</p>
-            <div class="home-top-books__item-rating">
-                <svg class="home-top-books__item-star" viewBox="0 0 32 32">
-                    <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                </svg>
-                <p class="home-top-books__item-rate">4.80</p>
-            </div>
-            <a href="/Buy" class="home-top-books__item-button">
-                <span class="home-top-books__item-buy">Kup teraz</span>
-                <span class="home-top-books__item-price">12,65 zł</span>
-            </a>
-        </div>
-        <div class="home-top-books__item">
-            <a href="/Book/1" class="home-top-books__item-link">
-                <img src="/assets/img/for_kids_category.png" alt="book" class="home-top-books__item-image">
-            </a>
-            <p class="home-top-books__item-title">Psycho</p>
-            <p class="home-top-books__item-author">Robert Bloch</p>
-            <p class="home-top-books__item-category">Horror</p>
-            <div class="home-top-books__item-rating">
-                <svg class="home-top-books__item-star" viewBox="0 0 32 32">
-                    <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                </svg>
-                <p class="home-top-books__item-rate">4.80</p>
-            </div>
-            <a href="/Buy" class="home-top-books__item-button">
-                <span class="home-top-books__item-buy">Kup teraz</span>
-                <span class="home-top-books__item-price">12,65 zł</span>
-            </a>
-        </div>
-        <div class="home-top-books__item">
-            <a href="/Book/1" class="home-top-books__item-link">
-                <img src="/assets/img/for_kids_category.png" alt="book" class="home-top-books__item-image">
-            </a>
-            <p class="home-top-books__item-title">Psycho</p>
-            <p class="home-top-books__item-author">Robert Bloch</p>
-            <p class="home-top-books__item-category">Horror</p>
-            <div class="home-top-books__item-rating">
-                <svg class="home-top-books__item-star" viewBox="0 0 32 32">
-                    <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                </svg>
-                <p class="home-top-books__item-rate">4.80</p>
-            </div>
-            <a href="/Buy" class="home-top-books__item-button">
-                <span class="home-top-books__item-buy">Kup teraz</span>
-                <span class="home-top-books__item-price">12,65 zł</span>
-            </a>
-        </div>
-        <div class="home-top-books__item">
-            <a href="/Book/1" class="home-top-books__item-link">
-                <img src="/assets/img/for_kids_category.png" alt="book" class="home-top-books__item-image">
-            </a>
-            <p class="home-top-books__item-title">Psycho</p>
-            <p class="home-top-books__item-author">Robert Bloch</p>
-            <p class="home-top-books__item-category">Horror</p>
-            <div class="home-top-books__item-rating">
-                <svg class="home-top-books__item-star" viewBox="0 0 32 32">
-                    <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                </svg>
-                <p class="home-top-books__item-rate">4.80</p>
-            </div>
-            <a href="/Buy" class="home-top-books__item-button">
-                <span class="home-top-books__item-buy">Kup teraz</span>
-                <span class="home-top-books__item-price">12,65 zł</span>
-            </a>
-        </div>
-    </div>
-</section>
 
-<section class="home-best-books wrapper">
-    <div class="home-best-books__header">
-        <h1 class="home-best-books__title">Najlepsze<br />książki wszechczasów:</h1>
-    </div>
-
-    <div class="home-best-books__content">
-        <a href="/Book/1" class="home-best-books__item home-best-books__item--first">
-            <img src="/assets/img/first_best_book.png" alt="Książka na pierwszym miejscu"
-                class="home-best-books__item-image" />
-            <p class="home-best-books__item-position">#1</p>
-            <p class="home-best-books__item-title">Harry Potter and the Chamber of Secrets</p>
-            <p class="home-best-books__item-author">J.K Rowling</p>
-        </a>
-        <a href="/Book/1" class="home-best-books__item home-best-books__item--second">
-            <img src="/assets/img/second_best_book.png" alt="Książka na pierwszym miejscu"
-                class="home-best-books__item-image" />
-            <p class="home-best-books__item-position">#2</p>
-            <p class="home-best-books__item-title">I Know Why the Caged Bird Sings</p>
-            <p class="home-best-books__item-author">Maya Angelou</p>
-        </a>
-        <a href="/Book/1" class="home-best-books__item home-best-books__item--third">
-            <img src="/assets/img/third_best_book.png" alt="Książka na pierwszym miejscu"
-                class="home-best-books__item-image" />
-            <p class="home-best-books__item-position">#3</p>
-            <p class="home-best-books__item-title">the Catcher in the Rye</p>
-            <p class="home-best-books__item-author">J. D. Salinger</p>
-        </a>
-    </div>
-</section>
-
-<section class="home-blog">
-    <div class="home-blog__content wrapper">
-        <div class="home-blog__header">
-            <h1 class="home-blog__title">Poznaj naszego bloga</h1>
-            <p class="home-blog__description">Chcesz jeszcze bardziej wgłębić się w świat książek? Zajrzyj na nasz blog,
-                gdzie przeczytasz o najnowszych trendach oraz
-                poznasz lepiej nasz skład.</p>
+            <div class="home-blog__articles">
+                <a href="/Post/1" class="home-blog__articles-item">
+                    <img src="/assets/img/example_post.png" alt="post" class="home-blog__articles-image">
+                    <p class="home-blog__articles-title">10 Książek, Które Zmienią Twoje Życie</p>
+                    <div class="home-blog__articles-author">
+                        <img src="/assets/img/example_avatar.png" alt="author"
+                            class="home-blog__articles-author-avatar"></img>
+                        <p class="home-blog__articles-author-name">Bartłomiej Stapiński</p>
+                    </div>
+                </a>
+                <a href="/Post/1" class="home-blog__articles-item">
+                    <img src="/assets/img/example_post.png" alt="post" class="home-blog__articles-image">
+                    <p class="home-blog__articles-title">Najlepsze Pozycje Do Czytania Książek</p>
+                    <div class="home-blog__articles-author">
+                        <img src="/assets/img/example_avatar.png" alt="author"
+                            class="home-blog__articles-author-avatar"></img>
+                        <p class="home-blog__articles-author-name">Bartłomiej Stapiński</p>
+                    </div>
+                </a>
+                <a href="/Post/1" class="home-blog__articles-item">
+                    <img src="/assets/img/example_post.png" alt="post" class="home-blog__articles-image">
+                    <p class="home-blog__articles-title">Już Mi Się Nie Chce Wymyślać Tytułów Tych Blogów</p>
+                    <div class="home-blog__articles-author">
+                        <img src="/assets/img/example_avatar.png" alt="author"
+                            class="home-blog__articles-author-avatar"></img>
+                        <p class="home-blog__articles-author-name">Bartłomiej Stapiński</p>
+                    </div>
+                </a>
+                <a href="/Post/1" class="home-blog__articles-item">
+                    <img src="/assets/img/example_post.png" alt="post" class="home-blog__articles-image">
+                    <p class="home-blog__articles-title">To Może Się Nawet Nie Pojawić W Tym Projekcie</p>
+                    <div class="home-blog__articles-author">
+                        <img src="/assets/img/example_avatar.png" alt="author"
+                            class="home-blog__articles-author-avatar"></img>
+                        <p class="home-blog__articles-author-name">Bartłomiej Stapiński</p>
+                    </div>
+                </a>
+            </div>
         </div>
-
-        <div class="home-blog__articles">
-            <a href="/Post/1" class="home-blog__articles-item">
-                <img src="/assets/img/example_post.png" alt="post" class="home-blog__articles-image">
-                <p class="home-blog__articles-title">10 Książek, Które Zmienią Twoje Życie</p>
-                <div class="home-blog__articles-author">
-                    <img src="/assets/img/example_avatar.png" alt="author"
-                        class="home-blog__articles-author-avatar"></img>
-                    <p class="home-blog__articles-author-name">Bartłomiej Stapiński</p>
-                </div>
-            </a>
-            <a href="/Post/1" class="home-blog__articles-item">
-                <img src="/assets/img/example_post.png" alt="post" class="home-blog__articles-image">
-                <p class="home-blog__articles-title">Najlepsze Pozycje Do Czytania Książek</p>
-                <div class="home-blog__articles-author">
-                    <img src="/assets/img/example_avatar.png" alt="author"
-                        class="home-blog__articles-author-avatar"></img>
-                    <p class="home-blog__articles-author-name">Bartłomiej Stapiński</p>
-                </div>
-            </a>
-            <a href="/Post/1" class="home-blog__articles-item">
-                <img src="/assets/img/example_post.png" alt="post" class="home-blog__articles-image">
-                <p class="home-blog__articles-title">Już Mi Się Nie Chce Wymyślać Tytułów Tych Blogów</p>
-                <div class="home-blog__articles-author">
-                    <img src="/assets/img/example_avatar.png" alt="author"
-                        class="home-blog__articles-author-avatar"></img>
-                    <p class="home-blog__articles-author-name">Bartłomiej Stapiński</p>
-                </div>
-            </a>
-            <a href="/Post/1" class="home-blog__articles-item">
-                <img src="/assets/img/example_post.png" alt="post" class="home-blog__articles-image">
-                <p class="home-blog__articles-title">To Może Się Nawet Nie Pojawić W Tym Projekcie</p>
-                <div class="home-blog__articles-author">
-                    <img src="/assets/img/example_avatar.png" alt="author"
-                        class="home-blog__articles-author-avatar"></img>
-                    <p class="home-blog__articles-author-name">Bartłomiej Stapiński</p>
-                </div>
-            </a>
-        </div>
-    </div>
-</section>
+    </section>
+</main>
