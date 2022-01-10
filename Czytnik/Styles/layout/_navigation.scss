@@ -6,8 +6,11 @@
   z-index: 100;
   background-color: var(--color-white);
 
-  padding: 4rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 
+  padding: 4rem 0;
   transition: padding 0.2s ease-in-out;
 
   &.isSticky {
@@ -18,16 +21,7 @@
   @media only screen and (max-width: 900px) {
     position: unset;
     padding: 4rem 0 !important;
-  }
-}
 
-.navigation__content {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-
-  @media only screen and (max-width: 900px) {
     display: grid;
     grid-template-columns: max-content 1fr max-content;
     row-gap: 2rem;
@@ -162,10 +156,8 @@
     &:focus-within {
       right: 50%;
       transform: translateX(51%);
-
-      width: clamp(400px, 51vw, 660px);
-
       background-color: var(--color-white-dark);
+      width: clamp(400px, 51vw, 660px);
 
       transition: 0.5s transform, 0.5s right, 0.5s width, 0.7s background-color;
     }
