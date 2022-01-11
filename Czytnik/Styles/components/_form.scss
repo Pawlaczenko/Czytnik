@@ -1,33 +1,51 @@
 ﻿.form {
     &--login{
-        --side-color: var(--color-primary);
+        --side-back-color: var(--color-primary);
+        --side-color: var(--color-black);
+        --side-border-radius: 15px 0 0 15px;
+        grid-template-columns: 40% 60%;
+        grid-template-areas:
+        "side content";
     }
     &--register{
-        --side-color: var(--color-secondary);
+        --side-back-color: var(--color-secondary);
+        --side-color: var(--color-white);
+        --side-border-radius: 0 15px 15px 0;
+        grid-template-columns: 60% 40%;
+        grid-template-areas:
+        "content side";
+
+        .form__submit {
+            margin-top: 5rem;
+        }
     }
 
     width: Min(96rem, 90vw);
     margin: 0 auto;
 
     display: grid;
-    grid-template-columns: 40% 60%;
 
     box-shadow: inset 0px 0px 4px -1px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
 
     @media only screen and (max-width: 800px) {
         grid-template-columns: 1fr;
+        grid-template-areas: 
+        "side"
+        "content";
       }
 
     //aside
     &__side {
+        grid-area: side;
         background: 
-            url("../assets/svg/form_decoration.svg") top left no-repeat, var(--side-color);
+            url("../assets/svg/form_decoration.svg") top left no-repeat, var(--side-back-color);
         background-size: cover;
         background-blend-mode: soft-light;
+        color: var(--side-color);
 
         padding: 6rem;
-        border-radius: 15px 0 0 15px;
+        border-radius: var(--side-border-radius);
 
         @media only screen and (max-width: 800px) {
             border-radius: 15px 15px 0 0;
@@ -57,6 +75,7 @@
     //Kontent 
 
     &__content {
+        grid-area: content;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -89,6 +108,7 @@
         border: 1px solid currentColor;
         border-radius: 5px;
         background: url("../assets/img/google-logo.png") top 50% right 5% no-repeat;
+        background-size: contain;
         transition: all .2s ease-in;
 
         &:hover {
@@ -126,6 +146,11 @@
 
         &:focus {
             background-color: var(--color-white-dark);
+        }
+
+        &--error {
+            border: 1px solid var(--color-warning);
+            color: var(--color-warning);
         }
     }
 

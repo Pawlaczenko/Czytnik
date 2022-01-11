@@ -11,6 +11,7 @@
     font-weight: 700;
     font-size: 1.2rem;
     text-transform: inherit;
+    text-align: center;
 
     transition: all 0.2s;
 
@@ -42,7 +43,7 @@
 
     &--transparent {
         background-color: transparent;
-        color: var(--color-black);
-        border: 2px solid var(--color-black);
+        color: currentColor;
+        border: 2px solid currentColor;
     }
 }
