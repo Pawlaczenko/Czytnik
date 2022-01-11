@@ -51,12 +51,14 @@ const generateLayout = (data) => {
     });
 }
 
- function getCategoriesData() {
+function getCategoriesData() {
+    displaySpinner();
     $.ajax({
         type: 'GET',
         url: 'Categories/GetAllCategories',
         dataType: 'json',
         success: function (categories) {
+            hideSpinner();
             generateLayout(categories);
         },
         error: function (emp) {
