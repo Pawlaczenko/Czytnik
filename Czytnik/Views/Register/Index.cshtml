@@ -4,11 +4,12 @@
         <button class="form__google">
             Dołącz za pomocą Google
         </button>
-        <form class="form__form">
+        <form class="form__form" id="form">
             <p class="form__text">lub użyj swojego maila</p>
-            <input type="email" placeholder="Email" class="form__input" />
-            <input type="password" placeholder="Hasło" class="form__input" />
-            <input type="password" placeholder="Powtórz hasło" class="form__input" />
+            <input type="text" placeholder="Nazwa użytkownika" class="form__input" id="usernameInput" required/>
+            <input type="email" placeholder="Email" class="form__input" id="emailInput" required />
+            <input type="password" placeholder="Hasło" class="form__input" id="passwordInput" required/>
+            <input type="password" placeholder="Powtórz hasło" class="form__input" id="password2Input" required/>
             <input type="submit" class="form__submit button button--medium" value="Zarejestruj się" />
         </form>
     </div>
@@ -18,3 +19,5 @@
         <a class="form__side-button button button--transparent button--medium" href="/Login">Zaloguj się</a>
     </div>
 </section>
+<script src="~/js/validateRegisterForm.js"></script>
+<script src="~/js/validateForm.js"></script>
