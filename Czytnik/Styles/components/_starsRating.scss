@@ -1,18 +1,10 @@
 :root {
     --star-size: 2.5rem;
-    --star-color: var(--color-grey-light);
+    --star-color: var(--color-grey-lightest);
     --star-background: var(--color-primary);
 }
 
 .stars-rating {
-    &--0{--rating:0;}
-    &--1{--rating:1;}
-    &--2{--rating:2;}
-    &--3{--rating:3;}
-    &--4{--rating:4;}
-    &--5{--rating:5;}
-    &--6{--rating:6;}
-
     --percent: calc(var(--rating) / 6 * 100%);
     display: inline-block;
     font-size: var(--star-size);
@@ -24,6 +16,6 @@
         background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        letter-spacing: -3px;
+        // letter-spacing: -3px;
     }
 }
