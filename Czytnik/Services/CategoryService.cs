@@ -19,6 +19,7 @@ namespace Czytnik.Services
 
         public async Task<IEnumerable<ListCategoriesViewModel>> GetAll()
         {
+
             var categoriesQuery = _dbContext.Categories.Select(c => new ListCategoriesViewModel
             {
                 Category = c,
