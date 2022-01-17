@@ -252,19 +252,19 @@
     width: 90%;
     display: grid;
     grid-template-columns: 5rem 1fr;
-    grid-template-areas: 
+    grid-template-areas:
     "value info"
     ". review";
     gap: 1rem;
 
     margin-bottom: 3rem;
 
-    &--1{--valCol: 0%;}
-    &--2{--valCol: 25%;}
-    &--3{--valCol: 50%;}
-    &--4{--valCol: 70%;}
-    &--5{--valCol: 85%;}
-    &--6{--valCol: 100%;}
+    &--1{--valCol: 0;}
+    &--2{--valCol: 0.25;}
+    &--3{--valCol: 0.50;}
+    &--4{--valCol: 0.70;}
+    &--5{--valCol: 0.85;}
+    &--6{--valCol: 1;}
 
     &__value {
         grid-area: value;

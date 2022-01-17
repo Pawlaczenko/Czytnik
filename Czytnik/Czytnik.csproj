@@ -71,4 +71,8 @@
 	  <Watch Remove="Views\Shared\Components\Footer\Default.cshtml" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="wwwroot\css\site.css" />
+	</ItemGroup>
+
 </Project>
