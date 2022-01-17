@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@model dynamic
+@model IEnumerable<Czytnik_Model.ViewModels.BestBooksViewModel>
 
 <main class="home-main">
     <header class="home-header">
@@ -62,30 +62,7 @@
         <div class="home-top-books__header">
             <h1 class="home-top-books__title">To najczęściej<br />czytano w Listopadzie:</h1>
         </div>
-
-        <div class="home-top-books__content">
-            @foreach (var item in Model.OfMonth)
-            {
-                <div class="home-top-books__item">
-                    <a href="/Book/@item.Id" class="home-top-books__item-link">
-                        <img src="@item.Cover" alt="book" class="home-top-books__item-image">
-                    </a>
-                    <p class="home-top-books__item-title">@item.Title</p>
-                    <p class="home-top-books__item-author">@string.Join(", ", item.Authors)</p>
-                    <p class="home-top-books__item-category">@item.Category.Name</p>
-                    <div class="home-top-books__item-rating">
-                        <svg class="home-top-books__item-star" viewBox="0 0 32 32">
-                            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                        </svg>
-                        <p class="home-top-books__item-rate">@item.Rating</p>
-                    </div>
-                    <a href="/Buy" class="home-top-books__item-button">
-                        <span class="home-top-books__item-buy">Kup teraz</span>
-                        <span class="home-top-books__item-price"> @item.Price zł</span>
-                    </a>
-                </div>  
-            }
-        </div>
+        <vc:books-carousel count="5" category="-1" ></vc:books-carousel>
     </section>
 
     <section class="home-best-books wrapper">
@@ -94,27 +71,16 @@
         </div>
 
         <div class="home-best-books__content">
-            <a href="/Book/@Model.OfAllTime[0].Id" class="home-best-books__item home-best-books__item--first">
-                <img src="@Model.OfAllTime[0].Cover" alt="Książka na pierwszym miejscu"
-                    class="home-best-books__item-image" />
-                <p class="home-best-books__item-position">#1</p>
-                <p class="home-best-books__item-title">@Model.OfAllTime[0].Title</p>
-                <p class="home-best-books__item-author">@string.Join(", ", Model.OfAllTime[0].Authors)</p>
-            </a>
-            <a href="/Book/@Model.OfAllTime[1].Id" class="home-best-books__item home-best-books__item--second">
-                <img src="@Model.OfAllTime[1].Cover" alt="Książka na drugim miejscu"
-                    class="home-best-books__item-image" />
-                <p class="home-best-books__item-position">#2</p>
-                <p class="home-best-books__item-title">@Model.OfAllTime[1].Title</p>
-                <p class="home-best-books__item-author">@string.Join(", ", Model.OfAllTime[1].Authors)</p>
-            </a>
-            <a href="/Book/@Model.OfAllTime[2].Id" class="home-best-books__item home-best-books__item--third">
-                <img src="@Model.OfAllTime[2].Cover" alt="Książka na trzecim miejscu"
-                    class="home-best-books__item-image" />
-                <p class="home-best-books__item-position">#3</p>
-                <p class="home-best-books__item-title">@Model.OfAllTime[2].Title</p>
-                <p class="home-best-books__item-author">@string.Join(", ", Model.OfAllTime[2].Authors)</p>
-            </a>
+            @foreach (var (book,i) in Model.Select((book, i)=>(book,i)))
+            {
+                <a href="/Book/@book.Id" class="home-best-books__item home-best-books__item--@(i+1)">
+                    <img src="@book.Cover" alt="Książka na pierwszym miejscu"
+                         class="home-best-books__item-image" />
+                    <p class="home-best-books__item-position">#@(i+1)</p>
+                    <p class="home-best-books__item-title">@book.Title</p>
+                    <p class="home-best-books__item-author">@string.Join(", ", book.Authors)</p>
+                </a>
+            }
         </div>
     </section>
 

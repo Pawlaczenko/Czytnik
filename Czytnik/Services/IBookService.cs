@@ -6,8 +6,8 @@ namespace Czytnik.Services
 {
     public interface IBookService
     {
-        Task<IEnumerable<BestOfMonthBooksViewModel>> GetBestOfMonthBooks();
-        Task<IEnumerable<BestOfMonthBooksViewModel>> GetBestOfAllTimeBooks();
+        Task<IEnumerable<BooksCarouselViewModel>> GetCarouselBooks(int count, int categoryId);
+        Task<IEnumerable<BestBooksViewModel>> GetBestOfAllTimeBooks();
 
     }
 }
