@@ -1,6 +1,7 @@
 ﻿using Czytnik_DataAccess.Database;
 using Czytnik_Model.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,9 +16,12 @@ namespace Czytnik.Services
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<BestOfMonthBooksViewModel>> GetBestOfMonthBooks()
+        public async Task<IEnumerable<BooksCarouselViewModel>> GetCarouselBooks(int count, int categoryId = -1)
         {
-            var booksQuery = _dbContext.Books.OrderByDescending(b => b.NumberOfCopiesSold).Select(b => new BestOfMonthBooksViewModel
+            Console.WriteLine(count);
+            Console.WriteLine(categoryId);
+            //var booksQuery = (categoryId>0)? _dbContext.Books.Where(b => b.Category.Id == categoryId) : _dbContext.Books;
+            IQueryable<BooksCarouselViewModel> booksQuery = _dbContext.Books.OrderByDescending(b => b.NumberOfCopiesSold).Select(b => new BooksCarouselViewModel
             {
                 Id = b.Id,
                 Title = b.Title,
@@ -26,20 +30,23 @@ namespace Czytnik.Services
                 Rating = b.Rating,
                 Category = b.Category,
                 Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
-            }).Take(5);
-            var books = await booksQuery.ToListAsync();
+            });
+            if (categoryId > 0)
+            {
+                booksQuery = booksQuery.Where(b => b.Category.Id == categoryId);
+            }    
+
+            var books = await booksQuery.Take(count).ToListAsync();
             return books;
         }
-        public async Task<IEnumerable<BestOfMonthBooksViewModel>> GetBestOfAllTimeBooks()
+
+        public async Task<IEnumerable<BestBooksViewModel>> GetBestOfAllTimeBooks()
         {
-            var booksQuery = _dbContext.Books.OrderByDescending(b => b.Rating).Select(b => new BestOfMonthBooksViewModel
+            var booksQuery = _dbContext.Books.OrderByDescending(b => b.Rating).Select(b => new BestBooksViewModel
             {
                 Id = b.Id,
                 Title = b.Title,
-                Price = b.Price,
-                Cover = b.Cover,
-                Rating = b.Rating,
-                Category = b.Category,
+                Cover = b.Cover.Replace("-w-iext","-b-iext"),
                 Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
             }).Take(3);
             var books = await booksQuery.ToListAsync();
