@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model dynamic
 
 <main class="home-main">
     <header class="home-header">
@@ -63,96 +64,27 @@
         </div>
 
         <div class="home-top-books__content">
-            <div class="home-top-books__item">
-                <a href="/Book/1" class="home-top-books__item-link">
-                    <img src="/assets/img/for_kids_category.png" alt="book" class="home-top-books__item-image">
-                </a>
-                <p class="home-top-books__item-title">Psycho</p>
-                <p class="home-top-books__item-author">Robert Bloch</p>
-                <p class="home-top-books__item-category">Horror</p>
-                <div class="home-top-books__item-rating">
-                    <svg class="home-top-books__item-star" viewBox="0 0 32 32">
-                        <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                    </svg>
-                    <p class="home-top-books__item-rate">4.80</p>
-                </div>
-                <a href="/Buy" class="home-top-books__item-button">
-                    <span class="home-top-books__item-buy">Kup teraz</span>
-                    <span class="home-top-books__item-price">12,65 zł</span>
-                </a>
-            </div>
-            <div class="home-top-books__item">
-                <a href="/Book/1" class="home-top-books__item-link">
-                    <img src="/assets/img/for_kids_category.png" alt="book" class="home-top-books__item-image">
-                </a>
-                <p class="home-top-books__item-title">Psycho</p>
-                <p class="home-top-books__item-author">Robert Bloch</p>
-                <p class="home-top-books__item-category">Horror</p>
-                <div class="home-top-books__item-rating">
-                    <svg class="home-top-books__item-star" viewBox="0 0 32 32">
-                        <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                    </svg>
-                    <p class="home-top-books__item-rate">4.80</p>
-                </div>
-                <a href="/Buy" class="home-top-books__item-button">
-                    <span class="home-top-books__item-buy">Kup teraz</span>
-                    <span class="home-top-books__item-price">12,65 zł</span>
-                </a>
-            </div>
-            <div class="home-top-books__item">
-                <a href="/Book/1" class="home-top-books__item-link">
-                    <img src="/assets/img/for_kids_category.png" alt="book" class="home-top-books__item-image">
-                </a>
-                <p class="home-top-books__item-title">Psycho</p>
-                <p class="home-top-books__item-author">Robert Bloch</p>
-                <p class="home-top-books__item-category">Horror</p>
-                <div class="home-top-books__item-rating">
-                    <svg class="home-top-books__item-star" viewBox="0 0 32 32">
-                        <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                    </svg>
-                    <p class="home-top-books__item-rate">4.80</p>
-                </div>
-                <a href="/Buy" class="home-top-books__item-button">
-                    <span class="home-top-books__item-buy">Kup teraz</span>
-                    <span class="home-top-books__item-price">12,65 zł</span>
-                </a>
-            </div>
-            <div class="home-top-books__item">
-                <a href="/Book/1" class="home-top-books__item-link">
-                    <img src="/assets/img/for_kids_category.png" alt="book" class="home-top-books__item-image">
-                </a>
-                <p class="home-top-books__item-title">Psycho</p>
-                <p class="home-top-books__item-author">Robert Bloch</p>
-                <p class="home-top-books__item-category">Horror</p>
-                <div class="home-top-books__item-rating">
-                    <svg class="home-top-books__item-star" viewBox="0 0 32 32">
-                        <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                    </svg>
-                    <p class="home-top-books__item-rate">4.80</p>
-                </div>
-                <a href="/Buy" class="home-top-books__item-button">
-                    <span class="home-top-books__item-buy">Kup teraz</span>
-                    <span class="home-top-books__item-price">12,65 zł</span>
-                </a>
-            </div>
-            <div class="home-top-books__item">
-                <a href="/Book/1" class="home-top-books__item-link">
-                    <img src="/assets/img/for_kids_category.png" alt="book" class="home-top-books__item-image">
-                </a>
-                <p class="home-top-books__item-title">Psycho</p>
-                <p class="home-top-books__item-author">Robert Bloch</p>
-                <p class="home-top-books__item-category">Horror</p>
-                <div class="home-top-books__item-rating">
-                    <svg class="home-top-books__item-star" viewBox="0 0 32 32">
-                        <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                    </svg>
-                    <p class="home-top-books__item-rate">4.80</p>
-                </div>
-                <a href="/Buy" class="home-top-books__item-button">
-                    <span class="home-top-books__item-buy">Kup teraz</span>
-                    <span class="home-top-books__item-price">12,65 zł</span>
-                </a>
-            </div>
+            @foreach (var item in Model.OfMonth)
+            {
+                <div class="home-top-books__item">
+                    <a href="/Book/@item.Id" class="home-top-books__item-link">
+                        <img src="@item.Cover" alt="book" class="home-top-books__item-image">
+                    </a>
+                    <p class="home-top-books__item-title">@item.Title</p>
+                    <p class="home-top-books__item-author">@string.Join(", ", item.Authors)</p>
+                    <p class="home-top-books__item-category">@item.Category.Name</p>
+                    <div class="home-top-books__item-rating">
+                        <svg class="home-top-books__item-star" viewBox="0 0 32 32">
+                            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
+                        </svg>
+                        <p class="home-top-books__item-rate">@item.Rating</p>
+                    </div>
+                    <a href="/Buy" class="home-top-books__item-button">
+                        <span class="home-top-books__item-buy">Kup teraz</span>
+                        <span class="home-top-books__item-price"> @item.Price zł</span>
+                    </a>
+                </div>  
+            }
         </div>
     </section>
 
@@ -162,26 +94,26 @@
         </div>
 
         <div class="home-best-books__content">
-            <a href="/Book/1" class="home-best-books__item home-best-books__item--first">
-                <img src="/assets/img/first_best_book.png" alt="Książka na pierwszym miejscu"
+            <a href="/Book/@Model.OfAllTime[0].Id" class="home-best-books__item home-best-books__item--first">
+                <img src="@Model.OfAllTime[0].Cover" alt="Książka na pierwszym miejscu"
                     class="home-best-books__item-image" />
                 <p class="home-best-books__item-position">#1</p>
-                <p class="home-best-books__item-title">Harry Potter and the Chamber of Secrets</p>
-                <p class="home-best-books__item-author">J.K Rowling</p>
+                <p class="home-best-books__item-title">@Model.OfAllTime[0].Title</p>
+                <p class="home-best-books__item-author">@string.Join(", ", Model.OfAllTime[0].Authors)</p>
             </a>
-            <a href="/Book/1" class="home-best-books__item home-best-books__item--second">
-                <img src="/assets/img/second_best_book.png" alt="Książka na pierwszym miejscu"
+            <a href="/Book/@Model.OfAllTime[1].Id" class="home-best-books__item home-best-books__item--second">
+                <img src="@Model.OfAllTime[1].Cover" alt="Książka na drugim miejscu"
                     class="home-best-books__item-image" />
                 <p class="home-best-books__item-position">#2</p>
-                <p class="home-best-books__item-title">I Know Why the Caged Bird Sings</p>
-                <p class="home-best-books__item-author">Maya Angelou</p>
+                <p class="home-best-books__item-title">@Model.OfAllTime[1].Title</p>
+                <p class="home-best-books__item-author">@string.Join(", ", Model.OfAllTime[1].Authors)</p>
             </a>
-            <a href="/Book/1" class="home-best-books__item home-best-books__item--third">
-                <img src="/assets/img/third_best_book.png" alt="Książka na pierwszym miejscu"
+            <a href="/Book/@Model.OfAllTime[2].Id" class="home-best-books__item home-best-books__item--third">
+                <img src="@Model.OfAllTime[2].Cover" alt="Książka na trzecim miejscu"
                     class="home-best-books__item-image" />
                 <p class="home-best-books__item-position">#3</p>
-                <p class="home-best-books__item-title">the Catcher in the Rye</p>
-                <p class="home-best-books__item-author">J. D. Salinger</p>
+                <p class="home-best-books__item-title">@Model.OfAllTime[2].Title</p>
+                <p class="home-best-books__item-author">@string.Join(", ", Model.OfAllTime[2].Authors)</p>
             </a>
         </div>
     </section>
