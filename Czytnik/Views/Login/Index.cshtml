@@ -9,12 +9,14 @@
         <button class="form__google">
             Zaloguj się za pomocą Google
         </button>
-        <form class="form__form">
+        <form id="form" class="form__form">
             <p class="form__text">lub użyj swojego maila</p>
-            <input type="email" placeholder="Email" class="form__input" />
-            <input type="password" placeholder="Hasło" class="form__input" />
+            <input type="email" placeholder="Email" class="form__input" id="emailInput" required />
+            <input type="password" placeholder="Hasło" class="form__input" id="passwordInput" required />
             <a href="/Login/RemindPassword" class="form__forgot">Nie pamiętasz hasła?</a>
             <input type="submit" class="form__submit button button--secondary button--medium" value="Zaloguj się" />
         </form>
     </div>
 </section>
+<script src="~/js/validateLoginForm.js"></script>
+<script src="~/js/validateForm.js"></script>

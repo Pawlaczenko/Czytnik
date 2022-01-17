@@ -24,10 +24,7 @@ namespace Czytnik.Controllers
 
         public async Task<IActionResult> Index()
         {
-            dynamic bestBooks = new ExpandoObject();
-            bestBooks.OfMonth = await _bookService.GetBestOfMonthBooks();
-            bestBooks.OfAllTime = await _bookService.GetBestOfAllTimeBooks();
-
+            var bestBooks = await _bookService.GetBestOfAllTimeBooks();
             return View(bestBooks);
         }
 

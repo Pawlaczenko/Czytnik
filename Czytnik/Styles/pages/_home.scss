@@ -186,6 +186,7 @@
     font-weight: 700;
     font-size: 2.4rem;
     text-align: center;
+    margin-bottom: 5rem;
 
     &::before,
     &::after {
@@ -208,109 +209,7 @@
   }
 
   &__content {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 2rem 5rem;
-
     margin-top: 5rem;
-
-    @media screen and(max-width: 900px) {
-      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    }
-  }
-
-  &__item-link {
-    display: block;
-    overflow: hidden;
-  }
-
-  &__item-image {
-    width: 100%;
-
-    object-fit: cover;
-
-    @media screen and(max-width: 600px) {
-      max-height: 19rem;
-    }
-
-    transition: transform 0.3s;
-    &:hover {
-      transform: scale(1.2);
-    }
-  }
-
-  &__item-title {
-    margin-top: 1rem;
-
-    font-weight: 700;
-    font-size: 1.8rem;
-  }
-
-  &__item-author {
-    font-weight: 400;
-    font-size: 1.4rem;
-    color: var(--color-grey);
-  }
-
-  &__item-category {
-    margin-top: 1rem;
-
-    font-weight: 400;
-    font-size: 1.3rem;
-    color: var(--color-secondary);
-  }
-
-  &__item-rating {
-    display: flex;
-    align-items: center;
-
-    margin-top: 1rem;
-  }
-
-  &__item-star {
-    width: 3rem;
-  }
-
-  &__item-rate {
-    margin-left: 0.6rem;
-
-    font-weight: 400;
-    font-size: 1.8rem;
-    color: var(--color-grey);
-  }
-
-  &__item-button {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    width: 100%;
-
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-
-    background-color: var(--color-secondary);
-    border: 1px solid transparent;
-    border-radius: 5px;
-
-    color: var(--color-white);
-
-    transition: all 0.3s;
-    &:hover {
-      color: var(--color-secondary);
-      background-color: var(--color-white);
-      border: 1px solid var(--color-secondary);
-    }
-  }
-
-  &__item-buy {
-    font-weight: 400;
-    font-size: 1.3rem;
-  }
-
-  &__item-price {
-    font-weight: 700;
-    font-size: 1.3rem;
   }
 }
 
@@ -354,7 +253,7 @@
 
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(5, 9rem);
+    grid-template-rows: repeat(5, 8rem);
     grid-gap: 2rem;
 
     margin-top: 6rem;
@@ -377,8 +276,19 @@
     color: var(--color-white);
 
     padding: 1rem 3rem;
+    
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,.7);
+      z-index: -1;
+    }
 
-    &--first {
+    &--1 {
       grid-column: 1 / span 6;
       grid-row: 1 / span 5;
 
@@ -390,11 +300,11 @@
       }
     }
 
-    &--second {
+    &--2 {
       grid-column: 7 / -1;
       grid-row: 1 / span 3;
 
-      font-size: 1.8rem;
+      font-size: 2rem;
 
       @media screen and(max-width: 900px) {
         grid-column: 1 / -1;
@@ -402,7 +312,7 @@
       }
     }
 
-    &--third {
+    &--3 {
       grid-column: 7 / -1;
       grid-row: 4 / span 2;
 
@@ -425,6 +335,7 @@
     top: 0;
     width: 100%;
     height: 100%;
+    filter: blur(1px);
 
     object-fit: cover;
 

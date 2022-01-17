@@ -18,7 +18,6 @@
     <Content Remove="Views\Login\Index.cshtml" />
     <Content Remove="Views\Shared\Components\Footer\Default.cshtml" />
     <Content Remove="Views\Shared\Components\Navigation\Default.cshtml" />
-    <Content Remove="Views\Shared\Partials\_LoadingSpinner.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,7 +54,6 @@
 
   <ItemGroup>
     <Folder Include="Styles\layout\" />
-    <Folder Include="Views\Shared\Partials\" />
     <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
@@ -71,7 +69,6 @@
 	  <Watch Remove="Views\Index.cshtml" />
 	  <Watch Remove="Views\Login\Index.cshtml" />
 	  <Watch Remove="Views\Shared\Components\Footer\Default.cshtml" />
-	  <Watch Remove="Views\Shared\Partials\_LoadingSpinner.cshtml" />
 	</ItemGroup>
 
 </Project>
