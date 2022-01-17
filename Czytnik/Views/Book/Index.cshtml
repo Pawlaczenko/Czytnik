@@ -2,16 +2,16 @@
     <div class="product__column">
         <div class="product__header product__section">
             <figure class="product__cover">
-                <img src="https://ecsmedia.pl/c/queen-krolewska-historia-w-iext96987039.jpg" />
+                <img src="https://images-na.ssl-images-amazon.com/images/I/41+L9Q+rCLL._SX277_BO1,204,203,200_.jpg" />
             </figure>
             <div class="product__info">
                 <h1 class="product__title">Queen. Królewska historia</h1>
                 <p class="product__author">Autor: <a href="/">Freddie Mercury</a></p>
                 <ul class="product__flags">
-                    <li class="flags__item flag flag--counted flag--secondary">
-                        <span class="flag__title">Bestseller</span><div class="flag__rank">#12</div>
+                    <li class="product__flags-item flag flag--counted flag--secondary">
+                        <span class="flag__title">Bestseller</span><span class="flag__rank">#12</span>
                     </li>
-                    <li class="flags__item flag flag--primary">
+                    <li class="product__flags-item flag flag--primary">
                         <span class="flag__title">Promocja</span>
                     </li>
                 </ul>
@@ -20,6 +20,7 @@
                     <span class="product__rating-title">Ocena: </span>
                     <stars rating="3.69" parent-class="product__stars"></stars>
                     <div class="product__rating-numbers">4.0/6</div>
+                    <span class="product__rating-pipe"></span>
                     <div class="product__rating-count">Opinie: 3</div>
                 </div>
             </div>
@@ -36,12 +37,12 @@
         </div>
         <div class="product__section product__opinions" id="reviews">
             <h2 class="product__heading">Oceny i opinie klientów (3)</h2>
-            <p>
-                <stars rating="5" parent-class="product__stars"></stars>
+            <div class="product__opinions-control">
+                <stars rating="3.69" parent-class="product__stars"></stars>
                 <button class="product__button">Dodaj opinię</button>
-            </p>
+            </div>
             <div class="product__reviews">
-                <div class="review">
+                <div class="review review--6">
                     <figure class="review__value">
                         6
                     </figure>
@@ -52,9 +53,9 @@
                         Świetna pozycja dla osób z Tymbarku chcących nauczyć się Linuxa i tego jak sprzątać rzeki z wózków sklepowych :)
                     </p>
                 </div>
-                <div class="review">
+                <div class="review review--3">
                     <figure class="review__value">
-                        6
+                        3
                     </figure>
                     <div class="review__info">
                         oceniona przez: Jakub, 2021-11-10
@@ -63,9 +64,9 @@
                         Dobry start dla każdego kto wchodzi w temat, a nawet dla osób z doświadczeniem. Opisano wiele istotnych elementów ważnych w pracy z linią poleceń, problematykę bezpieczeństwa pod Linuxem, użycie podstawowych programów/poleceń czy całych pakietów. Mimo to brakuje pewnych tematów, np.: konfiguracji serwerów zdalnych pulpitów czy łączenia komputerów pod Linuxem w celu budowania zespołów (klastrów) obliczeniowych; trochę mi również uwiera brak opisu czy nawet wzmianki o takich programach jak sed czy awk oraz przeszukiwania plików czy ogólnie wyników za pomocą wyrażeń regularnych.
                     </p>
                 </div>
-                <div class="review">
+                <div class="review review--1">
                     <figure class="review__value">
-                        6
+                        1
                     </figure>
                     <div class="review__info">
                         oceniona przez: Jakub, 2021-11-10
@@ -74,10 +75,11 @@
                         najgorsza ksiazka. o niczym. tak, bardzo chce wiedziec jak tworzyc usluge w sysvinit w 2021 tak tak tak, bardzo chce aby mi przypominano ze to bylo juz omawiane w x rozdziale. ksiazka zbloatowana bardziej niz swieza instalacja windowsa
                     </p>
                 </div>
+                <a class="review__seeAll" href="/Book/Reviews?id=1">zobacz wszystkie opinie</a>
             </div>
-            <a href="/Book/Reviews?id=1">zobacz wszystkie opinie</a>
         </div>
         <div class="product__section product__details" id="details">
+            <h2 class="product__heading">Szczegóły książki</h2>
             <ul class="product__details-list">
                 <li class="product__details-item">
                     <span class="product__details-name">Autor:</span> <span class="product__details-value">Christopher Negus</span>
@@ -120,14 +122,14 @@
             <button class="product__money-button product__money-button--orange">Dodaj do koszyka <span class="product__money-icon">+</span></button>
             <button class="product__money-button product__money-button--blue">Kup teraz <span class="product__money-icon">$</span></button>
         </div>
-        <div class="product__favourite">
+        <a href="/" class="product__favourite">
             <svg class="product__favourite-icon icon" viewBox="0 0 32 32">
                 <use xlink:href="/assets/svg/sprite.svg#icon-heart"></use>
             </svg>
             Dodaj do ulubionych
-        </div>
+        </a>
         <nav class="product__nav">
-            <a class="product__nav-item" href="#description">Opis książki</a>
+            <a class="product__nav-item product__nav-item--current" href="#description">Opis książki</a>
             <a class="product__nav-item" href="#reviews">Ocena i opinie</a>
             <a class="product__nav-item" href="#details">Szczegóły książki</a>
         </nav>
