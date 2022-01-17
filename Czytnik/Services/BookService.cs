@@ -46,7 +46,7 @@ namespace Czytnik.Services
             {
                 Id = b.Id,
                 Title = b.Title,
-                Cover = b.Cover,
+                Cover = b.Cover.Replace("-w-iext","-b-iext"),
                 Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
             }).Take(3);
             var books = await booksQuery.ToListAsync();
