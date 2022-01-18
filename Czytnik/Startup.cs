@@ -34,6 +34,7 @@ namespace Czytnik
 
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IBookService, BookService>();
+            services.AddTransient<ILanguageService, LanguageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
