@@ -63,7 +63,7 @@ namespace Czytnik.Services
 
         public async Task<IEnumerable<BestBooksViewModel>> GetBestOfAllTimeBooks()
         {
-            var booksQuery = _dbContext.Books.OrderByDescending(b => b.Rating).Select(b => new BestBooksViewModel
+            var booksQuery = _dbContext.Books.OrderByDescending(b => b.Rating*b.NumberOfCopiesSold).Select(b => new BestBooksViewModel
             {
                 Id = b.Id,
                 Title = b.Title,

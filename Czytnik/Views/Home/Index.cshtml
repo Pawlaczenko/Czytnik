@@ -73,7 +73,7 @@
         <div class="home-best-books__content">
             @foreach (var (book,i) in Model.Select((book, i)=>(book,i)))
             {
-                <a href="/Book/@book.Id" class="home-best-books__item home-best-books__item--@(i+1)">
+                <a href="/Book/Index/@book.Id" class="home-best-books__item home-best-books__item--@(i+1)">
                     <img src="@book.Cover" alt="Książka na pierwszym miejscu"
                          class="home-best-books__item-image" />
                     <p class="home-best-books__item-position">#@(i+1)</p>
