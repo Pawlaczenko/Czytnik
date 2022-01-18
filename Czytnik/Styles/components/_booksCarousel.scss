@@ -1,6 +1,6 @@
 .books-carousel{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(19.3rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
     grid-gap: 2rem 5rem;
     
     &__link {
