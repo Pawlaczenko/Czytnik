@@ -8,10 +8,31 @@
 }
 
 .sorting-header__sort {
+  display: flex;
+  align-items: center;
+
   &-select {
     margin-left: 1rem;
     padding: 0.5rem;
+    padding-right: 3rem;
 
+    background-color: var(--color-white);
     border-radius: 0.5rem;
+
+    appearance: none;
+
+    &-wrapper {
+      position: relative;
+    }
+  }
+
+  &-chevron {
+    position: absolute;
+    width: 1.45rem;
+    height: 0.9rem;
+
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
   }
 }

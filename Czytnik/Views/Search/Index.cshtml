@@ -12,10 +12,16 @@
         </div>
         <div class="sorting-header__sort">
           <label for="sort" class="sorting-header__sort-label">Sortuj według: </label>
-          <select name="sort" id="sort" class="sorting-header__sort-select">
-            <option value="price-down">Cena: malejąco</option>
-            <option value="price-up">Cena: rosnąco</option>
-          </select>
+          <div class="sorting-header__sort-select-wrapper">
+            <select name="sort" id="sort" class="sorting-header__sort-select">
+              <option value="price-down">Cena: malejąco</option>
+              <option value="price-up">Cena: rosnąco</option>
+            </select>
+            <svg class="sorting-header__sort-chevron" viewBox="0 0 32 32">
+              <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
+            </svg>
+          </div>
+
         </div>
       </div>
     </div>
