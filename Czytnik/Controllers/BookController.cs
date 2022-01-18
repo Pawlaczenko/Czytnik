@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Czytnik.Services;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,16 @@ namespace Czytnik.Controllers
 {
     public class BookController : Controller
     {
-        public IActionResult Index()
+        private readonly IBookService _bookService;
+
+        public BookController(IBookService bookService)
         {
-            return View();
+            _bookService = bookService;
+        }
+        public IActionResult Index(int Id)
+        {
+            var books = _bookService.GetProductBookPage(Id);
+            return View(books);
         }
     }
 }

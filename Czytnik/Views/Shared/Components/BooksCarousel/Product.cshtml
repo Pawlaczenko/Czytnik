@@ -4,7 +4,7 @@
     @foreach (var item in Model)
     {
         <div class="books-carousel__item">
-            <a href="/Book/@item.Id" class="books-carousel__link">
+            <a href="/Book/Index/@item.Id" class="books-carousel__link">
                 <img src="@item.Cover" alt="book" class="books-carousel__image">
             </a>
             <p class="books-carousel__title">@item.Title</p>
