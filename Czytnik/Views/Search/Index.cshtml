@@ -1,12 +1,154 @@
 ﻿<section class="search wrapper">
-  <aside class="search__filter">
+  <details class="search__filter">
+    <summary class="search__filter-header">
+      <p class="search__filter-title">Filter</p>
+      <svg class="search__filter-icon" viewBox="0 0 29 25">
+        <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
+      </svg>
+    </summary>
+    <div class="search__filter-item">
+      <details class="filter filter--list">
+        <summary class="filter__header">
+          <p class="filter__title">Kategoria</p>
+          <svg class="filter__icon" viewBox="0 0 32 32">
+            <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
+          </svg>
+        </summary>
 
-  </aside>
+        <div class="filter__search">
+          <input type="text" class="filter__search-input" placeholder="Wyszukaj">
+        </div>
+
+        <div class="filter__results">
+          <div class="filter__results-item">
+            <input class="filter__results-checkbox" type="checkbox" name="akcja" id="akcja">
+            <label class="filter__results-label" for="akcja">akcja</label>
+          </div>
+          <div class="filter__results-item">
+            <input class="filter__results-checkbox" type="checkbox" name="kryminał,sensacja,thriller"
+              id="kryminał,sensacja,thriller">
+            <label class="filter__results-label" for="kryminał,sensacja,thriller">kryminał, sensacja, thriller</label>
+          </div>
+          <div class="filter__results-item">
+            <input class="filter__results-checkbox" type="checkbox" name="akcja" id="akcja">
+            <label class="filter__results-label" for="akcja">akcja</label>
+          </div>
+          <div class="filter__results-item">
+            <input class="filter__results-checkbox" type="checkbox" name="akcja" id="akcja">
+            <label class="filter__results-label" for="akcja">akcja</label>
+          </div>
+          <div class="filter__results-item">
+            <input class="filter__results-checkbox" type="checkbox" name="akcja" id="akcja">
+            <label class="filter__results-label" for="akcja">akcja</label>
+          </div>
+          <div class="filter__results-item">
+            <input class="filter__results-checkbox" type="checkbox" name="akcja" id="akcja">
+            <label class="filter__results-label" for="akcja">akcja</label>
+          </div>
+          <div class="filter__results-item">
+            <input class="filter__results-checkbox" type="checkbox" name="akcja" id="akcja">
+            <label class="filter__results-label" for="akcja">akcja</label>
+          </div>
+          <div class="filter__results-item">
+            <input class="filter__results-checkbox" type="checkbox" name="akcja" id="akcja">
+            <label class="filter__results-label" for="akcja">akcja</label>
+          </div>
+          <div class="filter__results-item">
+            <input class="filter__results-checkbox" type="checkbox" name="akcja" id="akcja">
+            <label class="filter__results-label" for="akcja">akcja</label>
+          </div>
+          <div class="filter__results-item">
+            <input class="filter__results-checkbox" type="checkbox" name="akcja" id="akcja">
+            <label class="filter__results-label" for="akcja">akcja</label>
+          </div>
+          <div class="filter__results-item">
+            <input class="filter__results-checkbox" type="checkbox" name="akcja" id="akcja">
+            <label class="filter__results-label" for="akcja">akcja</label>
+          </div>
+          <div class="filter__results-item">
+            <input class="filter__results-checkbox" type="checkbox" name="akcja" id="akcja">
+            <label class="filter__results-label" for="akcja">akcja</label>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="search__filter-item">
+      <details class="filter">
+        <summary class="filter__header">
+          <p class="filter__title">Data Wydania</p>
+          <svg class="filter__icon" viewBox="0 0 32 32">
+            <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
+          </svg>
+        </summary>
+
+        <div class="filter__range">
+          <input class="filter__range-input" type="date" name="start-date" id="start-date">
+          <div class="filter__range-partition"></div>
+          <input class="filter__range-input" type="date" name="end-date" id="end-date">
+        </div>
+
+      </details>
+    </div>
+
+    <div class="search__filter-item">
+      <details class="filter">
+        <summary class="filter__header">
+          <p class="filter__title">Cena</p>
+          <svg class="filter__icon" viewBox="0 0 32 32">
+            <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
+          </svg>
+        </summary>
+
+        <div class="filter__range">
+          <input class="filter__range-input filter__range-input--price" type="number" min="1" name="start-price"
+            id="start-price" placeholder="od">
+          <div class="filter__range-partition"></div>
+          <input class="filter__range-input filter__range-input--price" type="number" min="1" name="end-price"
+            id="end-price" placeholder="do">
+        </div>
+
+      </details>
+    </div>
+
+    <div class="search__filter-item">
+      <details class="filter filter--list">
+        <summary class="filter__header">
+          <p class="filter__title">Język</p>
+          <svg class="filter__icon" viewBox="0 0 32 32">
+            <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
+          </svg>
+        </summary>
+
+        <div class="filter__search">
+          <input type="text" class="filter__search-input" placeholder="Wyszukaj">
+        </div>
+
+        <div class="filter__results">
+          <div class="filter__results-item">
+            <input class="filter__results-checkbox" type="checkbox" name="polski" id="polski">
+            <label class="filter__results-label" for="polski">polski</label>
+          </div>
+          <div class="filter__results-item">
+            <input class="filter__results-checkbox" type="checkbox" name="angielski" id="angielski">
+            <label class="filter__results-label" for="angielski">angielski</label>
+          </div>
+
+        </div>
+      </details>
+    </div>
+
+    <div class="filter__button">
+      <button class="button button--medium button--full-parent">
+        Wyszukaj
+      </button>
+    </div>
+  </details>
 
   <div class="search__content">
     <h1 class="search__header">Książki: {{category}}</h1>
     <div class="search__sorting">
-      <div class="sorting-header">
+      <div class="sorting-header sorting-header--search">
         <div class="sorting-header__counter">
           Znaleziono 481 produktów
         </div>
