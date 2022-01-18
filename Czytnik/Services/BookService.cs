@@ -18,9 +18,6 @@ namespace Czytnik.Services
 
         public async Task<IEnumerable<BooksCarouselViewModel>> GetCarouselBooks(int count, int categoryId = -1)
         {
-            Console.WriteLine(count);
-            Console.WriteLine(categoryId);
-            //var booksQuery = (categoryId>0)? _dbContext.Books.Where(b => b.Category.Id == categoryId) : _dbContext.Books;
             IQueryable<BooksCarouselViewModel> booksQuery = _dbContext.Books.OrderByDescending(b => b.NumberOfCopiesSold).Select(b => new BooksCarouselViewModel
             {
                 Id = b.Id,
