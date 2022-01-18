@@ -3,13 +3,17 @@
 
     display: grid;
     grid-template-columns: 75% 25%;
-    position: relative;
+    //position: relative;
 
     &__section {
         &:not(:last-child){
             border-bottom: 1px solid var(--color-grey-light);
         }
         padding: 3rem 0;
+    }
+
+    &__column:first-child{
+        margin-right: 7rem;
     }
 
     &__heading {
@@ -124,7 +128,10 @@
     }
 
     &__cart {
-
+        max-height: 100vh;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 8.5rem;
     }
 
     &__money {
