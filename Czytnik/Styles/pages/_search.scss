@@ -31,14 +31,7 @@
 }
 
 .search__filter {
-  position: sticky;
-  top: 10rem;
   height: max-content;
-
-  @media screen and (max-width: 900px) {
-    position: relative;
-    top: 0;
-  }
 
   &-header {
     display: flex;
