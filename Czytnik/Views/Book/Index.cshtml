@@ -1,79 +1,76 @@
-﻿<section class="product wrapper">
+﻿@model Czytnik_Model.ViewModels.ProductPageViewModel
+
+<section class="product wrapper">
     <div class="product__header product__section">
         <figure class="product__cover">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/41+L9Q+rCLL._SX277_BO1,204,203,200_.jpg" />
+            <img src="@Model.Product.Cover" />
         </figure>
         <div class="product__info">
-            <h1 class="product__title">Queen. Królewska historia</h1>
-            <p class="product__author">Autor: <a href="/">Freddie Mercury</a></p>
+            <h1 class="product__title">@Model.Product.Title</h1>
+            <p class="product__author">Autor:
+            @foreach(var author in Model.Authors)
+            {
+                <span>@author </span>
+            }
+            </p>
             <ul class="product__flags">
-                <li class="product__flags-item flag flag--counted flag--secondary">
-                    <span class="flag__title">Bestseller</span><span class="flag__rank">#12</span>
-                </li>
-                <li class="product__flags-item flag flag--primary">
-                    <span class="flag__title">Promocja</span>
-                </li>
+                @if (Model.Bestseller > 0)
+                {
+                    <li class="product__flags-item flag flag--counted flag--secondary">
+                        <span class="flag__title">Bestseller</span><span class="flag__rank">#@Model.Bestseller</span>
+                    </li>
+
+                }
+                @if (Model.Discount!=null)
+                {
+                    <li class="product__flags-item flag flag--primary">
+                        <span class="flag__title">Promocja</span>
+                    </li>
+                }
+
+                
             </ul>
-            <p class="product__publisher">Wydawnictwo: <span class="product__publisher--highlight">Helion</span></p>
+            <p class="product__publisher">Wydawnictwo: <span class="product__publisher--highlight">@Model.Publisher</span></p>
             <div class="product__rating">
                 <span class="product__rating-title">Ocena: </span>
-                <stars rating="3.69" parent-class="product__stars"></stars>
-                <div class="product__rating-numbers">4.0/6</div>
+                <stars rating="@Model.Product.Rating" parent-class="product__stars"></stars>
+                <div class="product__rating-numbers">@Model.Product.Rating/6</div>
                 <span class="product__rating-pipe"></span>
-                <div class="product__rating-count">Opinie: 3</div>
+                <div class="product__rating-count">Opinie: @Model.ReviewCount</div>
             </div>
         </div>
     </div>
     <article id="description" class="product__description product__section">
         <h2 class="product__heading">Opis książki</h2>
         <p class="product__description-content">
-            Biblia fanów Queen, manifest pokolenia, portret fenomenu Niepublikowane wcześniej wspomnienia, zaskakujące anegdoty, intrygujące fakty. Zagrożone losy zespołu, kiedy muzycy Genesis próbowali pozyskać do swojego składu Rogera Taylora. Śmierć Mercury’ego niedaleko miejsca, gdzie 21 lat wcześniej znaleziono ciało jego idola, Jimiego Hendrixa. Głęboka depresja Johna Deacona po stracie przyjaciela. Legendarna gitara Briana zbudowana domowym sposobem. Fascynacja zespołu scrabble’ami. Gdy Elton John usłyszał Bohemian Rhapsody, zapytał: „Czy wyście, k…a, oszaleli?”. Mark Blake przez lata rozmawiał z trzema żyjącymi muzykami grupy, dotarł także do dziesiątków innych osób – zapomnianych basistów Queen czy szkolnych kolegów Freddiego. Po raz pierwszy możemy tak szczegółowo prześledzić bogatą karierę zespołu uwielbianego przez Michaela Jacksona i wiele innych gwiazd, przemianę nieśmiałego chłopca z Zanzibaru w najbardziej charyzmatyczną postać w historii rocka, a także późniejsze kariery pozostałych członków grupy. Z wielką dumą prezentujemy polskim czytelnikom prawdziwą perłę na rynku biografii muzycznych – najlepszą historię Queen, jaka kiedykolwiek została napisana. Wydawało się wam, że wiecie o Queen wszystko? W takim razie tylko się wam wydawało! Mariusz Owczarek, Program Trzeci Polskiego Radia Książka jest pełna smakowitych anegdot. O wiele ważniejsze wydaje się jednak to, że autor naprawdę wnikliwie pokazuje w niej ewolucję zespołu, który zawsze był otwarty na przemiany zachodzące w muzyce popularnej. Dziś ta grupa to legenda. Bez wątpienia zasługująca na dociekliwość, której owocem jest właśnie Queen. Królewska historia. Wiesław Weiss, redaktor naczelny magazynu „Teraz Rock” To kompletna, fascynująca historia naszpikowana niesłychanie barwnymi anegdotami. „Mojo” Wokalista nagrywający duety z gwiazdą światowej opery, gitarzysta – przyszły doktor astronomii, basista, którego partie na potęgę samplowali hip-hopowcy, i perkusista o urodzie małej dziewczynki. Co spowodowało, że ta wybuchowa mieszanka stworzyła najtrudniejszy do sklasyfikowania zespół nagrywający muzykę popularną, który jako pierwszy od czasów The Beatles wywrócił ją do góry nogami? Mark Blake z dociekliwością śledczego z IPN-u, po prześwietleniu Pink Floyd, bierze na warsztat Queen i prezentuje nam historię grupy – od rodzinnych korzeni po trwającą do dziś walkę z ciężarem megasukcesu. Rzetelne i wciągające. Piotr Metz, dziennikarz Programu Trzeciego Polskiego Radia Jeśli jesteś fanem Freddiego i jego zespołu, musisz przeczytać tę książkę. Drobiazgowość autora i liczba szczegółowo opisanych faktów zachwycają i sprawiają, że nie można się od niej oderwać. Liczne cytaty i komentarze ubarwiają opowieść i dodają jej smaku. Marek Piekarczyk Niezwykle szczegółowa biografia napisana w oparciu o liczne wywiady. „Daily Telegraph” Powyższy opis pochodzi od wydawcy.
+            @Model.Product.Description            
         </p>
     </article>
     <div class="product__section product__similar">
-        <h2 class="product__heading">Ksiązki podobne do <span class="product__similar--highlight">Linux. Biblia</span></h2>
-        <vc:books-carousel count="4" category="1"></vc:books-carousel>
+        <h2 class="product__heading">Ksiązki podobne do <span class="product__similar--highlight">@Model.Product.Title</span></h2>
+        <vc:books-carousel count="4" category="@Model.Product.CategoryId"></vc:books-carousel>
     </div>
     <div class="product__section product__opinions" id="reviews">
-        <h2 class="product__heading">Oceny i opinie klientów (3)</h2>
+        <h2 class="product__heading">Oceny i opinie klientów (@Model.ReviewCount)</h2>
         <div class="product__opinions-control">
-            <stars rating="3.69" parent-class="product__stars"></stars>
+            <stars rating="@Model.Product.Rating" parent-class="product__stars"></stars>
             <a href="#reviewForm" class="product__button">Dodaj opinię</a>
         </div>
         <div class="product__reviews">
-            <div class="review review--6">
-                <figure class="review__value">
-                    6
-                </figure>
-                <div class="review__info">
-                    oceniona przez: Jakub, 2021-11-10
+            @foreach (var review in Model.Reviews)
+            {
+                <div class="review review--@review.Rating">
+                    <figure class="review__value">
+                        @review.Rating
+                    </figure>
+                    <div class="review__info">
+                        oceniona przez: @review.UserId, @review.ReviewDate
+                    </div>
+                    <p class="review__content">
+                        @review.ReviewText
+                    </p>
                 </div>
-                <p class="review__content">
-                    Świetna pozycja dla osób z Tymbarku chcących nauczyć się Linuxa i tego jak sprzątać rzeki z wózków sklepowych :)
-                </p>
-            </div>
-            <div class="review review--3">
-                <figure class="review__value">
-                    3
-                </figure>
-                <div class="review__info">
-                    oceniona przez: Jakub, 2021-11-10
-                </div>
-                <p class="review__content">
-                    Dobry start dla każdego kto wchodzi w temat, a nawet dla osób z doświadczeniem. Opisano wiele istotnych elementów ważnych w pracy z linią poleceń, problematykę bezpieczeństwa pod Linuxem, użycie podstawowych programów/poleceń czy całych pakietów. Mimo to brakuje pewnych tematów, np.: konfiguracji serwerów zdalnych pulpitów czy łączenia komputerów pod Linuxem w celu budowania zespołów (klastrów) obliczeniowych; trochę mi również uwiera brak opisu czy nawet wzmianki o takich programach jak sed czy awk oraz przeszukiwania plików czy ogólnie wyników za pomocą wyrażeń regularnych.
-                </p>
-            </div>
-            <div class="review review--1">
-                <figure class="review__value">
-                    1
-                </figure>
-                <div class="review__info">
-                    oceniona przez: Jakub, 2021-11-10
-                </div>
-                <p class="review__content">
-                    najgorsza ksiazka. o niczym. tak, bardzo chce wiedziec jak tworzyc usluge w sysvinit w 2021 tak tak tak, bardzo chce aby mi przypominano ze to bylo juz omawiane w x rozdziale. ksiazka zbloatowana bardziej niz swieza instalacja windowsa
-                </p>
-            </div>
+            }
             <a class="review__seeAll" href="/Book/Reviews?id=1">zobacz wszystkie opinie</a>
         </div>
         <vc:review-form></vc:review-form>
@@ -82,34 +79,44 @@
         <h2 class="product__heading">Szczegóły książki</h2>
         <ul class="product__details-list">
             <li class="product__details-item">
-                <span class="product__details-name">Autor:</span> <span class="product__details-value">Christopher Negus</span>
+                <span class="product__details-name">Autor:</span> <span class="product__details-value">
+                    @foreach (var author in Model.Authors)
+                    {
+                        <span>@author </span>
+                    }
+                </span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Tłuamczenie:</span> <span class="product__details-value">Christopher Nawalaniec</span>
+                <span class="product__details-name">Tłumaczenie:</span> <span class="product__details-value">
+                    @foreach (var translator in Model.Translators)
+                    {
+                        <span>@translator </span>
+                    }
+                </span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Język egzemplarza:</span> <span class="product__details-value">polski</span>
+                <span class="product__details-name">Język egzemplarza:</span> <span class="product__details-value">@Model.EditionLanguage</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Język oryginalny:</span> <span class="product__details-value">angielski</span>
+                <span class="product__details-name">Język oryginalny:</span> <span class="product__details-value">@Model.OriginalLanguage</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Data wydania książki:</span> <span class="product__details-value">2021-08-31</span>
+                <span class="product__details-name">Data wydania książki:</span> <span class="product__details-value">@Model.Product.ReleaseDate</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Format:</span> <span class="product__details-value">164mm x 239mm x 50mm</span>
+                <span class="product__details-name">Format:</span> <span class="product__details-value">@Model.Product.Dimensions</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Kategoria:</span> <span class="product__details-value">Systemy operacyjne</span>
+                <span class="product__details-name">Kategoria:</span> <span class="product__details-value">@Model.Category.Name</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Ilość stron:</span> <span class="product__details-value">872</span>
+                <span class="product__details-name">Ilość stron:</span> <span class="product__details-value">@Model.Product.PageQuantity</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Numer wydania:</span> <span class="product__details-value">X</span>
+                <span class="product__details-name">Numer wydania:</span> <span class="product__details-value">@Model.Product.IssueNumber</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Ilość sprzedanych kopii:</span> <span class="product__details-value">12</span>
+                <span class="product__details-name">Ilość sprzedanych kopii:</span> <span class="product__details-value">@Model.Product.NumberOfCopiesSold</span>
             </li>
         </ul>
     </div>

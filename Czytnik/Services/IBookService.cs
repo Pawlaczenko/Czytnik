@@ -8,6 +8,7 @@ namespace Czytnik.Services
     {
         Task<IEnumerable<BooksCarouselViewModel>> GetCarouselBooks(int count, int categoryId);
         Task<IEnumerable<BestBooksViewModel>> GetBestOfAllTimeBooks();
+        ProductPageViewModel GetProductBookPage(int bookId);
 
     }
 }

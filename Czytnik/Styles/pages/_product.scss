@@ -50,8 +50,9 @@
     }
 
     &__cover {
-        width: 25rem;
+        min-width: 25rem;
         height: 35rem;
+        margin-right: 2rem;
 
         img {
             object-fit: contain;
