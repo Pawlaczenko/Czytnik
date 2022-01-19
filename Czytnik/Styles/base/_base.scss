@@ -67,5 +67,9 @@ li {
 }
 
 details[open] summary ~ * {
-  animation: sweep 0.5s ease-in-out;
+  animation: sweepIn 0.2s ease-in-out;
+}
+
+details[close] summary ~ * {
+  animation: sweepOut 0.2s ease-in-out;
 }

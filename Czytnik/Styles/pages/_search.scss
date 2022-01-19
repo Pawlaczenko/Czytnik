@@ -40,10 +40,14 @@
     align-items: center;
     justify-content: space-between;
 
-    padding: 1.9rem 2.8rem;
+    padding: 1.5rem 2.8rem;
 
     background-color: var(--color-secondary-dark);
     border-radius: 1.5rem;
+  }
+
+  &[open] &-icon {
+    transform: rotate(0);
   }
 
   &-title {
@@ -57,6 +61,8 @@
     height: 2.5rem;
 
     fill: var(--color-white);
+    transform: rotate(-90deg);
+    transition: transform .2s ease-in-out;
   }
 
   &-item {
