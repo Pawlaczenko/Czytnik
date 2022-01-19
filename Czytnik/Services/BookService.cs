@@ -47,7 +47,7 @@ namespace Czytnik.Services
                                     ReviewText = review.ReviewText,
                                     ReviewDate = review.ReviewDate
                                 }).OrderByDescending(r=>r.ReviewDate).Take(3).ToList();
-
+            bookQuery.CalculatedPrice = (bookQuery.Discount == null) ? bookQuery.Product.Price : CalculateDiscount(bookQuery.Product.Price,bookQuery.Discount.DiscountValue);
             return bookQuery;
         }
 
@@ -83,6 +83,12 @@ namespace Czytnik.Services
             }).Take(3);
             var books = await booksQuery.ToListAsync();
             return books;
+        }
+
+        private decimal CalculateDiscount(decimal price, int discount)
+        {
+            var discountPercentage = ((decimal)discount / 100);
+            return Math.Round(price * discountPercentage, 2);
         }
     }
 }

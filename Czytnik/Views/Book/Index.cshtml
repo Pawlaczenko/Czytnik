@@ -24,7 +24,7 @@
                 @if (Model.Discount!=null)
                 {
                     <li class="product__flags-item flag flag--primary">
-                        <span class="flag__title">Promocja</span>
+                        <span class="flag__title">Promocja</span><span class="flag__rank">@Model.Discount.DiscountValue%</span>
                     </li>
                 }
 
@@ -34,7 +34,12 @@
             <div class="product__rating">
                 <span class="product__rating-title">Ocena: </span>
                 <stars rating="@Model.Product.Rating" parent-class="product__stars"></stars>
-                <div class="product__rating-numbers">@Model.Product.Rating/6</div>
+                <div class="product__rating-numbers">
+                    @if (Model.ReviewCount > 0)
+                    {
+                        <span>@Model.Product.Rating / 6</span>
+                    }
+                </div>
                 <span class="product__rating-pipe"></span>
                 <div class="product__rating-count">Opinie: @Model.ReviewCount</div>
             </div>
@@ -71,7 +76,9 @@
                     </p>
                 </div>
             }
-            <a class="review__seeAll" href="/Book/Reviews?id=1">zobacz wszystkie opinie</a>
+            @if (Model.ReviewCount > 3) {
+                <a class="review__seeAll" href="/Book/Reviews?id=1">zobacz wszystkie opinie</a>
+            }
         </div>
         <vc:review-form></vc:review-form>
     </div>
@@ -104,7 +111,7 @@
                 <span class="product__details-name">Data wydania książki:</span> <span class="product__details-value">@Model.Product.ReleaseDate.ToString("dd.MM.yyyy")</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Format:</span> <span class="product__details-value">@Model.Product.Dimensions</span>
+                <span class="product__details-name">Format:</span> <span class="product__details-value">@Model.Product.Dimensions.Replace("&nbsp;","")</span>
             </li>
             <li class="product__details-item">
                 <span class="product__details-name">Kategoria:</span> <span class="product__details-value">@Model.Category.Name</span>
@@ -123,7 +130,14 @@
     <aside class="product__cart">
         <div class="product__money">
             <div class="product__price">
-                89,40zł <span class="product__sale">150,00zł</span>
+                @Model.CalculatedPrice zł
+                @if (Model.Discount != null)
+                {
+                    <span class="product__sale">
+                        @Model.Product.Price zł
+                    </span>
+                }
+
             </div>
             <button class="product__money-button product__money-button--orange">Dodaj do koszyka <span class="product__money-icon">+</span></button>
             <button class="product__money-button product__money-button--blue">Kup teraz <span class="product__money-icon">$</span></button>

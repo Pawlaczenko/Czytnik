@@ -10,6 +10,7 @@ namespace Czytnik_Model.ViewModels
     public class ProductPageViewModel
     {
         public Book Product { get; set; }
+        public decimal CalculatedPrice { get; set; }
         public List<string> Authors { get; set; }
         public Discount Discount { get; set; }
         public int Bestseller { get; set; }
