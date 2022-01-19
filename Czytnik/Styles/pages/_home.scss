@@ -181,6 +181,7 @@
   }
 
   &__title {
+    --lineLength: 8rem;
     position: relative;
 
     font-weight: 700;
@@ -194,17 +195,17 @@
       top: calc(1em - 5px);
 
       content: '';
-      width: 8rem;
+      width: var(--lineLength);
       height: 5px;
 
       background-color: var(--color-secondary);
     }
 
     &::before {
-      left: -4rem;
+      left: calc(-1*var(--lineLength));
     }
     &::after {
-      right: -4rem;
+      right: calc(-1*var(--lineLength));
     }
   }
 

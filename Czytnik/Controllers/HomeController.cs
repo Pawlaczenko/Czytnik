@@ -24,8 +24,14 @@ namespace Czytnik.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var bestBooks = await _bookService.GetBestOfAllTimeBooks();
-            return View(bestBooks);
+            string[] months = new string[] { "Styczniu", "Lutym", "Marcu", "Kwietniu", "Maju", "Czerwcu", "Lipcu", "Sierpniu", "Wrześniu", "Październiku", "Listopadzie", "Grudniu" };
+            int prevMonth = DateTime.Now.AddMonths(-1).Month-1;
+
+            dynamic homeView = new ExpandoObject();
+            homeView.ofAllTime = await _bookService.GetBestOfAllTimeBooks();
+            homeView.month = months[prevMonth];
+
+            return View(homeView);
         }
 
 
