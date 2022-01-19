@@ -24,5 +24,15 @@ namespace Czytnik.Controllers
             filteringData.languages = await _languageService.GetAll();
             return View(filteringData);
         }
+
+        public async Task<JsonResult> GetAllFilters()
+        {
+            var categoriesViewModel = await _categoryService.GetAll();
+            var languagesViewModel = await _languageService.GetAll();
+
+            var filtersResult = new { categories = categoriesViewModel, languages = languagesViewModel };
+
+            return Json(filtersResult);
+        }
     }
 }

@@ -18,18 +18,10 @@
             </summary>
 
             <div class="filter__search">
-              <input type="text" class="filter__search-input" placeholder="Wyszukaj">
+              <input type="text" class="filter__search-input js-categories-filter-search" placeholder="Wyszukaj">
             </div>
 
-            <div class="filter__results">
-                @foreach (var category in Model.categories)
-                {
-                    <div class="filter__results-item">
-                        <input class="filter__results-checkbox" type="radio" name="category" id="@category.Category.Name" value="@category.Category.Id">
-                        <label class="filter__results-label" for="@category.Category.Name">@category.Category.Name</label>
-                    </div>
-                }
-            </div>
+            <div class="filter__results js-categories-filter"></div>
           </details>
         </div>
 
@@ -81,18 +73,10 @@
             </summary>
 
             <div class="filter__search">
-              <input type="text" class="filter__search-input" placeholder="Wyszukaj">
+              <input type="text" class="filter__search-input js-languages-filter-search" placeholder="Wyszukaj">
             </div>
 
-            <div class="filter__results">
-                @foreach (var language in Model.languages)
-                {
-                    <div class="filter__results-item">
-                        <input class="filter__results-checkbox" type="radio" name="language" id="@language.Name" value="@language.Id">
-                        <label class="filter__results-label" for="@language.Name">@language.Name</label>
-                    </div>
-                }
-            </div>
+            <div class="filter__results js-languages-filter"></div>
           </details>
         </div>
 
@@ -533,3 +517,5 @@
     </div>
   </div>
 </form>
+
+<script src="~/js/loadFilters.js"></script>
