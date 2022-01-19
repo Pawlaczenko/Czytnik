@@ -30,12 +30,23 @@ namespace Czytnik.Services
                 Bestseller = bestseller,
                 Publisher = b.Publisher.Name,
                 Category = b.Category,
-                ReviewCount = b.Reviews.Count(),
-                Reviews = b.Reviews.OrderByDescending(el=>el.ReviewDate).Take(3).ToList(),
+                ReviewCount = b.Reviews.Count,
                 Translators = b.BookTranslators.Select(ba => $"{ba.Translator.FirstName} {ba.Translator.SecondName} {ba.Translator.Surname}").ToList(),
                 OriginalLanguage = b.OriginalLanguage.Name,
-                EditionLanguage = b.EditionLanguage.Name
+                EditionLanguage = b.EditionLanguage.Name,
             }).FirstOrDefault();
+
+            //inaczej nie działa zagnieżdżony Select jeśli chce użyć w środku .Take(), bo ludzie od asp.net core byli zbyt leniwi żeby to naprawić przed releasem asp.net 6.0
+            bookQuery.Reviews = (from review in _dbContext.Reviews
+                                where review.BookId == bookId
+                                select new ReviewViewModel
+                                {
+                                    Id = review.Id,
+                                    Rating = review.Rating,
+                                    Username = review.User.Username,
+                                    ReviewText = review.ReviewText,
+                                    ReviewDate = review.ReviewDate
+                                }).OrderByDescending(r=>r.ReviewDate).Take(3).ToList();
 
             return bookQuery;
         }

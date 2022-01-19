@@ -16,7 +16,7 @@ namespace Czytnik_Model.ViewModels
         public string Publisher { get; set; }
         public Category Category { get; set; }
         public int ReviewCount { get; set; }
-        public List<Review> Reviews { get; set; }
+        public List<ReviewViewModel> Reviews { get; set; }
         public List<string> Translators { get; set; }
         public string OriginalLanguage { get; set; }
         public string EditionLanguage { get; set; }

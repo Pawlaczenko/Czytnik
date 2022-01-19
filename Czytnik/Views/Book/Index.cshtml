@@ -64,7 +64,7 @@
                         @review.Rating
                     </figure>
                     <div class="review__info">
-                        oceniona przez: @review.UserId, @review.ReviewDate
+                        oceniona przez: @review.Username, @review.ReviewDate.ToString("dd.MM.yyyy")
                     </div>
                     <p class="review__content">
                         @review.ReviewText
@@ -101,7 +101,7 @@
                 <span class="product__details-name">Język oryginalny:</span> <span class="product__details-value">@Model.OriginalLanguage</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Data wydania książki:</span> <span class="product__details-value">@Model.Product.ReleaseDate</span>
+                <span class="product__details-name">Data wydania książki:</span> <span class="product__details-value">@Model.Product.ReleaseDate.ToString("dd.MM.yyyy")</span>
             </li>
             <li class="product__details-item">
                 <span class="product__details-name">Format:</span> <span class="product__details-value">@Model.Product.Dimensions</span>
