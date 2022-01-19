@@ -52,21 +52,43 @@ namespace Czytnik.Services
             return bookQuery;
         }
 
-        public async Task<IEnumerable<BooksCarouselViewModel>> GetTopMonthBooks(int count)
+        public async Task<IEnumerable<BooksCarouselViewModel>> GetTopMonthBooks(int count, DateTime date)
         {
-            IQueryable<BooksCarouselViewModel> booksQuery = _dbContext.Books.OrderByDescending(b => b.NumberOfCopiesSold).Select(b => new BooksCarouselViewModel
-            {
-                Id = b.Id,
-                Title = b.Title,
-                Price = b.Price,
-                Cover = b.Cover,
-                Rating = b.Rating,
-                Category = b.Category,
-                Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
-            });
+            var today = new DateTime(date.Year, date.Month, 1);
+            var firstDayOfMonth = today.AddMonths(-1);
+            var lastDayOfMonth = today.AddDays(-1);
 
-            var books = await booksQuery.Take(count).ToListAsync();
-            return books;
+            var monthBooksQuery = _dbContext.OrderItems
+                .Select(x => new
+                {
+                    x.Book.Id,
+                    x.Quantity,
+                    x.Order.OrderDate
+                })
+                .Where(el => el.OrderDate >= firstDayOfMonth && el.OrderDate <= lastDayOfMonth)
+                .GroupBy(x => new { x.Id})
+                .Select(x => new
+                {
+                    Id = x.Key.Id,
+                    qntSum = x.Sum(y => y.Quantity)
+                })
+                .OrderByDescending(el=>el.qntSum)
+                .Take(count)
+                .Select(i => i.Id)
+                .ToList();
+
+            var res = _dbContext.Books.Where(b => monthBooksQuery.Contains(b.Id))
+                .Select(b => new BooksCarouselViewModel
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Price = b.Price,
+                    Cover = b.Cover,
+                    Rating = b.Rating,
+                    Category = b.Category,
+                    Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
+                });
+            return res;
         }
 
         public async Task<IEnumerable<BooksCarouselViewModel>> GetSimilarBooks(int seriesId, int categoryId, int bookId)

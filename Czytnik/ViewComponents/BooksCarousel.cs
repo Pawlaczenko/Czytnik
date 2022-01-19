@@ -17,7 +17,7 @@ public class BooksCarousel : ViewComponent
     {
         IEnumerable<BooksCarouselViewModel> books;
         if (type == "Product") books = await _bookService.GetSimilarBooks(series, category, book);
-        else books = await _bookService.GetTopMonthBooks(5);
+        else books = await _bookService.GetTopMonthBooks(5, DateTime.Now);
         return View(type, books);
     }
 }
