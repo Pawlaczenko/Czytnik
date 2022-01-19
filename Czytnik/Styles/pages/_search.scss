@@ -72,19 +72,11 @@
 
 .search__result {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19.3rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
   grid-gap: 2rem 5rem;
 
   margin-left: 2rem;
   margin-top: 4.5rem;
-
-  @media screen and (max-width: 1240px) {
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-  }
-
-  @media screen and (max-width: 900px) {
-    grid-template-columns: repeat(19.3rem, minmax(17rem, 1fr));
-  }
 
   &-item {
     max-width: 25rem;
