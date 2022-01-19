@@ -30,19 +30,70 @@ namespace Czytnik.Services
                 Bestseller = bestseller,
                 Publisher = b.Publisher.Name,
                 Category = b.Category,
-                ReviewCount = b.Reviews.Count(),
-                Reviews = b.Reviews.OrderByDescending(el=>el.ReviewDate).Take(3).ToList(),
+                ReviewCount = b.Reviews.Count,
                 Translators = b.BookTranslators.Select(ba => $"{ba.Translator.FirstName} {ba.Translator.SecondName} {ba.Translator.Surname}").ToList(),
                 OriginalLanguage = b.OriginalLanguage.Name,
-                EditionLanguage = b.EditionLanguage.Name
+                EditionLanguage = b.EditionLanguage.Name,
+                Series = b.Series
             }).FirstOrDefault();
 
+            //inaczej nie działa zagnieżdżony Select jeśli chce użyć w środku .Take(), bo ludzie od asp.net core byli zbyt leniwi żeby to naprawić przed releasem asp.net 6.0
+            bookQuery.Reviews = (from review in _dbContext.Reviews
+                                where review.BookId == bookId
+                                select new ReviewViewModel
+                                {
+                                    Id = review.Id,
+                                    Rating = review.Rating,
+                                    Username = review.User.Username,
+                                    ReviewText = review.ReviewText,
+                                    ReviewDate = review.ReviewDate
+                                }).OrderByDescending(r=>r.ReviewDate).Take(3).ToList();
+            bookQuery.CalculatedPrice = (bookQuery.Discount == null) ? bookQuery.Product.Price : CalculateDiscount(bookQuery.Product.Price,bookQuery.Discount.DiscountValue);
             return bookQuery;
         }
 
-        public async Task<IEnumerable<BooksCarouselViewModel>> GetCarouselBooks(int count, int categoryId = -1)
+        public async Task<IEnumerable<BooksCarouselViewModel>> GetTopMonthBooks(int count, DateTime date)
         {
-            IQueryable<BooksCarouselViewModel> booksQuery = _dbContext.Books.OrderByDescending(b => b.NumberOfCopiesSold).Select(b => new BooksCarouselViewModel
+            var today = new DateTime(date.Year, date.Month, 1);
+            var firstDayOfMonth = today.AddMonths(-1);
+            var lastDayOfMonth = today.AddDays(-1);
+
+            var monthBooksQuery = _dbContext.OrderItems
+                .Select(x => new
+                {
+                    x.Book.Id,
+                    x.Quantity,
+                    x.Order.OrderDate
+                })
+                .Where(el => el.OrderDate >= firstDayOfMonth && el.OrderDate <= lastDayOfMonth)
+                .GroupBy(x => new { x.Id})
+                .Select(x => new
+                {
+                    Id = x.Key.Id,
+                    qntSum = x.Sum(y => y.Quantity)
+                })
+                .OrderByDescending(el=>el.qntSum)
+                .Take(count)
+                .Select(i => i.Id)
+                .ToList();
+
+            var res = _dbContext.Books.Where(b => monthBooksQuery.Contains(b.Id))
+                .Select(b => new BooksCarouselViewModel
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Price = b.Price,
+                    Cover = b.Cover,
+                    Rating = b.Rating,
+                    Category = b.Category,
+                    Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
+                });
+            return res;
+        }
+
+        public async Task<IEnumerable<BooksCarouselViewModel>> GetSimilarBooks(int seriesId, int categoryId, int bookId)
+        {
+            var booksQuery = _dbContext.Books.Where(b => b.Id != bookId && (b.SeriesId == seriesId || b.CategoryId==categoryId)).Select(b => new BooksCarouselViewModel
             {
                 Id = b.Id,
                 Title = b.Title,
@@ -52,13 +103,8 @@ namespace Czytnik.Services
                 Category = b.Category,
                 Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
             });
-            if (categoryId > 0)
-            {
-                booksQuery = booksQuery.Where(b => b.Category.Id == categoryId);
-            }    
-
-            var books = await booksQuery.Take(count).ToListAsync();
-            return books;
+            var result = await booksQuery.Take(4).ToListAsync();
+            return result;
         }
 
         public async Task<IEnumerable<BestBooksViewModel>> GetBestOfAllTimeBooks()
@@ -72,6 +118,12 @@ namespace Czytnik.Services
             }).Take(3);
             var books = await booksQuery.ToListAsync();
             return books;
+        }
+
+        private decimal CalculateDiscount(decimal price, int discount)
+        {
+            var discountPercentage = ((decimal)discount / 100);
+            return Math.Round(price * discountPercentage, 2);
         }
     }
 }

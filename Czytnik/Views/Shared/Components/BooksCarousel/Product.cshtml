@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<Czytnik_Model.ViewModels.BooksCarouselViewModel>
 
-<div class="books-carousel">
+<div class="books-carousel books-carousel--similar">
+    @if(Model.Count() == 0) { 
+        <div class="books-carousel__warning">Brak podobnych książek</div>
+    }
     @foreach (var item in Model)
     {
         <div class="books-carousel__item">

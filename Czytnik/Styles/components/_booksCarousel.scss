@@ -1,12 +1,25 @@
 .books-carousel {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+
+  &--similar {
+    grid-template-columns: repeat(4, minmax(19rem, 21rem));
+  }
+  &--default {
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  }
+
   grid-gap: 2rem 3rem;
 
   &__link {
     display: block;
     overflow: hidden;
     height: 31.3rem;
+  }
+
+  &__warning {
+    font-size: 1.8rem;
+    color: var(--color-grey);
+    padding: 1rem;
   }
 
   &__image {
