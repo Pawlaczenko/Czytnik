@@ -1,4 +1,5 @@
 ﻿using Czytnik_DataAccess.Database;
+using Czytnik_Model.Models;
 using Czytnik_Model.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -104,6 +105,24 @@ namespace Czytnik.Services
                 Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
             });
             var result = await booksQuery.Take(4).ToListAsync();
+            return result;
+        }
+
+        public async Task<IEnumerable<BooksCarouselViewModel>> SearchBooks(Search search)
+        {
+            
+
+            var booksQuery = _dbContext.Books.Where(b => b.CategoryId == search.CategoryId && b.EditionLanguageId == search.LanguageId ).Select(b => new BooksCarouselViewModel
+            {
+                Id = b.Id,
+                Title = b.Title,
+                Price = b.Price,
+                Cover = b.Cover,
+                Rating = b.Rating,
+                Category = b.Category,
+                Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
+            });
+            var result = await booksQuery.ToListAsync();
             return result;
         }
 

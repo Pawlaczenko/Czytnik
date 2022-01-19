@@ -1,4 +1,5 @@
-﻿@model dynamic
+﻿@using Czytnik_Model.ViewModels
+@model IEnumerable<BooksCarouselViewModel>
 
 <form class="search wrapper" action="/Search" method="get">
       <details class="search__filter">
@@ -35,9 +36,9 @@
             </summary>
 
             <div class="filter__range">
-              <input class="filter__range-input" type="date" name="start-date" id="start-date">
+              <input class="filter__range-input" type="date" name="StartDate" id="start-date">
               <div class="filter__range-partition"></div>
-              <input class="filter__range-input" type="date" name="end-date" id="end-date">
+              <input class="filter__range-input" type="date" name="EndDate" id="end-date">
             </div>
 
           </details>
@@ -53,10 +54,10 @@
             </summary>
 
             <div class="filter__range">
-              <input class="filter__range-input filter__range-input--price" type="number" min="1" name="start-price"
+              <input class="filter__range-input filter__range-input--price" type="number" min="1" step="1" name="StartPrice"
                 id="start-price" placeholder="od">
               <div class="filter__range-partition"></div>
-              <input class="filter__range-input filter__range-input--price" type="number" min="1" name="end-price"
+              <input class="filter__range-input filter__range-input--price" type="number" min="1" step="1" name="EndPrice"
                 id="end-price" placeholder="do">
             </div>
 
@@ -97,7 +98,7 @@
         <div class="sorting-header__sort">
           <label for="sort" class="sorting-header__sort-label">Sortuj według: </label>
           <div class="sorting-header__sort-select-wrapper">
-            <select name="sort" id="sort" class="sorting-header__sort-select">
+            <select name="Sort" id="sort" class="sorting-header__sort-select">
               <option value="alphabet">A - Z</option>
               <option value="price-down">Cena: malejąco</option>
               <option value="price-up">Cena: rosnąco</option>
@@ -116,404 +117,34 @@
     </div>
 
     <div class="search__result">
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-          <div class="search__result-price-old">11,32 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-          <span class="books-carousel__button__left">Dodaj do koszyka</span>
-          <span class="books-carousel__button__right">+</span>
-        </a>
-      </div>
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-          <span class="books-carousel__button__left">Dodaj do koszyka</span>
-          <span class="books-carousel__button__right">+</span>
-        </a>
-      </div>
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-          <div class="search__result-price-old">11,32 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a class="books-carousel__button books-carousel__button--disabled">
-          <span class="books-carousel__button__right">Produkt niedostepny</span>
-        </a>
-      </div>
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-          <div class="search__result-price-old">11,32 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-          <span class="books-carousel__button__left">Dodaj do koszyka</span>
-          <span class="books-carousel__button__right">+</span>
-        </a>
-      </div>
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-          <div class="search__result-price-old">11,32 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-          <span class="books-carousel__button__left">Dodaj do koszyka</span>
-          <span class="books-carousel__button__right">+</span>
-        </a>
-      </div>
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-          <div class="search__result-price-old">11,32 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-          <span class="books-carousel__button__left">Dodaj do koszyka</span>
-          <span class="books-carousel__button__right">+</span>
-        </a>
-      </div>
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-          <div class="search__result-price-old">11,32 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-          <span class="books-carousel__button__left">Dodaj do koszyka</span>
-          <span class="books-carousel__button__right">+</span>
-        </a>
-      </div>
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-          <div class="search__result-price-old">11,32 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-          <span class="books-carousel__button__left">Dodaj do koszyka</span>
-          <span class="books-carousel__button__right">+</span>
-        </a>
-      </div>
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-          <div class="search__result-price-old">11,32 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-          <span class="books-carousel__button__left">Dodaj do koszyka</span>
-          <span class="books-carousel__button__right">+</span>
-        </a>
-      </div>
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-          <div class="search__result-price-old">11,32 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-          <span class="books-carousel__button__left">Dodaj do koszyka</span>
-          <span class="books-carousel__button__right">+</span>
-        </a>
-      </div>
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-          <div class="search__result-price-old">11,32 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-          <span class="books-carousel__button__left">Dodaj do koszyka</span>
-          <span class="books-carousel__button__right">+</span>
-        </a>
-      </div>
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-          <div class="search__result-price-old">11,32 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-          <span class="books-carousel__button__left">Dodaj do koszyka</span>
-          <span class="books-carousel__button__right">+</span>
-        </a>
-      </div>
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-          <div class="search__result-price-old">11,32 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-          <span class="books-carousel__button__left">Dodaj do koszyka</span>
-          <span class="books-carousel__button__right">+</span>
-        </a>
-      </div>
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-          <div class="search__result-price-old">11,32 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-          <span class="books-carousel__button__left">Dodaj do koszyka</span>
-          <span class="books-carousel__button__right">+</span>
-        </a>
-      </div>
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-          <div class="search__result-price-old">11,32 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-          <span class="books-carousel__button__left">Dodaj do koszyka</span>
-          <span class="books-carousel__button__right">+</span>
-        </a>
-      </div>
-      <div class="search__result-item">
-        <a href="/Book/1" class="search__result-link">
-          <img src="/assets/img/horror_category.png" alt="Book Title" class="search__result-image">
-        </a>
-        <div class="search__result-price">
-          <div class="search__result-price-current">9,99 zł</div>
-          <div class="search__result-price-old">11,32 zł</div>
-        </div>
-        <p class="search__result-title">
-          Minecraft Joke Book
-        </p>
-        <p class="search__result-author">
-          Mojang
-        </p>
-        <div class="search__result-rating">
-          <svg class="search__result-star" viewBox="0 0 32 32">
-            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-          </svg>
-          <p class="search__result-rate">4.8</p>
-        </div>
-        <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-          <span class="books-carousel__button__left">Dodaj do koszyka</span>
-          <span class="books-carousel__button__right">+</span>
-        </a>
-      </div>
+        @foreach (var book in Model)
+       {
+            <div class="search__result-item">
+                <a href="/Book/@book.Id" class="search__result-link">
+                  <img src="@book.Cover" alt="@book.Title" class="search__result-image">
+                </a>
+                <div class="search__result-price">
+                  <div class="search__result-price-current">@book.Price zł</div>
+                  <div class="search__result-price-old">11,32 zł</div>
+                </div>
+                <p class="search__result-title">
+                  @book.Title
+                </p>
+                <p class="search__result-author">
+                  @string.Join(", ", book.Authors)
+                </p>
+                <div class="search__result-rating">
+                  <svg class="search__result-star" viewBox="0 0 32 32">
+                    <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
+                  </svg>
+                  <p class="search__result-rate">@(book.Rating.HasValue ? book.Rating : "Brak Ocen")</p>
+                </div>
+                <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
+                  <span class="books-carousel__button__left">Dodaj do koszyka</span>
+                  <span class="books-carousel__button__right">+</span>
+                </a>
+              </div>
+       }
     </div>
   </div>
 </form>

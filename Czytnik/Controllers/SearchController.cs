@@ -1,5 +1,7 @@
 ﻿using Czytnik.Services;
+using Czytnik_Model.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Dynamic;
 using System.Threading.Tasks;
 
@@ -9,22 +11,23 @@ namespace Czytnik.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly ILanguageService _languageService;
-        public SearchController(ICategoryService categoryService, ILanguageService languageService)
+        private readonly IBookService _bookService;
+        public SearchController(ICategoryService categoryService, ILanguageService languageService, IBookService bookService)
         {
             _categoryService = categoryService;
             _languageService = languageService;
+            _bookService = bookService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Search search)
         {
-            dynamic filteringData = new ExpandoObject();
+            var booksViewModel = await _bookService.SearchBooks(search);
 
-            filteringData.categories = await _categoryService.GetAll();
-            filteringData.languages = await _languageService.GetAll();
-            return View(filteringData);
+            return View(booksViewModel);
         }
 
+        [HttpGet]
         public async Task<JsonResult> GetAllFilters()
         {
             var categoriesViewModel = await _categoryService.GetAll();
