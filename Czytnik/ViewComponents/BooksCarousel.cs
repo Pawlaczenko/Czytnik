@@ -1,6 +1,8 @@
 ﻿using Czytnik.Services;
+using Czytnik_Model.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 public class BooksCarousel : ViewComponent
@@ -11,10 +13,11 @@ public class BooksCarousel : ViewComponent
     {
         _bookService = bookService;
     }
-    public async Task<IViewComponentResult> InvokeAsync(int count, int category)
+    public async Task<IViewComponentResult> InvokeAsync(string type, int series=-1,int category=-1, int book=-1)
     {
-        var books = await _bookService.GetCarouselBooks(count,category);
-        string viewName = (category < 0) ? "Default" : "Product";
-        return View(viewName, books);
+        IEnumerable<BooksCarouselViewModel> books;
+        if (type == "Product") books = await _bookService.GetSimilarBooks(series, category, book);
+        else books = await _bookService.GetTopMonthBooks(5);
+        return View(type, books);
     }
 }

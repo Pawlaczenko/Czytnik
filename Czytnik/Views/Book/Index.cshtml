@@ -53,7 +53,7 @@
     </article>
     <div class="product__section product__similar">
         <h2 class="product__heading">Ksiązki podobne do <span class="product__similar--highlight">@Model.Product.Title</span></h2>
-        <vc:books-carousel count="4" category="@Model.Product.CategoryId"></vc:books-carousel>
+        <vc:books-carousel type="Product" series="@(Model.Series==null ? 0 : Model.Series.Id)" category="@Model.Product.CategoryId" book="@Model.Product.Id"></vc:books-carousel>
     </div>
     <div class="product__section product__opinions" id="reviews">
         <h2 class="product__heading">Oceny i opinie klientów (@Model.ReviewCount)</h2>
@@ -111,11 +111,17 @@
                 <span class="product__details-name">Data wydania książki:</span> <span class="product__details-value">@Model.Product.ReleaseDate.ToString("dd.MM.yyyy")</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Format:</span> <span class="product__details-value">@Model.Product.Dimensions.Replace("&nbsp;","")</span>
+                <span class="product__details-name">Format:</span> <span class="product__details-value">@Model.Product.Dimensions.Replace("&nbsp;", "")</span>
             </li>
             <li class="product__details-item">
                 <span class="product__details-name">Kategoria:</span> <span class="product__details-value">@Model.Category.Name</span>
             </li>
+            @if (Model.Series != null)
+            {
+                <li class="product__details-item">
+                    <span class="product__details-name">Seria:</span> <span class="product__details-value">@Model.Series.Name</span>
+                </li>
+            }
             <li class="product__details-item">
                 <span class="product__details-name">Ilość stron:</span> <span class="product__details-value">@Model.Product.PageQuantity</span>
             </li>

@@ -21,5 +21,6 @@ namespace Czytnik_Model.ViewModels
         public List<string> Translators { get; set; }
         public string OriginalLanguage { get; set; }
         public string EditionLanguage { get; set; }
+        public Series Series { get; set; }
     }
 }

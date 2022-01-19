@@ -34,6 +34,7 @@ namespace Czytnik.Services
                 Translators = b.BookTranslators.Select(ba => $"{ba.Translator.FirstName} {ba.Translator.SecondName} {ba.Translator.Surname}").ToList(),
                 OriginalLanguage = b.OriginalLanguage.Name,
                 EditionLanguage = b.EditionLanguage.Name,
+                Series = b.Series
             }).FirstOrDefault();
 
             //inaczej nie działa zagnieżdżony Select jeśli chce użyć w środku .Take(), bo ludzie od asp.net core byli zbyt leniwi żeby to naprawić przed releasem asp.net 6.0
@@ -51,7 +52,7 @@ namespace Czytnik.Services
             return bookQuery;
         }
 
-        public async Task<IEnumerable<BooksCarouselViewModel>> GetCarouselBooks(int count, int categoryId = -1)
+        public async Task<IEnumerable<BooksCarouselViewModel>> GetTopMonthBooks(int count)
         {
             IQueryable<BooksCarouselViewModel> booksQuery = _dbContext.Books.OrderByDescending(b => b.NumberOfCopiesSold).Select(b => new BooksCarouselViewModel
             {
@@ -63,13 +64,25 @@ namespace Czytnik.Services
                 Category = b.Category,
                 Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
             });
-            if (categoryId > 0)
-            {
-                booksQuery = booksQuery.Where(b => b.Category.Id == categoryId);
-            }    
 
             var books = await booksQuery.Take(count).ToListAsync();
             return books;
+        }
+
+        public async Task<IEnumerable<BooksCarouselViewModel>> GetSimilarBooks(int seriesId, int categoryId, int bookId)
+        {
+            var booksQuery = _dbContext.Books.Where(b => b.Id != bookId && (b.SeriesId == seriesId || b.CategoryId==categoryId)).Select(b => new BooksCarouselViewModel
+            {
+                Id = b.Id,
+                Title = b.Title,
+                Price = b.Price,
+                Cover = b.Cover,
+                Rating = b.Rating,
+                Category = b.Category,
+                Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
+            });
+            var result = await booksQuery.Take(4).ToListAsync();
+            return result;
         }
 
         public async Task<IEnumerable<BestBooksViewModel>> GetBestOfAllTimeBooks()
