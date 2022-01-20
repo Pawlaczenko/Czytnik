@@ -102,10 +102,10 @@
               <option value="alphabet">A - Z</option>
               <option value="price-down">Cena: malejąco</option>
               <option value="price-up">Cena: rosnąco</option>
-              <option value="data-down">Od najnowszych</option>
-              <option value="data-up">Od najstarszych</option>
+              <option value="date-down">Od najnowszych</option>
+              <option value="date-up">Od najstarszych</option>
               <option value="rating-down">Ocena: malejąco</option>
-              <option value="rating-down">Ocena: rosnąco</option>
+              <option value="rating-up">Ocena: rosnąco</option>
             </select>
             <svg class="sorting-header__sort-chevron" viewBox="0 0 32 32">
               <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
@@ -120,7 +120,7 @@
         @foreach (var book in Model)
        {
             <div class="search__result-item">
-                <a href="/Book/@book.Id" class="search__result-link">
+                <a href="/Book/Index/@book.Id" class="search__result-link">
                   <img src="@book.Cover" alt="@book.Title" class="search__result-image">
                 </a>
                 <div class="search__result-price">
@@ -143,7 +143,7 @@
                   <span class="books-carousel__button__left">Dodaj do koszyka</span>
                   <span class="books-carousel__button__right">+</span>
                 </a>
-              </div>
+            </div>
        }
     </div>
   </div>
