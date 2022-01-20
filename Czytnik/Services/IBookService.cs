@@ -11,7 +11,7 @@ namespace Czytnik.Services
         Task<IEnumerable<BooksCarouselViewModel>> GetTopMonthBooks(int count, DateTime date);
         Task<IEnumerable<BestBooksViewModel>> GetBestOfAllTimeBooks();
         Task<IEnumerable<BooksCarouselViewModel>> GetSimilarBooks(int seriesId, int categoryId, int bookId);
-        Task<IEnumerable<BooksCarouselViewModel>> SearchBooks(Search search);
+        Task<IEnumerable<BooksSearchViewModel>> SearchBooks(Search search);
         ProductPageViewModel GetProductBookPage(int bookId);
 
     }

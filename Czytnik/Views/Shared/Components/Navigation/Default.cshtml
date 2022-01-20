@@ -38,14 +38,14 @@
         <div class="navigation__buttons-cart-quantity">2</div>
       </button>
     </div>
-    <div class="navigation__search">
-      <input type="text" class="navigation__search-input" placeholder="Wyszukaj..." />
-      <a class="navigation__search-button" asp-controller="Cart" asp-action="Index">
+    <form class="navigation__search" asp-controller="Search" asp-action="Index" method="GET">
+      <input type="text" class="navigation__search-input" placeholder="Wyszukaj..." name="SearchText" />
+      <button class="navigation__search-button" >
         <svg class="navigation__search-icon" viewBox="0 0 32 32">
-          <use xlink:href="/assets/svg/sprite.svg#icon-search"></use>
+            <use xlink:href="/assets/svg/sprite.svg#icon-search"></use>
         </svg>
-      </a>
-    </div>
+      </button>
+    </form>
   </div>
 </nav>
 

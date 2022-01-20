@@ -108,7 +108,7 @@ namespace Czytnik.Services
             return result;
         }
 
-        public async Task<IEnumerable<BooksCarouselViewModel>> SearchBooks(Search search)
+        public async Task<IEnumerable<BooksSearchViewModel>> SearchBooks(Search search)
         {
             IQueryable<Book> booksQueryBuilder = _dbContext.Books;
 
@@ -130,6 +130,9 @@ namespace Czytnik.Services
             if (search.EndDate != null)
                 booksQueryBuilder = booksQueryBuilder.Where(b => b.ReleaseDate <= search.EndDate);
 
+            if (search.SearchText != null)
+                booksQueryBuilder = booksQueryBuilder.Where(b => b.Title.Contains(search.SearchText));
+
             if (search.Sort == "alphabet")
                 booksQueryBuilder = booksQueryBuilder.OrderBy(b => b.Title);
 
@@ -150,19 +153,28 @@ namespace Czytnik.Services
 
             if (search.Sort == "rating-up")
                 booksQueryBuilder = booksQueryBuilder.OrderBy(b => b.Rating);
+            
+            
 
-            var booksQuery = booksQueryBuilder.Select(b => new BooksCarouselViewModel
-                {
-                    Id = b.Id,
-                    Title = b.Title,
-                    Price = b.Price,
-                    Cover = b.Cover,
-                    Rating = b.Rating,
-                    Category = b.Category,
-                    Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
-                });
-
+            var booksQuery = booksQueryBuilder.Select(b => new BooksSearchViewModel
+            {
+                Id = b.Id,
+                Title = b.Title,
+                Price = b.Price,
+                Cover = b.Cover,
+                Rating = b.Rating,
+                Category = b.Category,
+                Discount = b.BookDiscounts.Where(entry => entry.BookId == b.Id).Select(entry => entry.Discount).FirstOrDefault(),
+                Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
+            }).Take(30);
+            
             var result =  await booksQuery.ToListAsync();
+
+            foreach (var book in result)
+            {
+                book.CalculatedPrice = (book.Discount == null) ? book.Price : CalculateDiscount(book.Price, book.Discount.DiscountValue);
+            }
+
             return result;
         }
 
