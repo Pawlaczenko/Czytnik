@@ -120,7 +120,7 @@
         @foreach (var book in Model)
        {
             <div class="search__result-item">
-                <a href="/Book/@book.Id" class="search__result-link">
+                <a href="/Book/Index/@book.Id" class="search__result-link">
                   <img src="@book.Cover" alt="@book.Title" class="search__result-image">
                 </a>
                 <div class="search__result-price">

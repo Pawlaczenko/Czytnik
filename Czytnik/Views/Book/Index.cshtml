@@ -1,4 +1,7 @@
 ﻿@model Czytnik_Model.ViewModels.ProductPageViewModel
+@{
+    ViewData["Title"] = Model.Product.Title;
+}
 
 <section class="product wrapper">
     <div class="product__header product__section">
@@ -7,11 +10,12 @@
         </figure>
         <div class="product__info">
             <h1 class="product__title">@Model.Product.Title</h1>
-            <p class="product__author">Autor:
-            @foreach(var author in Model.Authors)
-            {
-                <span>@author </span>
-            }
+            <p class="product__author">
+                Autor:
+                @foreach (var author in Model.Authors)
+                {
+                    <span>@author </span>
+                }
             </p>
             <ul class="product__flags">
                 @if (Model.Bestseller > 0)
@@ -21,14 +25,14 @@
                     </li>
 
                 }
-                @if (Model.Discount!=null)
+                @if (Model.Discount != null)
                 {
                     <li class="product__flags-item flag flag--primary">
                         <span class="flag__title">Promocja</span><span class="flag__rank">@Model.Discount.DiscountValue%</span>
                     </li>
                 }
 
-                
+
             </ul>
             <p class="product__publisher">Wydawnictwo: <span class="product__publisher--highlight">@Model.Publisher</span></p>
             <div class="product__rating">
@@ -48,7 +52,7 @@
     <article id="description" class="product__description product__section">
         <h2 class="product__heading">Opis książki</h2>
         <p class="product__description-content">
-            @Model.Product.Description            
+            @Model.Product.Description
         </p>
     </article>
     <div class="product__section product__similar">
@@ -76,8 +80,9 @@
                     </p>
                 </div>
             }
-            @if (Model.ReviewCount > 3) {
-                <a class="review__seeAll" href="/Book/Reviews?id=1">zobacz wszystkie opinie</a>
+            @if (Model.ReviewCount > 3)
+            {
+                <a class="review__seeAll" href="/Book/ReviewsList/@Model.Product.Id">zobacz wszystkie opinie</a>
             }
         </div>
         <vc:review-form></vc:review-form>
