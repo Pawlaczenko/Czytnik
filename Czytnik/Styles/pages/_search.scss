@@ -148,6 +148,10 @@
   }
 
   &-title {
+    --titleLineHeight: 2rem;
+    line-height: var(--titleLineHeight);
+    min-height: calc(var(--titleLineHeight) * 2);
+
     margin-top: 0.5rem;
 
     font-size: 1.3rem;
