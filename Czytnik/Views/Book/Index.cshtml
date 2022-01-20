@@ -82,7 +82,7 @@
             }
             @if (Model.ReviewCount > 3)
             {
-                <a class="review__seeAll" href="/Book/ReviewsList/@Model.Product.Id">zobacz wszystkie opinie</a>
+                <a class="review__seeAll" href="/Book/ReviewsList/@Model.Product.Id?id=@Model.Product.Id">zobacz wszystkie opinie</a>
             }
         </div>
         <vc:review-form></vc:review-form>

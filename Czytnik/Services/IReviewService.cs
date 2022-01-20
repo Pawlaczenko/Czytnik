@@ -8,6 +8,7 @@ namespace Czytnik.Services
 {
     public interface IReviewService
     {
-        Task<IEnumerable<ReviewViewModel>> GetAll(int Id);
+        Task<IEnumerable<ReviewViewModel>> GetAll(int Id, int skip = 0, int count = 3);
+        ReviewListViewModel GetReviewList(int BookId);
     }
 }
