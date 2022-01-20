@@ -28,7 +28,6 @@ namespace Czytnik.Services
                     Username = r.User.Username,
                     ReviewText = r.ReviewText,
                     ReviewDate = r.ReviewDate,
-                    BookId = r.BookId
                 })
                 .OrderByDescending(r => r.ReviewDate);
             var result = await reviews.ToListAsync();

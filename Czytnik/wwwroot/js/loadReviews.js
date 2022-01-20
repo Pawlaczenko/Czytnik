@@ -1,0 +1,1 @@
+const moreButton = document.getElementById("more");

@@ -3,3 +3,31 @@
 body {
   font-family: Montserrat;
 }
+
+.decorated-heading {
+  --lineLength: 8rem;
+    position: relative;
+
+    font-weight: 700;
+    font-size: 2.4rem;
+    text-align: center;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: calc(1em - 5px);
+
+      content: '';
+      width: var(--lineLength);
+      height: 5px;
+
+      background-color: var(--color-secondary);
+    }
+
+    &::before {
+      left: calc(-1*var(--lineLength));
+    }
+    &::after {
+      right: calc(-1*var(--lineLength));
+    }
+}

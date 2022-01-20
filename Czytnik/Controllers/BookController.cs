@@ -1,7 +1,9 @@
 ﻿using Czytnik.Services;
+using Czytnik_Model.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,10 +25,13 @@ namespace Czytnik.Controllers
             return View(books);
         }
 
-        public IActionResult ReviewsList(int Id)
+        public async Task<IActionResult> ReviewsList(int Id, [FromQuery(Name = "title")] string title)
         {
-            var reviews = _reviewService.GetAll(Id);
-            return View(reviews);
+            dynamic reviewList = new ExpandoObject();
+            reviewList.reviews = await _reviewService.GetAll(Id);
+            reviewList.title = title;
+            reviewList.bookId = Id;
+            return View(reviewList);
         }
     }
 }
