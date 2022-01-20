@@ -37,9 +37,10 @@
 
   &__title {
     --titleLineHeight: 2.2rem;
-    margin-top: 1rem;
     line-height: var(--titleLineHeight);
     min-height: calc(var(--titleLineHeight) * 2);
+
+    margin-top: 1rem;
 
     font-weight: 700;
     font-size: 1.8rem;
