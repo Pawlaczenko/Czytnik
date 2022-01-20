@@ -110,19 +110,59 @@ namespace Czytnik.Services
 
         public async Task<IEnumerable<BooksCarouselViewModel>> SearchBooks(Search search)
         {
-            
+            IQueryable<Book> booksQueryBuilder = _dbContext.Books;
 
-            var booksQuery = _dbContext.Books.Where(b => b.CategoryId == search.CategoryId && b.EditionLanguageId == search.LanguageId ).Select(b => new BooksCarouselViewModel
-            {
-                Id = b.Id,
-                Title = b.Title,
-                Price = b.Price,
-                Cover = b.Cover,
-                Rating = b.Rating,
-                Category = b.Category,
-                Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
-            });
-            var result = await booksQuery.ToListAsync();
+            if (search.CategoryId != null)
+                booksQueryBuilder = booksQueryBuilder.Where(b => b.CategoryId == search.CategoryId);
+
+            if (search.LanguageId != null)
+                booksQueryBuilder = booksQueryBuilder.Where(b => b.EditionLanguageId == search.LanguageId);
+
+            if (search.StartPrice != null)
+                booksQueryBuilder = booksQueryBuilder.Where(b => b.Price >= search.StartPrice);
+
+            if (search.EndPrice != null)
+                booksQueryBuilder = booksQueryBuilder.Where(b => b.Price <= search.EndPrice);
+
+            if (search.StartDate != null)
+                booksQueryBuilder = booksQueryBuilder.Where(b => b.ReleaseDate >= search.StartDate);
+
+            if (search.EndDate != null)
+                booksQueryBuilder = booksQueryBuilder.Where(b => b.ReleaseDate <= search.EndDate);
+
+            if (search.Sort == "alphabet")
+                booksQueryBuilder = booksQueryBuilder.OrderBy(b => b.Title);
+
+            if (search.Sort == "price-down")
+                booksQueryBuilder = booksQueryBuilder.OrderByDescending(b => b.Price);
+
+            if (search.Sort == "price-up")
+                booksQueryBuilder = booksQueryBuilder.OrderBy(b => b.Price);
+
+            if (search.Sort == "date-down")
+                booksQueryBuilder = booksQueryBuilder.OrderByDescending(b => b.ReleaseDate);
+
+            if (search.Sort == "date-up")
+                booksQueryBuilder = booksQueryBuilder.OrderBy(b => b.ReleaseDate);
+            
+            if (search.Sort == "rating-down")
+                booksQueryBuilder = booksQueryBuilder.OrderByDescending(b => b.Rating);
+
+            if (search.Sort == "rating-up")
+                booksQueryBuilder = booksQueryBuilder.OrderBy(b => b.Rating);
+
+            var booksQuery = booksQueryBuilder.Select(b => new BooksCarouselViewModel
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Price = b.Price,
+                    Cover = b.Cover,
+                    Rating = b.Rating,
+                    Category = b.Category,
+                    Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
+                });
+
+            var result =  await booksQuery.ToListAsync();
             return result;
         }
 

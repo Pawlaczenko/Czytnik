@@ -9,7 +9,7 @@ const renderCategories = (categories) => {
     categories.forEach(item => {
         template += `
             <div class="filter__results-item">
-                <input class="filter__results-checkbox" type="radio" name="CategoryId" id="${item.name}" value="${item.id}" ${item.id == 11 && "checked"}>
+                <input class="filter__results-checkbox" type="radio" name="CategoryId" id="${item.name}" value="${item.id}">
                 <label class="filter__results-label" for="${item.name}">${item.name}</label>
             </div>`
     });
@@ -22,7 +22,7 @@ const renderLanguages = (languages) => {
     languages.forEach(language => {
         template += `
             <div class="filter__results-item">
-                <input class="filter__results-checkbox" type="radio" name="LanguageId" id="${language.name}" value="${language.id}" ${language.id == 1 && "checked"}>
+                <input class="filter__results-checkbox" type="radio" name="LanguageId" id="${language.name}" value="${language.id}">
                 <label class="filter__results-label" for="${language.name}">${language.name}</label>
             </div>`
     });

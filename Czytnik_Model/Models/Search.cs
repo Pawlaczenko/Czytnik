@@ -14,6 +14,6 @@ namespace Czytnik_Model.Models
         public DateTime? EndDate { get; set; }
         public int? StartPrice { get; set; }
         public int? EndPrice { get; set; }
-        public int? Sort { get; set; }
+        public string? Sort { get; set; }
     }
 }
