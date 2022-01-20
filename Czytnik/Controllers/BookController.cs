@@ -25,13 +25,15 @@ namespace Czytnik.Controllers
             return View(books);
         }
 
-        public async Task<IActionResult> ReviewsList(int Id, [FromQuery(Name = "title")] string title)
+        public IActionResult ReviewsList(int Id)
         {
-            dynamic reviewList = new ExpandoObject();
-            reviewList.reviews = await _reviewService.GetAll(Id);
-            reviewList.title = title;
-            reviewList.bookId = Id;
-            return View(reviewList);
+            //dynamic reviewList = new ExpandoObject();
+            //reviewList.reviews = await _reviewService.GetAll(Id);
+            //reviewList.title = title;
+            //reviewList.bookId = Id;
+            //return View(reviewList);
+            var reviewView = _reviewService.GetReviewList(Id);
+            return View(reviewView);
         }
     }
 }
