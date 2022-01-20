@@ -15,5 +15,6 @@ namespace Czytnik_Model.Models
         public int? StartPrice { get; set; }
         public int? EndPrice { get; set; }
         public string? Sort { get; set; }
+        public string? SearchText { get; set; }
     }
 }
