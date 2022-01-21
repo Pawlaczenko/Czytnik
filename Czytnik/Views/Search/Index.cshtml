@@ -1,152 +1,156 @@
 ﻿@using Czytnik_Model.ViewModels
 @model IEnumerable<BooksSearchViewModel>
 
+@{
+    ViewData["Title"] = "Wyszukiwanie";
+}
+
 <form class="search wrapper" action="/Search" method="get">
-      <details open class="search__filter">
+    <details open class="search__filter">
         <summary class="search__filter-header">
-          <p class="search__filter-title">Filter</p>
-          <svg class="search__filter-icon" viewBox="0 0 29 25">
-            <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
-          </svg>
+            <p class="search__filter-title">Filter</p>
+            <svg class="search__filter-icon" viewBox="0 0 29 25">
+                <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
+            </svg>
         </summary>
         <div class="search__filter-item">
-          <details class="filter filter--list">
-            <summary class="filter__header">
-              <p class="filter__title">Kategoria</p>
-              <svg class="filter__icon" viewBox="0 0 32 32">
-                <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
-              </svg>
-            </summary>
+            <details class="filter filter--list">
+                <summary class="filter__header">
+                    <p class="filter__title">Kategoria</p>
+                    <svg class="filter__icon" viewBox="0 0 32 32">
+                        <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
+                    </svg>
+                </summary>
 
-            <div class="filter__search">
-              <input type="text" class="filter__search-input js-categories-filter-search" placeholder="Wyszukaj">
-            </div>
+                <div class="filter__search">
+                    <input type="text" class="filter__search-input js-categories-filter-search" placeholder="Wyszukaj">
+                </div>
 
-            <div class="filter__results js-categories-filter"></div>
-          </details>
+                <div class="filter__results js-categories-filter"></div>
+            </details>
         </div>
 
         <div class="search__filter-item">
-          <details class="filter">
-            <summary class="filter__header">
-              <p class="filter__title">Data Wydania</p>
-              <svg class="filter__icon" viewBox="0 0 32 32">
-                <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
-              </svg>
-            </summary>
+            <details class="filter">
+                <summary class="filter__header">
+                    <p class="filter__title">Data Wydania</p>
+                    <svg class="filter__icon" viewBox="0 0 32 32">
+                        <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
+                    </svg>
+                </summary>
 
-            <div class="filter__range">
-              <input class="filter__range-input" type="date" name="StartDate" id="start-date">
-              <div class="filter__range-partition"></div>
-              <input class="filter__range-input" type="date" name="EndDate" id="end-date">
-            </div>
+                <div class="filter__range">
+                    <input class="filter__range-input" type="date" name="StartDate" id="start-date">
+                    <div class="filter__range-partition"></div>
+                    <input class="filter__range-input" type="date" name="EndDate" id="end-date">
+                </div>
 
-          </details>
+            </details>
         </div>
 
         <div class="search__filter-item">
-          <details class="filter">
-            <summary class="filter__header">
-              <p class="filter__title">Cena</p>
-              <svg class="filter__icon" viewBox="0 0 32 32">
-                <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
-              </svg>
-            </summary>
+            <details class="filter">
+                <summary class="filter__header">
+                    <p class="filter__title">Cena</p>
+                    <svg class="filter__icon" viewBox="0 0 32 32">
+                        <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
+                    </svg>
+                </summary>
 
-            <div class="filter__range">
-              <input class="filter__range-input filter__range-input--price" type="number" min="1" step="1" name="StartPrice"
-                id="start-price" placeholder="od">
-              <div class="filter__range-partition"></div>
-              <input class="filter__range-input filter__range-input--price" type="number" min="1" step="1" name="EndPrice"
-                id="end-price" placeholder="do">
-            </div>
+                <div class="filter__range">
+                    <input class="filter__range-input filter__range-input--price" type="number" min="1" step="1" name="StartPrice"
+                           id="start-price" placeholder="od">
+                    <div class="filter__range-partition"></div>
+                    <input class="filter__range-input filter__range-input--price" type="number" min="1" step="1" name="EndPrice"
+                           id="end-price" placeholder="do">
+                </div>
 
-          </details>
+            </details>
         </div>
 
         <div class="search__filter-item">
-          <details class="filter filter--list">
-            <summary class="filter__header">
-              <p class="filter__title">Język</p>
-              <svg class="filter__icon" viewBox="0 0 32 32">
-                <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
-              </svg>
-            </summary>
+            <details class="filter filter--list">
+                <summary class="filter__header">
+                    <p class="filter__title">Język</p>
+                    <svg class="filter__icon" viewBox="0 0 32 32">
+                        <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
+                    </svg>
+                </summary>
 
-            <div class="filter__search">
-              <input type="text" class="filter__search-input js-languages-filter-search" placeholder="Wyszukaj">
-            </div>
+                <div class="filter__search">
+                    <input type="text" class="filter__search-input js-languages-filter-search" placeholder="Wyszukaj">
+                </div>
 
-            <div class="filter__results js-languages-filter"></div>
-          </details>
+                <div class="filter__results js-languages-filter"></div>
+            </details>
         </div>
 
         <div class="filter__button">
-          <button class="button button--medium button--full-parent">
-            Wyszukaj
-          </button>
+            <button class="button button--medium button--full-parent">
+                Wyszukaj
+            </button>
         </div>
-      </details>
+    </details>
 
-  <div class="search__content">
-    <h1 class="search__header">Książki </h1>
-    <div class="search__sorting">
-      <div class="sorting-header sorting-header--search">
-        <div class="sorting-header__counter">
-          Znaleziono 481 produktów
-        </div>
-        <div class="sorting-header__sort">
-          <label for="sort" class="sorting-header__sort-label">Sortuj według: </label>
-          <div class="sorting-header__sort-select-wrapper">
-            <select name="Sort" id="sort" class="sorting-header__sort-select">
-              <option value="alphabet">A - Z</option>
-              <option value="price-down">Cena: malejąco</option>
-              <option value="price-up">Cena: rosnąco</option>
-              <option value="date-down">Od najnowszych</option>
-              <option value="date-up">Od najstarszych</option>
-              <option value="rating-down">Ocena: malejąco</option>
-              <option value="rating-up">Ocena: rosnąco</option>
-            </select>
-            <svg class="sorting-header__sort-chevron" viewBox="0 0 32 32">
-              <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
-            </svg>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="search__result">
-        @foreach (var book in Model)
-       {
-            <div class="search__result-item">
-                <a href="/Book/Index/@book.Id" class="search__result-link">
-                  <img src="@book.Cover" alt="@book.Title" class="search__result-image">
-                </a>
-                <div class="search__result-price">
-                  <div class="search__result-price-current">@book.CalculatedPrice zł</div>
-                  <div class="search__result-price-old">@(book.Price == book.CalculatedPrice ? null : book.Price+" zł")</div>
+    <div class="search__content">
+        <h1 class="search__header">Książki </h1>
+        <div class="search__sorting">
+            <div class="sorting-header sorting-header--search">
+                <div class="sorting-header__counter">
+                    Znaleziono 481 produktów
                 </div>
-                <p class="search__result-title">
-                  @book.Title
-                </p>
-                <p class="search__result-author">
-                  @string.Join(", ", book.Authors)
-                </p>
-                <div class="search__result-rating">
-                  <svg class="search__result-star" viewBox="0 0 32 32">
-                    <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                  </svg>
-                  <p class="search__result-rate">@(book.Rating.HasValue ? book.Rating : "Brak Ocen")</p>
+                <div class="sorting-header__sort">
+                    <label for="sort" class="sorting-header__sort-label">Sortuj według: </label>
+                    <div class="sorting-header__sort-select-wrapper">
+                        <select name="Sort" id="sort" class="sorting-header__sort-select">
+                            <option value="alphabet">A - Z</option>
+                            <option value="price-down">Cena: malejąco</option>
+                            <option value="price-up">Cena: rosnąco</option>
+                            <option value="date-down">Od najnowszych</option>
+                            <option value="date-up">Od najstarszych</option>
+                            <option value="rating-down">Ocena: malejąco</option>
+                            <option value="rating-up">Ocena: rosnąco</option>
+                        </select>
+                        <svg class="sorting-header__sort-chevron" viewBox="0 0 32 32">
+                            <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
+                        </svg>
+                    </div>
+
                 </div>
-                <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-                  <span class="books-carousel__button__left">Dodaj do koszyka</span>
-                  <span class="books-carousel__button__right">+</span>
-                </a>
             </div>
-       }
+        </div>
+
+        <div class="search__result">
+            @foreach (var book in Model)
+            {
+                <div class="search__result-item">
+                    <a href="/Book/Index/@book.Id" class="search__result-link">
+                        <img src="@book.Cover" alt="@book.Title" class="search__result-image">
+                    </a>
+                    <div class="search__result-price">
+                        <div class="search__result-price-current">@book.CalculatedPrice zł</div>
+                        <div class="search__result-price-old">@(book.Price == book.CalculatedPrice ? null : book.Price+" zł")</div>
+                    </div>
+                    <p class="search__result-title">
+                        @book.Title
+                    </p>
+                    <p class="search__result-author">
+                        @string.Join(", ", book.Authors)
+                    </p>
+                    <div class="search__result-rating">
+                        <svg class="search__result-star @(book.Rating.HasValue ? "" : "search__result-star--disabled")" viewBox="0 0 32 32">
+                            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
+                        </svg>
+                        <p class="search__result-rate">@(book.Rating.HasValue ? book.Rating : "Brak Ocen")</p>
+                    </div>
+                    <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
+                        <span class="books-carousel__button__left">Dodaj do koszyka</span>
+                        <span class="books-carousel__button__right">+</span>
+                    </a>
+                </div>
+            }
+        </div>
     </div>
-  </div>
 </form>
 
 <script src="~/js/loadFilters.js"></script>

@@ -111,6 +111,9 @@
   }
 
   &-star {
+    &--disabled {
+      fill: var(--color-grey);
+    }
     width: 1.4rem;
     height: 1.3rem;
 

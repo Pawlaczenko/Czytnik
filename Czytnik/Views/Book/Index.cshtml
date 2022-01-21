@@ -12,10 +12,7 @@
             <h1 class="product__title">@Model.Product.Title</h1>
             <p class="product__author">
                 Autor:
-                @foreach (var author in Model.Authors)
-                {
-                    <span>@author </span>
-                }
+                @string.Join(", ", Model.Authors)
             </p>
             <ul class="product__flags">
                 @if (Model.Bestseller > 0)
@@ -92,18 +89,12 @@
         <ul class="product__details-list">
             <li class="product__details-item">
                 <span class="product__details-name">Autor:</span> <span class="product__details-value">
-                    @foreach (var author in Model.Authors)
-                    {
-                        <span>@author </span>
-                    }
+                    @string.Join(", ", Model.Authors)
                 </span>
             </li>
             <li class="product__details-item">
                 <span class="product__details-name">Tłumaczenie:</span> <span class="product__details-value">
-                    @foreach (var translator in Model.Translators)
-                    {
-                        <span>@translator </span>
-                    }
+                    @string.Join(", ", Model.Translators)
                 </span>
             </li>
             <li class="product__details-item">

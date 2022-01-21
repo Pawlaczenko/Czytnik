@@ -1,6 +1,6 @@
 using System;
 
-namespace Czytnik_Model.Models
+namespace Czytnik_Model.ViewModels
 {
     public class ErrorViewModel
     {

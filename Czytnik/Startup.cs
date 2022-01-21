@@ -47,10 +47,11 @@ namespace Czytnik
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Home/Error"); //jezeli akcja zwróci b³¹d
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseStatusCodePagesWithRedirects("/Error/ErrorPage?statusCode={0}"); // jezeli nie ma akcji
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

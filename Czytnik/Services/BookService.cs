@@ -149,10 +149,10 @@ namespace Czytnik.Services
                 booksQueryBuilder = booksQueryBuilder.OrderBy(b => b.ReleaseDate);
             
             if (search.Sort == "rating-down")
-                booksQueryBuilder = booksQueryBuilder.OrderByDescending(b => b.Rating);
+                booksQueryBuilder = booksQueryBuilder.OrderByDescending(b => b.Rating * b.Reviews.Count);
 
             if (search.Sort == "rating-up")
-                booksQueryBuilder = booksQueryBuilder.OrderBy(b => b.Rating);
+                booksQueryBuilder = booksQueryBuilder.OrderBy(b => b.Rating * b.Reviews.Count);
             
             
 
@@ -180,7 +180,7 @@ namespace Czytnik.Services
 
         public async Task<IEnumerable<BestBooksViewModel>> GetBestOfAllTimeBooks()
         {
-            var booksQuery = _dbContext.Books.OrderByDescending(b => b.Rating*b.NumberOfCopiesSold).Select(b => new BestBooksViewModel
+            var booksQuery = _dbContext.Books.OrderByDescending(b => b.Rating * b.Reviews.Count).Select(b => new BestBooksViewModel
             {
                 Id = b.Id,
                 Title = b.Title,
@@ -196,5 +196,6 @@ namespace Czytnik.Services
             var discountPercentage = ((decimal)discount / 100);
             return Math.Round(price * discountPercentage, 2);
         }
+
     }
 }
