@@ -1,4 +1,7 @@
 ﻿@model Czytnik_Model.ViewModels.ReviewListViewModel
+@{
+    ViewData["Title"] = "Oceny " + Model.Title;
+}
 
 <section class="product-reviews wrapper">
     <div class="product-reviews__header">
@@ -22,7 +25,8 @@
                     {
                         percentage = Math.Round((decimal)((decimal)Model.ReviewsQnt[(short)i] / (decimal)Model.ReviewCount) * 100);
                         count = Model.ReviewsQnt[(short)i];
-                    } else
+                    }
+                    else
                     {
                         percentage = 0;
                         count = 0;
@@ -32,25 +36,25 @@
                         <div class="diagram__bar" style="--percent:@percentage%;"></div>
                         <span class="diagram__count">@count</span>
                     </li>
-            }
+                }
             </ul>
         </div>
     </div>
     <div id="reviewsContainer" class="product-reviews__container">
         @*@foreach (var review in Model.reviews)
-        {
-            <div class="review review--@review.Rating">
-                <figure class="review__value">
-                    @review.Rating
-                </figure>
-                <div class="review__info">
-                    oceniona przez: @review.Username, @review.ReviewDate.ToString("dd.MM.yyyy")
+            {
+                <div class="review review--@review.Rating">
+                    <figure class="review__value">
+                        @review.Rating
+                    </figure>
+                    <div class="review__info">
+                        oceniona przez: @review.Username, @review.ReviewDate.ToString("dd.MM.yyyy")
+                    </div>
+                    <p class="review__content">
+                        @review.ReviewText
+                    </p>
                 </div>
-                <p class="review__content">
-                    @review.ReviewText
-                </p>
-            </div>
-        }*@
+            }*@
     </div>
     <button id="more" class="product-reviews__more button">Załaduj więcej</button>
 </section>
