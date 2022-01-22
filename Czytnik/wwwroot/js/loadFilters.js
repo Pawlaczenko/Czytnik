@@ -36,6 +36,52 @@ const renderLanguages = (languages) => {
     languagesFilterContainer.innerHTML = template;
 }
 
+const renderPagination = () => {
+    const pagination = document.querySelector(".js-pagination");
+    const booksQuantity = pagination.dataset.quantity;
+    const page = pagination.dataset.page * 1;
+
+    let startPage = page;
+    let endPage = Math.ceil(booksQuantity / 30);
+    if (page > 4) startPage -= 4;
+    else startPage = 1;
+    let template = "";
+
+    if (page > 1) template += `
+        <button class="pagination__item pagination__item--arrow" value="${page-1}">
+            <svg class="pagination__arrow pagination__arrow--left" viewBox="0 0 6 9">
+                <use xlink:href="/assets/svg/sprite.svg#icon-chevron-right"></use>
+            </svg>
+        </button>
+    `;
+
+    if (startPage > 1) template += `
+        <button class="pagination__item" value="1">1</button>
+        <span class="pagination__item pagination__item--text">...</span>
+    `
+
+    for (let i = startPage; i < startPage + 8 && i <= endPage; i++) {
+        template += `
+            <button class="pagination__item ${page == i ? "pagination__item--active" : ""}" value="${i}">${i}</button>
+        `
+    }
+
+    template += `
+        <span class="pagination__item pagination__item--text">z</span>
+        <button class="pagination__item" value="${endPage}">${endPage}</button>
+    `
+
+    if (page < endPage) template += `
+        <button class="pagination__item pagination__item--arrow" value="${page+1}">
+            <svg class="pagination__arrow" viewBox="0 0 6 9">
+                <use xlink:href="/assets/svg/sprite.svg#icon-chevron-right"></use>
+            </svg>
+        </button>
+    `;
+
+    pagination.innerHTML = template;
+}
+
 const setSortingOption = () => {
     sortingSelectItems.forEach(item => {
         if (item.value == params.Sort) item.selected = 'selected';
@@ -54,11 +100,12 @@ const generateFilters = (data) => {
 
     renderCategories(categories);
     renderLanguages(languages);
+    renderPagination();
 
     setSortingOption();
 
-    searchNavigationInput.value = params.SearchText;
-    
+    searchNavigationInput.value = params.SearchText ? params.SearchText : '';
+
     categoriesFilterSearch.addEventListener('input', (e) => {
         const searchValue = e.target.value.toLowerCase();
         const filteredCategories = categories.filter(el => el.name.toLowerCase().includes(searchValue));

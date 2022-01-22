@@ -23,7 +23,9 @@ namespace Czytnik.Controllers
         public async Task<IActionResult> Index(Search search)
         {
             dynamic searchView = new ExpandoObject();
-            searchView.books = await _bookService.SearchBooks(search);
+            var booksData = await _bookService.SearchBooks(search);
+            searchView.books = booksData.Item1;
+            searchView.booksCount = booksData.Item2;
             searchView.search = search;
 
             return View(searchView);

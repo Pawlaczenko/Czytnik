@@ -25,6 +25,8 @@
   align-items: center;
 
   &-select {
+    cursor: pointer;
+
     margin-left: 1rem;
     padding: 0.5rem;
     padding-right: 3rem;
@@ -40,6 +42,8 @@
   }
 
   &-chevron {
+    pointer-events: none;
+
     position: absolute;
     width: 1.45rem;
     height: 0.9rem;
