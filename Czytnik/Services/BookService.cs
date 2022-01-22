@@ -108,7 +108,7 @@ namespace Czytnik.Services
             return result;
         }
 
-        public async Task<IEnumerable<BooksSearchViewModel>> SearchBooks(Search search)
+        public async Task<Tuple<IEnumerable<BooksSearchViewModel>, int>> SearchBooks(Search search)
         {
             IQueryable<Book> booksQueryBuilder = _dbContext.Books;
 
@@ -147,14 +147,12 @@ namespace Czytnik.Services
 
             if (search.Sort == "date-up")
                 booksQueryBuilder = booksQueryBuilder.OrderBy(b => b.ReleaseDate);
-            
+
             if (search.Sort == "rating-down")
                 booksQueryBuilder = booksQueryBuilder.OrderByDescending(b => b.Rating * b.Reviews.Count);
 
             if (search.Sort == "rating-up")
                 booksQueryBuilder = booksQueryBuilder.OrderBy(b => b.Rating * b.Reviews.Count);
-            
-            
 
             var booksQuery = booksQueryBuilder.Select(b => new BooksSearchViewModel
             {
@@ -167,15 +165,17 @@ namespace Czytnik.Services
                 Discount = b.BookDiscounts.Where(entry => entry.BookId == b.Id).Select(entry => entry.Discount).FirstOrDefault(),
                 Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
             }).Take(30);
-            
-            var result =  await booksQuery.ToListAsync();
+
+            int count = booksQuery.Count();
+
+            IEnumerable<BooksSearchViewModel> result = await booksQuery.ToListAsync();
 
             foreach (var book in result)
             {
                 book.CalculatedPrice = (book.Discount == null) ? book.Price : CalculateDiscount(book.Price, book.Discount.DiscountValue);
             }
 
-            return result;
+            return Tuple.Create(result, count);
         }
 
         public async Task<IEnumerable<BestBooksViewModel>> GetBestOfAllTimeBooks()
