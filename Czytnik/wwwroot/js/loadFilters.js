@@ -57,8 +57,8 @@ const generateFilters = (data) => {
 
     setSortingOption();
 
-    searchNavigationInput.value = params.SearchText;
-    
+    searchNavigationInput.value = params.SearchText ? params.SearchText : '';
+
     categoriesFilterSearch.addEventListener('input', (e) => {
         const searchValue = e.target.value.toLowerCase();
         const filteredCategories = categories.filter(el => el.name.toLowerCase().includes(searchValue));
