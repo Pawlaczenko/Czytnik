@@ -112,6 +112,9 @@ namespace Czytnik.Services
         {
             IQueryable<Book> booksQueryBuilder = _dbContext.Books;
 
+            if (search.Page == null)
+                search.Page = 1;
+
             if (search.CategoryId != null)
                 booksQueryBuilder = booksQueryBuilder.Where(b => b.CategoryId == search.CategoryId);
 
@@ -164,9 +167,13 @@ namespace Czytnik.Services
                 Category = b.Category,
                 Discount = b.BookDiscounts.Where(entry => entry.BookId == b.Id).Select(entry => entry.Discount).FirstOrDefault(),
                 Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
-            }).Take(30);
+            });
 
             int count = booksQuery.Count();
+
+            int limit = 30;
+            int skip = (int)(search.Page - 1) * limit;
+            booksQuery = booksQuery.Skip(skip).Take(limit);
 
             IEnumerable<BooksSearchViewModel> result = await booksQuery.ToListAsync();
 
