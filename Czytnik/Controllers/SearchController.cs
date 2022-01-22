@@ -22,9 +22,11 @@ namespace Czytnik.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(Search search)
         {
-            var booksViewModel = await _bookService.SearchBooks(search);
+            dynamic searchView = new ExpandoObject();
+            searchView.books = await _bookService.SearchBooks(search);
+            searchView.search = search;
 
-            return View(booksViewModel);
+            return View(searchView);
         }
 
         [HttpGet]
