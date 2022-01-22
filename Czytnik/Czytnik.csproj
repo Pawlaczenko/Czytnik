@@ -19,6 +19,8 @@
     <Content Remove="Views\Search\Index.cshtml" />
     <Content Remove="Views\Shared\Components\Footer\Default.cshtml" />
     <Content Remove="Views\Shared\Components\Navigation\Default.cshtml" />
+    <Content Remove="Views\Shared\ErrorPage.cshtml" />
+    <Content Remove="Views\User\Profile.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,7 +52,9 @@
     <None Include="Views\Search\Index.cshtml" />
     <None Include="Views\Shared\Components\Footer\Default.cshtml" />
     <None Include="Views\Shared\Components\Navigation\Default.cshtml" />
+    <None Include="Views\Shared\ErrorPage.cshtml" />
     <None Include="Views\Shared\_LoadingSpinner.cshtml" />
+    <None Include="Views\User\Profile.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -70,6 +74,8 @@
 	  <Watch Remove="Views\Index.cshtml" />
 	  <Watch Remove="Views\Login\Index.cshtml" />
 	  <Watch Remove="Views\Shared\Components\Footer\Default.cshtml" />
+	  <Watch Remove="Views\Shared\ErrorPage.cshtml" />
+	  <Watch Remove="Views\User\Profile.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
