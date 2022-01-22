@@ -85,9 +85,7 @@
             </details>
         </div>
 
-        <div class="search__filter-item search__filter-item--hidden">
-            <input type="text" name="SearchText" class="js-search-form-input">
-        </div>
+        <input type="hidden" name="SearchText" class="js-search-form-input">
 
         <div class="filter__button">
             <button class="button button--medium button--full-parent js-search-button">
@@ -101,7 +99,7 @@
         <div class="search__sorting">
             <div class="sorting-header sorting-header--search">
                 <div class="sorting-header__counter">
-                    Znaleziono 481 produktów
+                    Znaleziono @Model.booksCount produktów
                 </div>
                 <div class="sorting-header__sort">
                     <label for="sort" class="sorting-header__sort-label">Sortuj według: </label>
