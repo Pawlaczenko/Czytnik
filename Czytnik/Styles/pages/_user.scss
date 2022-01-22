@@ -8,6 +8,18 @@
     "templates orders"
     "reviews reviews";
 
+    @media only screen and (max-width: 900px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 35rem auto;
+        grid-template-areas: 
+        "header"
+        "info"
+        "favourites"
+        "templates"
+        "orders"
+        "reviews";
+    }
+
     row-gap: 4rem;
 
     margin-top: 2rem;
@@ -56,6 +68,10 @@
         width: 80%;
         margin: 0 auto;
         align-self: center;
+
+        @media only screen and (max-width: 900px) {
+            width: 100%;
+        }
     }
 
     &__table {
@@ -100,16 +116,13 @@
         }
 
         &-list {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+            gap: 1rem 1.5rem;
         }
         
         &-item{
             display: block;
-            margin-right: 1.5rem;
-            margin-bottom: 1rem;
         }
 
         &-item:hover &-image {
@@ -117,7 +130,7 @@
         }
 
         &-figure {
-            width: 20rem;
+            min-width: 20rem;
             height: 15rem;
             overflow: hidden;
             position: relative;
@@ -129,7 +142,6 @@
             width: 100%;
             height: 100%;
             transition: all .2s ease-in-out;
-            //@include center-absolute;
         }
 
         &-title {
@@ -144,7 +156,7 @@
         }
 
         &-more {
-            margin-bottom: 5rem;
+            align-self: center;
         }
     }
 
@@ -153,6 +165,10 @@
     &__templates {
         grid-area: templates;
         margin-right: 3rem;
+
+        @media only screen and (max-width: 900px) {
+            margin-right: 0;
+        }
 
         &-container {
             margin-bottom: 1rem;
@@ -174,6 +190,14 @@
         grid-template-areas: "heading more" "reviews reviews";
         margin-top: 2rem;
 
+        @media only screen and (max-width: 900px) {
+            grid-template-columns: 1fr;
+            grid-template-areas: 
+            "heading"
+            "reviews"
+            "more";
+        }
+
         &-heading {
             grid-area: heading;
         }
@@ -181,6 +205,11 @@
         &-more {
             grid-area: more;
             justify-self: end;
+
+            @media only screen and (max-width: 900px) {
+                justify-self: center;
+                margin-top: 2.5rem;
+            }
         }
 
         &-container {
@@ -188,9 +217,13 @@
             margin-top: 2rem;
 
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(55rem,1fr));
+            grid-template-columns: repeat(auto-fill, minmax(50rem,1fr));
             column-gap: 3.5rem;
             row-gap: 2.5rem;
+
+            @media only screen and (max-width: 900px) {
+                grid-template-columns: 1fr;
+            }
         }
     }
 }
