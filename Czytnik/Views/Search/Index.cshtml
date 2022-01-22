@@ -152,32 +152,7 @@
                 </div>
             }
         </div>
-        <div class="pagination js-pagination" data-quantity="@Model.booksCount" data-page="@Model.search.Page">
-            @*<button class="pagination__item pagination__item--arrow">
-                <svg class="pagination__arrow pagination__arrow--left" viewBox="0 0 6 9">
-                    <use xlink:href="/assets/svg/sprite.svg#icon-chevron-right"></use>
-                </svg>
-            </button>*@
-            @*@for (int i = 1; i <= Math.Ceiling((decimal)Model.booksCount/30); i++)
-            {
-                <button class="pagination__item @(Model.search.Page == i ? "pagination__item--active" : "")">@i</button>
-            }*@
-            @*<button class="pagination__item pagination__item--active">1</button>
-            <button class="pagination__item">2</button>
-            <button class="pagination__item">3</button>
-            <button class="pagination__item">4</button>
-            <button class="pagination__item">5</button>
-            <button class="pagination__item">6</button>
-            <button class="pagination__item">7</button>
-            <button class="pagination__item">8</button>
-            <span class="pagination__item pagination__item--text">z</span>
-            <button class="pagination__item">132</button>*@
-            @*<button class="pagination__item pagination__item--arrow">
-                <svg class="pagination__arrow" viewBox="0 0 6 9">
-                    <use xlink:href="/assets/svg/sprite.svg#icon-chevron-right"></use>
-                </svg>
-            </button>*@
-        </div>
+        <div class="pagination js-pagination" data-quantity="@Model.booksCount" data-page="@Model.search.Page"></div>
     </div>
 
 </form>
