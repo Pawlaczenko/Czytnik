@@ -67,6 +67,10 @@
 
   &-item {
     margin-top: 2.3rem;
+
+    &--hidden{
+      display: none;
+    }
   }
 }
 
