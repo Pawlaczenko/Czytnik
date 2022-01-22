@@ -1,11 +1,11 @@
 ﻿@using Czytnik_Model.ViewModels
-@model IEnumerable<BooksSearchViewModel>
+@model dynamic
 
 @{
     ViewData["Title"] = "Wyszukiwanie";
 }
 
-<form class="search wrapper" action="/Search" method="get">
+<form class="search wrapper js-filter-form" action="/Search" method="get">
     <details open class="search__filter">
         <summary class="search__filter-header">
             <p class="search__filter-title">Filter</p>
@@ -40,9 +40,9 @@
                 </summary>
 
                 <div class="filter__range">
-                    <input class="filter__range-input" type="date" name="StartDate" id="start-date">
+                    <input class="filter__range-input" type="date" name="StartDate" id="start-date" value="@Model.search.StartDate?.ToString("yyyy-MM-dd")">
                     <div class="filter__range-partition"></div>
-                    <input class="filter__range-input" type="date" name="EndDate" id="end-date">
+                    <input class="filter__range-input" type="date" name="EndDate" id="end-date" value="@Model.search.EndDate?.ToString("yyyy-MM-dd")">
                 </div>
 
             </details>
@@ -59,10 +59,10 @@
 
                 <div class="filter__range">
                     <input class="filter__range-input filter__range-input--price" type="number" min="1" step="1" name="StartPrice"
-                           id="start-price" placeholder="od">
+                           id="start-price" placeholder="od"  value="@Model.search.StartPrice">
                     <div class="filter__range-partition"></div>
                     <input class="filter__range-input filter__range-input--price" type="number" min="1" step="1" name="EndPrice"
-                           id="end-price" placeholder="do">
+                           id="end-price" placeholder="do"  value="@Model.search.EndPrice">
                 </div>
 
             </details>
@@ -85,15 +85,19 @@
             </details>
         </div>
 
+        <div class="search__filter-item search__filter-item--hidden">
+            <input type="text" name="SearchText" class="js-search-form-input">
+        </div>
+
         <div class="filter__button">
-            <button class="button button--medium button--full-parent">
+            <button class="button button--medium button--full-parent js-search-button">
                 Wyszukaj
             </button>
         </div>
     </details>
 
     <div class="search__content">
-        <h1 class="search__header">Książki </h1>
+        <h1 class="search__header">Książki: @Model.search.SearchText</h1>
         <div class="search__sorting">
             <div class="sorting-header sorting-header--search">
                 <div class="sorting-header__counter">
@@ -102,7 +106,7 @@
                 <div class="sorting-header__sort">
                     <label for="sort" class="sorting-header__sort-label">Sortuj według: </label>
                     <div class="sorting-header__sort-select-wrapper">
-                        <select name="Sort" id="sort" class="sorting-header__sort-select">
+                        <select name="Sort" id="sort" class="sorting-header__sort-select js-sorting-select">
                             <option value="alphabet">A - Z</option>
                             <option value="price-down">Cena: malejąco</option>
                             <option value="price-up">Cena: rosnąco</option>
@@ -121,7 +125,7 @@
         </div>
 
         <div class="search__result">
-            @foreach (var book in Model)
+            @foreach (BooksSearchViewModel book in Model.books)
             {
                 <div class="search__result-item">
                     <a href="/Book/Index/@book.Id" class="search__result-link">
@@ -154,3 +158,4 @@
 </form>
 
 <script src="~/js/loadFilters.js"></script>
+<script src="~/js/submitSearch.js"></script>

@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BuildWebCompiler" Version="1.12.394" />
     <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.344" />
     <PackageReference Include="LigerShark.WebOptimizer.Sass" Version="3.0.58-beta" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.11" />
