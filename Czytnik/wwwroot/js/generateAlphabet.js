@@ -28,7 +28,7 @@ const createCategoryBoxElement = (letter, categoriesByLetter) => {
         itemCategory.className = "categoryBox__list-item";
 
         let itemAnchor = document.createElement("a");
-        itemAnchor.setAttribute("href", `/Search?categoryId=${category.category.id}`); //TODO: zrobi� dzia�aj�cy link
+        itemAnchor.setAttribute("href", `/Search?CategoryId=${category.category.id}`); //TODO: zrobi� dzia�aj�cy link
         itemAnchor.className = "categoryBox__list-link";
         itemAnchor.textContent = `${category.category.name} (${category.bookCount})`;
 
