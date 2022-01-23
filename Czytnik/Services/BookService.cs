@@ -115,6 +115,9 @@ namespace Czytnik.Services
             if (search.Page == null)
                 search.Page = 1;
 
+            if (search.Sort == null)
+                search.Sort = "alphabet";
+
             if (search.CategoryId != null)
                 booksQueryBuilder = booksQueryBuilder.Where(b => b.CategoryId == search.CategoryId);
 
