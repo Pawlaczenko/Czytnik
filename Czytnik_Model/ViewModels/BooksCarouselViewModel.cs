@@ -16,5 +16,6 @@ namespace Czytnik_Model.ViewModels
         public decimal? Rating { get; set; }
         public Category Category { get; set; }
         public List<string> Authors { get; set; }   
+        public Discount Discount { get; set; }
     }
 }
