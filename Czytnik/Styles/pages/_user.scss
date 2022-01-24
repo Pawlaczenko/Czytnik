@@ -256,6 +256,19 @@
     }
 }
 
+.user-reviews {
+    &__container {
+        margin-top: 4rem;
+        li {
+            margin-bottom: 2rem;
+        }
+    }
+    
+    &__button {
+        margin: 0 auto;
+    }
+}
+
 .user-container {
     width: Min(90rem, 90vw);
     margin: 4rem auto;
@@ -499,6 +512,16 @@
 }
 
 .userReview{
+    &--buttons {
+        display: grid;
+        grid-template-columns: 85% 15%;
+        column-gap: 2rem;
+        
+        @media only screen and (max-width: 900px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
     &__header {
         display: flex;
         align-items: center;
@@ -531,9 +554,40 @@
     }
 
     &__text {
+        display: block;
         font-size: 1.3rem;
         color: var(--color-grey);
 
         margin-top: 1rem;
+        resize: vertical;
+        width: 100%;
+        font-family: inherit;
+    }
+
+    textarea {
+        padding: 1rem;
+    }
+
+    &__column {
+
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        @media only screen and (max-width: 900px) {
+            flex-direction: row;
+            margin-top: 1.5rem;
+        }
+
+        button{
+            margin-bottom: 1rem;
+            @media only screen and (max-width: 900px) {
+                margin-right: 1rem;
+            }
+        }
     }
 }
