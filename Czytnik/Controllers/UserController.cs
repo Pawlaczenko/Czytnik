@@ -16,5 +16,9 @@ namespace Czytnik.Controllers
         {
             return View();
         }
+        public IActionResult Orders()
+        {
+            return View();
+        }
     }
 }

@@ -232,19 +232,22 @@
     }
 }
 
-.user-settings {
-    &__paragraph {
-        font-size: 1.3rem;
-        color: var(--color-grey);
-        text-align: center;
-        margin: 1rem 0;
+.user-orders {
+    &__container {
+        margin-top: 3rem;
     }
 
-    &__container{
-        width: Min(90rem, 90vw);
-        margin: 4rem auto;
-        padding: 2rem 5rem 6rem 5rem;
+    &__button {
+        margin: 0 auto;
+    }
+}
 
+.user-container {
+    width: Min(90rem, 90vw);
+    margin: 4rem auto;
+
+    &--settings {
+        padding: 2rem 5rem 6rem 5rem;
         background-color: var(--color-white-dark);
         border-radius: 1.5rem;
     }
