@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Twój profil - Ustawienia";
+}
+
+<section class="user-settings wrapper">
+    <h2 class="heading-line heading-line--both user-settings__heading">Ustawienia</h2>
+    <p class="user-settings__paragraph">Zmień ustawienia swojego profilu i konta</p>
+    <div class="user-settings__container">
+        <form class="user-settings__form settings-form">
+            <figure class="settings-form__figure">
+                <input type="file" accept="image/png, image/jpeg" id="settingsImageInput" class="settings-form__image-input" />
+                <img src="~/assets/img/defaultProfilePicture.png" id="settingsImage" class="settings-form__image" />
+                <label for="settingsImageInput" class="settings-form__edit"></label>
+            </figure>
+            <button class="settings-form__delete">usuń obraz</button>
+            <h3 class="settings-form__heading">Ustawienia Profilu</h3>
+            <section class="settings-form__section">
+                <label class="settings-form__input small-input">
+                    <span class="small-input__label">Imię</span>
+                    <input type="text" class="small-input__input" value="Bartłomiej" />
+                </label>
+                <label class="settings-form__input small-input">
+                    <span class="small-input__label">Drugie imię</span>
+                    <input type="text" class="small-input__input" value="Hieronim" />
+                </label>
+                <label class="settings-form__input small-input">
+                    <span class="small-input__label">Nazwisko</span>
+                    <input type="text" class="small-input__input" value="Pawlak" />
+                </label>
+                <label class="settings-form__input small-input">
+                    <span class="small-input__label">Data urodzenia</span>
+                    <input type="date" class="small-input__input" value="2000-12-27" />
+                </label>
+                <label class="settings-form__input small-input">
+                    <span class="small-input__label">Numer telefonu</span>
+                    <input type="tel" class="small-input__input" value="500500123" />
+                </label>
+            </section>
+            <h3 class="settings-form__heading">Ustawienia Konta</h3>
+            <section class="settings-form__section">
+                <label class="settings-form__input small-input">
+                    <span class="small-input__label">Email</span>
+                    <input type="text" class="small-input__input" value="bartek.pawlak@mail.com" />
+                </label>
+                <label class="settings-form__input small-input">
+                    <span class="small-input__label">Nazwa użytkownika</span>
+                    <input type="text" class="small-input__input" value="bp181" />
+                </label>
+            </section>
+            <input type="submit" class="button settings-form__button" value="ZAPISZ" />
+        </form>
+        <form class="user-settings__form settings-form">
+            <h3 class="settings-form__heading">Ustawienia Hasła</h3>
+            <section class="settings-form__section">
+                <label class="settings-form__input small-input">
+                    <span class="small-input__label">Aktualne hasło</span>
+                    <input type="password" class="small-input__input" />
+                </label>
+                <label class="settings-form__input small-input">
+                    <span class="small-input__label">nowe hasło</span>
+                    <input type="password" class="small-input__input" />
+                </label>
+                <label class="settings-form__input small-input">
+                    <span class="small-input__label">powtórz nowe hasło</span>
+                    <input type="password" class="small-input__input" />
+                </label>
+            </section>
+            <input type="submit" class="button button--secondary settings-form__button" value="ZMIEŃ HASŁO" />
+        </form>
+        <form class="user-settings__form settings-form">
+            <h3 class="settings-form__heading settings-form__heading--danger">Dezaktywacja konta</h3>
+            <section class="settings-form__section">
+                <label class="settings-form__input small-input">
+                    <span class="small-input__label">hasło</span>
+                    <input type="password" class="small-input__input" />
+                </label>
+                <label class="settings-form__input small-input">
+                    <span class="small-input__label">Powtórz hasło</span>
+                    <input type="password" class="small-input__input" />
+                </label>
+            </section>
+            <input type="submit" class="button button--danger settings-form__button" value="DEZAKTYWUJ" />
+        </form>
+    </div>
+</section>
