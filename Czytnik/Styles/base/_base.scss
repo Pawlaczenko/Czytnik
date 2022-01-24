@@ -28,6 +28,12 @@ body {
   margin: 0;
 
   overflow-x: hidden;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  //align-items: center;
 }
 
 .container {

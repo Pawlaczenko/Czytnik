@@ -123,6 +123,10 @@
         </div>
 
         <div class="search__result">
+            @if(Model.books.Count == 0)
+            {
+                <p class="search__result-none">Brak wyników :(</p>
+            }
             @foreach (BooksSearchViewModel book in Model.books)
             {
                 <div class="search__result-item">

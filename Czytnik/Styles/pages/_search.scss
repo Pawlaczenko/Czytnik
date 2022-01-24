@@ -90,6 +90,14 @@
     //max-width: 25rem;
   }
 
+  &-none {
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--color-grey);
+
+    grid-column: 1/-1;
+  }
+
   &-link {
     display: block;
     overflow: hidden;
