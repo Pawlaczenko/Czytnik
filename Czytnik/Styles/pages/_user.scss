@@ -242,6 +242,20 @@
     }
 }
 
+.user-templates {
+    &__container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 3.2rem;
+
+        margin-top: 3rem;
+
+        @media only screen and (max-width: 900px) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
 .user-container {
     width: Min(90rem, 90vw);
     margin: 4rem auto;
@@ -337,12 +351,7 @@
     }
 
     &__section {
-        margin-top: 1.5rem;
-        margin-bottom: 2.5rem;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(21.5rem,1fr));
-        column-gap: 4rem;
-        row-gap: 2rem;
+
     }
 
     &__button {
@@ -401,6 +410,12 @@
             background-color: var(--color-white-dark);
             color: var(--color-secondary);
         }
+    }
+
+    &__buttons {
+        display: flex;
+        margin-top: 2rem;
+        gap: 1.5rem;
     }
 }
 

@@ -18,3 +18,12 @@
         font-family: inherit;
     }
 }
+
+.small-form {
+            margin-top: 1.5rem;
+        margin-bottom: 2.5rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(21.5rem,1fr));
+        column-gap: 4rem;
+        row-gap: 2rem;
+}
