@@ -87,8 +87,13 @@ namespace Czytnik.Services
                     Cover = b.Cover,
                     Rating = b.Rating,
                     Category = b.Category,
-                    Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
+                    Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
+                    Discount = b.BookDiscounts.Where(entry => entry.BookId == b.Id).Select(entry => entry.Discount).FirstOrDefault(),
                 });
+            foreach (var book in res)
+            {
+                book.Price = (book.Discount == null) ? book.Price : CalculateDiscount(book.Price, book.Discount.DiscountValue);
+            }
             return res;
         }
 
@@ -102,9 +107,14 @@ namespace Czytnik.Services
                 Cover = b.Cover,
                 Rating = b.Rating,
                 Category = b.Category,
-                Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList()
+                Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
+                Discount = b.BookDiscounts.Where(entry => entry.BookId == b.Id).Select(entry => entry.Discount).FirstOrDefault(),
             });
             var result = await booksQuery.Take(4).ToListAsync();
+            foreach (var book in result)
+            {
+                book.Price = (book.Discount == null) ? book.Price : CalculateDiscount(book.Price, book.Discount.DiscountValue);
+            }
             return result;
         }
 
@@ -190,7 +200,7 @@ namespace Czytnik.Services
 
         public async Task<IEnumerable<BestBooksViewModel>> GetBestOfAllTimeBooks()
         {
-            var booksQuery = _dbContext.Books.OrderByDescending(b => b.Rating * b.Reviews.Count).Select(b => new BestBooksViewModel
+            var booksQuery = _dbContext.Books.OrderByDescending(b => b.NumberOfCopiesSold).Select(b => new BestBooksViewModel
             {
                 Id = b.Id,
                 Title = b.Title,
