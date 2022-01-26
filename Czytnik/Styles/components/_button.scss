@@ -35,6 +35,10 @@
     min-width: 18.7rem;
   }
 
+  &--parent-font-size {
+    font-size: inherit;
+  }
+
   &--big {
     padding: 1.2rem 5rem;
     font-size: 2rem;
