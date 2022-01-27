@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Twój profil - Recenzje";
+}
+
+<section class="wrapper user-reviews">
+    <h2 class="heading-line heading-line--both">Recenzje i oceny</h2>
+    <p class="small-paragraph">Usuń lub edytuj swoje recenzje i oceny</p>
+    <div class="user-container user-container--reviews">
+        <div class="sorting-header user-reviews__sort">
+            <div class="sorting-header__counter">
+                Znaleziono 3 recenzje
+            </div>
+            <div class="sorting-header__sort">
+                <label for="sort" class="sorting-header__sort-label">Sortuj według: </label>
+                <div class="sorting-header__sort-select-wrapper">
+                    <select name="Sort" id="sort" class="sorting-header__sort-select js-sorting-select">
+                        <option value="date-down">Od najnowszych</option>
+                        <option value="date-up">Od najstarszych</option>
+                        <option value="date-up">Ocena rosnąco</option>
+                        <option value="date-up">Ocena malejąco</option>
+                    </select>
+                    <svg class="sorting-header__sort-chevron" viewBox="0 0 32 32">
+                        <use xlink:href="/assets/svg/sprite.svg#icon-chevron-down"></use>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <ul class="user-reviews__container">
+            <li class="userReview userReview--buttons" id="1">
+                <div class="userReview__column">
+                    <div class="userReview__header">
+                        <div>
+                            <svg class="userReview__icon icon" viewBox="0 0 32 32">
+                                <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
+                            </svg>
+                            <span class="userReview__rating">4</span>
+                        </div>
+                        <span class="userReview__date">02-12-2021</span>
+                    </div>
+                    <h3 class="userReview__title">Biblia dla Minecrafterów - <span class="userReview__author">Mojang</span></h3>
+                    <p class="userReview__text">Bardzo fajna książka, Bogurodzica dziewica bogiem sławiena maryja u swego syna gospodzina matka wielebna maryja ziści nam spuści nam kyrie elejsonBardzo fajna książka, Bogurodzica dziewica bogiem sławiena maryja u swego syna gospodzina matka wielebna maryja ziści nam spuści nam kyrie elejsonBardzo fajna książka, Bogurodzica dziewica bogiem sławiena maryja u swego syna gospodzina matka wielebna maryja ziści nam spuści nam kyrie elejsonBardzo fajna książka, Bogurodzica dziewica bogiem sławiena maryja u swego syna gospodzina matka wielebna maryja ziści nam spuści nam kyrie elejsonBardzo fajna książka, Bogurodzica dziewica bogiem sławiena maryja u swego syna gospodzina matka wielebna maryja ziści nam spuści nam kyrie elejsonBardzo fajna książka, Bogurodzica dziewica bogiem sławiena maryja u swego syna gospodzina matka wielebna maryja ziści nam spuści nam kyrie elejsonBardzo fajna książka, Bogurodzica dziewica bogiem sławiena maryja u swego syna gospodzina matka wielebna maryja ziści nam spuści nam kyrie elejson</p>
+                </div>
+                <div class="userReview__buttons">
+                    <button class="button button--secondary">EDYTUJ</button>
+                    <button class="button button--danger">USUŃ</button>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <button class="button button--secondary user-reviews__button">Załaduj więcej...</button>
+</section>

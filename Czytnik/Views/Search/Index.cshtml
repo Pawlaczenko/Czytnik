@@ -123,37 +123,13 @@
         </div>
 
         <div class="search__result">
-            @if(Model.books.Count == 0)
+            @if (Model.books.Count == 0)
             {
                 <p class="search__result-none">Brak wyników :(</p>
             }
             @foreach (BooksSearchViewModel book in Model.books)
             {
-                <div class="search__result-item">
-                    <a href="/Book/Index/@book.Id" class="search__result-link">
-                        <img src="@book.Cover" alt="@book.Title" class="search__result-image">
-                    </a>
-                    <div class="search__result-price">
-                        <div class="search__result-price-current">@book.CalculatedPrice zł</div>
-                        <div class="search__result-price-old">@(book.Price == book.CalculatedPrice ? null : book.Price+" zł")</div>
-                    </div>
-                    <p class="search__result-title">
-                        @book.Title
-                    </p>
-                    <p class="search__result-author">
-                        @string.Join(", ", book.Authors)
-                    </p>
-                    <div class="search__result-rating">
-                        <svg class="search__result-star @(book.Rating.HasValue ? "" : "search__result-star--disabled")" viewBox="0 0 32 32">
-                            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                        </svg>
-                        <p class="search__result-rate">@(book.Rating.HasValue ? book.Rating : "Brak Ocen")</p>
-                    </div>
-                    <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
-                        <span class="books-carousel__button__left">Dodaj do koszyka</span>
-                        <span class="books-carousel__button__right">+</span>
-                    </a>
-                </div>
+                @await Component.InvokeAsync("BookItem", new { element = book })
             }
         </div>
         <div class="pagination js-pagination" data-quantity="@Model.booksCount" data-page="@Model.search.Page"></div>

@@ -68,6 +68,10 @@
         width: 80%;
         margin: 0 auto;
         align-self: center;
+        
+        &-button {
+            margin: 1rem auto;
+        }
 
         @media only screen and (max-width: 900px) {
             width: 100%;
@@ -228,6 +232,163 @@
     }
 }
 
+.user-orders {
+    &__container {
+        margin-top: 3rem;
+    }
+
+    &__button {
+        margin: 0 auto;
+    }
+}
+
+.user-templates {
+    &__container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 3.2rem;
+
+        margin-top: 3rem;
+
+        @media only screen and (max-width: 900px) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.user-reviews {
+    &__container {
+        margin-top: 4rem;
+        li {
+            margin-bottom: 2rem;
+        }
+    }
+    
+    &__button {
+        margin: 0 auto;
+    }
+}
+
+.user-favourites {
+    &__container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+        grid-gap: 2rem 5rem;
+    }
+
+    &__button {
+        margin: 0 auto;
+    }
+}
+
+.user-container {
+    width: Min(90rem, 90vw);
+    margin: 4rem auto;
+
+    &--settings {
+        padding: 2rem 5rem 6rem 5rem;
+        background-color: var(--color-white-dark);
+        border-radius: 1.5rem;
+    }
+}
+
+.settings-form {
+
+    &:not(:first-child){
+        margin-top: 4rem;
+    }
+
+    &__heading {
+        font-weight: 700;
+        font-size: 1.6rem;
+        text-align: left;
+        text-transform: capitalize;
+
+        &--danger {
+            color: var(--color-warning);
+        }
+    }
+
+    &__figure {
+        position: relative;
+
+        width: 11.5rem;
+        height: 11.5rem;
+        margin: 2.5rem auto;
+
+        border-radius: 50%;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    &__image-input {
+        display: none;
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+    
+    &__edit {
+        opacity: 0;
+        cursor: pointer;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border-radius: inherit;
+        width: inherit;
+        height: inherit;
+        transition: all .2s ease;
+
+        border: 2px solid var(--color-secondary);
+
+        &:before {
+            content: "Edytuj";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: var(--color-secondary);
+            height: 3.3rem;
+            width: 100%;
+
+            text-align: center;
+            color: var(--color-white);
+            font-size: 1.5rem;
+            padding-top: .5rem;
+        }
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    &__delete {
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 300;
+        text-align: center;
+        max-width: 7rem;
+        margin: 0 auto 2rem auto;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__section {
+
+    }
+
+    &__button {
+        margin: 0 auto;
+    }
+}
+
+
 .address-template {
     width: 100%;
     padding: 2.5rem 3rem;
@@ -278,6 +439,12 @@
             background-color: var(--color-white-dark);
             color: var(--color-secondary);
         }
+    }
+
+    &__buttons {
+        display: flex;
+        margin-top: 2rem;
+        gap: 1.5rem;
     }
 }
 
@@ -361,6 +528,16 @@
 }
 
 .userReview{
+    &--buttons {
+        display: grid;
+        grid-template-columns: 85% 15%;
+        column-gap: 2rem;
+        
+        @media only screen and (max-width: 900px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
     &__header {
         display: flex;
         align-items: center;
@@ -393,9 +570,40 @@
     }
 
     &__text {
+        display: block;
         font-size: 1.3rem;
         color: var(--color-grey);
 
         margin-top: 1rem;
+        resize: vertical;
+        width: 100%;
+        font-family: inherit;
+    }
+
+    textarea {
+        padding: 1rem;
+    }
+
+    &__column {
+
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        @media only screen and (max-width: 900px) {
+            flex-direction: row;
+            margin-top: 1.5rem;
+        }
+
+        button{
+            margin-bottom: 1rem;
+            @media only screen and (max-width: 900px) {
+                margin-right: 1rem;
+            }
+        }
     }
 }

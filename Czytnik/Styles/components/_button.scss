@@ -64,4 +64,9 @@
     color: currentColor;
     border: 2px solid currentColor;
   }
+
+  &--danger {
+    background-color: var(--color-warning);
+    color: var(--color-white);
+  }
 }
