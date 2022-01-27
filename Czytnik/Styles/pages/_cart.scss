@@ -73,8 +73,13 @@
     }
   }
 
+  &-cover {
+    flex-shrink: 0;
+    width: 30%;
+  }
+
   &-image {
-    height: 13.5rem;
+    width: 100%;
   }
 
   &-info {
@@ -87,6 +92,8 @@
   &-title {
     font-size: 1.4rem;
     font-weight: 700;
+
+    @include lineClamp(3);
   }
 
   &-author {
@@ -94,6 +101,8 @@
 
     font-size: 1.4rem;
     font-weight: 400;
+
+    @include lineClamp(2);
   }
 
   &-delete {
@@ -186,6 +195,8 @@
 }
 
 .cart__service {
+  position: sticky;
+  top: 8rem;
   height: 40rem;
 
   padding: 4.5rem 2.5rem;
