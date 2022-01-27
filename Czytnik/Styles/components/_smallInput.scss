@@ -17,6 +17,22 @@
         background-color: var(--color-white);
         font-family: inherit;
     }
+
+    &--error &__errorMessage{
+        display: block;
+    }
+    &--error {
+        input{
+            border-color: var(--color-warning);
+            color: var(--color-warning);
+        }
+    }
+
+    &__errorMessage {
+        color: var(--color-warning);
+        margin-bottom: .3rem;
+        display: none;
+    }
 }
 
 .small-form {

@@ -15,8 +15,14 @@
         </button>
         <form id="form" class="form__form">
             <p class="form__text">lub użyj swojego maila</p>
-            <input type="email" placeholder="Email" class="form__input" id="emailInput" required />
-            <input type="password" placeholder="Hasło" class="form__input" id="passwordInput" required />
+            <label class="form__label">
+                <span class="form__errorMessage">Podaj poprawny adres email</span>
+                <input type="email" placeholder="Email" class="form__input" id="emailInput" required />
+            </label>
+            <label class="form__label">
+                <span class="form__errorMessage">Hasło musi posiadać minimum 8 znaków, jedną małą i dużą literę i jedną cyfrę.</span>
+                <input type="password" placeholder="Hasło" class="form__input" id="passwordInput" required />
+            </label>
             <a href="/Login/RemindPassword" class="form__forgot">Nie pamiętasz hasła?</a>
             <input type="submit" class="form__submit button button--secondary button--medium" value="Zaloguj się" />
         </form>

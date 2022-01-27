@@ -269,6 +269,18 @@
     }
 }
 
+.user-favourites {
+    &__container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+        grid-gap: 2rem 5rem;
+    }
+
+    &__button {
+        margin: 0 auto;
+    }
+}
+
 .user-container {
     width: Min(90rem, 90vw);
     margin: 4rem auto;
@@ -302,7 +314,7 @@
 
         width: 11.5rem;
         height: 11.5rem;
-        margin: 2.5rem auto 1rem auto;
+        margin: 2.5rem auto;
 
         border-radius: 50%;
         overflow: hidden;
@@ -360,7 +372,11 @@
         text-align: center;
         max-width: 7rem;
         margin: 0 auto 2rem auto;
-        font-family: inherit;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     &__section {

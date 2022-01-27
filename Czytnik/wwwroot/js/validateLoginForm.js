@@ -7,8 +7,22 @@ const formTruthTable = {
     password: false,
 };
 
-emailInput.addEventListener('change',e=>{formTruthTable.email= validateEmail(e.target)});
-passwordInput.addEventListener('change',e=>{formTruthTable.password= validatePassword(e.target)});
+emailInput.addEventListener('change',e=>{
+    formTruthTable.email = validateEmail(e.target);
+    if(!formTruthTable.email){
+        e.target.parentNode.classList.add('form__label--error');
+    } else {
+        e.target.parentNode.classList.remove('form__label--error');
+    }
+});
+passwordInput.addEventListener('change',e=>{
+    formTruthTable.password = validatePassword(e.target);
+    if(!formTruthTable.password){
+        e.target.parentNode.classList.add('form__label--error');
+    } else {
+        e.target.parentNode.classList.remove('form__label--error');
+    }
+});
 
 form.addEventListener('submit',e=>{
     e.preventDefault();
