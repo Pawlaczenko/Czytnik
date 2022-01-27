@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
+    <Content Remove="Views\Cart\Index.cshtml" />
     <Content Remove="Views\Categories\Index.cshtml" />
     <Content Remove="Views\Index.cshtml" />
     <Content Remove="Views\Login\Index.cshtml" />
@@ -46,6 +47,7 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="Views\Cart\Index.cshtml" />
     <None Include="Views\Categories\Index.cshtml" />
     <None Include="Views\Login\Index.cshtml" />
     <None Include="Views\Register\Index.cshtml" />
@@ -70,6 +72,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Watch Remove="Views\Cart\Index.cshtml" />
 	  <Watch Remove="Views\Categories\Index.cshtml" />
 	  <Watch Remove="Views\Index.cshtml" />
 	  <Watch Remove="Views\Login\Index.cshtml" />
