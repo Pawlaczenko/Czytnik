@@ -37,7 +37,7 @@
               </svg>
             </button>
             <input class="cart__item-input js-cart-quantity-input" type="number" min="1" name="cartItemQuantity"
-            value="@item.Quantity">
+            value="@item.Quantity" data-book="@item.bookId">
             <button class="cart__item-button js-cart-quantity-increment">
               <svg class="cart__item-button-icon" viewBox="0 0 24 24">
                 <use xlink:href="/assets/svg/sprite.svg#icon-plus"></use>
@@ -64,7 +64,7 @@
     </div>
 
     <div class="cart__service-break">LUB</div>
-    <button class="cart__service-back">Kontynuuj zakupy</button>
+    <a href="/Search" class="cart__service-back">Kontynuuj zakupy</a>
     <div class="cart__service-summary">
       <div class="cart__service-summary-title">Podsumowanie zamówienia</div>
       <div class="cart__service-summary-info">

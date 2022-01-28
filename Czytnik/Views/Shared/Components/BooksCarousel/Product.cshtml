@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Czytnik_Model.ViewModels.BooksCarouselViewModel>
 
-<div class="books-carousel books-carousel--similar">
+<div class="books-carousel books-carousel--similar js-books-container">
     @if(Model.Count() == 0) { 
         <div class="books-carousel__warning">Brak podobnych książek</div>
     }
@@ -19,10 +19,10 @@
                 <p class="books-carousel__rate">@(item.Rating == null ? "Brak ocen" : item.Rating)</p>
             </div>
             <p class="books-carousel__price">@item.Price zł</p>
-            <a href="/Buy" class="books-carousel__button books-carousel__button--secondary">
+            <button class="books-carousel__button books-carousel__button--secondary js-cart-item-add" data-book="@item.Id">
                 <span class="books-carousel__button__left">Dodaj do koszyka</span>
                 <span class="books-carousel__button__right">+</span>
-            </a>
+            </button>
         </div>
     }
 </div>

@@ -3,7 +3,7 @@
     ViewData["Title"] = Model.Product.Title;
 }
 
-<section class="product wrapper">
+<section class="product wrapper js-books-container">
     <div class="product__header product__section">
         <figure class="product__cover">
             <img src="@Model.Product.Cover" />
@@ -141,7 +141,7 @@
                 }
 
             </div>
-            <button class="product__money-button product__money-button--orange">Dodaj do koszyka <span class="product__money-icon">+</span></button>
+            <button class="product__money-button product__money-button--orange js-cart-item-add" data-book="@Model.Product.Id">Dodaj do koszyka <span class="product__money-icon">+</span></button>
             <button class="product__money-button product__money-button--blue">Kup teraz <span class="product__money-icon">$</span></button>
         </div>
         <a href="/" class="product__favourite">
@@ -157,3 +157,5 @@
         </nav>
     </aside>
 </section>
+
+<script src="~/js/addCartItem.js"></script>

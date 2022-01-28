@@ -1,8 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Czytnik.Services;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+
 public class Navigation : ViewComponent
 {
-  public IViewComponentResult Invoke()
-  {
-    return View("Default");
-  }
+    private readonly ICartService _cartService;
+
+    public Navigation(ICartService cartService)
+    {
+        _cartService = cartService;
+    }
+    public async Task<IViewComponentResult> InvokeAsync()
+    {
+        int quantity = await _cartService.GetCartQuantity(1);
+        return View("Default", quantity);
+    }
 }
