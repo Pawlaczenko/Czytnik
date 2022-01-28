@@ -35,5 +35,13 @@ namespace Czytnik.Controllers
             _cartService.AddCartItem(bookId, userId);
             return Ok();
         }
+        
+        [HttpPatch]
+        public IActionResult UpdateQuantity(int bookId, short quantity)
+        {
+            int userId = 1;
+            _cartService.UpdateQuantity(bookId, userId, quantity);
+            return Ok();
+        }
     }
 }

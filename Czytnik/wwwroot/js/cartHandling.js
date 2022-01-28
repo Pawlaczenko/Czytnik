@@ -1,4 +1,24 @@
 ﻿(function () {
+    const quantityInputs = document.querySelectorAll('.js-cart-quantity-input');
+    quantityInputs.forEach(input => {
+        input.addEventListener('focusout', (e) => {
+            const book = e.target.dataset.book;
+            const quantity = e.target.value;
+
+            $.ajax({
+                type: 'PATCH',
+                url: '/Cart/UpdateQuantity',
+                data: { bookId: book, quantity: quantity },
+                dataType: 'json',
+                success: function () {
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        })
+    })
+
     const cart = document.querySelector('.js-cart-container');
     setCartPromotion();
 
@@ -40,6 +60,7 @@
         const quantityInputItem = button.nextElementSibling;
 
         if (quantityInputItem.value <= 1) return;
+        quantityInputItem.focus();
         quantityInputItem.value--;
         const cartItem = button.closest('.js-cart-item');
         const price = parseFloat(cartItem.querySelector('.js-cart-item-price').innerText.replace(',', '.'));
@@ -58,6 +79,7 @@
     const incrementQuantity = (button) => {
         const quantityInputItem = button.previousElementSibling;
 
+        quantityInputItem.focus();
         quantityInputItem.value++;
         const cartItem = button.closest('.js-cart-item');
         const price = parseFloat(cartItem.querySelector('.js-cart-item-price').innerText.replace(',', '.'));

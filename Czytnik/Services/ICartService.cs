@@ -11,5 +11,6 @@ namespace Czytnik.Services
         Task<IEnumerable<CartItemsViewModel>> GetCartItems(int userId);
         void DeleteCartItem(int bookId, int userId);
         void AddCartItem(int bookId, int userId);
+        void UpdateQuantity(int bookId, int userId, short quantity);
     }
 }

@@ -55,6 +55,13 @@ namespace Czytnik.Services
             _dbContext.Add(item);
             _dbContext.SaveChanges();
         }
+        
+        public void UpdateQuantity(int bookId, int userId, short quantity)
+        {
+            var item = _dbContext.CartItems.Where(i => i.BookId == bookId && i.UserId == userId).First();
+            item.Quantity = quantity;
+            _dbContext.SaveChanges();
+        }
 
         private decimal CalculateDiscount(decimal price, int discount)
         {
