@@ -62,6 +62,14 @@ namespace Czytnik.Services
             item.Quantity = quantity;
             _dbContext.SaveChanges();
         }
+        
+        public async Task<int> GetCartQuantity(int userId)
+        {
+            var itemsQuery = _dbContext.CartItems.Where(i => i.UserId == userId);
+            var items = await itemsQuery.ToListAsync();
+
+            return items.Count;
+        }
 
         private decimal CalculateDiscount(decimal price, int discount)
         {

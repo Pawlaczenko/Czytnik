@@ -33,7 +33,7 @@ namespace Czytnik.Controllers
         {
             int userId = 1;
             _cartService.AddCartItem(bookId, userId);
-            return Ok();
+            return Ok("{}");
         }
         
         [HttpPatch]

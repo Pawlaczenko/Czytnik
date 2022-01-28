@@ -12,5 +12,6 @@ namespace Czytnik.Services
         void DeleteCartItem(int bookId, int userId);
         void AddCartItem(int bookId, int userId);
         void UpdateQuantity(int bookId, int userId, short quantity);
+        Task<int> GetCartQuantity(int userId);
     }
 }

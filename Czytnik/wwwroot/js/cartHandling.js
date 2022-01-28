@@ -42,6 +42,9 @@
             data: { bookId: book },
             dataType: 'json',
             success: function (reviews) {
+                const navCartQuantityItem = document.querySelector('.js-nav-cart-quantity');
+                navCartQuantityItem.innerText = navCartQuantityItem.innerText * 1 - 1
+
                 const cartItem = button.closest('.js-cart-item');
                 cart.removeChild(cartItem);
                 const cartItemsCountElement = document.querySelector('.js-cart-quantity');

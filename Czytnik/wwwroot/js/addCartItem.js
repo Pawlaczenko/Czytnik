@@ -7,6 +7,8 @@
         data: { bookId: book},
         dataType: 'json',
         success: function (cartItem) {
+            const navCartQuantityItem = document.querySelector('.js-nav-cart-quantity');
+            navCartQuantityItem.innerText = navCartQuantityItem.innerText*1+1
         },
         error: function (err) {
             //console.log(err);
