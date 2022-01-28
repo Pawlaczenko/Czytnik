@@ -7,8 +7,11 @@ const languagesFilterContainer = document.querySelector(".js-languages-filter");
 const categoriesFilterSearch = document.querySelector(".js-categories-filter-search");
 const languagesFilterSearch = document.querySelector(".js-languages-filter-search");
 
+const sortingSelect = document.querySelector(".js-sorting-select");
 const sortingSelectItems = document.querySelectorAll(".js-sorting-select > *");
 const searchNavigationInput = document.querySelector(".js-search-navigation-input");
+
+const resetButton = document.querySelector(".js-reset-button");
 
 const renderCategories = (categories) => {
     let template = '';
@@ -78,14 +81,38 @@ const renderPagination = () => {
             </svg>
         </button>
     `;
-
-    pagination.innerHTML = template;
+    if(booksQuantity>0) pagination.innerHTML = template;
 }
 
 const setSortingOption = () => {
     sortingSelectItems.forEach(item => {
         if (item.value == params.Sort) item.selected = 'selected';
     })
+}
+
+const focusSingleInput = (inputName, value) => {
+    const input = document.querySelector(`input[name="${inputName}"][value="${value}"]`);
+    if(input) {
+        const topPos = input.offsetTop;
+        const detailsElement = input.closest('.filter');
+        const scrollableElement = input.closest(".filter__results");
+
+        detailsElement.open = true;
+        scrollableElement.scrollTop = topPos - scrollableElement.offsetTop;
+    }
+}
+
+const focusInputs = () => {
+    focusSingleInput("CategoryId",params.CategoryId);
+    focusSingleInput("LanguageId",params.LanguageId);
+
+    if(params.StartDate || params.EndDate){
+        document.querySelector(`input[name="StartDate"]`).closest(".filter").open = true;
+    }
+
+    if(params.StartPrice || params.EndPrice){
+        document.querySelector(`input[name="StartPrice"]`).closest(".filter").open = true;
+    }
 }
 
 const generateFilters = (data) => {
@@ -101,6 +128,8 @@ const generateFilters = (data) => {
     renderCategories(categories);
     renderLanguages(languages);
     renderPagination();
+
+    focusInputs();
 
     setSortingOption();
 
@@ -118,8 +147,32 @@ const generateFilters = (data) => {
         const filteredLanguages = languages.filter(el => el.name.toLowerCase().includes(searchValue));
 
         renderLanguages(filteredLanguages);
-    })
+    });
 }
+
+const submitWithQuery = () => {
+    const searchNavigationInput = document.querySelector(".js-search-navigation-input");
+    const searchFormInput = document.querySelector(".js-search-form-input");
+
+    searchFormInput.value = searchNavigationInput.value;
+    document.querySelector(".js-filter-form").submit();
+}
+
+sortingSelect.addEventListener('change',e=>{
+    submitWithQuery();
+});
+
+resetButton.addEventListener('click', e => {
+    e.preventDefault();
+
+    document.querySelector('input[name="StartDate"]').value="";
+    document.querySelector('input[name="EndDate"]').value="";
+    document.querySelector('input[name="StartPrice"]').value="";
+    document.querySelector('input[name="EndPrice"]').value="";
+    if(document.querySelector('input[name="CategoryId"]:checked')) document.querySelector('input[name="CategoryId"]:checked').checked = false;
+    if(document.querySelector('input[name="LanguageId"]:checked')) document.querySelector('input[name="LanguageId"]:checked').checked = false;
+    submitWithQuery();
+});
 
 const getFiltersData = () => {
     $.ajax({

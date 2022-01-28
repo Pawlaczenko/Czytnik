@@ -1,7 +1,6 @@
 ﻿const filterForm = document.querySelector(".js-filter-form");
 const searchForm = document.querySelector(".js-search-form");
 
-
 filterForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
