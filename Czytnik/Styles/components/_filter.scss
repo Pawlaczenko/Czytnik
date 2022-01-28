@@ -33,6 +33,10 @@
   &__button {
     margin-top: 2.2rem;
   }
+
+  &__reset {
+    margin: .8rem auto;
+  }
 }
 
 .filter__search {
@@ -87,6 +91,10 @@
     }
   }
 
+  &-checkbox:checked + &-label {
+    color: var(--color-secondary);
+  }
+
   &-label {
     cursor: pointer;
 
@@ -108,7 +116,7 @@
   margin: 1.5rem;
 
   &-partition {
-    width: 1.3rem;
+    width: .5rem;
     height: 1px;
 
     margin: 0 1rem;
@@ -117,15 +125,13 @@
   }
 
   &-input {
-    width: 40%;
+    width: 42%;
 
     background: var(--color-white-dark);
     border: 1px solid var(--color-grey);
-
-    &--price {
-      border-radius: 0.5rem;
-      padding: 0.5rem;
-      padding-right: 0;
-    }
+    font-family: inherit;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    padding-right: 0;
   }
 }

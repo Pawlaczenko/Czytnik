@@ -59,10 +59,10 @@
 
                 <div class="filter__range">
                     <input class="filter__range-input filter__range-input--price" type="number" min="1" step="1" name="StartPrice"
-                           id="start-price" placeholder="od"  value="@Model.search.StartPrice">
+                           id="start-price" placeholder="od" value="@Model.search.StartPrice">
                     <div class="filter__range-partition"></div>
                     <input class="filter__range-input filter__range-input--price" type="number" min="1" step="1" name="EndPrice"
-                           id="end-price" placeholder="do"  value="@Model.search.EndPrice">
+                           id="end-price" placeholder="do" value="@Model.search.EndPrice">
                 </div>
 
             </details>
@@ -91,6 +91,7 @@
             <button class="button button--medium button--full-parent js-search-button">
                 Wyszukaj
             </button>
+            <input type="reset" class="button button--secondary js-reset-button filter__reset" value="Resetuj filtry"/>
         </div>
     </details>
 
