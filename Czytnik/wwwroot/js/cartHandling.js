@@ -1,4 +1,24 @@
 ﻿(function () {
+    const quantityInputs = document.querySelectorAll('.js-cart-quantity-input');
+    quantityInputs.forEach(input => {
+        input.addEventListener('focusout', (e) => {
+            const book = e.target.dataset.book;
+            const quantity = e.target.value;
+
+            $.ajax({
+                type: 'PATCH',
+                url: '/Cart/UpdateQuantity',
+                data: { bookId: book, quantity: quantity },
+                dataType: 'json',
+                success: function () {
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        })
+    })
+
     const cart = document.querySelector('.js-cart-container');
     setCartPromotion();
 
@@ -14,15 +34,17 @@
     })
 
     const deleteItem = (button) => {
-        const user = button.dataset.user;
         const book = button.dataset.book;
 
         $.ajax({
             type: 'DELETE',
             url: '/Cart/DeleteItem',
-            data: { bookId: book, userId: user },
+            data: { bookId: book },
             dataType: 'json',
             success: function (reviews) {
+                const navCartQuantityItem = document.querySelector('.js-nav-cart-quantity');
+                navCartQuantityItem.innerText = navCartQuantityItem.innerText * 1 - 1
+
                 const cartItem = button.closest('.js-cart-item');
                 cart.removeChild(cartItem);
                 const cartItemsCountElement = document.querySelector('.js-cart-quantity');
@@ -31,8 +53,8 @@
                 setCartPrice();
                 setCartPromotion();
             },
-            error: function (emp) {
-                console.log(emp);
+            error: function (err) {
+                console.log(err);
             }
         });
     }
@@ -41,6 +63,7 @@
         const quantityInputItem = button.nextElementSibling;
 
         if (quantityInputItem.value <= 1) return;
+        quantityInputItem.focus();
         quantityInputItem.value--;
         const cartItem = button.closest('.js-cart-item');
         const price = parseFloat(cartItem.querySelector('.js-cart-item-price').innerText.replace(',', '.'));
@@ -59,6 +82,7 @@
     const incrementQuantity = (button) => {
         const quantityInputItem = button.previousElementSibling;
 
+        quantityInputItem.focus();
         quantityInputItem.value++;
         const cartItem = button.closest('.js-cart-item');
         const price = parseFloat(cartItem.querySelector('.js-cart-item-price').innerText.replace(',', '.'));
