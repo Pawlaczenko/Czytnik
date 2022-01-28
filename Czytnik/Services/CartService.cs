@@ -25,7 +25,6 @@ namespace Czytnik.Services
                 userId = i.UserId,
                 Title = i.Book.Title,
                 Price = i.Book.Price,
-                FullPrice = i.Book.Price * i.Quantity,
                 Cover = i.Book.Cover,
                 Quantity = i.Quantity,
                 Authors = i.Book.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
@@ -37,6 +36,7 @@ namespace Czytnik.Services
             foreach (var item in result)
             {
                 item.CalculatedPrice = (item.Discount == null) ? item.Price : CalculateDiscount(item.Price, item.Discount.DiscountValue);
+                item.FullPrice = item.CalculatedPrice * item.Quantity;
             }
 
             return result;
@@ -47,6 +47,13 @@ namespace Czytnik.Services
             var cartItem = _dbContext.CartItems.Where(i => i.BookId == bookId && i.UserId == userId).First();
             _dbContext.CartItems.Remove(cartItem);
             _dbContext.SaveChangesAsync();
+        }
+
+        public void AddCartItem(int bookId, int userId)
+        {
+            var item = new CartItem { BookId = bookId, UserId = userId, Quantity = 1 };
+            _dbContext.Add(item);
+            _dbContext.SaveChanges();
         }
 
         private decimal CalculateDiscount(decimal price, int discount)

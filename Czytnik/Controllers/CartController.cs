@@ -21,10 +21,19 @@ namespace Czytnik.Controllers
         }
 
         [HttpDelete]
-        public JsonResult DeleteItem(int bookId, int userId)
+        public JsonResult DeleteItem(int bookId)
         {
+            int userId = 1;
             _cartService.DeleteCartItem(bookId, userId);
             return Json(null);
+        }
+
+        [HttpPost]
+        public IActionResult AddItem(int bookId)
+        {
+            int userId = 1;
+            _cartService.AddCartItem(bookId, userId);
+            return Ok();
         }
     }
 }

@@ -14,13 +14,12 @@
     })
 
     const deleteItem = (button) => {
-        const user = button.dataset.user;
         const book = button.dataset.book;
 
         $.ajax({
             type: 'DELETE',
             url: '/Cart/DeleteItem',
-            data: { bookId: book, userId: user },
+            data: { bookId: book },
             dataType: 'json',
             success: function (reviews) {
                 const cartItem = button.closest('.js-cart-item');
@@ -31,8 +30,8 @@
                 setCartPrice();
                 setCartPromotion();
             },
-            error: function (emp) {
-                console.log(emp);
+            error: function (err) {
+                console.log(err);
             }
         });
     }
