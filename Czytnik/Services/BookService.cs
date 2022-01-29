@@ -184,7 +184,7 @@ namespace Czytnik.Services
 
             int count = booksQuery.Count();
 
-            int limit = 30;
+            int limit = 28;
             int skip = (int)(search.Page - 1) * limit;
             booksQuery = booksQuery.Skip(skip).Take(limit);
 
