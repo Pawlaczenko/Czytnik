@@ -33,7 +33,11 @@
         
     })
 
+    let deleteButtonClicked = false;
+
     const deleteItem = (button) => {
+        if (deleteButtonClicked) return;
+        deleteButtonClicked = true;
         const book = button.dataset.book;
 
         $.ajax({
@@ -42,6 +46,7 @@
             data: { bookId: book },
             dataType: 'json',
             success: function (reviews) {
+                deleteButtonClicked = false;
                 const navCartQuantityItem = document.querySelector('.js-nav-cart-quantity');
                 navCartQuantityItem.innerText = navCartQuantityItem.innerText * 1 - 1
 
@@ -54,6 +59,7 @@
                 setCartPromotion();
             },
             error: function (err) {
+                deleteButtonClicked = false;
                 console.log(err);
             }
         });
