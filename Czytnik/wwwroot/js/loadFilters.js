@@ -43,9 +43,10 @@ const renderPagination = () => {
     const pagination = document.querySelector(".js-pagination");
     const booksQuantity = pagination.dataset.quantity;
     const page = pagination.dataset.page * 1;
+    const limit = 28;
 
     let startPage = page;
-    let endPage = Math.ceil(booksQuantity / 30);
+    let endPage = Math.ceil(booksQuantity / limit);
     if (page > 4) startPage -= 4;
     else startPage = 1;
     let template = "";
