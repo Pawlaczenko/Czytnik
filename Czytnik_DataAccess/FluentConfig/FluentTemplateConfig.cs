@@ -22,9 +22,6 @@ namespace Czytnik_DataAccess.FluentConfig
             modelBuilder.Property(i => i.Town).IsRequired().HasMaxLength(100);
             modelBuilder.Property(i => i.Post).IsRequired().HasMaxLength(100);
             modelBuilder.Property(i => i.PostCode).IsRequired().HasMaxLength(6);
-            modelBuilder.Property(i => i.UserId).IsRequired();
-
-            modelBuilder.HasOne(i => i.User).WithMany(i => i.Templates).HasForeignKey(i => i.UserId);
         }
     }
 }

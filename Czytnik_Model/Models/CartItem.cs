@@ -2,8 +2,8 @@
 {
     public class CartItem
     {
+        public int Id { get; set; }
         public int BookId { get; set; }
-        public int UserId { get; set; }
         public short Quantity { get; set; }
 
         public Book Book { get; set; }
