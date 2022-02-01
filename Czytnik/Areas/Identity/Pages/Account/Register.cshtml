@@ -1,0 +1,45 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Rejestracja";
+}
+
+<section class="form form--register">
+    <div class="form__content">
+        <h2 class="form__heading">Zarejestruj się na <span class="form__heading--highlight">Czytnik</span></h2>
+        <button class="form__google">
+            Dołącz za pomocą Google
+        </button>
+        <form class="form__form" form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <p class="form__text">lub użyj swojego maila</p>
+            <label class="form__label">
+                <span class="form__errorMessage">Nazwa użytkownika musi posiadać minimum 8 znaków, literę lub cyfrę</span>
+                <input type="text" placeholder="Nazwa użytkownika" class="form__input" asp-for="Input.UserName" required />
+            </label>
+            <label class="form__label">
+                <span class="form__errorMessage">Podaj poprawny adres email</span>
+                <input type="email" placeholder="Email" class="form__input" asp-for="Input.Email" required />
+            </label>
+            <label class="form__label">
+                <span class="form__errorMessage">Hasło musi posiadać minimum 8 znaków, jedną małą i dużą literę i jedną cyfrę.</span>
+                <input type="password" placeholder="Hasło" class="form__input" asp-for="Input.Password" required />
+            </label>
+            <label class="form__label">
+                <span class="form__errorMessage">Hasła muszą się zgadzać.</span>
+                <input type="password" placeholder="Powtórz hasło" class="form__input" asp-for="Input.ConfirmPassword" required />
+            </label>
+            <input type="submit" class="form__submit button button--medium" value="Zarejestruj się" />
+        </form>
+    </div>
+    <div class="form__side">
+        <h2 class="form__side-heading">Posiadasz już konto?</h2>
+        <p class="form__side-paragraph">Aby pozostać z nami w kontakcie, zaloguj się i zacznij korzystać z serwisu.</p>
+        <a class="form__side-button button button--transparent button--medium" href="/Login">Zaloguj się</a>
+    </div>
+</section>
+@*<script src="~/js/validateRegisterForm.js"></script>*@
+@*<script src="~/js/validateForm.js"></script>*@
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -15,7 +15,7 @@ namespace Czytnik.Controllers
         }
         public IActionResult Index()
         {
-            int userId = 1; //For now
+            string userId = "1"; //For now
             var cartItems = _cartService.GetCartItems(userId);
             return View(cartItems.Result);
         }
@@ -23,7 +23,7 @@ namespace Czytnik.Controllers
         [HttpDelete]
         public JsonResult DeleteItem(int bookId)
         {
-            int userId = 1;
+            string userId = "1";
             _cartService.DeleteCartItem(bookId, userId);
             return Json(null);
         }
@@ -31,7 +31,7 @@ namespace Czytnik.Controllers
         [HttpPost]
         public IActionResult AddItem(int bookId)
         {
-            int userId = 1;
+            string userId = "1";
             _cartService.AddCartItem(bookId, userId);
             return Ok("{}");
         }
@@ -39,7 +39,7 @@ namespace Czytnik.Controllers
         [HttpPatch]
         public IActionResult UpdateQuantity(int bookId, short quantity)
         {
-            int userId = 1;
+            string userId = "1";
             _cartService.UpdateQuantity(bookId, userId, quantity);
             return Ok();
         }

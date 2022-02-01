@@ -26,7 +26,7 @@ namespace Czytnik.Services
                 {
                     Id = r.Id,
                     Rating = r.Rating,
-                    Username = r.User.Username,
+                    Username = r.User.UserName,
                     ReviewText = r.ReviewText,
                     ReviewDate = r.ReviewDate,
                 })

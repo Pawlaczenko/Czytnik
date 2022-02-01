@@ -17,7 +17,6 @@ namespace Czytnik_DataAccess.FluentConfig
             modelBuilder.Property(i => i.Content).IsRequired().HasMaxLength(20000);
             modelBuilder.Property(i => i.Photo).IsRequired().HasMaxLength(200).HasDefaultValue("link");
 
-            modelBuilder.HasOne(i => i.Admin).WithOne(i => i.Post).HasForeignKey<Post>("AdminId");
         }
     }
 }

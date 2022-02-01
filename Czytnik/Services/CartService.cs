@@ -17,7 +17,7 @@ namespace Czytnik.Services
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<CartItemsViewModel>> GetCartItems(int userId)
+        public async Task<IEnumerable<CartItemsViewModel>> GetCartItems(string userId)
         {
             var itemsQuery = _dbContext.CartItems.Where(i => i.UserId == userId).Select(i => new CartItemsViewModel
             {
@@ -42,28 +42,28 @@ namespace Czytnik.Services
             return result;
         }
 
-        public void DeleteCartItem(int bookId, int userId)
+        public void DeleteCartItem(int bookId, string userId)
         {
             var cartItem = _dbContext.CartItems.Where(i => i.BookId == bookId && i.UserId == userId).First();
             _dbContext.CartItems.Remove(cartItem);
             _dbContext.SaveChangesAsync();
         }
 
-        public void AddCartItem(int bookId, int userId)
+        public void AddCartItem(int bookId, string userId)
         {
             var item = new CartItem { BookId = bookId, UserId = userId, Quantity = 1 };
             _dbContext.Add(item);
             _dbContext.SaveChanges();
         }
         
-        public void UpdateQuantity(int bookId, int userId, short quantity)
+        public void UpdateQuantity(int bookId, string userId, short quantity)
         {
             var item = _dbContext.CartItems.Where(i => i.BookId == bookId && i.UserId == userId).First();
             item.Quantity = quantity;
             _dbContext.SaveChanges();
         }
         
-        public async Task<int> GetCartQuantity(int userId)
+        public async Task<int> GetCartQuantity(string userId)
         {
             var itemsQuery = _dbContext.CartItems.Where(i => i.UserId == userId);
             var items = await itemsQuery.ToListAsync();

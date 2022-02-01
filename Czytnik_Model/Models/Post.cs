@@ -15,6 +15,5 @@ namespace Czytnik_Model.Models
         public string Content { get; set; }
         public string Photo { get; set; }
 
-        public Admin Admin { get; set; }
     }
 }

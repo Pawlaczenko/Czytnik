@@ -12,7 +12,7 @@ public class Navigation : ViewComponent
     }
     public async Task<IViewComponentResult> InvokeAsync()
     {
-        int quantity = await _cartService.GetCartQuantity(1);
+        int quantity = await _cartService.GetCartQuantity("1");
         return View("Default", quantity);
     }
 }

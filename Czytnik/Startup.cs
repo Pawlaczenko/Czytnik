@@ -1,8 +1,10 @@
 using Czytnik.Services;
 using Czytnik_DataAccess.Database;
+using Czytnik_Model.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +28,8 @@ namespace Czytnik
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDefaultIdentity<User>()
+                .AddEntityFrameworkStores<AppDbContext>();
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddDbContext<AppDbContext>(
                 config => config.UseSqlServer(Configuration.GetConnectionString("Application"))
@@ -58,6 +62,7 @@ namespace Czytnik
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -65,6 +70,7 @@ namespace Czytnik
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
 
