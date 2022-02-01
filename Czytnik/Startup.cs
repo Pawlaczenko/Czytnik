@@ -1,5 +1,6 @@
 using Czytnik.Services;
 using Czytnik_DataAccess.Database;
+using Czytnik_Model.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,7 +28,7 @@ namespace Czytnik
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddRazorPages().AddRazorRuntimeCompilation();

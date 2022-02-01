@@ -1,6 +1,8 @@
 ﻿using Czytnik_DataAccess.Database;
 using Czytnik_Model.Models;
 using Czytnik_Model.ViewModels;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,69 +14,85 @@ namespace Czytnik.Services
     public class CartService : ICartService
     {
         private readonly AppDbContext _dbContext;
-        public CartService(AppDbContext dbContext)
+        private readonly UserManager<User> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public CartService(AppDbContext dbContext, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _dbContext = dbContext;
+            _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        //public async Task<IEnumerable<CartItemsViewModel>> GetCartItems(string userId)
-        //{
-        //    var itemsQuery = _dbContext.CartItems.Where(i => i.Id == userId).Select(i => new CartItemsViewModel
-        //    {
-        //        bookId = i.BookId,
-        //        userId = i.Id,
-        //        Title = i.Book.Title,
-        //        Price = i.Book.Price,
-        //        Cover = i.Book.Cover,
-        //        Quantity = i.Quantity,
-        //        Authors = i.Book.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
-        //        Discount = i.Book.BookDiscounts.Where(entry => entry.BookId == i.BookId).Select(entry => entry.Discount).FirstOrDefault(),
-        //    });
+        public async Task<IEnumerable<CartItemsViewModel>> GetCartItems()
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 
-        //    IEnumerable<CartItemsViewModel> result = await itemsQuery.ToListAsync();
+            var itemsQuery = _dbContext.CartItems.Where(i => i.User == currentUser).Select(i => new CartItemsViewModel
+            {
+                bookId = i.BookId,
+                userId = i.Id,
+                Title = i.Book.Title,
+                Price = i.Book.Price,
+                Cover = i.Book.Cover,
+                Quantity = i.Quantity,
+                Authors = i.Book.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
+                Discount = i.Book.BookDiscounts.Where(entry => entry.BookId == i.BookId).Select(entry => entry.Discount).FirstOrDefault(),
+            });
 
-        //    foreach (var item in result)
-        //    {
-        //        item.CalculatedPrice = (item.Discount == null) ? item.Price : CalculateDiscount(item.Price, item.Discount.DiscountValue);
-        //        item.FullPrice = item.CalculatedPrice * item.Quantity;
-        //    }
+            IEnumerable<CartItemsViewModel> result = await itemsQuery.ToListAsync();
 
-        //    return result;
-        //}
+            foreach (var item in result)
+            {
+                item.CalculatedPrice = (item.Discount == null) ? item.Price : CalculateDiscount(item.Price, item.Discount.DiscountValue);
+                item.FullPrice = item.CalculatedPrice * item.Quantity;
+            }
 
-        //public void DeleteCartItem(int bookId, string userId)
-        //{
-        //    var cartItem = _dbContext.CartItems.Where(i => i.BookId == bookId && i.Id == userId).First();
-        //    _dbContext.CartItems.Remove(cartItem);
-        //    _dbContext.SaveChangesAsync();
-        //}
+            return result;
+        }
 
-        //public void AddCartItem(int bookId, string userId)
-        //{
-        //    var item = new CartItem { BookId = bookId, Id = userId, Quantity = 1 };
-        //    _dbContext.Add(item);
-        //    _dbContext.SaveChanges();
-        //}
-        
-        //public void UpdateQuantity(int bookId, string userId, short quantity)
-        //{
-        //    var item = _dbContext.CartItems.Where(i => i.BookId == bookId && i.Id == userId).First();
-        //    item.Quantity = quantity;
-        //    _dbContext.SaveChanges();
-        //}
-        
-        //public async Task<int> GetCartQuantity(string userId)
-        //{
-        //    var itemsQuery = _dbContext.CartItems.Where(i => i.Id == userId);
-        //    var items = await itemsQuery.ToListAsync();
+        public async void  DeleteCartItem(int bookId)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 
-        //    return items.Count;
-        //}
+            var cartItem = _dbContext.CartItems.Where(i => i.BookId == bookId && i.User == currentUser).First();
+            _dbContext.CartItems.Remove(cartItem);
+            await _dbContext.SaveChangesAsync();
+        }
 
-        //private decimal CalculateDiscount(decimal price, int discount)
-        //{
-        //    var discountPercentage = ((decimal)discount / 100);
-        //    return Math.Round(price * discountPercentage, 2);
-        //}
+        public async void AddCartItem(int bookId)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            if (currentUser == null) return;
+
+            var item = new CartItem { BookId = bookId, User = currentUser, Quantity = 1 };
+
+            _dbContext.Add(item);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async void UpdateQuantity(int bookId, short quantity)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+
+            var item = _dbContext.CartItems.Where(i => i.BookId == bookId && i.User == currentUser).First();
+            item.Quantity = quantity;
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> GetCartQuantity()
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+
+            var itemsQuery = _dbContext.CartItems.Where(i => i.User == currentUser);
+            var items = await itemsQuery.ToListAsync();
+
+            return items.Count;
+        }
+
+        private decimal CalculateDiscount(decimal price, int discount)
+        {
+            var discountPercentage = ((decimal)discount / 100);
+            return Math.Round(price * discountPercentage, 2);
+        }
     }
 }
