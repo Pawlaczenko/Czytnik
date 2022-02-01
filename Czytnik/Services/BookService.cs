@@ -45,7 +45,7 @@ namespace Czytnik.Services
                                 {
                                     Id = review.Id,
                                     Rating = review.Rating,
-                                    Username = review.User.Username,
+                                    Username = review.User.UserName,
                                     ReviewText = review.ReviewText,
                                     ReviewDate = review.ReviewDate
                                 }).OrderByDescending(r=>r.ReviewDate).Take(3).ToList();

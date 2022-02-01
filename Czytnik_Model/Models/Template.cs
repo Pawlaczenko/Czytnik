@@ -14,7 +14,6 @@
         public string Town { get; set; }
         public string Post { get; set; }
         public string PostCode { get; set; }
-        public int UserId { get; set; }
 
         public User User { get; set; }
 

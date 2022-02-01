@@ -1,10 +1,11 @@
 ﻿using Czytnik_DataAccess.FluentConfig;
 using Czytnik_Model.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Czytnik_DataAccess.Database
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext
     {
         public AppDbContext(DbContextOptions options)
         : base(options)
@@ -22,8 +23,6 @@ namespace Czytnik_DataAccess.Database
         public DbSet<Review> Reviews { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Favourite> Favourites { get; set; }
-        public DbSet<Admin> Admins { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<Template> Templates { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Post> Posts { get; set; }
@@ -36,7 +35,8 @@ namespace Czytnik_DataAccess.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new FluentAdminConfig());
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfiguration(new FluentAuthorConfig());
             modelBuilder.ApplyConfiguration(new FluentBookAuthorConfig());
             modelBuilder.ApplyConfiguration(new FluentBookConfig());
@@ -53,8 +53,8 @@ namespace Czytnik_DataAccess.Database
             modelBuilder.ApplyConfiguration(new FluentSeriesConfig());
             modelBuilder.ApplyConfiguration(new FluentTemplateConfig());
             modelBuilder.ApplyConfiguration(new FluentTranslatorConfig());
-            modelBuilder.ApplyConfiguration(new FluentUserConfig());
-           modelBuilder.ApplyConfiguration(new FluentOrderConfig());
+            //modelBuilder.ApplyConfiguration(new FluentUserConfig());
+            modelBuilder.ApplyConfiguration(new FluentOrderConfig());
             modelBuilder.ApplyConfiguration(new FluentOrderItemConfig());
         }
 

@@ -13,9 +13,7 @@ namespace Czytnik_DataAccess.FluentConfig
     {
         public void Configure(EntityTypeBuilder<Favourite> modelBuilder)
         {
-            modelBuilder.HasKey(i => new { i.BookId, i.UserId });
             modelBuilder.HasOne(i => i.Book).WithMany(i => i.Favourites).HasForeignKey(i => i.BookId);
-            modelBuilder.HasOne(i => i.User).WithMany(i => i.Favourites).HasForeignKey(i => i.UserId);
         }
     }
 }

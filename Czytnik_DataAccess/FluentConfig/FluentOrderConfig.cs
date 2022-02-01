@@ -13,10 +13,8 @@ namespace Czytnik_DataAccess.FluentConfig
     {
         public void Configure(EntityTypeBuilder<Order> modelBuilder)
         {
-            modelBuilder.Property(i => i.UserId).IsRequired();
             modelBuilder.Property(i => i.OrderDate).IsRequired();
 
-            modelBuilder.HasOne(i => i.User).WithMany(i => i.Orders).HasForeignKey(i => i.UserId);
         }
     }
 }

@@ -15,9 +15,7 @@ namespace Czytnik_DataAccess.FluentConfig
         {
             modelBuilder.Property(i => i.Quantity).IsRequired().HasDefaultValue(1);
 
-            modelBuilder.HasKey(i => new { i.BookId, i.UserId });
             modelBuilder.HasOne(i => i.Book).WithMany(i => i.CartItems).HasForeignKey(i => i.BookId);
-            modelBuilder.HasOne(i => i.User).WithMany(i => i.CartItems).HasForeignKey(i => i.UserId);
         }
     }
 }
