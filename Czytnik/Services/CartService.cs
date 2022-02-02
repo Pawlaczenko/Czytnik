@@ -63,10 +63,9 @@ namespace Czytnik.Services
         {
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
             if (currentUser == null) return;
-
             var item = new CartItem { BookId = bookId, User = currentUser, Quantity = 1 };
 
-            _dbContext.Add(item);
+            await _dbContext.CartItems.AddAsync(item);
             await _dbContext.SaveChangesAsync();
         }
 

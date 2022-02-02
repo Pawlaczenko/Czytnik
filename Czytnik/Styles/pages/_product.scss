@@ -119,6 +119,12 @@
 
     &__description {
         grid-area: description;
+
+        br{
+            content: "A" !important;
+            display: block !important;
+            margin-bottom: 1.2em !important;
+        }
     }
 
     &__description-content {

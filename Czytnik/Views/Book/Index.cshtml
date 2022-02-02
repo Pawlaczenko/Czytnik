@@ -49,7 +49,8 @@
     <article id="description" class="product__description product__section">
         <h2 class="product__heading">Opis książki</h2>
         <p class="product__description-content">
-            @Model.Product.Description
+            @*@Model.Product.Description*@
+            @Html.Raw(Model.Product.Description)
         </p>
     </article>
     <div class="product__section product__similar">
