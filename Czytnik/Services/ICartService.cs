@@ -9,9 +9,9 @@ namespace Czytnik.Services
     public interface ICartService
     {
         Task<IEnumerable<CartItemsViewModel>> GetCartItems();
-        void DeleteCartItem(int bookId);
-        void AddCartItem(int bookId);
-        void UpdateQuantity(int bookId, short quantity);
+        Task DeleteCartItem(int bookId);
+        Task AddCartItem(int bookId);
+        Task UpdateQuantity(int bookId, short quantity);
         Task<int> GetCartQuantity();
     }
 }
