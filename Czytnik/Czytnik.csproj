@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Content Remove="Areas\Identity\Pages\Account\Manage\Profile.cshtml" />
+    <Content Remove="Areas\Identity\Pages\Account\Manage\_Layout.cshtml" />
     <Content Remove="compilerconfig.json" />
     <Content Remove="Views\Cart\Index.cshtml" />
     <Content Remove="Views\Categories\Index.cshtml" />
@@ -22,6 +23,7 @@
     <Content Remove="Views\Shared\Components\Footer\Default.cshtml" />
     <Content Remove="Views\Shared\Components\Navigation\Default.cshtml" />
     <Content Remove="Views\Shared\ErrorPage.cshtml" />
+    <Content Remove="Views\Shared\_MobileLoginPartial.cshtml" />
     <Content Remove="Views\User\Favourites.cshtml" />
     <Content Remove="Views\User\Orders.cshtml" />
     <Content Remove="Views\User\Profile.cshtml" />
@@ -82,6 +84,7 @@
     <None Include="Views\Shared\ErrorPage.cshtml" />
     <None Include="Views\Shared\_LoadingSpinner.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Views\Shared\_MobileLoginPartial.cshtml" />
     <None Include="Views\User\Favourites.cshtml" />
     <None Include="Views\User\Profile.cshtml" />
     <None Include="Views\User\Orders.cshtml" />
@@ -104,12 +107,14 @@
 
 	<ItemGroup>
 	  <Watch Remove="Areas\Identity\Pages\Account\Manage\Profile.cshtml" />
+	  <Watch Remove="Areas\Identity\Pages\Account\Manage\_Layout.cshtml" />
 	  <Watch Remove="Views\Cart\Index.cshtml" />
 	  <Watch Remove="Views\Categories\Index.cshtml" />
 	  <Watch Remove="Views\Index.cshtml" />
 	  <Watch Remove="Views\Shared\Components\BookItem\Default.cshtml" />
 	  <Watch Remove="Views\Shared\Components\Footer\Default.cshtml" />
 	  <Watch Remove="Views\Shared\ErrorPage.cshtml" />
+	  <Watch Remove="Views\Shared\_MobileLoginPartial.cshtml" />
 	  <Watch Remove="Views\User\Favourites.cshtml" />
 	  <Watch Remove="Views\User\Orders.cshtml" />
 	  <Watch Remove="Views\User\Profile.cshtml" />
