@@ -1,4 +1,6 @@
 (function() {
+  const isUserLogged = document.querySelector('.js-navigation-cart').dataset.logged;
+  if(isUserLogged == 'True') return;
   const myStorage = window.localStorage;
   const items = JSON.parse(myStorage.getItem('cartItems')) || new Array();
 

@@ -1,7 +1,8 @@
 ﻿(async function () {
   const myStorage = window.localStorage;
   const isUserLogged = document.querySelector('.js-navigation-cart').dataset.logged;
-  await renderCartItemsFromLocalStorage();
+  if(isUserLogged != 'True')
+    await renderCartItemsFromLocalStorage();
 
   const quantityInputs = document.querySelectorAll('.js-cart-quantity-input');
   quantityInputs.forEach(input => {
