@@ -32,11 +32,11 @@
         </a>
       </div>*@
       <partial name="_LoginPartial" />
-      <a href="/Cart" class="navigation__buttons-cart">
+      <a href="/Cart" class="navigation__buttons-cart js-navigation-cart" data-logged="@(Model == null ? false : true)">
         <svg class="navigation__buttons-cart-icon" viewBox="0 0 32 32">
           <use xlink:href="/assets/svg/sprite.svg#icon-cart"></use>
         </svg>
-        <div class="navigation__buttons-cart-quantity js-nav-cart-quantity">@Model</div>
+        <div class="navigation__buttons-cart-quantity js-nav-cart-quantity">@(Model != null ? Model : "")</div>
       </a>
     </div>
     <form class="navigation__search js-search-form" asp-controller="Search" asp-action="Index" method="GET">
