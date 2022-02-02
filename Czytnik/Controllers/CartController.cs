@@ -13,30 +13,30 @@ namespace Czytnik.Controllers
         {
             _cartService = cartService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var cartItems = _cartService.GetCartItems();
-            return View(cartItems.Result);
+            var cartItems = await _cartService.GetCartItems();
+            return View(cartItems);
         }
 
         [HttpDelete]
-        public JsonResult DeleteItem(int bookId)
+        public async Task<JsonResult> DeleteItem(int bookId)
         {
-            _cartService.DeleteCartItem(bookId);
+            await _cartService.DeleteCartItem(bookId);
             return Json(null);
         }
 
         [HttpPost]
-        public IActionResult AddItem(int bookId)
+        public async Task<IActionResult> AddItem(int bookId)
         {
-            _cartService.AddCartItem(bookId);
+            await _cartService.AddCartItem(bookId);
             return Ok("{}");
         }
-        
+
         [HttpPatch]
-        public IActionResult UpdateQuantity(int bookId, short quantity)
+        public async Task<IActionResult> UpdateQuantity(int bookId, short quantity)
         {
-            _cartService.UpdateQuantity(bookId, quantity);
+            await _cartService.UpdateQuantity(bookId, quantity);
             return Ok();
         }
     }

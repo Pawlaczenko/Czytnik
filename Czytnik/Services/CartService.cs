@@ -50,29 +50,31 @@ namespace Czytnik.Services
             return result;
         }
 
-        public async void  DeleteCartItem(int bookId)
+        public async Task DeleteCartItem(int bookId)
         {
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            if(currentUser == null) return;
 
             var cartItem = _dbContext.CartItems.Where(i => i.BookId == bookId && i.User == currentUser).First();
             _dbContext.CartItems.Remove(cartItem);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async void AddCartItem(int bookId)
+        public async Task AddCartItem(int bookId)
         {
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-            if (currentUser == null) return;
+            if(currentUser == null) return;
 
             var item = new CartItem { BookId = bookId, User = currentUser, Quantity = 1 };
 
-            _dbContext.Add(item);
+            await _dbContext.AddAsync(item);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async void UpdateQuantity(int bookId, short quantity)
+        public async Task UpdateQuantity(int bookId, short quantity)
         {
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            if(currentUser == null) return;
 
             var item = _dbContext.CartItems.Where(i => i.BookId == bookId && i.User == currentUser).First();
             item.Quantity = quantity;
@@ -82,6 +84,7 @@ namespace Czytnik.Services
         public async Task<int> GetCartQuantity()
         {
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            if(currentUser == null) return 0;
 
             var itemsQuery = _dbContext.CartItems.Where(i => i.User == currentUser);
             var items = await itemsQuery.ToListAsync();
