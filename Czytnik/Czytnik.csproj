@@ -16,7 +16,6 @@
     <Content Remove="Views\Cart\Index.cshtml" />
     <Content Remove="Views\Categories\Index.cshtml" />
     <Content Remove="Views\Index.cshtml" />
-    <Content Remove="Views\Login\Index.cshtml" />
     <Content Remove="Views\Search\Index.cshtml" />
     <Content Remove="Views\Shared\Components\BookItem\Default.cshtml" />
     <Content Remove="Views\Shared\Components\Footer\Default.cshtml" />
@@ -49,8 +48,6 @@
     <None Include="compilerconfig.json" />
     <None Include="Views\Cart\Index.cshtml" />
     <None Include="Views\Categories\Index.cshtml" />
-    <None Include="Views\Login\Index.cshtml" />
-    <None Include="Views\Register\Index.cshtml" />
     <None Include="Views\Search\Index.cshtml" />
     <None Include="Views\Shared\Components\BookItem\Default.cshtml" />
     <None Include="Views\Shared\Components\Footer\Default.cshtml" />
@@ -82,7 +79,6 @@
 	  <Watch Remove="Views\Cart\Index.cshtml" />
 	  <Watch Remove="Views\Categories\Index.cshtml" />
 	  <Watch Remove="Views\Index.cshtml" />
-	  <Watch Remove="Views\Login\Index.cshtml" />
 	  <Watch Remove="Views\Shared\Components\BookItem\Default.cshtml" />
 	  <Watch Remove="Views\Shared\Components\Footer\Default.cshtml" />
 	  <Watch Remove="Views\Shared\ErrorPage.cshtml" />
