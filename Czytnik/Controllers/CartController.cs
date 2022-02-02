@@ -1,12 +1,14 @@
 ﻿using Czytnik.Services;
+using Czytnik_Model.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Czytnik.Controllers
 {
-    [Authorize]
     public class CartController : Controller
     {
         private readonly ICartService _cartService;
@@ -21,6 +23,14 @@ namespace Czytnik.Controllers
             return View(cartItems);
         }
 
+        [HttpGet]
+        public async Task<JsonResult> GetBooks(string booksId)
+        {
+            IEnumerable<CartItemsViewModel> books = await _cartService.GetCartBooks(booksId);
+            var json = JsonSerializer.Serialize(books);
+
+            return Json(json);
+        }
         [HttpDelete]
         public async Task<JsonResult> DeleteItem(int bookId)
         {

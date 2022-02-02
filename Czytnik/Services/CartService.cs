@@ -63,7 +63,9 @@ namespace Czytnik.Services
         public async Task AddCartItem(int bookId)
         {
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-            if (currentUser == null) return;
+            if(currentUser == null) return;
+            if(_dbContext.CartItems.Any(ci => ci.BookId == bookId && ci.User == currentUser)) return;
+
             var item = new CartItem { BookId = bookId, User = currentUser, Quantity = 1 };
 
             await _dbContext.CartItems.AddAsync(item);
@@ -83,12 +85,40 @@ namespace Czytnik.Services
         public async Task<int> GetCartQuantity()
         {
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-            if(currentUser == null) return 0;
+            if(currentUser == null) return -1;
 
             var itemsQuery = _dbContext.CartItems.Where(i => i.User == currentUser);
             var items = await itemsQuery.ToListAsync();
 
             return items.Count;
+        }
+
+        public async Task<IEnumerable<CartItemsViewModel>> GetCartBooks(string booksId)
+        {
+            string[] list = booksId.Split(',');
+
+            var itemsQuery = _dbContext.Books.Where(b => list.Contains(Convert.ToString(b.Id))).Select(i => new CartItemsViewModel
+            {
+                bookId = i.Id,
+                userId = -1,
+                Title = i.Title,
+                Price = i.Price,
+                Cover = i.Cover,
+                Quantity = 1,
+                Authors = i.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
+                Discount = i.BookDiscounts.Where(entry => entry.BookId == i.Id).Select(entry => entry.Discount).FirstOrDefault(),
+            });
+
+
+            var items = await itemsQuery.ToListAsync();
+
+            foreach (var item in items)
+            {
+                item.CalculatedPrice = (item.Discount == null) ? item.Price : CalculateDiscount(item.Price, item.Discount.DiscountValue);
+                item.FullPrice = item.CalculatedPrice * item.Quantity;
+            }
+
+            return items;
         }
 
         private decimal CalculateDiscount(decimal price, int discount)

@@ -13,5 +13,6 @@ namespace Czytnik.Services
         Task AddCartItem(int bookId);
         Task UpdateQuantity(int bookId, short quantity);
         Task<int> GetCartQuantity();
+        Task<IEnumerable<CartItemsViewModel>> GetCartBooks(string booksId);
     }
 }
