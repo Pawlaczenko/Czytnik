@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Czytnik_DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220201191322_CreateDatabaseModel")]
-    partial class CreateDatabaseModel
+    [Migration("20220201225853_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

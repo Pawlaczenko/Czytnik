@@ -1,10 +1,12 @@
 ﻿using Czytnik.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
 namespace Czytnik.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly ICartService _cartService;
@@ -13,34 +15,30 @@ namespace Czytnik.Controllers
         {
             _cartService = cartService;
         }
-        //public IActionResult Index()
-        //{
-        //    string userId = "1"; //For now
-        //    var cartItems = _cartService.GetCartItems(userId);
-        //    return View(cartItems.Result);
-        //}
+        public IActionResult Index()
+        {
+            var cartItems = _cartService.GetCartItems();
+            return View(cartItems.Result);
+        }
 
         [HttpDelete]
         public JsonResult DeleteItem(int bookId)
         {
-            string userId = "1";
-            //_cartService.DeleteCartItem(bookId, userId);
+            _cartService.DeleteCartItem(bookId);
             return Json(null);
         }
 
         [HttpPost]
         public IActionResult AddItem(int bookId)
         {
-            string userId = "1";
-            //_cartService.AddCartItem(bookId, userId);
+            _cartService.AddCartItem(bookId);
             return Ok("{}");
         }
         
         [HttpPatch]
         public IActionResult UpdateQuantity(int bookId, short quantity)
         {
-            string userId = "1";
-            //_cartService.UpdateQuantity(bookId, userId, quantity);
+            _cartService.UpdateQuantity(bookId, quantity);
             return Ok();
         }
     }
