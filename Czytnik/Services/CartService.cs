@@ -68,7 +68,7 @@ namespace Czytnik.Services
 
             var item = new CartItem { BookId = bookId, User = currentUser, Quantity = 1 };
 
-            await _dbContext.AddAsync(item);
+            await _dbContext.CartItems.AddAsync(item);
             await _dbContext.SaveChangesAsync();
         }
 

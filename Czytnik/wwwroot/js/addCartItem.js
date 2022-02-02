@@ -11,7 +11,7 @@
             navCartQuantityItem.innerText = navCartQuantityItem.innerText*1+1
         },
         error: function (err) {
-            //console.log(err);
+            console.log(err);
         }
     });
     button.classList.add("books-carousel__button--disabled");

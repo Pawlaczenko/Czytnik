@@ -32,14 +32,12 @@ namespace Czytnik
                 {
                     //Dodaj tutaj
 
-                    {
-
-                    }
+                    { }
 
                     //Tutaj skończ
-                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Orders ON;");
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT BooksTranslators ON;");
                     context.SaveChanges();
-                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Orders OFF;");
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT BooksTranslators OFF;");
                     transaction.Commit();
                 }
                 finally
