@@ -44,7 +44,7 @@ namespace Czytnik.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Nazwa użytkownika musi mieć minimum {2} i maksimum {1} znaków.", MinimumLength = 6)]
             [Display(Name = "Username")]
             public string UserName { get; set; }
 
@@ -86,7 +86,7 @@ namespace Czytnik.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    _logger.LogInformation("Zalogowano pomyślnie");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -100,7 +100,7 @@ namespace Czytnik.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Niepoprawne dane logowania");
                     return Page();
                 }
             }

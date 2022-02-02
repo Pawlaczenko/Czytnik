@@ -143,17 +143,18 @@
             background-color: rgba(red,.15);
             color: var(--color-warning);
         }
-        span {
-            display: block;
-            align-self: flex-start;
-            font-size: 1.2rem;
-            color: var(--color-warning);
-            margin: .5rem 0 1rem 0;
-    
-            transition: all .2s ease-in-out;
-            transform-origin: left;
-            animation: fadeIn .2s linear both;
-        }
+    }
+
+    &__warning {
+        display: block;
+        align-self: flex-start;
+        font-size: 1.2rem;
+        color: var(--color-warning);
+        margin: .5rem 0 1rem 0;
+
+        transition: all .2s ease-in-out;
+        transform-origin: left;
+        animation: fadeIn .2s linear both;
     }
 
     &__input {
@@ -165,7 +166,6 @@
         border-radius: 5px;
         
         font-size: 1.6rem;
-        color: var(--color-grey);
 
         &:focus {
             background-color: var(--color-white-dark);

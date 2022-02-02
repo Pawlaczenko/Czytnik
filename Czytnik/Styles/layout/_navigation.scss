@@ -217,6 +217,10 @@
   @media only screen and (max-width: 900px) {
     position: initial;
     grid-area: cart;
+
+    .navigation__buttons-dropdown{
+      display: none;
+    }
   }
 
   &-login {
@@ -287,12 +291,19 @@
   }
 
   &-item {
-    padding-left: 4rem;
-    padding-bottom: 3rem;
-    margin-top: 3rem;
-
     color: var(--color-grey-light);
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+    &--variant {
+      background-color: var(--color-primary);
+
+      button {
+        color: var(--color-black);
+        font-family: inherit;
+        font-size: 2.2rem;
+        font-weight: 700;
+      }
+    }
 
     &:hover {
       cursor: pointer;
@@ -311,7 +322,13 @@
   }
 
   &-link {
+    display: block;
     font-size: 2rem;
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+    padding-left: 4rem;
+    width: 100%;
+    height: 100%;
   }
 
   &-login {
