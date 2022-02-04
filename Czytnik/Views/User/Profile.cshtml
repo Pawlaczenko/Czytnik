@@ -146,7 +146,7 @@
         <ul class="user__reviews-container">
             @foreach (var r in Model.UserReviews)
             {
-                @await Component.InvokeAsync("UserReview", new { review = r })
+                @await Component.InvokeAsync("UserReview", new { review = r, isEditable = false })
             }
         </ul>
     </div>

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Czytnik.Controllers
@@ -25,6 +26,12 @@ namespace Czytnik.Controllers
         {
             var reviewsViewModel = await _reviewService.GetAll(Id,skip,count);
             return Json(reviewsViewModel);
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetAllUserReviews(int skip = 0, int count = 5, string sortBy="")
+        {
+            var reviewsViewModel = await _reviewService.GetAllUser(skip, count, sortBy);
+            return Json(reviewsViewModel, new JsonSerializerOptions { PropertyNamingPolicy = null });
         }
 
         [HttpPost]

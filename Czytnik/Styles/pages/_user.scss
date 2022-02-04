@@ -259,6 +259,8 @@
 .user-reviews {
     &__container {
         margin-top: 4rem;
+        position: relative;
+        min-height: 7rem;
         li {
             margin-bottom: 2rem;
         }

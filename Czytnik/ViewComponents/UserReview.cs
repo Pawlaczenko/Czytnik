@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 public class UserReview : ViewComponent
 {
-    public IViewComponentResult Invoke(UserReviewViewModel review)
+    public IViewComponentResult Invoke(UserReviewViewModel review, bool isEditable)
     {
+        if (isEditable) return View("Editable", review);
         return View("Default",review);
     }
 }
