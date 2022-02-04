@@ -25,14 +25,15 @@
     &__container {
         //background-color: var(--color-white-dark);
         padding: 1.5rem;
-        margin-top: 3rem;
+        margin: 3rem auto 0 auto;
+        width: 90%;
 
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(50%,1fr));
+        grid-template-columns: 1fr;
+    }
 
-        @media only screen and (max-width: 900px) {
-            grid-template-columns: 1fr;
-        }
+    &__more {
+        margin: auto;
     }
 }
 

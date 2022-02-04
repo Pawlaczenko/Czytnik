@@ -1,4 +1,8 @@
 ﻿@model Czytnik_Model.ViewModels.ProductPageViewModel
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @{
     ViewData["Title"] = Model.Product.Title;
 }
@@ -42,7 +46,7 @@
                     }
                 </div>
                 <span class="product__rating-pipe"></span>
-                <div class="product__rating-count">Opinie: @Model.ReviewCount</div>
+                <div class="product__rating-count">Opinie: <span class="js-count">@Model.ReviewCount</span></div>
             </div>
         </div>
     </div>
@@ -58,10 +62,16 @@
         <vc:books-carousel type="Product" series="@(Model.Series==null ? 0 : Model.Series.Id)" category="@Model.Product.CategoryId" book="@Model.Product.Id"></vc:books-carousel>
     </div>
     <div class="product__section product__opinions" id="reviews">
-        <h2 class="product__heading">Oceny i opinie klientów (@Model.ReviewCount)</h2>
+        <h2 class="product__heading">Oceny i opinie klientów (<span class="js-count">@Model.ReviewCount</span>)</h2>
         <div class="product__opinions-control">
-            <stars rating="@Model.Product.Rating" parent-class="product__stars"></stars>
-            <a href="#reviewForm" class="product__button">Dodaj opinię</a>
+            @if (Model.Product.Rating != null)
+            {
+                <stars rating="@Model.Product.Rating" parent-class="product__stars"></stars>
+            }
+            @if (SignInManager.IsSignedIn(User) && Model.IsFormVisible)
+            {
+                <a href="#reviewForm" class="product__button">Dodaj opinię</a>
+            }
         </div>
         <div class="product__reviews">
             @foreach (var review in Model.Reviews)
@@ -78,13 +88,16 @@
                     </p>
                 </div>
             }
-            @if (Model.ReviewCount > 3)
+            @if (Model.ReviewCount > 0)
             {
                 <a class="review__seeAll" href="/Book/ReviewsList/@Model.Product.Id?id=@Model.Product.Id">zobacz wszystkie opinie</a>
             }
         </div>
-        <vc:review-form></vc:review-form>
-    </div>
+        @if (SignInManager.IsSignedIn(User) && Model.IsFormVisible)
+        {
+            <vc:review-form></vc:review-form>
+        }
+        </div>
     <div class="product__section product__details" id="details">
         <h2 class="product__heading">Szczegóły książki</h2>
         <ul class="product__details-list">

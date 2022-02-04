@@ -5,13 +5,17 @@
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
+@using Microsoft.AspNetCore.Identity
+@using Czytnik_Model.Models
+@inject UserManager<User> UserManager
+
 <section class="user wrapper">
     <header class="user__header">
         <figure class="user__figure">
             <img src="~/assets/img/defaultProfilePicture.png" class="user__image" />
         </figure>
-        <p class="user__username"></p>
-        <p class="user__name">Piotr Kozieł</p>
+        <p class="user__username">@User.Identity.Name</p>
+        <p class="user__name">Bartek Pawlak</p>
     </header>
     <div class="user__info">
         <h2 class="heading-line heading-line--both user__info-heading">Coś o Tobie</h2>

@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Czytnik.Services;
+using Czytnik_Model.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +9,20 @@ using System.Threading.Tasks;
 
 namespace Czytnik.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
-        public IActionResult Profile()
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
         {
-            return View();
+            _userService = userService;
+        }
+
+        public async Task<IActionResult> Profile()
+        {
+            UserProfileViewModel userInfo = await _userService.GetProfileInfo();
+            return View(userInfo);
         }
         public IActionResult Settings()
         {

@@ -22,5 +22,6 @@ namespace Czytnik_Model.ViewModels
         public string OriginalLanguage { get; set; }
         public string EditionLanguage { get; set; }
         public Series Series { get; set; }
+        public bool IsFormVisible { get; set; }
     }
 }

@@ -6,12 +6,12 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <div class="dropdown navigation__buttons-dropdown">
-        <a class="dropdown__figure" asp-area="Identity" asp-page="/Account/Manage/Profile">
+        <a class="dropdown__figure" asp-controller="User" asp-action="Profile">
             <img class="dropdown__profile" src="~/assets/img/defaultProfilePicture.png" />
         </a>
         <ul class="dropdown__content">
             <li class="dropdown__item">
-                <a class="dropdown__link" asp-area="Identity" asp-page="/Account/Manage/Profile">
+                <a class="dropdown__link"  asp-controller="User" asp-action="Profile">
                     <svg class="dropdown__icon icon" viewBox="0 0 32 32">
                         <use xlink:href="/assets/svg/sprite.svg#icon-user"></use>
                     </svg>
@@ -19,15 +19,15 @@
                 </a>
             </li>
             <li class="dropdown__item">
-                <a class="dropdown__link">
+                <a class="dropdown__link" asp-controller="User" asp-action="Settings">
                     <svg class="dropdown__icon icon" viewBox="0 0 32 32">
                         <use xlink:href="/assets/svg/sprite.svg#icon-cog"></use>
                     </svg>
-                    <span class="dropdown__name">Ustawienai profilu</span>
+                    <span class="dropdown__name">Ustawienia profilu</span>
                 </a>
             </li>
             <li class="dropdown__item">
-                <a class="dropdown__link">
+                <a class="dropdown__link" asp-controller="User" asp-action="Favourites">
                     <svg class="dropdown__icon icon" viewBox="0 0 32 32">
                         <use xlink:href="/assets/svg/sprite.svg#icon-heart"></use>
                     </svg>
