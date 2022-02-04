@@ -17,6 +17,7 @@
     <Content Remove="compilerconfig.json" />
     <Content Remove="Views\Cart\Index.cshtml" />
     <Content Remove="Views\Categories\Index.cshtml" />
+    <Content Remove="Views\Checkout\Index.cshtml" />
     <Content Remove="Views\Index.cshtml" />
     <Content Remove="Views\Search\Index.cshtml" />
     <Content Remove="Views\Shared\Components\BookItem\Default.cshtml" />
@@ -77,6 +78,7 @@
     <None Include="compilerconfig.json" />
     <None Include="Views\Cart\Index.cshtml" />
     <None Include="Views\Categories\Index.cshtml" />
+    <None Include="Views\Checkout\Index.cshtml" />
     <None Include="Views\Search\Index.cshtml" />
     <None Include="Views\Shared\Components\BookItem\Default.cshtml" />
     <None Include="Views\Shared\Components\Footer\Default.cshtml" />
@@ -110,6 +112,7 @@
 	  <Watch Remove="Areas\Identity\Pages\Account\Manage\_Layout.cshtml" />
 	  <Watch Remove="Views\Cart\Index.cshtml" />
 	  <Watch Remove="Views\Categories\Index.cshtml" />
+	  <Watch Remove="Views\Checkout\Index.cshtml" />
 	  <Watch Remove="Views\Index.cshtml" />
 	  <Watch Remove="Views\Shared\Components\BookItem\Default.cshtml" />
 	  <Watch Remove="Views\Shared\Components\Footer\Default.cshtml" />
@@ -142,6 +145,7 @@
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
 	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+	  <PackageReference Include="Stripe.net" Version="39.89.0" />
 	</ItemGroup>
 
 </Project>
