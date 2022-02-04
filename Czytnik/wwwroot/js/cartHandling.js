@@ -183,7 +183,7 @@
                     <img class="cart__item-image" src="${book.Cover}" alt="${book.Title}">
                   </a>
                   <div class="cart__item-info">
-                    <div class="cart__item-title">${book.Title}</div>
+                    <div class="cart__item-title" title="${book.Title}">${book.Title}</div>
                     <div class="cart__item-author">${book.Authors.join(', ')}</div>
                     <button class="cart__item-delete js-cart-item-delete" data-book="${book.bookId}">USUŃ</button>
                   </div>

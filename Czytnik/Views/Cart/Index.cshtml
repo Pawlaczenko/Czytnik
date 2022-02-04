@@ -24,7 +24,7 @@
               <img class="cart__item-image" src="@item.Cover" alt="@item.Title">
             </a>
             <div class="cart__item-info">
-              <div class="cart__item-title">@item.Title</div>
+              <div class="cart__item-title" title="@item.Title">@item.Title</div>
               <div class="cart__item-author">@string.Join(", ", item.Authors)</div>
               <button class="cart__item-delete js-cart-item-delete" data-book="@item.bookId">USUŃ</button>
             </div>

@@ -8,7 +8,7 @@
         <div class="book-item__price-current">@Model.CalculatedPrice zł</div>
         <div class="book-item__price-old">@(Model.Price == Model.CalculatedPrice ? null : Model.Price+" zł")</div>
     </div>
-    <p class="book-item__title">
+    <p class="book-item__title" title="@Model.Title">
         @Model.Title
     </p>
     <p class="book-item__author">
