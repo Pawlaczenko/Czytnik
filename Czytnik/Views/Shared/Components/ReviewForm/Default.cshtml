@@ -1,4 +1,5 @@
-﻿<form id="reviewForm" method="POST" asp-action="AddReview" class="review-form">
+﻿<form id="reviewForm" method="POST" class="review-form">
+    <partial name="_LoadingSpinner" />
     <h2 class="review-form__heading">Twoja ocena:</h2>
     <label class="rating-label review-form__stars">
         <input class="rating"
@@ -8,9 +9,14 @@
                step="1"
                style="--stars:6;--value:0"
                type="range"
-               value="0">
+               value="0"
+               name="rating"
+               required
+               >
     </label>
     <label class="review-form__heading">Recenzja: <span class="review-form__heading--lowlight">(nieobowiązkowa)</span></label>
-    <textarea class="review-form__review" placeholder="Ta książkia..."></textarea>
-    <input class="review-form__button button button--secondary" type="submit" value="Prześlij" />
+    <textarea name="reviewText" class="review-form__review" placeholder="Ta książka..."></textarea>
+    <span class="review-form__charCount" id="charCount"></span>
+    <input id="submitReview" class="review-form__button button button--secondary" type="submit" value="Prześlij" />
 </form>
+<script src="~/js/addReview.js"></script>

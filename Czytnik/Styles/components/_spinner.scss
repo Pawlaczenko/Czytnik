@@ -1,12 +1,16 @@
 ﻿.spinner {
-    position: absolute;
-    display: none;
-    padding: 2rem;
-    height: 20rem;
     margin: auto;
     inset: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
 
-    @include center-flex;
+    &--shown {
+        display: flex;
+    }
 
     &:before {
         content: '';
@@ -16,7 +20,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0,0,0,0);
+        background-color: rgba(0,0,0,.1);
     }
 
     &:not(:required) {

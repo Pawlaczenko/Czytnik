@@ -13,25 +13,23 @@ namespace Czytnik.Controllers
     {
         private readonly IBookService _bookService;
         private readonly IReviewService _reviewService;
+        private readonly IUserService _userService;
 
-        public BookController(IBookService bookService, IReviewService reviewService)
+        public BookController(IBookService bookService, IReviewService reviewService, IUserService userService)
         {
             _bookService = bookService;
             _reviewService = reviewService;
+            _userService = userService;
         }
         public IActionResult Index(int Id)
         {
             var books = _bookService.GetProductBookPage(Id);
+            books.IsFormVisible = _userService.DidUserRateThisBook(Id).Result;
             return View(books);
         }
 
         public IActionResult ReviewsList(int Id)
         {
-            //dynamic reviewList = new ExpandoObject();
-            //reviewList.reviews = await _reviewService.GetAll(Id);
-            //reviewList.title = title;
-            //reviewList.bookId = Id;
-            //return View(reviewList);
             var reviewView = _reviewService.GetReviewList(Id);
             return View(reviewView);
         }

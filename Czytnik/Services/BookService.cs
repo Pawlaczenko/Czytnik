@@ -35,7 +35,8 @@ namespace Czytnik.Services
                 Translators = b.BookTranslators.Select(ba => $"{ba.Translator.FirstName} {ba.Translator.SecondName} {ba.Translator.Surname}").ToList(),
                 OriginalLanguage = b.OriginalLanguage.Name,
                 EditionLanguage = b.EditionLanguage.Name,
-                Series = b.Series
+                Series = b.Series,
+
             }).FirstOrDefault();
 
             //inaczej nie działa zagnieżdżony Select jeśli chce użyć w środku .Take(), bo ludzie od asp.net core byli zbyt leniwi żeby to naprawić przed releasem asp.net 6.0

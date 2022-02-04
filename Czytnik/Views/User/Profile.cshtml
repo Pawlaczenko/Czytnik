@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Czytnik_Model.ViewModels.UserProfileViewModel
+@{
     ViewData["Title"] = "Twój profil";
 }
 <section class="user wrapper">
@@ -6,35 +7,35 @@
         <figure class="user__figure">
             <img src="~/assets/img/defaultProfilePicture.png" class="user__image" />
         </figure>
-        <p class="user__username">baqardo</p>
-        <p class="user__name">Piotr Kozieł</p>
+        <p class="user__username">@Model.Username</p>
+        <p class="user__name">@Model.FullName</p>
     </header>
     <div class="user__info">
         <h2 class="heading-line heading-line--both user__info-heading">Coś o Tobie</h2>
         <table class="user__table">
             <tr class="user__table-row">
                 <td class="user__table-column user__table-column--title">Imię:</td>
-                <td class="user__table-column user__table-column--data">Bartłomiej</td>
+                <td class="user__table-column user__table-column--data @validateString(Model.FirstName)">@((Model.FirstName==null)?"brak":Model.FirstName)</td>
             </tr>
             <tr class="user__table-row">
                 <td class="user__table-column user__table-column--title">Drugie imię:</td>
-                <td class="user__table-column user__table-column--data">Piotr</td>
+                <td class="user__table-column user__table-column--data @validateString(Model.SecondName)">@((Model.SecondName==null)?"brak":Model.SecondName)</td>
             </tr>
             <tr class="user__table-row">
                 <td class="user__table-column user__table-column--title">Nazwisko:</td>
-                <td class="user__table-column user__table-column--data">Pawlak</td>
+                <td class="user__table-column user__table-column--data @validateString(Model.Surname)">@((Model.Surname==null)?"brak":Model.Surname)</td>
             </tr>
             <tr class="user__table-row">
                 <td class="user__table-column user__table-column--title">Data urodzenia:</td>
-                <td class="user__table-column user__table-column--data">27.12.2099</td>
+                <td class="user__table-column user__table-column--data @validateString(Model.Birthdate.Value.ToString("dd MMM yyyy"))">@((Model.Birthdate==null)?"brak":Model.Birthdate.Value.ToString("dd MMM yyyy"))</td>
             </tr>
             <tr class="user__table-row">
                 <td class="user__table-column user__table-column--title">Email:</td>
-                <td class="user__table-column user__table-column--data">bazyl@mamak.com</td>
+                <td class="user__table-column user__table-column--data @validateString(Model.Email)">@((Model.Email==null)?"brak":Model.Email)</td>
             </tr>
             <tr class="user__table-row">
                 <td class="user__table-column user__table-column--title">Numer telefonu:</td>
-                <td class="user__table-column user__table-column--data user__table-column--empty">brak</td>
+                <td class="user__table-column user__table-column--data @validateString(Model.PhoneNumber)">@((Model.PhoneNumber == null)?"brak":Model.PhoneNumber)</td>
             </tr>
         </table>
         <a href="/User/Settings" class=" user__info-button button button--secondary">Ustawienia</a>
@@ -206,3 +207,10 @@
         </ul>
     </div>
 </section>
+
+@functions{
+    public static string validateString(string value)
+    {
+        return (value == null) ? "user__table-column--empty" : "";
+    }
+}

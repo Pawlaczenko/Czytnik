@@ -1,4 +1,5 @@
 ﻿using Czytnik.Services;
+using Czytnik_Model.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,13 @@ namespace Czytnik.Controllers
         {
             var reviewsViewModel = await _reviewService.GetAll(Id,skip,count);
             return Json(reviewsViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(Review review)
+        {
+            await _reviewService.Add(review);
+            return Ok("{}");
         }
     }
 }

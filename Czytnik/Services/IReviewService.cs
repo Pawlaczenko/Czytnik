@@ -1,4 +1,5 @@
-﻿using Czytnik_Model.ViewModels;
+﻿using Czytnik_Model.Models;
+using Czytnik_Model.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace Czytnik.Services
     {
         Task<IEnumerable<ReviewViewModel>> GetAll(int Id, int skip = 0, int count = 3);
         ReviewListViewModel GetReviewList(int BookId);
+        Task Add(Review review);
+        void CalculateAverageRating(int bookId);
     }
 }

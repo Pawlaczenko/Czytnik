@@ -1,6 +1,8 @@
 ﻿using Czytnik_DataAccess.Database;
 using Czytnik_Model.Models;
 using Czytnik_Model.ViewModels;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,9 +15,13 @@ namespace Czytnik.Services
     public class ReviewService : IReviewService
     {
         private readonly AppDbContext _dbContext;
-        public ReviewService(AppDbContext dbContext)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly UserManager<User> _userManager;
+        public ReviewService(AppDbContext dbContext, IHttpContextAccessor accessor, UserManager<User> userManager)
         {
             _dbContext = dbContext;
+            _httpContextAccessor = accessor;
+            _userManager = userManager;
         }
 
         public async Task<IEnumerable<ReviewViewModel>> GetAll(int Id, int skip=0, int count=10)
@@ -55,6 +61,37 @@ namespace Czytnik.Services
             reviewList.ReviewsQnt = reviewCount.ToDictionary(x=>x.rating,x=>x.count);
 
             return reviewList ;
+        }
+
+        public async Task Add(Review review)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            if(currentUser != null)
+            {
+                var entity = new Review
+                {
+                    Rating = review.Rating,
+                    ReviewDate = DateTime.Now,
+                    BookId = review.BookId,
+                    ReviewText = review.ReviewText,
+                    User = currentUser
+                };
+                await _dbContext.Reviews.AddAsync(entity);
+                await _dbContext.SaveChangesAsync();
+                CalculateAverageRating(review.BookId);
+            }
+        }
+
+        public void CalculateAverageRating(int bookId)
+        {
+            var book = _dbContext.Books.SingleOrDefault(b => b.Id == bookId);
+            var reviews = _dbContext.Books.Where(b => b.Id == bookId).Select(b => b.Reviews).FirstOrDefault();
+            double reviewSum = reviews.Sum(r => r.Rating);
+            decimal avgRating = (decimal)reviewSum / reviews.Count;
+            decimal avgRatingFixed = Math.Round(avgRating, 2);
+
+            book.Rating = avgRatingFixed;
+            _dbContext.SaveChanges();
         }
     }
 }

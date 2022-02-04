@@ -1,7 +1,7 @@
 const displaySpinner = () => {
-    $('.spinner').show();
+    $('.spinner').css('display', 'flex');
 }
 
 const hideSpinner = () => {
-    $('.spinner').hide();
+    $('.spinner').css('display', 'none');
 }

@@ -29,6 +29,7 @@ namespace Czytnik
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDefaultIdentity<User>().AddEntityFrameworkStores<AppDbContext>();
+
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddDbContext<AppDbContext>(
                 config => config.UseSqlServer(Configuration.GetConnectionString("Application"))
@@ -40,6 +41,7 @@ namespace Czytnik
             services.AddTransient<ILanguageService, LanguageService>();
             services.AddTransient<IReviewService, ReviewService>();
             services.AddTransient<ICartService, CartService>();
+            services.AddTransient<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
