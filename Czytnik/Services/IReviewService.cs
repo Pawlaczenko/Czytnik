@@ -12,6 +12,7 @@ namespace Czytnik.Services
         Task<IEnumerable<ReviewViewModel>> GetAll(int Id, int skip = 0, int count = 3);
         ReviewListViewModel GetReviewList(int BookId);
         Task Add(Review review);
+        Task Delete(int Id);
         void CalculateAverageRating(int bookId);
         Task<IEnumerable<UserReviewViewModel>> GetAllUser(int skip = 0, int count = 5, string sortBy = "");
     }

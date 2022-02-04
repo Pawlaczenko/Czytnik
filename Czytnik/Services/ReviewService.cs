@@ -118,6 +118,17 @@ namespace Czytnik.Services
             }
         }
 
+        public async Task Delete(int Id)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var review = _dbContext.Reviews.Where(r => r.Id == Id).FirstOrDefault();
+            if(review.User == currentUser)
+            {
+                _dbContext.Reviews.Remove(review);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
         public void CalculateAverageRating(int bookId)
         {
             var book = _dbContext.Books.SingleOrDefault(b => b.Id == bookId);
