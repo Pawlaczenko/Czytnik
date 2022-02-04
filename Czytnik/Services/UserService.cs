@@ -36,9 +36,24 @@ namespace Czytnik.Services
                 Email = currentUser.Email,
                 PhoneNumber = currentUser.PhoneNumber,
                 ProfilePicture = currentUser.ProfilePicture,
-                Username = currentUser.UserName
+                Username = currentUser.UserName,
+                UserReviews = GetUserReviews(4).Result
             };
             return userInfoModel;
+        }
+
+        public async Task<List<UserReviewViewModel>> GetUserReviews(int count)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var reviews = _dbContext.Reviews.Where(r => r.User == currentUser).Select(r => new UserReviewViewModel
+            {
+                Review = r,
+                BookTitle = r.Book.Title,
+                Authors = r.Book.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
+            }).Take(count);
+
+            var results = await reviews.ToListAsync();
+            return results;
         }
 
         public async Task<bool> DidUserRateThisBook(int bookId)

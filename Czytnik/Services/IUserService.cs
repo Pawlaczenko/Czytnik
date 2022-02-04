@@ -10,5 +10,6 @@ namespace Czytnik.Services
     {
        Task<UserProfileViewModel> GetProfileInfo();
        Task<bool> DidUserRateThisBook(int bookId);
+        Task<List<UserReviewViewModel>> GetUserReviews(int count);
     }
 }

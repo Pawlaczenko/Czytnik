@@ -144,66 +144,10 @@
         <h2 class="heading-line heading-line--left user__reviews-heading">Twoje oceny i recenzje</h2>
         <a href="/User/Reviews" class="moreLink user__reviews-more">zobacz wszystkie recenzje... </a>
         <ul class="user__reviews-container">
-            <li class="userReview">
-                <div class="userReview__header">
-                    <div>
-                        <svg class="userReview__icon icon" viewBox="0 0 32 32">
-                            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                        </svg>
-                        <span class="userReview__rating">4</span>
-                    </div>
-                    <span class="userReview__date">02-12-2021</span>
-                </div>
-                <h3 class="userReview__title">Biblia dla Minecrafterów - <span class="userReview__author">Mojang</span></h3>
-                <p class="userReview__text">
-                    Bardzo fajna książka, Bogurodzica dziewica bogiem sławiena maryja u swego syna gospodzina matka wielebna maryja ziści nam spuści nam kyrie elejson
-                </p>
-            </li>
-            <li class="userReview">
-                <div class="userReview__header">
-                    <div>
-                        <svg class="userReview__icon icon" viewBox="0 0 32 32">
-                            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                        </svg>
-                        <span class="userReview__rating">4</span>
-                    </div>
-                    <span class="userReview__date">02-12-2021</span>
-                </div>
-                <h3 class="userReview__title">Biblia dla Minecrafterów - <span class="userReview__author">Mojang</span></h3>
-                <p class="userReview__text">
-                    Bardzo fajna książka, Bogurodzica dziewica bogiem sławiena maryja u swego syna gospodzina matka wielebna maryja ziści nam spuści nam kyrie elejson
-                </p>
-            </li>
-            <li class="userReview">
-                <div class="userReview__header">
-                    <div>
-                        <svg class="userReview__icon icon" viewBox="0 0 32 32">
-                            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                        </svg>
-                        <span class="userReview__rating">4</span>
-                    </div>
-                    <span class="userReview__date">02-12-2021</span>
-                </div>
-                <h3 class="userReview__title">Biblia dla Minecrafterów - <span class="userReview__author">Mojang</span></h3>
-                <p class="userReview__text">
-                    Bardzo fajna książka, Bogurodzica dziewica bogiem sławiena maryja u swego syna gospodzina matka wielebna maryja ziści nam spuści nam kyrie elejson
-                </p>
-            </li>
-            <li class="userReview">
-                <div class="userReview__header">
-                    <div>
-                        <svg class="userReview__icon icon" viewBox="0 0 32 32">
-                            <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
-                        </svg>
-                        <span class="userReview__rating">4</span>
-                    </div>
-                    <span class="userReview__date">02-12-2021</span>
-                </div>
-                <h3 class="userReview__title">Biblia dla Minecrafterów - <span class="userReview__author">Mojang</span></h3>
-                <p class="userReview__text">
-                    Bardzo fajna książka, Bogurodzica dziewica bogiem sławiena maryja u swego syna gospodzina matka wielebna maryja ziści nam spuści nam kyrie elejson
-                </p>
-            </li>
+            @foreach (var r in Model.UserReviews)
+            {
+                @await Component.InvokeAsync("UserReview", new { review = r })
+            }
         </ul>
     </div>
 </section>
