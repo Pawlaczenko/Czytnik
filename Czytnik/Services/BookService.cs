@@ -100,7 +100,9 @@ namespace Czytnik.Services
 
         public async Task<IEnumerable<BooksCarouselViewModel>> GetSimilarBooks(int seriesId, int categoryId, int bookId)
         {
-            var booksQuery = _dbContext.Books.Where(b => b.Id != bookId && (b.SeriesId == seriesId || b.CategoryId==categoryId)).Select(b => new BooksCarouselViewModel
+            var booksQuery = _dbContext.Books.Where(b => b.Id != bookId && (b.SeriesId == seriesId || b.CategoryId==categoryId))
+            .OrderByDescending(b => b.SeriesId == seriesId)
+            .Select(b => new BooksCarouselViewModel
             {
                 Id = b.Id,
                 Title = b.Title,

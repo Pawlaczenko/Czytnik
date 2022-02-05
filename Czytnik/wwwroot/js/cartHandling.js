@@ -1,8 +1,7 @@
 ﻿(async function () {
   const myStorage = window.localStorage;
   const isUserLogged = document.querySelector('.js-navigation-cart').dataset.logged;
-  if(isUserLogged != 'True')
-    await renderCartItemsFromLocalStorage();
+  if (isUserLogged != 'True') await renderCartItemsFromLocalStorage();
 
   const quantityInputs = document.querySelectorAll('.js-cart-quantity-input');
   quantityInputs.forEach(input => {
@@ -120,8 +119,9 @@
       ','
     );
 
+    document.querySelector('.js-checkout-button').href = `/Checkout?data=${sum}`;
     document.querySelector('.js-cart-price').innerText = `${sum} zł`;
-  };
+  }
 
   async function getBooks() {
     let booksId = JSON.parse(myStorage.getItem('cartItems'));
@@ -164,7 +164,8 @@
       });
     }
 
-    console.log(booksItems);
+    document.querySelector('.js-cart-quantity').innerText = `${booksItems.length} przedmioty`;
+
     let template = `
             <div class="cart__item cart__item-header">
                 <div class="cart__item-description cart__item-description--product">Produkt</div>
@@ -178,14 +179,14 @@
       template += `
             <div class="cart__item js-cart-item">
                 <div class="cart__item-product">
-                    <div class="cart__item-cover">
+                  <a href="/Book/Index/${book.bookId}" class="cart__item-cover">
                     <img class="cart__item-image" src="${book.Cover}" alt="${book.Title}">
-                    </div>
-                    <div class="cart__item-info">
-                    <div class="cart__item-title">${book.Title}</div>
+                  </a>
+                  <div class="cart__item-info">
+                    <div class="cart__item-title" title="${book.Title}">${book.Title}</div>
                     <div class="cart__item-author">${book.Authors.join(', ')}</div>
                     <button class="cart__item-delete js-cart-item-delete" data-book="${book.bookId}">USUŃ</button>
-                    </div>
+                  </div>
                 </div>
 
                 <div class="cart__item-quantity">
@@ -209,11 +210,14 @@
                     }" data-discount="${
         book.Price == book.CalculatedPrice ? 0 : (book.Price - book.CalculatedPrice) * book.Quantity
       }">${book.Price == book.CalculatedPrice ? '' : book.Price + 'zł'} </div>
-                    <div class="cart__item-price-new js-cart-item-price">${book.CalculatedPrice} zł</div>
+                    <div class="cart__item-price-new js-cart-item-price">${book.CalculatedPrice.toFixed(2)} zł</div>
                 </div>
 
                 <div class="cart__item-sum">
-                    <div class="cart__item-sum-price js-cart-item-full-price">${(Math.round(book.FullPrice * 100) / 100) * book.Quantity} zł</div>
+                    <div class="cart__item-sum-price js-cart-item-full-price">${(
+                      (Math.round(book.FullPrice * 100) / 100) *
+                      book.Quantity
+                    ).toFixed(2)} zł</div>
                 </div>
             </div>
             `;

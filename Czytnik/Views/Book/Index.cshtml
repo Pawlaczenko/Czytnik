@@ -13,7 +13,7 @@
             <img src="@Model.Product.Cover" />
         </figure>
         <div class="product__info">
-            <h1 class="product__title">@Model.Product.Title</h1>
+            <h1 class="product__title" title="@Model.Product.Title">@Model.Product.Title</h1>
             <p class="product__author">
                 Autor:
                 @string.Join(", ", Model.Authors)
@@ -29,13 +29,15 @@
                 @if (Model.Discount != null)
                 {
                     <li class="product__flags-item flag flag--primary">
-                        <span class="flag__title">Promocja</span><span class="flag__rank">@Model.Discount.DiscountValue%</span>
+                        <span class="flag__title">Promocja</span><span
+                        class="flag__rank">@Model.Discount.DiscountValue%</span>
                     </li>
                 }
 
 
             </ul>
-            <p class="product__publisher">Wydawnictwo: <span class="product__publisher--highlight">@Model.Publisher</span></p>
+            <p class="product__publisher">Wydawnictwo: <span
+                    class="product__publisher--highlight">@Model.Publisher</span></p>
             <div class="product__rating">
                 <span class="product__rating-title">Ocena: </span>
                 <stars rating="@Model.Product.Rating" parent-class="product__stars"></stars>
@@ -58,8 +60,10 @@
         </p>
     </article>
     <div class="product__section product__similar">
-        <h2 class="product__heading">Ksiązki podobne do <span class="product__similar--highlight">@Model.Product.Title</span></h2>
-        <vc:books-carousel type="Product" series="@(Model.Series==null ? 0 : Model.Series.Id)" category="@Model.Product.CategoryId" book="@Model.Product.Id"></vc:books-carousel>
+        <h2 class="product__heading">Ksiązki podobne do <span
+                class="product__similar--highlight">@Model.Product.Title</span></h2>
+        <vc:books-carousel type="Product" series="@(Model.Series==null ? 0 : Model.Series.Id)"
+            category="@Model.Product.CategoryId" book="@Model.Product.Id"></vc:books-carousel>
     </div>
     <div class="product__section product__opinions" id="reviews">
         <h2 class="product__heading">Oceny i opinie klientów (<span class="js-count">@Model.ReviewCount</span>)</h2>
@@ -90,7 +94,8 @@
             }
             @if (Model.ReviewCount > 0)
             {
-                <a class="review__seeAll" href="/Book/ReviewsList/@Model.Product.Id?id=@Model.Product.Id">zobacz wszystkie opinie</a>
+                <a class="review__seeAll" href="/Book/ReviewsList/@Model.Product.Id?id=@Model.Product.Id">zobacz wszystkie
+                    opinie</a>
             }
         </div>
         @if (SignInManager.IsSignedIn(User) && Model.IsFormVisible)
@@ -112,34 +117,43 @@
                 </span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Język egzemplarza:</span> <span class="product__details-value">@Model.EditionLanguage</span>
+                <span class="product__details-name">Język egzemplarza:</span> <span
+                    class="product__details-value">@Model.EditionLanguage</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Język oryginalny:</span> <span class="product__details-value">@Model.OriginalLanguage</span>
+                <span class="product__details-name">Język oryginalny:</span> <span
+                    class="product__details-value">@Model.OriginalLanguage</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Data wydania książki:</span> <span class="product__details-value">@Model.Product.ReleaseDate.ToString("dd.MM.yyyy")</span>
+                <span class="product__details-name">Data wydania książki:</span> <span
+                    class="product__details-value">@Model.Product.ReleaseDate.ToString("dd.MM.yyyy")</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Format:</span> <span class="product__details-value">@Model.Product.Dimensions.Replace("&nbsp;", "")</span>
+                <span class="product__details-name">Format:</span> <span
+                    class="product__details-value">@Model.Product.Dimensions.Replace("&nbsp;", "")</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Kategoria:</span> <span class="product__details-value">@Model.Category.Name</span>
+                <span class="product__details-name">Kategoria:</span> <span
+                    class="product__details-value">@Model.Category.Name</span>
             </li>
             @if (Model.Series != null)
             {
                 <li class="product__details-item">
-                    <span class="product__details-name">Seria:</span> <span class="product__details-value">@Model.Series.Name</span>
+                    <span class="product__details-name">Seria:</span> <span
+                    class="product__details-value">@Model.Series.Name</span>
                 </li>
             }
             <li class="product__details-item">
-                <span class="product__details-name">Ilość stron:</span> <span class="product__details-value">@Model.Product.PageQuantity</span>
+                <span class="product__details-name">Ilość stron:</span> <span
+                    class="product__details-value">@Model.Product.PageQuantity</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Numer wydania:</span> <span class="product__details-value">@Model.Product.IssueNumber</span>
+                <span class="product__details-name">Numer wydania:</span> <span
+                    class="product__details-value">@Model.Product.IssueNumber</span>
             </li>
             <li class="product__details-item">
-                <span class="product__details-name">Ilość sprzedanych kopii:</span> <span class="product__details-value">@Model.Product.NumberOfCopiesSold</span>
+                <span class="product__details-name">Ilość sprzedanych kopii:</span> <span
+                    class="product__details-value">@Model.Product.NumberOfCopiesSold</span>
             </li>
         </ul>
     </div>
@@ -155,10 +169,12 @@
                 }
 
             </div>
-            <button class="product__money-button product__money-button--orange js-cart-item-add" data-book="@Model.Product.Id">Dodaj do koszyka <span class="product__money-icon">+</span></button>
-            <button class="product__money-button product__money-button--blue">Kup teraz <span class="product__money-icon">$</span></button>
+            <button class="product__money-button product__money-button--orange js-cart-item-add"
+                data-book="@Model.Product.Id">Dodaj do koszyka <span class="product__money-icon">+</span></button>
+            <button class="product__money-button product__money-button--blue">Kup teraz <span
+                    class="product__money-icon">$</span></button>
         </div>
-        <a href="/" class="product__favourite">
+        <a href="/" class="product__favourite js-product-favourite">
             <svg class="product__favourite-icon icon" viewBox="0 0 32 32">
                 <use xlink:href="/assets/svg/sprite.svg#icon-heart"></use>
             </svg>
@@ -173,3 +189,4 @@
 </section>
 
 <script src="~/js/addCartItem.js"></script>
+<script src="~/js/bookHandling.js"></script>

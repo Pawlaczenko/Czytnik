@@ -58,31 +58,35 @@
         </div>
     </section>
 
-    <section class="home-top-books wrapper">
+    <section class="home-top-books wrapper js-home-top-books">
         <div class="home-top-books__header">
             <h1 class="home-top-books__title decorated-heading">To najczęściej<br />czytano w @Model.month:</h1>
         </div>
-        <vc:books-carousel type="Default"  series="-1" category="-1" book="-1"></vc:books-carousel>
+        <vc:books-carousel type="Default" series="-1" category="-1" book="-1"></vc:books-carousel>
     </section>
 
-    <section class="home-best-books wrapper">
-        <div class="home-best-books__header">
-            <h1 class="home-best-books__title decorated-heading">Nasze <br /> Bestsellery</h1>
-        </div>
+    @if (Model.ofAllTime.Count > 0)
+    {
+        <section class="home-best-books wrapper">
+            <div class="home-best-books__header">
+                <h1 class="home-best-books__title decorated-heading">Nasze <br /> Bestsellery</h1>
+            </div>
 
-        <div class="home-best-books__content">
-            @for (int i = 0; i < Model.ofAllTime.Count; i++)
-            {
-                <a href="/Book/Index/@Model.ofAllTime[i].Id" class="home-best-books__item home-best-books__item--@(i+1)">
-                    <img src="@Model.ofAllTime[i].Cover" alt="Książka na pierwszym miejscu"
-                         class="home-best-books__item-image" />
-                    <p class="home-best-books__item-position">#@(i+1)</p>
-                    <p class="home-best-books__item-title">@Model.ofAllTime[i].Title</p>
-                    <p class="home-best-books__item-author">@string.Join(", ", Model.ofAllTime[i].Authors)</p>
-                </a>
-            }
-        </div>
-    </section>
+            <div class="home-best-books__content">
+                @for (int i = 0; i < Model.ofAllTime.Count; i++)
+                {
+                    <a href="/Book/Index/@Model.ofAllTime[i].Id" class="home-best-books__item home-best-books__item--@(i+1)">
+                        <img src="@Model.ofAllTime[i].Cover" alt="Książka na pierwszym miejscu"
+                    class="home-best-books__item-image" />
+                        <p class="home-best-books__item-position">#@(i+1)</p>
+                        <p class="home-best-books__item-title" title="@Model.ofAllTime[i].Title">@Model.ofAllTime[i].Title</p>
+                        <p class="home-best-books__item-author">@string.Join(", ", Model.ofAllTime[i].Authors)</p>
+                    </a>
+                }
+            </div>
+        </section>
+    }
+
 
     <section class="home-blog">
         <div class="home-blog__content wrapper">
@@ -139,3 +143,5 @@
         </div>
     </section>
 </main>
+
+<script src="~/js/homeHandling.js"></script>

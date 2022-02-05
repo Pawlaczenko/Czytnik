@@ -30,7 +30,7 @@
     </div>
 
     <h1 class="checkout__heading">Sposób dostawy</h1>
-    <div class="checkout__delivery">
+    <div class="checkout__delivery js-checkout-delivery">
       <div class="checkout__delivery-point">
         <div class="checkout__delivery-header">
           <h2 class="checkout__delivery-heading">Odbiór w punkcie Czytnik</h2>
@@ -39,13 +39,15 @@
 
 
         <div class="checkout__delivery-input">
-          <input class="checkout__delivery-radio" type="radio" name="type" id="adres1">
-          <label for="adres1" class="checkout__delivery-label">plac Defilad 1, 00-901 Warszawa</label>
+          <input class="checkout__delivery-radio js-checkout-radio" type="radio" name="type" id="adres1" value="point1"
+            checked>
+          <label for="adres1" class="checkout__delivery-label js-checkout-label">plac Defilad 1, 00-901 Warszawa</label>
         </div>
 
         <div class="checkout__delivery-input">
-          <input class="checkout__delivery-radio" type="radio" name="type" id="adres2">
-          <label for="adres2" class="checkout__delivery-label">Kapitana Mieczysława Medweckiego 1, 32-083 Balice</label>
+          <input class="checkout__delivery-radio js-checkout-radio" type="radio" name="type" id="adres2" value="point2">
+          <label for="adres2" class="checkout__delivery-label js-checkout-label">Kapitana Mieczysława Medweckiego 1,
+            32-083 Balice</label>
         </div>
 
       </div>
@@ -57,8 +59,9 @@
 
         <div class="checkout__delivery-item">
           <div class="checkout__delivery-input">
-            <input class="checkout__delivery-radio" type="radio" name="type" id="type1">
-            <label for="type1" class="checkout__delivery-label">Kurier, <span
+            <input class="checkout__delivery-radio js-checkout-radio" type="radio" name="type" id="type1"
+              value="shipment1" required>
+            <label for="type1" class="checkout__delivery-label js-checkout-label">Kurier, <span
                 class="checkout__delivery-provider">InPost</span></label>
           </div>
 
@@ -69,8 +72,9 @@
 
         <div class="checkout__delivery-item">
           <div class="checkout__delivery-input">
-            <input class="checkout__delivery-radio" type="radio" name="type" id="type2">
-            <label for="type2" class="checkout__delivery-label">Kurier, <span
+            <input class="checkout__delivery-radio js-checkout-radio" type="radio" name="type" id="type2"
+              value="shipment2">
+            <label for="type2" class="checkout__delivery-label js-checkout-label">Kurier, <span
                 class="checkout__delivery-provider">DPD</span></label>
           </div>
 
@@ -81,8 +85,9 @@
 
         <div class="checkout__delivery-item">
           <div class="checkout__delivery-input">
-            <input class="checkout__delivery-radio" type="radio" name="type" id="type3">
-            <label for="type3" class="checkout__delivery-label">Kurier za pobraniem,
+            <input class="checkout__delivery-radio js-checkout-radio" type="radio" name="type" id="type3"
+              value="shipment3">
+            <label for="type3" class="checkout__delivery-label js-checkout-label">Kurier za pobraniem,
               <span class="checkout__delivery-provider">DPD</span>
             </label>
           </div>
@@ -114,19 +119,19 @@
     <div class="checkout__service-prices">
       <div class="checkout__service-cost">
         <p class="checkout__service-title">Wartość przedmiotów</p>
-        <p class="checkout__service-value">89.90 zł</p>
+        <p class="checkout__service-value js-checkout-products-price">89.90 zł</p>
       </div>
 
       <div class="checkout__service-cost">
         <p class="checkout__service-title">Dostawa</p>
-        <p class="checkout__service-value">8.99 zł</p>
+        <p class="checkout__service-value js-checkout-shipment-price">8.99 zł</p>
       </div>
     </div>
 
     <div class="checkout__service-sum">
       <div class="checkout__service-cost">
         <p class="checkout__service-title checkout__service-title--sum">Do zapłaty</p>
-        <p class="checkout__service-value checkout__service-value--sum">99.99 zł</p>
+        <p class="checkout__service-value checkout__service-value--sum js-checkout-full-price">99.99 zł</p>
       </div>
     </div>
 
