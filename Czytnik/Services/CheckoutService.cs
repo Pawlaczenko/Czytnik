@@ -24,6 +24,48 @@ namespace Czytnik.Services
       _httpContextAccessor = httpContextAccessor;
     }
 
+    public async Task AddOrder(Item[] items)
+    {
+      var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+
+      var order = new Order { OrderDate = DateTime.Now, User = currentUser };
+
+      await _dbContext.Orders.AddAsync(order);
+      await _dbContext.SaveChangesAsync();
+
+      int orderId = order.Id;
+
+      if(currentUser == null){
+        foreach(Item item in items){
+          OrderItem newOrderItem = new OrderItem{
+            OrderId = orderId,
+            BookId = Convert.ToInt32(item.Id),
+            Quantity = item.Quantity,
+            Price = _dbContext.Books.Where(b => b.Id == Convert.ToInt32(item.Id)).Select(b => b.Price).FirstOrDefault()
+          };
+
+          await _dbContext.OrderItems.AddAsync(newOrderItem);
+          await _dbContext.SaveChangesAsync();
+        }
+      }else{
+        var itemsQuery = _dbContext.CartItems.Where(i => i.User == currentUser).Select(i => new OrderItem
+        {
+          BookId = i.BookId,
+          OrderId = orderId,
+          Quantity = i.Quantity,
+          Price = _dbContext.Books.Where(b => b.Id == i.BookId).Select(b => b.Price).FirstOrDefault()
+        });
+
+        IEnumerable<OrderItem> orderItems = await itemsQuery.ToListAsync();
+
+        foreach(OrderItem newOrderitem in orderItems){
+          await _dbContext.OrderItems.AddAsync(newOrderitem);
+          await _dbContext.SaveChangesAsync();
+        }
+      }
+
+    }
+
     public async Task<decimal> CalculatePrice(Item[] items)
     {
       var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);

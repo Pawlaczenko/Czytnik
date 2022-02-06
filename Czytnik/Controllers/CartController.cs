@@ -44,6 +44,12 @@ namespace Czytnik.Controllers
             await _cartService.AddCartItem(bookId);
             return Ok("{}");
         }
+        [HttpDelete]
+        public async Task<IActionResult> Clear()
+        {
+            await _cartService.Clear();
+            return Ok("{}");
+        }
 
         [HttpPatch]
         public async Task<IActionResult> UpdateQuantity(int bookId, short quantity)
