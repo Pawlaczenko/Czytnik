@@ -10,5 +10,6 @@ namespace Czytnik.Services
   public interface ICheckoutService
   {
     Task<decimal> CalculatePrice(Item[] items);
+    Task AddOrder(Item[] items);
   }
 }

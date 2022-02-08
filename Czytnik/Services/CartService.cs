@@ -60,6 +60,17 @@ namespace Czytnik.Services
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task Clear()
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            if(currentUser == null) return;
+
+            var cartItemsQuery = _dbContext.CartItems.Where(i => i.User == currentUser);
+
+            _dbContext.CartItems.RemoveRange(cartItemsQuery);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task AddCartItem(int bookId)
         {
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
