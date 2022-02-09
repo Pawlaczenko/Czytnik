@@ -37,6 +37,7 @@ namespace Czytnik
       services.AddControllersWithViews();
 
       services.AddTransient<ICategoryService, CategoryService>();
+      services.AddTransient<IUserService, UserService>();
       services.AddTransient<IBookService, BookService>();
       services.AddTransient<ILanguageService, LanguageService>();
       services.AddTransient<IReviewService, ReviewService>();

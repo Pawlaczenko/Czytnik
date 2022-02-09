@@ -23,6 +23,8 @@
     <Content Remove="Views\Shared\Components\BookItem\Default.cshtml" />
     <Content Remove="Views\Shared\Components\Footer\Default.cshtml" />
     <Content Remove="Views\Shared\Components\Navigation\Default.cshtml" />
+    <Content Remove="Views\Shared\Components\UserReview\Default.cshtml" />
+    <Content Remove="Views\Shared\Components\UserReview\Editable.cshtml" />
     <Content Remove="Views\Shared\ErrorPage.cshtml" />
     <Content Remove="Views\Shared\_MobileLoginPartial.cshtml" />
     <Content Remove="Views\User\Favourites.cshtml" />
@@ -83,6 +85,8 @@
     <None Include="Views\Shared\Components\BookItem\Default.cshtml" />
     <None Include="Views\Shared\Components\Footer\Default.cshtml" />
     <None Include="Views\Shared\Components\Navigation\Default.cshtml" />
+    <None Include="Views\Shared\Components\UserReview\Default.cshtml" />
+    <None Include="Views\Shared\Components\UserReview\Editable.cshtml" />
     <None Include="Views\Shared\ErrorPage.cshtml" />
     <None Include="Views\Shared\_LoadingSpinner.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml" />
@@ -116,6 +120,8 @@
 	  <Watch Remove="Views\Index.cshtml" />
 	  <Watch Remove="Views\Shared\Components\BookItem\Default.cshtml" />
 	  <Watch Remove="Views\Shared\Components\Footer\Default.cshtml" />
+	  <Watch Remove="Views\Shared\Components\UserReview\Default.cshtml" />
+	  <Watch Remove="Views\Shared\Components\UserReview\Editable.cshtml" />
 	  <Watch Remove="Views\Shared\ErrorPage.cshtml" />
 	  <Watch Remove="Views\Shared\_MobileLoginPartial.cshtml" />
 	  <Watch Remove="Views\User\Favourites.cshtml" />

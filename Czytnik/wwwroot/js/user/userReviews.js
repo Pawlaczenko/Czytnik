@@ -15,9 +15,71 @@ const handleChange = (e) => {
     loadReviews();
 }
 
+const createButton = (value,type,handleClick, variant="") => {
+    const button = document.createElement('button');
+    button.classList.add("button");
+    button.classList.add(`button--${variant}`);
+    button.innerText = value;
+    button.addEventListener('click',handleClick);
+    button.dataset.type = type;
+
+    return button;
+}
+
+const cancelReview = (box) => {
+    const reviewBox = box;
+
+    reviewBox.querySelector("[data-type='edit']").style.display = 'block';
+    reviewBox.querySelector("[data-type='delete']").style.display = 'block';
+    reviewBox.querySelector('.userReview__text').style.display = 'block';
+
+    reviewBox.querySelector('.userReview__textarea').remove();
+    reviewBox.querySelector('.rating-label').remove();
+    reviewBox.querySelector("[data-type='save']").remove();
+    reviewBox.querySelector("[data-type='cancel']").remove();
+}
+
+const displayEditForm = (id) => {
+    const reviewBox = document.querySelector(`[data-review='${id}']`);
+    const reviewText = reviewBox.querySelector('.userReview__text');
+    
+    const textArea = document.createElement('textarea');
+    textArea.value = reviewText.innerText;
+    textArea.classList.add('userReview__textarea');
+
+    reviewText.style.display = 'none';
+    reviewBox.querySelector('.userReview__column').append(textArea);
+    textArea.focus();
+
+    const rating = reviewBox.querySelector('.userReview__rating').innerText;
+    const stars = document.createElement('label');
+    stars.classList.add('rating-label');
+
+    const starsInput = document.createElement('input');
+    starsInput.classList.add('rating');
+    starsInput.setAttribute('max',6);
+    starsInput.setAttribute('min',1);
+    starsInput.setAttribute('step',1);
+    starsInput.setAttribute('style',`--stars:6;--value:${rating}`);
+    starsInput.setAttribute('type',"range");
+    starsInput.setAttribute('value',rating);
+    starsInput.setAttribute('name',rating);
+    starsInput.setAttribute('required',true);
+    starsInput.addEventListener('input',e=>e.target.style.setProperty('--value', `${e.target.value}`))
+    
+    stars.appendChild(starsInput);
+    reviewBox.querySelector('.userReview__column').prepend(stars);
+
+    reviewBox.querySelector("[data-type='edit']").style.display = 'none';
+    reviewBox.querySelector("[data-type='delete']").style.display = 'none';
+
+    reviewBox.querySelector('.userReview__buttons').append(createButton("ZAPISZ","save",getReview));
+    reviewBox.querySelector('.userReview__buttons').append(createButton("ANULUJ","cancel",()=>{cancelReview(reviewBox)},"danger"));
+}
+
 const getReview = (review) => {
     const markup = `
-    <li class="userReview userReview--buttons" data-id="${review.Id}">
+    <li class="userReview userReview--buttons" data-review="${review.Id}">
         <div class="userReview__column">
             <div class="userReview__header">
                 <div>
@@ -34,7 +96,7 @@ const getReview = (review) => {
             </p>
         </div>
         <div class="userReview__buttons">
-            <button class="button button--secondary">EDYTUJ</button>
+            <button class="button button--secondary" data-type="edit" data-id="${review.Id}">EDYTUJ</button>
             <button class="button button--danger" data-type="delete" data-id="${review.Id}">USUŃ</button>
         </div>
     </li>
@@ -98,5 +160,9 @@ reviewsContainer.addEventListener('click',e=>{
         let id = parseInt(e.target.dataset.id);
         e.target.disabled = true;
         deleteReview(id,e.target.closest('.userReview'));
+    }
+    if(e.target.dataset.type === "edit"){
+        let id = parseInt(e.target.dataset.id);
+        displayEditForm(id);
     }
 });
