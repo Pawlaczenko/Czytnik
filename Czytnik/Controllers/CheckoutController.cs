@@ -39,8 +39,6 @@ namespace Czytnik.Controllers
     [HttpPost]
     public async Task<IActionResult> Session(string products)
     {
-      var items = JsonConvert.DeserializeObject<Item[]>(products);
-
       var paymentIntentService = new PaymentIntentService();
 
       var paymentIntent = paymentIntentService.Create(new PaymentIntentCreateOptions
@@ -56,9 +54,19 @@ namespace Czytnik.Controllers
       return Json(new { clientSecret = paymentIntent.ClientSecret, key = paymentIntent.Id });
     }
 
+    [HttpPost]
+    public async Task Order(string products)
+    {
+      products = (products == null) ? "" : products;
+      var items = JsonConvert.DeserializeObject<Item[]>(products);
+
+      await _checkoutService.AddOrder(items);
+    }
+
     [HttpPatch]
     public async Task<IActionResult> Update(string shipping, string key, string products)
     {
+      products = (products==null) ? "" : products;
       var items = JsonConvert.DeserializeObject<Item[]>(products);
       long Amount = (long)((await CalculateOrderAmount(items) + shipments[shipping]) * 100);
       var options = new PaymentIntentUpdateOptions

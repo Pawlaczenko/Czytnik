@@ -14,5 +14,6 @@ namespace Czytnik.Services
         Task UpdateQuantity(int bookId, short quantity);
         Task<int> GetCartQuantity();
         Task<IEnumerable<CartItemsViewModel>> GetCartBooks(string booksId);
+        Task Clear();
     }
 }
