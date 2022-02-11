@@ -32,10 +32,6 @@ namespace Czytnik.Controllers
         {
             return View();
         }
-        public IActionResult Templates()
-        {
-            return View();
-        }
         public async Task<IActionResult> Reviews(string sortOrder)
         {
             ViewData["RatingSortParm"] = String.IsNullOrEmpty(sortOrder) ? "rating_desc" : "rating";
@@ -47,6 +43,27 @@ namespace Czytnik.Controllers
         public IActionResult Favourites()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddFavouriteBook(int bookId)
+        {
+            if(!Double.IsNaN(bookId) && !Double.IsInfinity(bookId))
+            {
+                await _userService.AddToFavourites(bookId);
+                return Ok("{}");
+            } else
+            {
+                return NotFound();
+            }
+            
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteFavouriteBook(int bookId)
+        {
+            await _userService.DeleteFavourite(bookId);
+            return Ok("{}");
         }
 
     }

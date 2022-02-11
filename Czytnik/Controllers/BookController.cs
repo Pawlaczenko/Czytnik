@@ -25,6 +25,7 @@ namespace Czytnik.Controllers
         {
             var books = _bookService.GetProductBookPage(Id);
             books.IsFormVisible = _userService.DidUserRateThisBook(Id).Result;
+            books.IsLikedByUser = _userService.DidUserBefriendThisBook(Id).Result;
             return View(books);
         }
 

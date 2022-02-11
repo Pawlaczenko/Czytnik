@@ -19,5 +19,6 @@ namespace Czytnik_Model.ViewModels
             get { return string.Format("{0} {1}", FirstName, Surname); }
         }
         public List<UserReviewViewModel> UserReviews { get; set; }
+        public List<BestBooksViewModel> Favourites { get; set; }
     }
 }

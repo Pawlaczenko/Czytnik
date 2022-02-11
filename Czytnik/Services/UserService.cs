@@ -37,7 +37,8 @@ namespace Czytnik.Services
                 PhoneNumber = currentUser.PhoneNumber,
                 ProfilePicture = currentUser.ProfilePicture,
                 Username = currentUser.UserName,
-                UserReviews = GetUserReviews(4,"").Result
+                UserReviews = GetUserReviews(4,"").Result,
+                Favourites = GetAllFavourites(4,"").Result,
             };
             return userInfoModel;
         }
@@ -83,6 +84,64 @@ namespace Czytnik.Services
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
             var review = _dbContext.Reviews.Where(r => r.User == currentUser).Where(r => r.BookId == bookId).FirstOrDefault();
             return review == null; //może - true, nie 
+        }
+
+        public async Task<bool> DidUserBefriendThisBook(int bookId)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var fav = _dbContext.Favourites.Where(f => f.User == currentUser).Where(f => f.BookId == bookId).FirstOrDefault();
+            return fav == null; // - true, nie 
+        }
+
+        public async Task AddToFavourites(int bookId)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            if (currentUser != null && DidUserBefriendThisBook(bookId).Result)
+            {
+                var fav = new Favourite
+                {
+                    BookId = bookId,
+                    User = currentUser
+                };
+                await _dbContext.Favourites.AddAsync(fav);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteFavourite(int bookId)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var favourite = _dbContext.Favourites.Where(f => f.BookId == bookId && f.User==currentUser).FirstOrDefault();
+            if (currentUser != null && favourite!=null)
+            {
+                _dbContext.Favourites.Remove(favourite);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+        public async Task<List<BestBooksViewModel>> GetAllFavourites(int count, string sortBy) {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var favourites = _dbContext.Favourites.Where(f => f.User == currentUser).Select(f => new BestBooksViewModel
+            {
+                Cover = f.Book.Cover,
+                Title = f.Book.Title,
+                Id = f.Book.Id,
+                Authors = f.Book.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
+            });
+
+            switch (sortBy)
+            {
+                case "title_desc":
+                    favourites = favourites.OrderByDescending(f => f.Title);
+                    break;
+                default:
+                    favourites = favourites.OrderBy(f => f.Title);
+                    break;
+            }
+
+            if (count > 0) favourites = favourites.Take(count);
+
+            var results = await favourites.ToListAsync();
+            return results;
         }
     }
 }
