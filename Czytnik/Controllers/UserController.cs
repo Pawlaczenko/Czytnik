@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Czytnik.Controllers
@@ -32,36 +33,44 @@ namespace Czytnik.Controllers
         {
             return View();
         }
-        public IActionResult Templates()
-        {
-            return View();
-        }
         public async Task<IActionResult> Reviews(string sortOrder)
         {
-            ViewData["RatingSortParm"] = String.IsNullOrEmpty(sortOrder) ? "rating_desc" : "rating";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "date";
-
-            var results = await _userService.GetUserReviews(-1, sortOrder);
+            int results = _userService.GetUserReviews(-1, sortOrder).Result.Count;
             return View(results);
         }
-        public IActionResult Favourites()
+        public async Task<IActionResult> Favourites(string sortOrder)
         {
-            return View();
+            var results = _userService.GetAllFavourites(0,-1, sortOrder).Result.Count;
+            return View(results);
         }
-        public IActionResult GetReviewViewComponent(UserReviewViewModel review)
+
+        [HttpPost]
+        public async Task<IActionResult> AddFavouriteBook(int bookId)
         {
-            UserReviewViewModel _review = new UserReviewViewModel
+            if(!Double.IsNaN(bookId) && !Double.IsInfinity(bookId))
             {
-                Id = review.Id,
-                ReviewDate = review.ReviewDate,
-                Rating = review.Rating,
-                ReviewText = review.ReviewText,
-                BookTitle = review.BookTitle,
-                Authors = review.Authors
-            };
-            Console.WriteLine("____________");
-            Console.WriteLine(_review.Id);
-            return ViewComponent("UserReview", new { review = _review, isEditable = true });
+                await _userService.AddToFavourites(bookId);
+                return Ok("{}");
+            } else
+            {
+                return NotFound();
+            }
+            
         }
+
+        [HttpGet]
+        public async Task<JsonResult> GetAllUserFavourites(int skip = 0, int count = 5, string sortBy = "")
+        {
+            var reviewsViewModel = await _userService.GetAllFavourites(skip, count, sortBy);
+            return Json(reviewsViewModel, new JsonSerializerOptions { PropertyNamingPolicy = null });
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteFavouriteBook(int bookId)
+        {
+            await _userService.DeleteFavourite(bookId);
+            return Ok("{}");
+        }
+
     }
 }

@@ -12,5 +12,6 @@ namespace Czytnik_Model.ViewModels
         public DateTime ReviewDate { get; set; }
         public string BookTitle { get; set; }
         public List<string> Authors { get; set; }
+        public int BookId { get; set; }
     }
 }

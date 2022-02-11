@@ -1,4 +1,4 @@
-﻿@model List<Czytnik_Model.ViewModels.UserReviewViewModel>
+﻿@model int
 @{
     ViewData["Title"] = "Twój profil - Recenzje";
 }
@@ -9,7 +9,7 @@
     <div class="user-container user-container--reviews">
         <div class="sorting-header user-reviews__sort">
             <div class="sorting-header__counter">
-                Znaleziono <span id="reviewsCount">@Model.Count</span> recenzje
+                Znaleziono <span id="reviewsCount">@Model</span> recenzje
             </div>
             <div class="sorting-header__sort">
                 <label for="sort" class="sorting-header__sort-label">Sortuj według: </label>

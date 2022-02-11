@@ -121,6 +121,8 @@ const displayEditForm = (id) => {
 }
 
 const getReview = (review) => {
+    let text = review.ReviewText;
+    text = text ? text.replace(/</g, "&lt;").replace(/>/g, "&gt;") : "";
     const markup = `
     <li class="userReview userReview--buttons" data-review="${review.Id}">
         <div class="userReview__column">
@@ -133,9 +135,9 @@ const getReview = (review) => {
                 </div> 
                 <span class="userReview__date">${review.ReviewDate.slice(0,10)}</span>
             </div>
-            <h3 class="userReview__title">${review.BookTitle} - <span class="userReview__author">${review.Authors}</span></h3>
+            <a class="userReview__title" href="/Book/Index/${review.BookId}">${review.BookTitle} - <span class="userReview__author">${review.Authors}</span></a>
             <p class="userReview__text">
-                ${review.ReviewText.replace(/</g, "&lt;").replace(/>/g, "&gt;") || ""}
+                ${text}
             </p>
         </div>
         <div class="userReview__buttons">

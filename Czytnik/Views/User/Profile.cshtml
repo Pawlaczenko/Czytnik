@@ -43,66 +43,30 @@
     <div class="user__favourites">
         <h2 class="heading-line heading-line--left user__favourites-heading">Twoje ulubione pozycje</h2>
         <div class="user__favourites-list">
-            <a href="/Book/Index/69" class="user__favourites-item">
-                <figure class="user__favourites-figure">
-                    <img class="user__favourites-image" src="~/assets/img/history_category.png" />
-                </figure>
-                <p class="user__favourites-title">Psycho</p>
-                <p class="user__favourites-author">Robert Bloch</p>
-            </a>
-            <a href="/Book/Index/69" class="user__favourites-item">
-                <figure class="user__favourites-figure">
-                    <img class="user__favourites-image" src="~/assets/img/history_category.png" />
-                </figure>
-                <p class="user__favourites-title">Psycho</p>
-                <p class="user__favourites-author">Robert Bloch</p>
-            </a>
-            <a href="/Book/Index/69" class="user__favourites-item">
-                <figure class="user__favourites-figure">
-                    <img class="user__favourites-image" src="~/assets/img/fantasy_category.png" />
-                </figure>
-                <p class="user__favourites-title">Psycho</p>
-                <p class="user__favourites-author">Robert Bloch</p>
-            </a>
-            <a href="/Book/Index/69" class="user__favourites-item">
-                <figure class="user__favourites-figure">
-                    <img class="user__favourites-image" src="~/assets/img/history_category.png" />
-                </figure>
-                <p class="user__favourites-title">Psycho</p>
-                <p class="user__favourites-author">Robert Bloch</p>
-            </a>
-            <div class="user__favourites-item user__favourites-more">
-                <a href="/User/Favourites" class="moreLink">zobacz wszystkie...</a>
-            </div>
+            @if (Model.Favourites.Count > 0)
+            {
+                @foreach (var fav in Model.Favourites)
+                {
+                    <a href="/Book/Index/@fav.Id" class="user__favourites-item">
+                        <figure class="user__favourites-figure">
+                            <img class="user__favourites-image" src="@fav.Cover" />
+                        </figure>
+                        <p class="user__favourites-title">@fav.Title</p>
+                        <p class="user__favourites-author">@string.Join(", ", fav.Authors)</p>
+                    </a>
+                }
+                <div class="user__favourites-item user__favourites-more">
+                    <a href="/User/Favourites" class="moreLink">zobacz wszystkie...</a>
+                </div>
+            } else
+            {
+                <div class="user__favourites-none user__none">Nic tu nie ma :(</div>
+            }
+
         </div>
-    </div>
-    <div class="user__templates">
-        <h2 class="heading-line heading-line--left user__favourites-heading">Twoje szablony płatności</h2>
-        <div class="user__templates-container">
-            <details class="address-template" open>
-                <summary class="address-template__header">
-                    <h3 class="address-template__heading">Bartłomiej Pawlak</h3>
-                    <p class="address-template__post">34-600 Limanowa</p>
-                </summary>
-                <p class="address-template__address">Stróża 100 ul. Piotrowa</p>
-                <p class="address-template__email">bartek@email.com</p>
-                <p class="address-template__phone">500 100 100</p>
-            </details>
-            <details class="address-template">
-                <summary class="address-template__header">
-                    <h3 class="address-template__heading">Bartłomiej Pawlak</h3>
-                    <p class="address-template__post">34-600 Limanowa</p>
-                </summary>
-                <p class="address-template__address">Stróża 100 ul. Piotrowa</p>
-                <p class="address-template__email">bartek@email.com</p>
-                <p class="address-template__phone">500 100 100</p>
-            </details>
-            <a href="/User/Templates" class="address-template__button">+</a>
-        </div>
-        <a href="/User/Templates" class="moreLink">zobacz wszystkie szablony... </a>
     </div>
     <div class="user__orders">
-        <h2 class="heading-line heading-line--right user__favourites-heading">Historia zamówień</h2>
+        <h2 class="heading-line heading-line--left user__favourites-heading">Historia zamówień</h2>
         <div class="user__orders-container">
             <div class="order">
                 <div class="order__info">
@@ -144,10 +108,18 @@
         <h2 class="heading-line heading-line--left user__reviews-heading">Twoje oceny i recenzje</h2>
         <a href="/User/Reviews" class="moreLink user__reviews-more">zobacz wszystkie recenzje... </a>
         <ul class="user__reviews-container">
-            @foreach (var r in Model.UserReviews)
+            @if (Model.UserReviews.Count > 0)
             {
-                @await Component.InvokeAsync("UserReview", new { review = r, isEditable = false })
+                @foreach (var r in Model.UserReviews)
+                {
+                    @await Component.InvokeAsync("UserReview", new { review = r, isEditable = false })
+                }
             }
+            else
+            {
+                <li class="user__reviews-none user__none">Nic tu nie ma :(</li>
+            }
+
         </ul>
     </div>
 </section>

@@ -5,7 +5,7 @@
     grid-template-areas: 
     "header info"
     "favourites favourites"
-    "templates orders"
+    "orders ."
     "reviews reviews";
 
     @media only screen and (max-width: 900px) {
@@ -15,7 +15,6 @@
         "header"
         "info"
         "favourites"
-        "templates"
         "orders"
         "reviews";
     }
@@ -25,6 +24,12 @@
     margin-top: 2rem;
     padding-bottom: 4rem;
     
+    &__none {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        text-align: center;
+    }
+
     // HEADER
 
     &__header {
@@ -134,11 +139,13 @@
         }
 
         &-figure {
-            min-width: 20rem;
-            height: 15rem;
+            //max-width: 20rem;
+            display: block;
+            height: 30rem;
             overflow: hidden;
             position: relative;
             margin-bottom: 1rem;
+            background-color: var(--color-white-dark);
         }
 
         &-image {
@@ -151,7 +158,26 @@
         &-title {
             font-size: 1.8rem;
             font-weight: 700;
-            @include lineClamp(1);
+            @include lineClamp(2);
+        }
+
+        &-button {
+            width: 100%;
+            padding: .5rem;
+            background-color: var(--color-secondary-dark);
+            color: var(--color-white);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: .6rem auto;
+            border: 1px solid currentColor;
+
+            font-family: inherit;
+
+            &:hover {
+                background-color: var(--color-white);
+                color: var(--color-secondary-dark);
+            }
         }
 
         &-author {
@@ -276,6 +302,7 @@
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
         grid-gap: 2rem 5rem;
+        margin-top: 3rem;
     }
 
     &__button {
@@ -573,6 +600,11 @@
 
     &__title {
         font-size: 1.6rem;
+        font-weight: 700;
+
+        &:hover {
+            color: var(--color-secondary);
+        }
     }
 
     &__author {
