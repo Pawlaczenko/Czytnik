@@ -573,6 +573,11 @@
 
     &__title {
         font-size: 1.6rem;
+        font-weight: 700;
+
+        &:hover {
+            color: var(--color-secondary);
+        }
     }
 
     &__author {

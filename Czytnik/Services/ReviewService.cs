@@ -54,6 +54,7 @@ namespace Czytnik.Services
                     ReviewDate = r.ReviewDate,
                     BookTitle = r.Book.Title,
                     Authors = r.Book.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
+                    BookId = r.BookId
                 });
 
 

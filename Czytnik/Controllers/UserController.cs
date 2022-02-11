@@ -48,20 +48,6 @@ namespace Czytnik.Controllers
         {
             return View();
         }
-        public IActionResult GetReviewViewComponent(UserReviewViewModel review)
-        {
-            UserReviewViewModel _review = new UserReviewViewModel
-            {
-                Id = review.Id,
-                ReviewDate = review.ReviewDate,
-                Rating = review.Rating,
-                ReviewText = review.ReviewText,
-                BookTitle = review.BookTitle,
-                Authors = review.Authors
-            };
-            Console.WriteLine("____________");
-            Console.WriteLine(_review.Id);
-            return ViewComponent("UserReview", new { review = _review, isEditable = true });
-        }
+
     }
 }
