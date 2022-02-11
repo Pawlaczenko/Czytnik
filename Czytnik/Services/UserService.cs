@@ -36,9 +36,45 @@ namespace Czytnik.Services
                 Email = currentUser.Email,
                 PhoneNumber = currentUser.PhoneNumber,
                 ProfilePicture = currentUser.ProfilePicture,
-                Username = currentUser.UserName
+                Username = currentUser.UserName,
+                UserReviews = GetUserReviews(4,"").Result
             };
             return userInfoModel;
+        }
+
+        public async Task<List<UserReviewViewModel>> GetUserReviews(int count, string sortOrder)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var reviews = _dbContext.Reviews.Where(r => r.User == currentUser).Select(r => new UserReviewViewModel
+            {
+                Id = r.Id,
+                Rating = r.Rating,
+                ReviewText = r.ReviewText,
+                ReviewDate = r.ReviewDate,
+                BookTitle = r.Book.Title,
+                Authors = r.Book.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
+            });
+
+            switch (sortOrder)
+            {
+                case "rating_desc":
+                    reviews = reviews.OrderByDescending(r => r.Rating);
+                    break;
+                case "rating":
+                    reviews = reviews.OrderBy(r => r.Rating);
+                    break;
+                case "date_desc":
+                    reviews = reviews.OrderByDescending(r => r.ReviewDate);
+                    break;
+                default:
+                    reviews = reviews.OrderBy(r => r.ReviewDate);
+                    break;
+            }
+
+            if (count > 0) reviews = reviews.Take(count); 
+
+            var results = await reviews.ToListAsync();
+            return results;
         }
 
         public async Task<bool> DidUserRateThisBook(int bookId)

@@ -24,7 +24,7 @@ namespace Czytnik.Controllers
             UserProfileViewModel userInfo = await _userService.GetProfileInfo();
             return View(userInfo);
         }
-        public IActionResult Settings()
+        public async Task<IActionResult> Settings()
         {
             return View();
         }
@@ -36,13 +36,32 @@ namespace Czytnik.Controllers
         {
             return View();
         }
-        public IActionResult Reviews()
+        public async Task<IActionResult> Reviews(string sortOrder)
         {
-            return View();
+            ViewData["RatingSortParm"] = String.IsNullOrEmpty(sortOrder) ? "rating_desc" : "rating";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "date";
+
+            var results = await _userService.GetUserReviews(-1, sortOrder);
+            return View(results);
         }
         public IActionResult Favourites()
         {
             return View();
+        }
+        public IActionResult GetReviewViewComponent(UserReviewViewModel review)
+        {
+            UserReviewViewModel _review = new UserReviewViewModel
+            {
+                Id = review.Id,
+                ReviewDate = review.ReviewDate,
+                Rating = review.Rating,
+                ReviewText = review.ReviewText,
+                BookTitle = review.BookTitle,
+                Authors = review.Authors
+            };
+            Console.WriteLine("____________");
+            Console.WriteLine(_review.Id);
+            return ViewComponent("UserReview", new { review = _review, isEditable = true });
         }
     }
 }

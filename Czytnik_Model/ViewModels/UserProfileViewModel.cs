@@ -1,5 +1,6 @@
 ﻿using Czytnik_Model.Models;
 using System;
+using System.Collections.Generic;
 
 namespace Czytnik_Model.ViewModels
 {
@@ -17,5 +18,6 @@ namespace Czytnik_Model.ViewModels
         {
             get { return string.Format("{0} {1}", FirstName, Surname); }
         }
+        public List<UserReviewViewModel> UserReviews { get; set; }
     }
 }
