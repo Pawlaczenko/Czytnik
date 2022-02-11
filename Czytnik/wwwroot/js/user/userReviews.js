@@ -15,19 +15,58 @@ const handleChange = (e) => {
     loadReviews();
 }
 
-const createButton = (value,type,handleClick, variant="") => {
+const createButton = (value,type, variant="",id) => {
     const button = document.createElement('button');
     button.classList.add("button");
     button.classList.add(`button--${variant}`);
     button.innerText = value;
-    button.addEventListener('click',handleClick);
     button.dataset.type = type;
+    button.dataset.id = id;
 
     return button;
 }
 
-const cancelReview = (box) => {
-    const reviewBox = box;
+const getNewReviewData = (id) => {
+    const box =  document.querySelector(`[data-review='${id}']`);
+    let reviewText = box.querySelector('.userReview__textarea').value;
+    const reviewRating = parseInt(box.querySelector('.rating').value);
+
+    reviewText = reviewText ? reviewText : "";
+
+    return {ReviewText: reviewText, Rating: reviewRating};
+}
+
+const updateReviewBox = (id,data) => {
+    const box =  document.querySelector(`[data-review='${id}']`);
+    const reviewText = box.querySelector('.userReview__text');
+    const reviewRating = box.querySelector('.userReview__rating');
+
+    reviewText.innerText = data.ReviewText;
+    reviewRating.innerText = data.Rating;
+}
+
+const submitReview = (id) => {
+    const data = getNewReviewData(id);
+    displaySpinner();
+    $.ajax({
+        type: "PATCH",
+        url: "/Reviews/Edit",
+        dataType: 'json',
+        data: {Review:{...data},Id: id},
+        success: function (result) {
+            hideSpinner();
+            cancelReview(id);
+            updateReviewBox(id,data);
+        },
+        error: function (emp) {
+            alert("Coś poszło nie tak");
+            hideSpinner();
+        }
+    });
+}
+
+const cancelReview = (id) => {
+    const reviewBox = document.querySelector(`[data-review='${id}']`);
 
     reviewBox.querySelector("[data-type='edit']").style.display = 'block';
     reviewBox.querySelector("[data-type='delete']").style.display = 'block';
@@ -37,15 +76,19 @@ const cancelReview = (box) => {
     reviewBox.querySelector('.rating-label').remove();
     reviewBox.querySelector("[data-type='save']").remove();
     reviewBox.querySelector("[data-type='cancel']").remove();
+    reviewBox.classList.remove('userReview--editable');
 }
 
 const displayEditForm = (id) => {
     const reviewBox = document.querySelector(`[data-review='${id}']`);
+    reviewBox.classList.add('userReview--editable');
+
     const reviewText = reviewBox.querySelector('.userReview__text');
     
     const textArea = document.createElement('textarea');
     textArea.value = reviewText.innerText;
     textArea.classList.add('userReview__textarea');
+    textArea.setAttribute('max',999);
 
     reviewText.style.display = 'none';
     reviewBox.querySelector('.userReview__column').append(textArea);
@@ -73,8 +116,8 @@ const displayEditForm = (id) => {
     reviewBox.querySelector("[data-type='edit']").style.display = 'none';
     reviewBox.querySelector("[data-type='delete']").style.display = 'none';
 
-    reviewBox.querySelector('.userReview__buttons').append(createButton("ZAPISZ","save",getReview));
-    reviewBox.querySelector('.userReview__buttons').append(createButton("ANULUJ","cancel",()=>{cancelReview(reviewBox)},"danger"));
+    reviewBox.querySelector('.userReview__buttons').append(createButton("ZAPISZ","save","",id));
+    reviewBox.querySelector('.userReview__buttons').append(createButton("ANULUJ","cancel","danger",id));
 }
 
 const getReview = (review) => {
@@ -92,7 +135,7 @@ const getReview = (review) => {
             </div>
             <h3 class="userReview__title">${review.BookTitle} - <span class="userReview__author">${review.Authors}</span></h3>
             <p class="userReview__text">
-                ${review.ReviewText || ""}
+                ${review.ReviewText.replace(/</g, "&lt;").replace(/>/g, "&gt;") || ""}
             </p>
         </div>
         <div class="userReview__buttons">
@@ -164,5 +207,14 @@ reviewsContainer.addEventListener('click',e=>{
     if(e.target.dataset.type === "edit"){
         let id = parseInt(e.target.dataset.id);
         displayEditForm(id);
+    }
+    if(e.target.dataset.type === "save"){
+        let id = parseInt(e.target.dataset.id);
+        e.target.disabled = true;
+        submitReview(id);
+    }
+    if(e.target.dataset.type === "cancel"){
+        let id = parseInt(e.target.dataset.id);
+        cancelReview(id);
     }
 });

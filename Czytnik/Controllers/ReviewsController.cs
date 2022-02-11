@@ -47,5 +47,12 @@ namespace Czytnik.Controllers
             await _reviewService.Delete(Id);
             return Ok("{}");
         }
+
+        [HttpPatch]
+        public async Task<IActionResult> Edit(Review review, int Id)
+        {
+            await _reviewService.Edit(review, Id);
+            return Ok("{}");
+        }
     }
 }

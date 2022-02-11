@@ -530,7 +530,14 @@
 }
 
 .userReview{
-    
+    transition: all .2s ease-in-out;
+    &--editable {
+        border-top: 3px solid var(--color-secondary);
+        border-bottom: 3px solid var(--color-secondary);
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+    }
+
     &--buttons {
         display: grid;
         grid-template-columns: 85% 15%;
