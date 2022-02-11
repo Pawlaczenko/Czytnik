@@ -38,7 +38,7 @@ namespace Czytnik.Services
                 ProfilePicture = currentUser.ProfilePicture,
                 Username = currentUser.UserName,
                 UserReviews = GetUserReviews(4,"").Result,
-                Favourites = GetAllFavourites(4,"").Result,
+                Favourites = GetAllFavourites(0,4,"").Result,
             };
             return userInfoModel;
         }
@@ -118,7 +118,8 @@ namespace Czytnik.Services
                 await _dbContext.SaveChangesAsync();
             }
         }
-        public async Task<List<BestBooksViewModel>> GetAllFavourites(int count, string sortBy) {
+        public async Task<List<BestBooksViewModel>> GetAllFavourites(int skip = 0, int count = 5, string sortBy = "")
+        {
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
             var favourites = _dbContext.Favourites.Where(f => f.User == currentUser).Select(f => new BestBooksViewModel
             {
@@ -128,7 +129,7 @@ namespace Czytnik.Services
                 Authors = f.Book.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
             });
 
-            switch (sortBy)
+            switch(sortBy)
             {
                 case "title_desc":
                     favourites = favourites.OrderByDescending(f => f.Title);
@@ -138,7 +139,7 @@ namespace Czytnik.Services
                     break;
             }
 
-            if (count > 0) favourites = favourites.Take(count);
+            if (count > 0) favourites = favourites.Skip(skip).Take(count);
 
             var results = await favourites.ToListAsync();
             return results;

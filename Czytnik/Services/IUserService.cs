@@ -14,6 +14,6 @@ namespace Czytnik.Services
         Task<List<UserReviewViewModel>> GetUserReviews(int count, string sortOrder);
         Task AddToFavourites(int bookId);
         Task DeleteFavourite(int bookId);
-        Task<List<BestBooksViewModel>> GetAllFavourites(int count, string sortBy);
+        Task<List<BestBooksViewModel>> GetAllFavourites(int skip = 0, int count = 5, string sortBy = "");
     }
 }
