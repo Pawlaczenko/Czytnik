@@ -20,5 +20,6 @@ namespace Czytnik_Model.ViewModels
         }
         public List<UserReviewViewModel> UserReviews { get; set; }
         public List<BestBooksViewModel> Favourites { get; set; }
+        public List<OrderViewModel> Orders { get; set; }
     }
 }

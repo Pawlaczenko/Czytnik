@@ -31,7 +31,8 @@ namespace Czytnik.Controllers
         }
         public IActionResult Orders()
         {
-            return View();
+            int ordersCount = _userService.GetOrders(-1, 0, "").Result.Count;
+            return View(ordersCount);
         }
         public async Task<IActionResult> Reviews(string sortOrder)
         {
@@ -70,6 +71,12 @@ namespace Czytnik.Controllers
         {
             await _userService.DeleteFavourite(bookId);
             return Ok("{}");
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetAllOrders(int skip = 0, int count = 2, string sortBy = "")
+        {
+            var orders = await _userService.GetOrders(count, skip, sortBy);
+            return Json(orders, new JsonSerializerOptions { PropertyNamingPolicy = null });
         }
 
     }
