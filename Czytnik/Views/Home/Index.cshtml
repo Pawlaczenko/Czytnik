@@ -43,7 +43,7 @@
                 <img src="/assets/img/fantasy_category.png" alt="fantasy" class="home-categories__item-image">
                 <p class="home-categories__item-title">Fantasy</p>
             </a>
-            <a href="/Search?CategoryId=123" class="home-categories__item">
+            <a href="/Search?CategoryId=4" class="home-categories__item">
                 <img src="/assets/img/history_category.png" alt="historia" class="home-categories__item-image">
                 <p class="home-categories__item-title">Historia</p>
             </a>
@@ -62,7 +62,7 @@
         <div class="home-top-books__header">
             <h1 class="home-top-books__title decorated-heading">To najczęściej<br />czytano w @Model.month:</h1>
         </div>
-        <vc:books-carousel type="Default" series="-1" category="-1" book="-1"></vc:books-carousel>
+        @await Component.InvokeAsync("BooksCarousel", new { type = "Default" });
     </section>
 
     @if (Model.ofAllTime.Count > 0)
@@ -86,62 +86,6 @@
             </div>
         </section>
     }
-
-
-    <section class="home-blog">
-        <div class="home-blog__content wrapper">
-            <div class="home-blog__header">
-                <h1 class="home-blog__title">Poznaj naszego bloga</h1>
-                <p class="home-blog__description">Chcesz jeszcze bardziej wgłębić się w świat książek? Zajrzyj na nasz
-                    blog,
-                    gdzie przeczytasz o najnowszych trendach oraz
-                    poznasz lepiej nasz skład.</p>
-            </div>
-
-            <div class="home-blog__articles">
-                <a href="/Post/1" class="home-blog__articles-item">
-                    <div class="home-blog__articles-image-wrapper"><img src="/assets/img/example_post.png" alt="post"
-                            class="home-blog__articles-image"></div>
-                    <p class="home-blog__articles-title">10 Książek, Które Zmienią Twoje Życie</p>
-                    <div class="home-blog__articles-author">
-                        <img src="/assets/img/example_avatar.png" alt="author"
-                            class="home-blog__articles-author-avatar"></img>
-                        <p class="home-blog__articles-author-name">Bartłomiej Stapiński</p>
-                    </div>
-                </a>
-                <a href="/Post/1" class="home-blog__articles-item">
-                    <div class="home-blog__articles-image-wrapper"><img src="/assets/img/example_post.png" alt="post"
-                            class="home-blog__articles-image"></div>
-                    <p class="home-blog__articles-title">Najlepsze Pozycje Do Czytania Książek</p>
-                    <div class="home-blog__articles-author">
-                        <img src="/assets/img/example_avatar.png" alt="author"
-                            class="home-blog__articles-author-avatar"></img>
-                        <p class="home-blog__articles-author-name">Bartłomiej Stapiński</p>
-                    </div>
-                </a>
-                <a href="/Post/1" class="home-blog__articles-item">
-                    <div class="home-blog__articles-image-wrapper"><img src="/assets/img/example_post.png" alt="post"
-                            class="home-blog__articles-image"></div>
-                    <p class="home-blog__articles-title">Już Mi Się Nie Chce Wymyślać Tytułów Tych Blogów</p>
-                    <div class="home-blog__articles-author">
-                        <img src="/assets/img/example_avatar.png" alt="author"
-                            class="home-blog__articles-author-avatar"></img>
-                        <p class="home-blog__articles-author-name">Bartłomiej Stapiński</p>
-                    </div>
-                </a>
-                <a href="/Post/1" class="home-blog__articles-item">
-                    <div class="home-blog__articles-image-wrapper"><img src="/assets/img/example_post.png" alt="post"
-                            class="home-blog__articles-image"></div>
-                    <p class="home-blog__articles-title">To Może Się Nawet Nie Pojawić W Tym Projekcie</p>
-                    <div class="home-blog__articles-author">
-                        <img src="/assets/img/example_avatar.png" alt="author"
-                            class="home-blog__articles-author-avatar"></img>
-                        <p class="home-blog__articles-author-name">Bartłomiej Stapiński</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
 </main>
 
 <script src="~/js/homeHandling.js"></script>

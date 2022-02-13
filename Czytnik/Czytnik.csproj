@@ -32,7 +32,6 @@
     <Content Remove="Views\User\Profile.cshtml" />
     <Content Remove="Views\User\Reviews.cshtml" />
     <Content Remove="Views\User\Settings.cshtml" />
-    <Content Remove="Views\User\Templates.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -96,7 +95,6 @@
     <None Include="Views\User\Orders.cshtml" />
     <None Include="Views\User\Reviews.cshtml" />
     <None Include="Views\User\Settings.cshtml" />
-    <None Include="Views\User\Templates.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -129,7 +127,6 @@
 	  <Watch Remove="Views\User\Profile.cshtml" />
 	  <Watch Remove="Views\User\Reviews.cshtml" />
 	  <Watch Remove="Views\User\Settings.cshtml" />
-	  <Watch Remove="Views\User\Templates.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>

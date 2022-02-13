@@ -37,7 +37,7 @@ namespace Czytnik.Services
                 PhoneNumber = currentUser.PhoneNumber,
                 ProfilePicture = currentUser.ProfilePicture,
                 Username = currentUser.UserName,
-                UserReviews = GetUserReviews(4,"").Result,
+                UserReviews = GetUserReviews(4, "date_desc").Result,
                 Favourites = GetAllFavourites(0,4,"").Result,
             };
             return userInfoModel;

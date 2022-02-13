@@ -57,17 +57,16 @@ namespace Czytnik.Services
         public async Task<IEnumerable<BooksCarouselViewModel>> GetTopMonthBooks(int count, DateTime date)
         {
             var today = new DateTime(date.Year, date.Month, 1);
-            var firstDayOfMonth = today.AddMonths(-1);
-            var lastDayOfMonth = today.AddDays(-1);
-
-            var monthBooksQuery = _dbContext.OrderItems
+            var firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
+            var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+            var monthBooksQuery = await _dbContext.OrderItems
                 .Select(x => new
                 {
                     x.Book.Id,
                     x.Quantity,
                     x.Order.OrderDate
                 })
-                .Where(el => el.OrderDate >= firstDayOfMonth && el.OrderDate <= lastDayOfMonth)
+                .Where(el => ((el.OrderDate >= firstDayOfMonth) && (el.OrderDate <= lastDayOfMonth)))
                 .GroupBy(x => new { x.Id})
                 .Select(x => new
                 {
@@ -77,20 +76,26 @@ namespace Czytnik.Services
                 .OrderByDescending(el=>el.qntSum)
                 .Take(count)
                 .Select(i => i.Id)
-                .ToList();
+                .ToListAsync();
 
-            var res = _dbContext.Books.Where(b => monthBooksQuery.Contains(b.Id))
-                .Select(b => new BooksCarouselViewModel
-                {
-                    Id = b.Id,
-                    Title = b.Title,
-                    Price = b.Price,
-                    Cover = b.Cover,
-                    Rating = b.Rating,
-                    Category = b.Category,
-                    Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
-                    Discount = b.BookDiscounts.Where(entry => entry.BookId == b.Id).Select(entry => entry.Discount).FirstOrDefault(),
-                });
+            var res = new List<BooksCarouselViewModel>();
+            foreach(var bId in monthBooksQuery)
+            {
+                var book = _dbContext.Books.Where(b => b.Id == bId)
+                    .Select(b => new BooksCarouselViewModel
+                    {
+                        Id = b.Id,
+                        Title = b.Title,
+                        Price = b.Price,
+                        Cover = b.Cover,
+                        Rating = b.Rating,
+                        Category = b.Category,
+                        Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
+                        Discount = b.BookDiscounts.Where(entry => entry.BookId == b.Id).Select(entry => entry.Discount).FirstOrDefault(),
+                    }).FirstOrDefault();
+                res.Add(book);
+            }
+
             foreach (var book in res)
             {
                 book.Price = (book.Discount == null) ? book.Price : CalculateDiscount(book.Price, book.Discount.DiscountValue);

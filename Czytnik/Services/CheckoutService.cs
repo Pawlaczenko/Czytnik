@@ -12,59 +12,71 @@ using static Czytnik.Controllers.CheckoutController;
 
 namespace Czytnik.Services
 {
-  public class CheckoutService : ICheckoutService
-  {
-    private readonly AppDbContext _dbContext;
-    private readonly UserManager<User> _userManager;
-    private readonly IHttpContextAccessor _httpContextAccessor;
-    public CheckoutService(AppDbContext dbContext, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
+    public class CheckoutService : ICheckoutService
     {
-      _dbContext = dbContext;
-      _userManager = userManager;
-      _httpContextAccessor = httpContextAccessor;
-    }
-
-    public async Task AddOrder(Item[] items)
-    {
-      var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-
-      var order = new Order { OrderDate = DateTime.Now, User = currentUser };
-
-      await _dbContext.Orders.AddAsync(order);
-      await _dbContext.SaveChangesAsync();
-
-      int orderId = order.Id;
-
-      if(currentUser == null){
-        foreach(Item item in items){
-          OrderItem newOrderItem = new OrderItem{
-            OrderId = orderId,
-            BookId = Convert.ToInt32(item.Id),
-            Quantity = item.Quantity,
-            Price = _dbContext.Books.Where(b => b.Id == Convert.ToInt32(item.Id)).Select(b => b.Price).FirstOrDefault()
-          };
-
-          await _dbContext.OrderItems.AddAsync(newOrderItem);
-          await _dbContext.SaveChangesAsync();
-        }
-      }else{
-        var itemsQuery = _dbContext.CartItems.Where(i => i.User == currentUser).Select(i => new OrderItem
+        private readonly AppDbContext _dbContext;
+        private readonly UserManager<User> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public CheckoutService(AppDbContext dbContext, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
         {
-          BookId = i.BookId,
-          OrderId = orderId,
-          Quantity = i.Quantity,
-          Price = _dbContext.Books.Where(b => b.Id == i.BookId).Select(b => b.Price).FirstOrDefault()
-        });
-
-        IEnumerable<OrderItem> orderItems = await itemsQuery.ToListAsync();
-
-        foreach(OrderItem newOrderitem in orderItems){
-          await _dbContext.OrderItems.AddAsync(newOrderitem);
-          await _dbContext.SaveChangesAsync();
+            _dbContext = dbContext;
+            _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
         }
-      }
 
-    }
+        public async Task AddOrder(Item[] items)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+
+            var order = new Order { OrderDate = DateTime.Now, User = currentUser };
+
+            await _dbContext.Orders.AddAsync(order);
+            await _dbContext.SaveChangesAsync();
+
+            int orderId = order.Id;
+
+            if (currentUser == null) {
+                foreach (Item item in items) {
+                    OrderItem newOrderItem = new OrderItem {
+                        OrderId = orderId,
+                        BookId = Convert.ToInt32(item.Id),
+                        Quantity = item.Quantity,
+                        Price = _dbContext.Books.Where(b => b.Id == Convert.ToInt32(item.Id)).Select(b => b.Price).FirstOrDefault()
+                    };
+
+                    await _dbContext.OrderItems.AddAsync(newOrderItem);
+                    await _dbContext.SaveChangesAsync();
+                    await UpdateNumberOfCopiesSold(newOrderItem.BookId,newOrderItem.Quantity);
+                }
+            } else {
+                var itemsQuery = _dbContext.CartItems.Where(i => i.User == currentUser).Select(i => new OrderItem
+                {
+                    BookId = i.BookId,
+                    OrderId = orderId,
+                    Quantity = i.Quantity,
+                    Price = _dbContext.Books.Where(b => b.Id == i.BookId).Select(b => b.Price).FirstOrDefault()
+                });
+
+                IEnumerable<OrderItem> orderItems = await itemsQuery.ToListAsync();
+
+                foreach (OrderItem newOrderItem in orderItems) {
+                    await _dbContext.OrderItems.AddAsync(newOrderItem);
+                    await _dbContext.SaveChangesAsync();
+                    await UpdateNumberOfCopiesSold(newOrderItem.BookId, newOrderItem.Quantity);
+                }
+            }
+
+        }
+
+        public async Task UpdateNumberOfCopiesSold(int bookId, int quantity = 1)
+        {
+            var book = _dbContext.Books.Where(b => b.Id == bookId).FirstOrDefault();
+            if(book != null)
+            {
+                book.NumberOfCopiesSold += (short)quantity;
+                await _dbContext.SaveChangesAsync();
+            }
+        }
 
     public async Task<decimal> CalculatePrice(Item[] items)
     {
