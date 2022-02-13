@@ -96,19 +96,6 @@ namespace Czytnik.Services
                 res.Add(book);
             }
 
-            //var res = _dbContext.Books.Where(b => monthBooksQuery.Contains(b.Id))
-            //    .Select(b => new BooksCarouselViewModel
-            //    {
-            //        Id = b.Id,
-            //        Title = b.Title,
-            //        Price = b.Price,
-            //        Cover = b.Cover,
-            //        Rating = b.Rating,
-            //        Category = b.Category,
-            //        Authors = b.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
-            //        Discount = b.BookDiscounts.Where(entry => entry.BookId == b.Id).Select(entry => entry.Discount).FirstOrDefault(),
-            //    });
-
             foreach (var book in res)
             {
                 book.Price = (book.Discount == null) ? book.Price : CalculateDiscount(book.Price, book.Discount.DiscountValue);
