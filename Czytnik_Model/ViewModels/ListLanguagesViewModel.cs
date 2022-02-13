@@ -1,5 +1,4 @@
-﻿
-namespace Czytnik_Model.ViewModels
+﻿namespace Czytnik_Model.ViewModels
 {
     public class ListLanguagesViewModel
     {

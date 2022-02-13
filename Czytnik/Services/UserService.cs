@@ -38,7 +38,8 @@ namespace Czytnik.Services
                 ProfilePicture = currentUser.ProfilePicture,
                 Username = currentUser.UserName,
                 UserReviews = GetUserReviews(4, "date_desc").Result,
-                Favourites = GetAllFavourites(0,4,"").Result,
+                Favourites = GetAllFavourites(0, 4, "").Result,
+                Orders = GetOrders(2, 0, "").Result
             };
             return userInfoModel;
         }
@@ -142,6 +143,52 @@ namespace Czytnik.Services
             if (count > 0) favourites = favourites.Skip(skip).Take(count);
 
             var results = await favourites.ToListAsync();
+            return results;
+        }
+        public async Task<List<OrderViewModel>> GetOrders(int count = 2, int skip = 0, string sortBy = "")
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var orders = _dbContext.Orders
+                .Where(o => o.User == currentUser)
+                .Select(o => new OrderViewModel
+                {
+                    OrderId = o.Id,
+                    OrderDate = o.OrderDate,
+                    Items = o.OrderItems.Select(oi => new OrderItemViewModel
+                    {
+                        BookId = oi.BookId,
+                        BookTitle = oi.Book.Title,
+                        Price = oi.Price,
+                        Quantity = oi.Quantity
+                    }).ToList(),
+                    CalculatedPrice = o.OrderItems
+                        .Where(oi => oi.OrderId == o.Id)
+                        .Select(oi => oi.Price * oi.Quantity)
+                        .Sum()
+            });
+
+            foreach(var order in orders)
+            {
+                order.CalculatedPrice = Math.Round(order.CalculatedPrice, 2);
+            }
+
+            switch (sortBy)
+            {
+                case "price_asc":
+                    orders = orders.OrderBy(o => o.CalculatedPrice);
+                    break;
+                case "price_desc":
+                    orders = orders.OrderByDescending(o => o.CalculatedPrice);
+                    break;
+                case "date_asc":
+                    orders = orders.OrderBy(o => o.OrderDate);
+                    break;
+                default:
+                    orders = orders.OrderByDescending(o => o.OrderDate);
+                    break;
+            }
+            if (count > 0) orders = orders.Skip(skip).Take(count);
+            var results = await orders.ToListAsync();
             return results;
         }
     }
