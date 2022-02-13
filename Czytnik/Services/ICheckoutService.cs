@@ -11,5 +11,6 @@ namespace Czytnik.Services
   {
     Task<decimal> CalculatePrice(Item[] items);
     Task AddOrder(Item[] items);
+    Task UpdateNumberOfCopiesSold(int bookId, int quantity = 1);
   }
 }
