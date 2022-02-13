@@ -11,7 +11,7 @@
     <None Remove="wwwroot\scss\**" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <Content Remove="Areas\Identity\Pages\Account\Manage\Profile.cshtml" />
     <Content Remove="Areas\Identity\Pages\Account\Manage\_Layout.cshtml" />
     <Content Remove="compilerconfig.json" />
@@ -32,7 +32,7 @@
     <Content Remove="Views\User\Profile.cshtml" />
     <Content Remove="Views\User\Reviews.cshtml" />
     <Content Remove="Views\User\Settings.cshtml" />
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <ProjectReference Include="..\Czytnik_DataAccess\Czytnik_DataAccess.csproj" />
