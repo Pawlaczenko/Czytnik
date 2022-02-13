@@ -24,8 +24,9 @@ namespace Czytnik.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task AddOrder(Item[] items)
+        public async Task AddOrder(Item[] items, string type)
         {
+            if(type == null) return;
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 
             var order = new Order { OrderDate = DateTime.Now, User = currentUser };
@@ -33,9 +34,11 @@ namespace Czytnik.Services
             await _dbContext.Orders.AddAsync(order);
             await _dbContext.SaveChangesAsync();
 
+            int booksCounter = 0;
+
             int orderId = order.Id;
 
-            if (currentUser == null) {
+            if (currentUser == null || type == "single") {
                 foreach (Item item in items) {
                     OrderItem newOrderItem = new OrderItem {
                         OrderId = orderId,
@@ -59,6 +62,8 @@ namespace Czytnik.Services
 
                 IEnumerable<OrderItem> orderItems = await itemsQuery.ToListAsync();
 
+                booksCounter = orderItems.Count();
+
                 foreach (OrderItem newOrderItem in orderItems) {
                     await _dbContext.OrderItems.AddAsync(newOrderItem);
                     await _dbContext.SaveChangesAsync();
@@ -66,6 +71,19 @@ namespace Czytnik.Services
                 }
             }
 
+            if(type == "single"){
+              if(items.Length == 0){
+                var orderItem = _dbContext.Orders.Where(i => i.Id == orderId).First();
+                _dbContext.Orders.Remove(orderItem);
+                await _dbContext.SaveChangesAsync();
+              }
+            }else if(type == "cart"){
+              if(currentUser != null && booksCounter == 0){
+                var orderItem = _dbContext.Orders.Where(i => i.Id == orderId).First();
+                _dbContext.Orders.Remove(orderItem);
+                await _dbContext.SaveChangesAsync();
+              }
+            }
         }
 
         public async Task UpdateNumberOfCopiesSold(int bookId, int quantity = 1)
@@ -78,11 +96,12 @@ namespace Czytnik.Services
             }
         }
 
-    public async Task<decimal> CalculatePrice(Item[] items)
+    public async Task<decimal> CalculatePrice(Item[] items, string type)
     {
       var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-      if (currentUser == null)
+      if (currentUser == null || type == "single")
       {
+        if(items == null) return 1400;
         List<string> ids = items.Select(item => item.Id).ToList();
 
         var booksQuery = _dbContext.Books.Where(b => ids.Contains(Convert.ToString(b.Id))).Select(i => new CartItemsViewModel

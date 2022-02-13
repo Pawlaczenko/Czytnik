@@ -20,7 +20,7 @@
         </svg>
         <p class="book-item__rate">@(Model.Rating.HasValue ? Model.Rating : "Brak Ocen")</p>
     </div>
-    <button class="books-carousel__button books-carousel__button--secondary js-cart-item-add" data-book="@Model.Id">
+    <button class="books-carousel__button books-carousel__button--secondary js-cart-item-add" data-book="@Model.Id" data-price="@Model.Price">
         <span class="books-carousel__button__left">Dodaj do koszyka</span>
         <span class="books-carousel__button__right">+</span>
     </button>

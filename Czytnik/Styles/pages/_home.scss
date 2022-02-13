@@ -51,6 +51,8 @@
 
   &__button {
     color: var(--color-white);
+    width: max-content;
+    margin: 0 auto;
   }
 
   &__covers {
@@ -225,7 +227,7 @@
     color: var(--color-white);
 
     padding: 1rem 3rem;
-    
+
     &:before {
       content: "";
       position: absolute;

@@ -1,7 +1,18 @@
 ﻿(async function () {
   const myStorage = window.localStorage;
+
+  document.querySelector('.js-checkout-button').addEventListener('click', e => {
+    e.preventDefault();
+
+    myStorage.setItem('type', 'cart');
+
+    window.location.href = '/Checkout';
+  });
+
   const isUserLogged = document.querySelector('.js-navigation-cart').dataset.logged;
   if (isUserLogged != 'True') await renderCartItemsFromLocalStorage();
+  setCartPrice();
+
 
   const quantityInputs = document.querySelectorAll('.js-cart-quantity-input');
   quantityInputs.forEach(input => {
@@ -119,7 +130,7 @@
       ','
     );
 
-    document.querySelector('.js-checkout-button').href = `/Checkout?data=${sum}`;
+    myStorage.setItem('cartFull', sum);
     document.querySelector('.js-cart-price').innerText = `${sum} zł`;
   }
 
