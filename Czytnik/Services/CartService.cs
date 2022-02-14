@@ -47,6 +47,8 @@ namespace Czytnik.Services
                 item.FullPrice = item.CalculatedPrice * item.Quantity;
             }
 
+            if(result.Count() == 0) return null;
+
             return result;
         }
 
@@ -106,6 +108,7 @@ namespace Czytnik.Services
 
         public async Task<IEnumerable<CartItemsViewModel>> GetCartBooks(string booksId)
         {
+            if(booksId == null) booksId = "";
             string[] list = booksId.Split(',');
 
             var itemsQuery = _dbContext.Books.Where(b => list.Contains(Convert.ToString(b.Id))).Select(i => new CartItemsViewModel
