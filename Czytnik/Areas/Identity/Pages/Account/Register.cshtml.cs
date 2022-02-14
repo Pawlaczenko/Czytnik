@@ -46,22 +46,23 @@ namespace Czytnik.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Nazwa użytkownika jest wymagana")]
             [StringLength(100, ErrorMessage = "Nazwa użytkownika musi mieć minimum {2} i maksimum {1} znaków", MinimumLength = 6)]
             [Display(Name = "Username")]
             public string UserName { get; set; }
 
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Email jest wymagany")]
+            [EmailAddress(ErrorMessage = "Wpisz poprawny email")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Hasło jest wymagane")]
             [StringLength(100, ErrorMessage = "Hasło musi mieć minimum {2} i maksimum {1} znaków", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
+            [Required(ErrorMessage = "Powtórzone hasło jest wymagane")]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "Hasła się nie zgadzają")]

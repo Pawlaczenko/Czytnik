@@ -22,7 +22,7 @@ namespace Czytnik.Areas.Identity.Pages.Account
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<User> signInManager, 
+        public LoginModel(SignInManager<User> signInManager,
             ILogger<LoginModel> logger,
             UserManager<User> userManager)
         {
@@ -43,12 +43,12 @@ namespace Czytnik.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Nazwa użytkownika jest wymagana")]
             [StringLength(100, ErrorMessage = "Nazwa użytkownika musi mieć minimum {2} i maksimum {1} znaków.", MinimumLength = 6)]
             [Display(Name = "Username")]
             public string UserName { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Hasło jest wymagane")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -78,7 +78,7 @@ namespace Czytnik.Areas.Identity.Pages.Account
             returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-        
+
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout

@@ -27,7 +27,7 @@ const getBook = (book) => {
                 <use xlink:href="/assets/svg/sprite.svg#icon-heart-broken"></use>
             </svg>
         </button>
-        <p class="user__favourites-title">${book.Title}</p>
+        <p class="user__favourites-title" title="${book.Title}">${book.Title}</p>
         <p class="user__favourites-author">${book.Authors}</p>
     </a>
     `;

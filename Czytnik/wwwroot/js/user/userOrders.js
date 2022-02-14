@@ -23,7 +23,7 @@ const getOrder = (order) => {
     let itemsMarkup = "";
     const items = order.Items.map(item => {
         itemsMarkup += `<li class="order__item">
-            <p class="order__title">${item.BookTitle}</p>
+            <p class="order__title" title="${item.BookTitle}">${item.BookTitle}</p>
             <span class="order__count">x${item.Quantity}</span>
             <span class="order__price">${showTwoD(item.Price)}zł</span>
         </li>`;

@@ -16,7 +16,6 @@ namespace Czytnik_DataAccess.FluentConfig
             modelBuilder.Property(i => i.FirstName).HasMaxLength(30);
             modelBuilder.Property(i => i.SecondName).HasMaxLength(30);
             modelBuilder.Property(i => i.Surname).HasMaxLength(40);
-            modelBuilder.Property(i => i.BirthDate).IsRequired();
             modelBuilder.Property(i => i.ProfilePicture).IsRequired().HasMaxLength(200).HasDefaultValue("link");
         }
     }
