@@ -170,10 +170,10 @@
 
             </div>
             <button class="product__money-button product__money-button--orange js-cart-item-add"
-                    data-book="@Model.Product.Id">
+                    data-book="@Model.Product.Id" data-price="@Model.Product.Price">
                 Dodaj do koszyka <span class="product__money-icon">+</span>
             </button>
-            <button class="product__money-button product__money-button--blue">
+            <button class="product__money-button product__money-button--blue js-single-item-add" data-book="@Model.Product.Id" data-price="@Model.Product.Price">
                 Kup teraz <span class="product__money-icon">$</span>
             </button>
         </div>
@@ -187,9 +187,9 @@
                     </svg>
                     Usuń z ulubionych
                 </div>
-            } 
-            else 
-            { 
+            }
+            else
+            {
                 <div data-type="add" data-bookid="@Model.Product.Id" class="product__favourite js-product-favourite">
                     <svg class="product__favourite-icon icon" viewBox="0 0 32 32">
                         <use xlink:href="/assets/svg/sprite.svg#icon-heart"></use>

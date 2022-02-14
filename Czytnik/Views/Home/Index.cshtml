@@ -62,7 +62,7 @@
         <div class="home-top-books__header">
             <h1 class="home-top-books__title decorated-heading">To najczęściej<br />czytano w @Model.month:</h1>
         </div>
-        @await Component.InvokeAsync("BooksCarousel", new { type = "Default" });
+        @await Component.InvokeAsync("BooksCarousel", new { type = "Default" })
     </section>
 
     @if (Model.ofAllTime.Count > 0)
@@ -89,3 +89,4 @@
 </main>
 
 <script src="~/js/homeHandling.js"></script>
+<script src="~/js/addCartItem.js"></script>

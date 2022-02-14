@@ -36,8 +36,13 @@ namespace Czytnik.Controllers
       return View();
     }
 
+    public IActionResult Success()
+    {
+      return View();
+    }
+
     [HttpPost]
-    public async Task<IActionResult> Session(string products)
+    public IActionResult Session(string products)
     {
       var paymentIntentService = new PaymentIntentService();
 
@@ -55,20 +60,20 @@ namespace Czytnik.Controllers
     }
 
     [HttpPost]
-    public async Task Order(string products)
+    public async Task Order(string products, string type)
     {
       products = (products == null) ? "" : products;
       var items = JsonConvert.DeserializeObject<Item[]>(products);
 
-      await _checkoutService.AddOrder(items);
+      await _checkoutService.AddOrder(items, type);
     }
 
     [HttpPatch]
-    public async Task<IActionResult> Update(string shipping, string key, string products)
+    public async Task<IActionResult> Update(string shipping, string key, string products, string type)
     {
       products = (products==null) ? "" : products;
       var items = JsonConvert.DeserializeObject<Item[]>(products);
-      long Amount = (long)((await CalculateOrderAmount(items) + shipments[shipping]) * 100);
+      long Amount = (long)((await CalculateOrderAmount(items, type) + shipments[shipping]) * 100);
       var options = new PaymentIntentUpdateOptions
       {
         Amount = Amount
@@ -80,9 +85,9 @@ namespace Czytnik.Controllers
       return Json(new { state = "success" });
     }
 
-    private async Task<decimal> CalculateOrderAmount(Item[] items)
+    private async Task<decimal> CalculateOrderAmount(Item[] items, string type)
     {
-      decimal price = await _checkoutService.CalculatePrice(items);
+      decimal price = await _checkoutService.CalculatePrice(items, type);
 
       return price;
     }

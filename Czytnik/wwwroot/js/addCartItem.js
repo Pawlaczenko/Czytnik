@@ -3,6 +3,7 @@
 
   const addCartItem = button => {
     const book = button.dataset.book;
+    const price = button.dataset.price;
     const myStorage = window.localStorage;
 
     if(isUserLogged == "True")
@@ -11,7 +12,7 @@
         const items = JSON.parse(myStorage.getItem('cartItems')) || new Array();
         if(items.some(item => item.bookId == book)) return;
 
-        items.push({ bookId: book, Quantity: 1 });
+        items.push({ bookId: book, Quantity: 1, price: price });
         myStorage.setItem('cartItems', JSON.stringify(items));
         updateNavigationCart();
     }
@@ -21,6 +22,22 @@
     button.disabled = true;
   };
 
+  const addSingleItem = button => {
+    const book = button.dataset.book;
+    const price = button.dataset.price;
+    const myStorage = window.localStorage;
+
+    const items = new Array();
+
+    items.push({ bookId: book, Quantity: 1, price: price });
+
+    myStorage.setItem('singleItem', JSON.stringify(items));
+    myStorage.setItem('singleFull', price);
+    myStorage.setItem('type', 'single');
+
+    window.location.href = '/Checkout';
+  };
+
   const booksContainer = document.querySelector('.js-books-container');
 
   booksContainer.addEventListener('click', e => {
@@ -28,6 +45,12 @@
     if (addItemButton) {
       e.preventDefault();
       addCartItem(addItemButton);
+    }
+
+    const addSingleButton = e.target.closest('.js-single-item-add');
+    if (addSingleButton) {
+      e.preventDefault();
+      addSingleItem(addSingleButton);
     }
   });
 

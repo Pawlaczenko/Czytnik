@@ -9,8 +9,8 @@ namespace Czytnik.Services
 {
   public interface ICheckoutService
   {
-    Task<decimal> CalculatePrice(Item[] items);
-    Task AddOrder(Item[] items);
+    Task<decimal> CalculatePrice(Item[] items, string type);
+    Task AddOrder(Item[] items, string type);
     Task UpdateNumberOfCopiesSold(int bookId, int quantity = 1);
   }
 }

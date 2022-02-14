@@ -4,14 +4,21 @@
   const params = Object.fromEntries(urlSearchParams.entries());
 
   // The items the customer wants to buy
-  const items = storage.getItem('cartItems');
-
-  if (params.redirect_status == 'succeeded') {
-    makeOrder();
-    return;
+  let items = ""
+  if(storage.getItem('type') == 'single'){
+    items = storage.getItem('singleItem');
+  }else{
+    items = storage.getItem('cartItems');
   }
 
-  let productsPrice = params.data.replace(',', '.') * 1;
+  let productsPrice = 0;
+
+  if (storage.getItem('type') == 'single') {
+    productsPrice = storage.getItem('singleFull').replace(',', '.') * 1;
+  } else {
+    productsPrice = storage.getItem('cartFull').replace(',', '.') * 1;
+  }
+
   let shipmentPrice = 0;
   let fullPrice = productsPrice + shipmentPrice;
   let shipKey = 'point1';
@@ -25,7 +32,6 @@
   let elements;
 
   initialize();
-  checkStatus();
 
   document.querySelector('#payment-form').addEventListener('submit', handleSubmit);
 
@@ -79,7 +85,7 @@
     $.ajax({
       url: '/Checkout/Update',
       type: 'PATCH',
-      data: { shipping: shipKey, key: key, products: items },
+      data: { shipping: shipKey, key: key, products: items, type: storage.getItem('type')},
       datatype: 'json',
       success: async function (data) {
         console.log(data);
@@ -88,7 +94,7 @@
             elements,
             confirmParams: {
               // Make sure to change this to your payment completion page
-              return_url: 'https://localhost:5001/Checkout',
+              return_url: 'https://localhost:5001/Checkout/Success',
             },
           });
 
@@ -111,42 +117,42 @@
   }
 
   // Fetches the payment intent status after payment submission
-  async function checkStatus() {
-    const clientSecret = new URLSearchParams(window.location.search).get('payment_intent_client_secret');
+  // async function checkStatus() {
+  //   const clientSecret = new URLSearchParams(window.location.search).get('payment_intent_client_secret');
 
-    if (!clientSecret) {
-      return;
-    }
+  //   if (!clientSecret) {
+  //     return;
+  //   }
 
-    const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
+  //   const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
 
-    switch (paymentIntent.status) {
-      case 'succeeded':
-        showMessage('Payment succeeded!');
-        break;
-      case 'processing':
-        showMessage('Your payment is processing.');
-        break;
-      case 'requires_payment_method':
-        showMessage('Your payment was not successful, please try again.');
-        break;
-      default:
-        showMessage('Something went wrong.');
-        break;
-    }
-  }
+  //   switch (paymentIntent.status) {
+  //     case 'succeeded':
+  //       showMessage('Payment succeeded!');
+  //       break;
+  //     case 'processing':
+  //       showMessage('Your payment is processing.');
+  //       break;
+  //     case 'requires_payment_method':
+  //       showMessage('Your payment was not successful, please try again.');
+  //       break;
+  //     default:
+  //       showMessage('Something went wrong.');
+  //       break;
+  //   }
+  // }
 
-  // ------- UI helpers -------
+  // // ------- UI helpers -------
 
-  function showMessage(messageText) {
-    // const messageContainer = document.querySelector('#payment-message');
-    // messageContainer.classList.remove('hidden');
-    // messageContainer.textContent = messageText;
-    // setTimeout(function () {
-    //   messageContainer.classList.add('hidden');
-    //   messageText.textContent = '';
-    // }, 4000);
-  }
+  // function showMessage(messageText) {
+  //   // const messageContainer = document.querySelector('#payment-message');
+  //   // messageContainer.classList.remove('hidden');
+  //   // messageContainer.textContent = messageText;
+  //   // setTimeout(function () {
+  //   //   messageContainer.classList.add('hidden');
+  //   //   messageText.textContent = '';
+  //   // }, 4000);
+  // }
 
   // Show a spinner on payment submission
   function setLoading(isLoading) {
@@ -160,31 +166,5 @@
       // document.querySelector('#spinner').classList.add('spinner--hidden');
       // document.querySelector('#button-text').classList.remove('hidden');
     }
-  }
-
-  function makeOrder() {
-    $.ajax({
-      url: '/Checkout/Order',
-      type: 'POST',
-      data: { products: items },
-      datatype: 'json',
-      success: function () {
-        console.log('success');
-        clearCart();
-      },
-    });
-  }
-
-  function clearCart() {
-    storage.removeItem('cartItems');
-
-    $.ajax({
-      url: '/Cart/Clear',
-      type: 'DELETE',
-      datatype: 'json',
-      success: function () {
-        console.log('success');
-      },
-    });
   }
 })();
