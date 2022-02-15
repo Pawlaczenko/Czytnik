@@ -27,7 +27,7 @@
             </tr>
             <tr class="user__table-row">
                 <td class="user__table-column user__table-column--title">Data urodzenia:</td>
-                <td class="user__table-column user__table-column--data @validateString(Model.Birthdate.Value.ToString("dd MMM yyyy"))">@((Model.Birthdate==null)?"brak":Model.Birthdate.Value.ToString("dd MMM yyyy"))</td>
+                <td class="user__table-column user__table-column--data @((Model.Birthdate==null)?"user__table-column--empty": "")">@((Model.Birthdate==null)?"brak":Model.Birthdate.Value.ToString("dd MMM yyyy"))</td>
             </tr>
             <tr class="user__table-row">
                 <td class="user__table-column user__table-column--title">Email:</td>
@@ -51,7 +51,7 @@
                         <figure class="user__favourites-figure">
                             <img class="user__favourites-image" src="@fav.Cover" />
                         </figure>
-                        <p class="user__favourites-title">@fav.Title</p>
+                        <p class="user__favourites-title" title="@fav.Title">@fav.Title</p>
                         <p class="user__favourites-author">@string.Join(", ", fav.Authors)</p>
                     </a>
                 }
@@ -80,7 +80,7 @@
                             @foreach (var item in order.Items)
                             {
                                 <li class="order__item">
-                                    <p class="order__title">@item.BookTitle</p>
+                                    <p class="order__title" title="@item.BookTitle">@item.BookTitle</p>
                                     <span class="order__count">x @item.Quantity</span>
                                     <span class="order__price">@item.Price zł</span>
                                 </li>

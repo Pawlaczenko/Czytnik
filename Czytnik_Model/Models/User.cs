@@ -9,7 +9,7 @@ namespace Czytnik_Model.Models
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string Surname { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
         public string ProfilePicture { get; set; }
 
         public ICollection<Review> Reviews { get; set; }

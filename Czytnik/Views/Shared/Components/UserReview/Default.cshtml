@@ -10,7 +10,7 @@
         </div>
         <span class="userReview__date">@Model.ReviewDate.ToString("dd-MM-yyyy")</span>
     </div>
-    <a href="/Book/Index/@Model.BookId" class="userReview__title">@Model.BookTitle - <span class="userReview__author">@string.Join(", ",Model.Authors)</span></a>
+    <a href="/Book/Index/@Model.BookId" class="userReview__title" title="@Model.BookTitle">@Model.BookTitle - <span class="userReview__author">@string.Join(", ",Model.Authors)</span></a>
     <p class="userReview__text">
         @Model.ReviewText
     </p>

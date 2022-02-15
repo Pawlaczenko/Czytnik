@@ -1,20 +1,46 @@
 ﻿(async function () {
   const myStorage = window.localStorage;
 
+    const isUserLogged = document.querySelector('.js-navigation-cart').dataset.logged;
+
   document.querySelector('.js-checkout-button').addEventListener('click', e => {
     e.preventDefault();
+    if (isUserLogged == "False" && !myStorage.getItem('cartItems')) return;
 
     myStorage.setItem('type', 'cart');
 
     window.location.href = '/Checkout';
   });
 
-  const isUserLogged = document.querySelector('.js-navigation-cart').dataset.logged;
-  if (isUserLogged != 'True') await renderCartItemsFromLocalStorage();
+
+  if (isUserLogged != 'True') {
+    await renderCartItemsFromLocalStorage();
+  }
+
   setCartPrice();
 
-
   const quantityInputs = document.querySelectorAll('.js-cart-quantity-input');
+
+  quantityInputs.forEach(input => {
+    input.addEventListener('change', (e) => {
+
+      if (this.value <= 1) return;
+      const cartItem = e.target.closest('.js-cart-item');
+      const price = parseFloat(cartItem.querySelector('.js-cart-item-price').innerText.replace(',', '.'));
+      const promotionItem = cartItem.querySelector('.js-cart-item-promotion');
+      const defaultPromotion = promotionItem.dataset.defaultDiscount.replace(',', '.');
+
+      const fullPrice = calculateFullPrice(price, e.target.value);
+      const newPromotion = calculateCartItemPromotion(defaultPromotion, e.target.value);
+      const cartFullPriceItem = cartItem.querySelector('.js-cart-item-full-price');
+      promotionItem.dataset.discount = newPromotion;
+      cartFullPriceItem.innerText = `${fullPrice} zł`;
+      setCartPrice();
+      setCartPromotion();
+
+    })
+  })
+
   quantityInputs.forEach(input => {
     input.addEventListener('focusout', e => {
       const book = e.target.dataset.book;

@@ -20,7 +20,12 @@ namespace Czytnik.Controllers
         public async Task<IActionResult> Index()
         {
             var cartItems = await _cartService.GetCartItems();
+            if(cartItems == null) return View("Empty");
             return View(cartItems);
+        }
+        public IActionResult Empty()
+        {
+            return View();
         }
 
         [HttpGet]

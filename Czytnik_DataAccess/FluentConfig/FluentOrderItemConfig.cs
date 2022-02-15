@@ -15,7 +15,7 @@ namespace Czytnik_DataAccess.FluentConfig
         {
             modelBuilder.Property(i => i.OrderId).IsRequired();
             modelBuilder.Property(i => i.BookId).IsRequired();
-            modelBuilder.Property(i => i.Price).IsRequired();
+            modelBuilder.Property(i => i.Price).IsRequired().HasColumnType("decimal(18,2)");
             modelBuilder.Property(i => i.Quantity).HasDefaultValue(1);
 
             modelBuilder.HasKey(i => new { i.BookId, i.OrderId });

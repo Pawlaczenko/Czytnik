@@ -17,12 +17,12 @@
         <li class="navigation__links-item @Html.ActiveClass("Categories", "Index")">
             <a class="navigation__links-link" asp-controller="Categories" asp-action="Index">Kategorie</a>
         </li>
-        <li class="navigation__links-item @Html.ActiveClass("Home", "Kontakt")">
+        @* <li class="navigation__links-item @Html.ActiveClass("Home", "Kontakt")">
             <a class="navigation__links-link" asp-controller="Home" asp-action="Kontakt">Kontakt</a>
         </li>
         <li class="navigation__links-item @Html.ActiveClass("Blog", "Index")">
             <a class="navigation__links-link" asp-controller="Blog" asp-action="Index">Blog</a>
-        </li>
+        </li> *@
     </ul>
 
     <div class="navigation__buttons">
@@ -62,7 +62,7 @@
                 Kategorie
             </a>
         </li>
-        <li class="navigation__mobile-item">
+        @* <li class="navigation__mobile-item">
             <a href="/Home/Kontakt" class="navigation__mobile-link navigation__links-link">
                 Kontakt
             </a>
@@ -71,7 +71,7 @@
             <a href="/Blog" class="navigation__mobile-link navigation__links-link">
                 Blog
             </a>
-        </li>
+        </li> *@
     </ul>
 
     <partial name="_MobileLoginPartial" />

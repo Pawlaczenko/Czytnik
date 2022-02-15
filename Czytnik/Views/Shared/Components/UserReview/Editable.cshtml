@@ -11,7 +11,7 @@
             </div>
             <span class="userReview__date">@Model.ReviewDate.ToString("dd-MM-yyyy")</span>
         </div>
-        <h3 class="userReview__title">@Model.BookTitle - <span class="userReview__author">@string.Join(", ", Model.Authors)</span></h3>
+        <h3 class="userReview__title" title="@Model.BookTitle">@Model.BookTitle - <span class="userReview__author">@string.Join(", ", Model.Authors)</span></h3>
         <p class="userReview__text">
             @Model.ReviewText
         </p>

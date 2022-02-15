@@ -84,7 +84,7 @@ const displayEditForm = (id) => {
     reviewBox.classList.add('userReview--editable');
 
     const reviewText = reviewBox.querySelector('.userReview__text');
-    
+
     const textArea = document.createElement('textarea');
     textArea.value = reviewText.innerText;
     textArea.classList.add('userReview__textarea');
@@ -109,7 +109,7 @@ const displayEditForm = (id) => {
     starsInput.setAttribute('name',rating);
     starsInput.setAttribute('required',true);
     starsInput.addEventListener('input',e=>e.target.style.setProperty('--value', `${e.target.value}`))
-    
+
     stars.appendChild(starsInput);
     reviewBox.querySelector('.userReview__column').prepend(stars);
 
@@ -132,10 +132,12 @@ const getReview = (review) => {
                         <use xlink:href="/assets/svg/sprite.svg#icon-star"></use>
                     </svg>
                     <span class="userReview__rating">${review.Rating}</span>
-                </div> 
-                <span class="userReview__date">${review.ReviewDate.slice(0,10)}</span>
+                </div>
+                <span class="userReview__date">${review.ReviewDate.slice(0, 10)}</span>
             </div>
-            <a class="userReview__title" href="/Book/Index/${review.BookId}">${review.BookTitle} - <span class="userReview__author">${review.Authors}</span></a>
+            <a class="userReview__title" href="/Book/Index/${review.BookId}" title="${review.BookTitle}">${
+      review.BookTitle
+    } - <span class="userReview__author">${review.Authors}</span></a>
             <p class="userReview__text">
                 ${text}
             </p>
