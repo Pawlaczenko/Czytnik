@@ -325,6 +325,14 @@
     }
 }
 
+.user-settings {
+    &__error{
+        text-align: center;
+        color: var(--color-warning);
+        font-size: 1.6rem;
+    }
+}
+
 .settings-form {
 
     &:not(:first-child){

@@ -27,7 +27,8 @@ namespace Czytnik.Controllers
         }
         public async Task<IActionResult> Settings()
         {
-            return View();
+            UserSettingsViewModel userInfo = await _userService.GetUserData();
+            return View(userInfo);
         }
         public IActionResult Orders()
         {
@@ -77,6 +78,18 @@ namespace Czytnik.Controllers
         {
             var orders = await _userService.GetOrders(count, skip, sortBy);
             return Json(orders, new JsonSerializerOptions { PropertyNamingPolicy = null });
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditUser(UserSettingsViewModel userData)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["error"] = "Coś poszło nie tak";
+                return RedirectToAction("Settings");
+            }
+
+            await _userService.EditUserData(userData);
+            return RedirectToAction("Settings");
         }
 
     }

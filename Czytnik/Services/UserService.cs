@@ -80,6 +80,41 @@ namespace Czytnik.Services
             return results;
         }
 
+        public async Task<UserSettingsViewModel> GetUserData()
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var userData = new UserSettingsViewModel
+            {
+                Username = currentUser.UserName,
+                Birthdate = currentUser.BirthDate,
+                FirstName = currentUser.FirstName,
+                PhoneNumber = currentUser.PhoneNumber,
+                ProfilePicture = currentUser.ProfilePicture,
+                SecondName = currentUser.SecondName,
+                Surname = currentUser.Surname
+            };
+
+            return userData;
+        }
+
+        public async Task EditUserData(UserSettingsViewModel userData)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+
+            if(currentUser != null)
+            {
+                currentUser.PhoneNumber = userData.PhoneNumber;
+                currentUser.UserName = userData.Username;
+                currentUser.FirstName = userData.FirstName;
+                currentUser.SecondName = userData.SecondName;
+                currentUser.Surname = userData.Surname;
+                currentUser.BirthDate = userData.Birthdate;
+
+                await _userManager.UpdateAsync(currentUser);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
         public async Task<bool> DidUserRateThisBook(int bookId)
         {
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);

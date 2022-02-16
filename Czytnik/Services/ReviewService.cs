@@ -123,10 +123,12 @@ namespace Czytnik.Services
         {
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
             var review = _dbContext.Reviews.Where(r => r.Id == Id).FirstOrDefault();
+            int bookId = review.BookId;
             if(review.User == currentUser)
             {
                 _dbContext.Reviews.Remove(review);
                 await _dbContext.SaveChangesAsync();
+                CalculateAverageRating(bookId);
             }
         }
 
