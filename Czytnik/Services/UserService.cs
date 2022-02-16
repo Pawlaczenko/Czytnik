@@ -97,11 +97,12 @@ namespace Czytnik.Services
             return userData;
         }
 
-        public async Task EditUserData(UserSettingsViewModel userData)
+        public async Task<bool> EditUserData(UserSettingsViewModel userData)
         {
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var existsFlag = _dbContext.Users.Where(u => u.UserName == userData.Username).Select(u => u.UserName).FirstOrDefault();
 
-            if(currentUser != null)
+            if (currentUser != null && existsFlag == null)
             {
                 currentUser.PhoneNumber = userData.PhoneNumber;
                 currentUser.UserName = userData.Username;
@@ -112,7 +113,34 @@ namespace Czytnik.Services
 
                 await _userManager.UpdateAsync(currentUser);
                 await _dbContext.SaveChangesAsync();
+                return true;
             }
+            return false;
+        }
+
+        public async Task<string> ChangePassword(UserSettingsViewModel userData)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+
+            if (currentUser != null)
+            {
+                bool passwordFlag = await _userManager.CheckPasswordAsync(currentUser, userData.CurrentPassword);
+
+                if (!passwordFlag) return "wrong_password";
+                if (userData.NewPassword != userData.RepeatNewPassword) return "password_match";
+
+                var passVal = new PasswordValidator<User>();
+                bool validatePasswordFlag = passVal.ValidateAsync(_userManager, currentUser, userData.NewPassword).Result.Succeeded;
+
+                if (validatePasswordFlag == false) return "validation_false";
+
+                await _userManager.ChangePasswordAsync(currentUser, userData.CurrentPassword, userData.NewPassword);
+
+                await _userManager.UpdateAsync(currentUser);
+                await _dbContext.SaveChangesAsync();
+                return "";
+            }
+            return "error";
         }
 
         public async Task<bool> DidUserRateThisBook(int bookId)

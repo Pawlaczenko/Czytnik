@@ -17,6 +17,7 @@ namespace Czytnik.Services
         Task<List<BestBooksViewModel>> GetAllFavourites(int skip = 0, int count = 5, string sortBy = "");
         Task<List<OrderViewModel>> GetOrders(int count, int skip, string sortBy);
         Task<UserSettingsViewModel> GetUserData();
-        Task EditUserData(UserSettingsViewModel userData);
+        Task<bool> EditUserData(UserSettingsViewModel userData);
+        Task<string> ChangePassword(UserSettingsViewModel userData);
     }
 }

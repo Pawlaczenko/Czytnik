@@ -331,6 +331,12 @@
         color: var(--color-warning);
         font-size: 1.6rem;
     }
+
+    &__info {
+        text-align: center;
+        color: var(--color-secondary);
+        font-size: 1.6rem;
+    }
 }
 
 .settings-form {

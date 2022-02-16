@@ -8,6 +8,7 @@
     <h2 class="heading-line heading-line--both user-settings__heading">Ustawienia</h2>
     <p class="user-settings__paragraph small-paragraph">Zmień ustawienia swojego profilu i konta</p>
     <div class="user-settings__error">@TempData["error"]</div>
+    <div class="user-settings__info">@TempData["info"]</div>
     <div class="user-container user-container--settings">
         <form class="user-settings__form settings-form" id="profileSettingsForm" method="post" asp-action="EditUser">
             <figure class="settings-form__figure">
@@ -35,7 +36,7 @@
                 <label class="settings-form__input small-input">
                     <span class="small-input__label">Data urodzenia</span>
                     <span class="small-input__errorMessage">Niepoprawna data</span>
-                    <input type="date" class="small-input__input" asp-for="Birthdate" value=@(Model.Birthdate.HasValue ? Model.Birthdate.Value.ToString("yyyy-MM-dd"):DateTime.Now.ToString("yyyy-MM-dd")) min="1920-01-01" max="@DateTime.Now.ToString("yyyy-MM-dd")" name="birthDate" />
+                    <input type="date" class="small-input__input" asp-for="Birthdate" value=@(Model.Birthdate.HasValue ? Model.Birthdate.Value.ToString("yyyy-MM-dd"):"") min="1930-01-01" max="@DateTime.Now.ToString("yyyy-MM-dd")" name="birthDate" />
                 </label>
                 <label class="settings-form__input small-input">
                     <span class="small-input__label">Numer telefonu</span>
@@ -53,22 +54,22 @@
             </section>
             <input disabled type="submit" class="button settings-form__button" value="ZAPISZ" id="profileSettingsButton" name="username" />
         </form>
-        <form class="user-settings__form settings-form" id="passwordSettingsForm">
+        <form class="user-settings__form settings-form" id="passwordSettingsForm" method="post" asp-action="ChangePassword">
             <h3 class="settings-form__heading">Ustawienia Hasła</h3>
             <section class="settings-form__section small-form">
                 <label class="settings-form__input small-input">
                     <span class="small-input__label">Aktualne hasło</span>
-                    <input type="password" class="small-input__input" name="currentPassword" required />
+                    <input type="password" class="small-input__input" name="currentPassword" asp-for="CurrentPassword" required />
                 </label>
                 <label class="settings-form__input small-input">
                     <span class="small-input__label">nowe hasło</span>
                     <span class="small-input__errorMessage">Nazwa użytkownika musi posiadać minimum 8 znaków, literę lub cyfrę</span>
-                    <input type="password" class="small-input__input" name="newPassword" required />
+                    <input type="password" class="small-input__input" name="newPassword" asp-for="NewPassword" required />
                 </label>
                 <label class="settings-form__input small-input">
                     <span class="small-input__label">powtórz nowe hasło</span>
                     <span class="small-input__errorMessage">Hasła muszą być identyczne</span>
-                    <input type="password" class="small-input__input" name="repeatNewPassword" required />
+                    <input type="password" class="small-input__input" name="repeatNewPassword" asp-for="RepeatNewPassword" required />
                 </label>
             </section>
             <input type="submit" class="button button--secondary settings-form__button" value="ZMIEŃ HASŁO" />

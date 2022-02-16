@@ -13,5 +13,10 @@ namespace Czytnik_Model.ViewModels
         public DateTime? Birthdate { get; set; }
         public string? PhoneNumber { get; set; }
         public string ProfilePicture { get; set; }
+
+        public string CurrentPassword { get; set; }
+        public string RepeatCurrentPassword { get; set; }
+        public string NewPassword { get; set; }
+        public string RepeatNewPassword { get; set; }
     }
 }

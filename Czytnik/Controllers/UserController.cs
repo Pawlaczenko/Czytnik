@@ -88,7 +88,41 @@ namespace Czytnik.Controllers
                 return RedirectToAction("Settings");
             }
 
-            await _userService.EditUserData(userData);
+            bool isComplete = await _userService.EditUserData(userData);
+            if (!isComplete) TempData["error"] = "Podany użytkownik już istnieje";
+            return RedirectToAction("Settings");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(UserSettingsViewModel userData)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["error"] = "Coś poszło nie tak";
+                return RedirectToAction("Settings");
+            }
+            string message = await _userService.ChangePassword(userData);
+            if (message == "")
+            {
+                TempData["info"] = "Twoje hasło zostało zmienione";
+                return RedirectToAction("Settings");
+            }
+
+            switch (message)
+            {
+                case "wrong_password":
+                    TempData["error"] = "Hasło niepoprawne.";
+                    break;
+                case "password_match":
+                    TempData["error"] = "Hasła się nie zgadzają.";
+                    break;
+                case "validation_false":
+                    TempData["error"] = "Hasło nie spełnia wymagań.";
+                    break;
+                default:
+                    TempData["error"] = "Coś poszło nie tak";
+                    break;
+            }
             return RedirectToAction("Settings");
         }
 
