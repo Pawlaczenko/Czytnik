@@ -7,11 +7,11 @@
 <section class="form form--register">
     <div class="form__content">
         <h2 class="form__heading">Zarejestruj się na <span class="form__heading--highlight">Czytnik</span></h2>
-        <button class="form__google">
+        @* <button class="form__google">
             Dołącz za pomocą Google
-        </button>
+        </button> *@
         <form class="form__form" id="form" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <p class="form__text">lub użyj swojego maila</p>
+            @* <p class="form__text">lub użyj swojego maila</p> *@
             <div asp-validation-summary="All" class="form__warning"></div>
             <label class="form__label" asp-for="Input.UserName">
                 <span asp-validation-for="Input.UserName" class="form__warning"></span>

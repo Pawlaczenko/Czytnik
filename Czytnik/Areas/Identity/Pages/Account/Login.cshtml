@@ -13,12 +13,12 @@
     </div>
     <div class="form__content">
         <h2 class="form__heading">Zaloguj się na <span class="form__heading--highlight">Czytnik</span></h2>
-        <button class="form__google">
+        @* <button class="form__google">
             Zaloguj się za pomocą Google
-        </button>
+        </button> *@
         <form id="account" method="post" class="form__form">
             <div asp-validation-summary="All" class="form__warning"></div>
-            <p class="form__text">lub użyj swojego maila</p>
+            @* <p class="form__text">lub użyj swojego maila</p> *@
             <label class="form__label">
                 <span asp-validation-for="Input.UserName" class="form__warning"></span>
                 <input asp-for="Input.UserName" type="text" placeholder="Nazwa użytkownika" class="form__input form-control" required />
