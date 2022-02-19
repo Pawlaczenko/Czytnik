@@ -74,16 +74,16 @@
             </section>
             <input type="submit" class="button button--secondary settings-form__button" value="ZMIEŃ HASŁO" />
         </form>
-        <form class="user-settings__form settings-form" id="deleteAccountSettingsForm">
+        <form class="user-settings__form settings-form" id="deleteAccountSettingsForm" method="post" asp-action="DeleteUser">
             <h3 class="settings-form__heading settings-form__heading--danger">Dezaktywacja konta</h3>
             <section class="settings-form__section small-form">
                 <label class="settings-form__input small-input">
                     <span class="small-input__label">hasło</span>
-                    <input type="password" class="small-input__input" required />
+                    <input type="password" class="small-input__input" required asp-for="CurrentPassword"/>
                 </label>
                 <label class="settings-form__input small-input">
                     <span class="small-input__label">Powtórz hasło</span>
-                    <input type="password" class="small-input__input" required />
+                    <input type="password" class="small-input__input" required asp-for="RepeatCurrentPassword"/>
                 </label>
             </section>
             <input type="submit" class="button button--danger settings-form__button" value="DEZAKTYWUJ" />

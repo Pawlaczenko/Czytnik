@@ -15,7 +15,7 @@ namespace Czytnik_DataAccess.FluentConfig
         {
             modelBuilder.HasKey(i => new { i.BookId, i.DiscountId });
             modelBuilder.HasOne(i => i.Book).WithMany(i => i.BookDiscounts).HasForeignKey(i => i.BookId);
-            modelBuilder.HasOne(i => i.Discount).WithMany(i => i.BookDiscounts).HasForeignKey(i => i.DiscountId);
+            modelBuilder.HasOne(i => i.Discount).WithMany(i => i.BookDiscounts).HasForeignKey(i => i.DiscountId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -16,7 +16,12 @@ namespace Czytnik_DataAccess.FluentConfig
             modelBuilder.Property(i => i.FirstName).HasMaxLength(30);
             modelBuilder.Property(i => i.SecondName).HasMaxLength(30);
             modelBuilder.Property(i => i.Surname).HasMaxLength(40);
-            modelBuilder.Property(i => i.ProfilePicture).IsRequired().HasMaxLength(200).HasDefaultValue("link");
+
+            modelBuilder.HasMany(u => u.Favourites).WithOne(f => f.User).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.HasMany(u => u.CartItems).WithOne(f => f.User).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.HasMany(u => u.Reviews).WithOne(f => f.User).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.HasMany(u => u.Orders).WithOne(f => f.User).OnDelete(DeleteBehavior.SetNull);
+
         }
     }
 }

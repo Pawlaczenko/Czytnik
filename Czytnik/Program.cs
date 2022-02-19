@@ -35,9 +35,9 @@ namespace Czytnik
                     { }
 
                     //Tutaj skończ
-                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT BooksTranslators ON;");
+                    //context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Books ON;");
                     context.SaveChanges();
-                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT BooksTranslators OFF;");
+                    //context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Books OFF;");
                     transaction.Commit();
                 }
                 finally

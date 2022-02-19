@@ -23,9 +23,7 @@ namespace Czytnik_DataAccess.Database
         public DbSet<Review> Reviews { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Favourite> Favourites { get; set; }
-        public DbSet<Template> Templates { get; set; }
         public DbSet<Language> Languages { get; set; }
-        public DbSet<Post> Posts { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Discount> Discounts { get; set; }
@@ -47,13 +45,11 @@ namespace Czytnik_DataAccess.Database
             modelBuilder.ApplyConfiguration(new FluentDiscountConfig());
             modelBuilder.ApplyConfiguration(new FluentFavouriteConfig());
             modelBuilder.ApplyConfiguration(new FluentLanguageConfig());
-            modelBuilder.ApplyConfiguration(new FluentPostConfig());
             modelBuilder.ApplyConfiguration(new FluentPublisherConfig());
             modelBuilder.ApplyConfiguration(new FluentReviewConfig());
             modelBuilder.ApplyConfiguration(new FluentSeriesConfig());
-            modelBuilder.ApplyConfiguration(new FluentTemplateConfig());
             modelBuilder.ApplyConfiguration(new FluentTranslatorConfig());
-            //modelBuilder.ApplyConfiguration(new FluentUserConfig());
+            modelBuilder.ApplyConfiguration(new FluentUserConfig());
             modelBuilder.ApplyConfiguration(new FluentOrderConfig());
             modelBuilder.ApplyConfiguration(new FluentOrderItemConfig());
         }

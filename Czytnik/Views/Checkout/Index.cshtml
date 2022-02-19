@@ -22,58 +22,54 @@
       <div class="checkout__shipment-row">
         <div class="checkout__shipment-field">
           <label for="name" class="checkout__shipment-label">Imię</label>
-          <input type="text" class="checkout__shipment-input" placeholder="Imię" name="name" id="name" required>
+          <input type="text" class="checkout__shipment-input" name="name" id="name" required>
         </div>
         <div class="checkout__shipment-field">
           <label for="surname" class="checkout__shipment-label">Nazwisko</label>
-          <input type="text" class="checkout__shipment-input" placeholder="Nazwisko" name="surname" id="surname" required>
+          <input type="text" class="checkout__shipment-input" name="surname" id="surname" required>
         </div>
         <div class="checkout__shipment-field">
           <label for="phone" class="checkout__shipment-label">Numer Telefonu</label>
-          <input type="text" class="checkout__shipment-input" placeholder="Numer Telefonu" name="phone" minlength="9" maxlength="9" id="phone">
+          <input type="text" class="checkout__shipment-input" name="phone" minlength="9" maxlength="9" id="phone">
         </div>
       </div>
 
       <div class="checkout__shipment-row">
         <div class="checkout__shipment-field">
           <label for="email" class="checkout__shipment-label">Email</label>
-          <input type="email" class="checkout__shipment-input" placeholder="Email" name="email" id="email" required>
+          <input type="email" class="checkout__shipment-input" name="email" id="email" required>
         </div>
       </div>
 
       <div class="checkout__shipment-row">
         <div class="checkout__shipment-field">
           <label for="post-code" class="checkout__shipment-label">Kod Pocztowy</label>
-          <input type="text" class="checkout__shipment-input" placeholder="Kod Pocztowy" minlength="6" maxlength="6" name="post-code" id="post-code" required>
+          <input type="text" class="checkout__shipment-input"  minlength="6" maxlength="6" name="post-code" id="post-code" required>
         </div>
         <div class="checkout__shipment-field">
           <label for="post" class="checkout__shipment-label">Poczta</label>
-          <input type="text" class="checkout__shipment-input" placeholder="Poczta" name="post" id="post" required>
+          <input type="text" class="checkout__shipment-input" name="post" id="post" required>
         </div>
         <div class="checkout__shipment-field">
           <label for="town" class="checkout__shipment-label">Miejscowość</label>
-          <input type="text" class="checkout__shipment-input" placeholder="Miejscowość" name="town" id="town" required>
+          <input type="text" class="checkout__shipment-input" name="town" id="town" required>
         </div>
       </div>
 
       <div class="checkout__shipment-row">
         <div class="checkout__shipment-field">
           <label for="home" class="checkout__shipment-label">Numer Domu</label>
-          <input type="number" class="checkout__shipment-input" placeholder="Numer Domu" name="home" id="home" required>
+          <input type="number" class="checkout__shipment-input" name="home" id="home" required>
         </div>
         <div class="checkout__shipment-field">
           <label for="street" class="checkout__shipment-label">Ulica</label>
-          <input type="text" class="checkout__shipment-input" placeholder="Ulica" name="street" id="street">
+          <input type="text" class="checkout__shipment-input"name="street" id="street">
         </div>
         <div class="checkout__shipment-field">
           <label for="flat" class="checkout__shipment-label">Numer Mieszkania</label>
-          <input type="number" class="checkout__shipment-input" placeholder="Numer Mieszkania" name="flat" id="flat">
+          <input type="number" class="checkout__shipment-input" name="flat" id="flat">
         </div>
       </div>
-
-      @* <a href="#ChangeAddress" class="checkout__shipment-button checkout__shipment-button--change">Zmień adres</a>
-      <a href="#InsertManually" class="checkout__shipment-button checkout__shipment-button--manual">Wpisz adres
-        ręcznie</a> *@
     </div>
 
     <h1 class="checkout__heading">Sposób dostawy</h1>
@@ -136,12 +132,9 @@
     <div class="checkout__payment">
       <h1 class="checkout__heading">Metoda płatności</h1>
       <div id="payment-element">
-        <!--Stripe.js injects the Payment Element-->
+
       </div>
-      @* <button id="submit"> *@
-      @* <span id="button-text">Zapłać teraz</span>
-        </button>
-        <div id="payment-message" class="hidden"></div> *@
+
     </div>
 
   </main>
