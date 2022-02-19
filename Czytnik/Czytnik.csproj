@@ -80,6 +80,7 @@
     <None Include="Views\Cart\Index.cshtml" />
     <None Include="Views\Categories\Index.cshtml" />
     <None Include="Views\Checkout\Index.cshtml" />
+    <None Include="Views\Home\Info.cshtml" />
     <None Include="Views\Search\Index.cshtml" />
     <None Include="Views\Shared\Components\BookItem\Default.cshtml" />
     <None Include="Views\Shared\Components\Footer\Default.cshtml" />
@@ -110,11 +111,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Remove="Views\Home\Info.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Watch Remove="Areas\Identity\Pages\Account\Manage\Profile.cshtml" />
 	  <Watch Remove="Areas\Identity\Pages\Account\Manage\_Layout.cshtml" />
 	  <Watch Remove="Views\Cart\Index.cshtml" />
 	  <Watch Remove="Views\Categories\Index.cshtml" />
 	  <Watch Remove="Views\Checkout\Index.cshtml" />
+	  <Watch Remove="Views\Home\Info.cshtml" />
 	  <Watch Remove="Views\Index.cshtml" />
 	  <Watch Remove="Views\Shared\Components\BookItem\Default.cshtml" />
 	  <Watch Remove="Views\Shared\Components\Footer\Default.cshtml" />
@@ -147,6 +153,7 @@
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
+	  <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="4.2.0" />
 	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
 	  <PackageReference Include="Stripe.net" Version="39.89.0" />
 	</ItemGroup>

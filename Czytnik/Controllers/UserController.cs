@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace Czytnik.Controllers
 {
@@ -27,7 +29,8 @@ namespace Czytnik.Controllers
         }
         public async Task<IActionResult> Settings()
         {
-            return View();
+            UserSettingsViewModel userInfo = await _userService.GetUserData();
+            return View(userInfo);
         }
         public IActionResult Orders()
         {
@@ -77,6 +80,81 @@ namespace Czytnik.Controllers
         {
             var orders = await _userService.GetOrders(count, skip, sortBy);
             return Json(orders, new JsonSerializerOptions { PropertyNamingPolicy = null });
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditUser(UserSettingsViewModel userData)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["error"] = "Coś poszło nie tak";
+                return RedirectToAction("Settings");
+            }
+
+            bool isComplete = await _userService.EditUserData(userData);
+            if (!isComplete) TempData["error"] = "Podany użytkownik już istnieje";
+            TempData["info"] = "Twoje dane zostały zmienione";
+            return RedirectToAction("Settings");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(UserSettingsViewModel userData)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["error"] = "Coś poszło nie tak";
+                return RedirectToAction("Settings");
+            }
+            string message = await _userService.ChangePassword(userData);
+            if (message == "")
+            {
+                TempData["info"] = "Twoje hasło zostało zmienione";
+                return RedirectToAction("Settings");
+            }
+
+            switch (message)
+            {
+                case "wrong_password":
+                    TempData["error"] = "Hasło niepoprawne.";
+                    break;
+                case "password_match":
+                    TempData["error"] = "Hasła się nie zgadzają.";
+                    break;
+                case "validation_false":
+                    TempData["error"] = "Hasło nie spełnia wymagań.";
+                    break;
+                default:
+                    TempData["error"] = "Coś poszło nie tak";
+                    break;
+            }
+            return RedirectToAction("Settings");
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(UserSettingsViewModel userData)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["error"] = "Coś poszło nie tak";
+                return RedirectToAction("Settings");
+            }
+
+            string message = await _userService.DeleteAccount(userData);
+
+            switch (message)
+            {
+                case "wrong_password":
+                    TempData["error"] = "Hasło niepoprawne.";
+                    break;
+                case "password_match":
+                    TempData["error"] = "Hasła się nie zgadzają.";
+                    break;
+                case "":
+                    
+                    return RedirectToAction("Info", "Home");
+                default:
+                    TempData["error"] = "Coś poszło nie tak";
+                    break;
+            }
+            return RedirectToAction("Settings");
         }
 
     }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Czytnik_DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220201225853_Initial")]
+    [Migration("20220219143452_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -328,43 +328,6 @@ namespace Czytnik_DataAccess.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("Czytnik_Model.Models.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(20000)
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Photo")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasDefaultValue("link");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Posts");
-                });
-
             modelBuilder.Entity("Czytnik_Model.Models.Publisher", b =>
                 {
                     b.Property<int>("Id")
@@ -435,71 +398,6 @@ namespace Czytnik_DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("Series");
-                });
-
-            modelBuilder.Entity("Czytnik_Model.Models.Template", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<short>("FlatNumber")
-                        .HasColumnType("smallint");
-
-                    b.Property<short>("HouseNumber")
-                        .HasColumnType("smallint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(9)
-                        .HasColumnType("nvarchar(9)");
-
-                    b.Property<string>("Post")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("PostCode")
-                        .IsRequired()
-                        .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)");
-
-                    b.Property<string>("StreetName")
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
-
-                    b.Property<short>("StreetNumber")
-                        .HasColumnType("smallint");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("Town")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Templates");
                 });
 
             modelBuilder.Entity("Czytnik_Model.Models.Translator", b =>
@@ -737,20 +635,23 @@ namespace Czytnik_DataAccess.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("ProfilePicture")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("SecondName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Surname")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.HasDiscriminator().HasValue("User");
                 });
@@ -760,26 +661,29 @@ namespace Czytnik_DataAccess.Migrations
                     b.HasOne("Czytnik_Model.Models.Category", "Category")
                         .WithMany("Books")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Czytnik_Model.Models.Language", "EditionLanguage")
                         .WithMany("EditionBooks")
-                        .HasForeignKey("EditionLanguageId");
+                        .HasForeignKey("EditionLanguageId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Czytnik_Model.Models.Language", "OriginalLanguage")
                         .WithMany("OriginalBooks")
-                        .HasForeignKey("OriginalLanguageId");
+                        .HasForeignKey("OriginalLanguageId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Czytnik_Model.Models.Publisher", "Publisher")
                         .WithMany("Books")
                         .HasForeignKey("PublisherId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Czytnik_Model.Models.Series", "Series")
                         .WithMany("Books")
-                        .HasForeignKey("SeriesId");
+                        .HasForeignKey("SeriesId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Category");
 
@@ -822,7 +726,7 @@ namespace Czytnik_DataAccess.Migrations
                     b.HasOne("Czytnik_Model.Models.Discount", "Discount")
                         .WithMany("BookDiscounts")
                         .HasForeignKey("DiscountId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Book");
@@ -859,7 +763,8 @@ namespace Czytnik_DataAccess.Migrations
 
                     b.HasOne("Czytnik_Model.Models.User", "User")
                         .WithMany("CartItems")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Book");
 
@@ -876,7 +781,8 @@ namespace Czytnik_DataAccess.Migrations
 
                     b.HasOne("Czytnik_Model.Models.User", "User")
                         .WithMany("Favourites")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Book");
 
@@ -911,15 +817,6 @@ namespace Czytnik_DataAccess.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("Czytnik_Model.Models.Post", b =>
-                {
-                    b.HasOne("Czytnik_Model.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Czytnik_Model.Models.Review", b =>
                 {
                     b.HasOne("Czytnik_Model.Models.Book", "Book")
@@ -930,18 +827,10 @@ namespace Czytnik_DataAccess.Migrations
 
                     b.HasOne("Czytnik_Model.Models.User", "User")
                         .WithMany("Reviews")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Book");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Czytnik_Model.Models.Template", b =>
-                {
-                    b.HasOne("Czytnik_Model.Models.User", "User")
-                        .WithMany("Templates")
-                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
@@ -1065,8 +954,6 @@ namespace Czytnik_DataAccess.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("Reviews");
-
-                    b.Navigation("Templates");
                 });
 #pragma warning restore 612, 618
         }

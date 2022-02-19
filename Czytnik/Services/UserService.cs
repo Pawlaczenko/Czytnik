@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Czytnik.Services
 {
@@ -16,12 +17,14 @@ namespace Czytnik.Services
         private readonly AppDbContext _dbContext;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public UserService(AppDbContext dbContext, IHttpContextAccessor accessor, UserManager<User> userManager)
+        public UserService(AppDbContext dbContext, SignInManager<User> signInManager, IHttpContextAccessor accessor, UserManager<User> userManager)
         {
             _dbContext = dbContext;
             _httpContextAccessor = accessor;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public async Task<UserProfileViewModel> GetProfileInfo()
@@ -78,6 +81,92 @@ namespace Czytnik.Services
 
             var results = await reviews.ToListAsync();
             return results;
+        }
+
+        public async Task<UserSettingsViewModel> GetUserData()
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var userData = new UserSettingsViewModel
+            {
+                Username = currentUser.UserName,
+                Birthdate = currentUser.BirthDate,
+                FirstName = currentUser.FirstName,
+                PhoneNumber = currentUser.PhoneNumber,
+                ProfilePicture = currentUser.ProfilePicture,
+                SecondName = currentUser.SecondName,
+                Surname = currentUser.Surname
+            };
+
+            return userData;
+        }
+
+        public async Task<bool> EditUserData(UserSettingsViewModel userData)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var existsFlag = _dbContext.Users.Where(u => u.UserName == userData.Username && u.Id != currentUser.Id).Select(u => u.UserName).FirstOrDefault();
+
+            if (currentUser != null && existsFlag == null)
+            {
+                currentUser.PhoneNumber = userData.PhoneNumber;
+                currentUser.UserName = userData.Username;
+                currentUser.FirstName = userData.FirstName;
+                currentUser.SecondName = userData.SecondName;
+                currentUser.Surname = userData.Surname;
+                currentUser.BirthDate = userData.Birthdate;
+
+                await _userManager.UpdateAsync(currentUser);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<string> ChangePassword(UserSettingsViewModel userData)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+
+            if (currentUser != null)
+            {
+                bool passwordFlag = await _userManager.CheckPasswordAsync(currentUser, userData.CurrentPassword);
+
+                if (!passwordFlag) return "wrong_password";
+                if (userData.NewPassword != userData.RepeatNewPassword) return "password_match";
+
+                var passVal = new PasswordValidator<User>();
+                bool validatePasswordFlag = passVal.ValidateAsync(_userManager, currentUser, userData.NewPassword).Result.Succeeded;
+
+                if (validatePasswordFlag == false) return "validation_false";
+
+                await _userManager.ChangePasswordAsync(currentUser, userData.CurrentPassword, userData.NewPassword);
+
+                await _userManager.UpdateAsync(currentUser);
+
+                await _dbContext.SaveChangesAsync();
+                return "";
+            }
+            return "error";
+        }
+
+        public async Task<string> DeleteAccount(UserSettingsViewModel userData)
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+
+            if (currentUser != null)
+            {
+                bool passwordFlag = await _userManager.CheckPasswordAsync(currentUser, userData.CurrentPassword);
+
+                if (!passwordFlag) return "wrong_password";
+                if (userData.CurrentPassword != userData.RepeatCurrentPassword) return "password_match";
+
+                await _signInManager.SignOutAsync();
+                var d = await _userManager.DeleteAsync(currentUser);
+                if (d.Succeeded) {
+                    await _dbContext.SaveChangesAsync();
+                    return "";
+                }
+
+            }
+            return "error";
         }
 
         public async Task<bool> DidUserRateThisBook(int bookId)

@@ -24,11 +24,11 @@ namespace Czytnik_DataAccess.FluentConfig
             modelBuilder.Property(i => i.IsInStock).IsRequired().HasDefaultValue(true);
             modelBuilder.Property(i => i.NumberOfCopiesSold).HasDefaultValue(0);
             
-            modelBuilder.HasOne(i => i.OriginalLanguage).WithMany(i => i.OriginalBooks).HasForeignKey(i => i.OriginalLanguageId);
-            modelBuilder.HasOne(i => i.EditionLanguage).WithMany(i => i.EditionBooks).HasForeignKey(i => i.EditionLanguageId);
-            modelBuilder.HasOne(i => i.Category).WithMany(i => i.Books).HasForeignKey(i => i.CategoryId);
-            modelBuilder.HasOne(i => i.Series).WithMany(i => i.Books).HasForeignKey(i => i.SeriesId);
-            modelBuilder.HasOne(i => i.Publisher).WithMany(i => i.Books).HasForeignKey(i => i.PublisherId);
+            modelBuilder.HasOne(i => i.OriginalLanguage).WithMany(i => i.OriginalBooks).HasForeignKey(i => i.OriginalLanguageId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.HasOne(i => i.EditionLanguage).WithMany(i => i.EditionBooks).HasForeignKey(i => i.EditionLanguageId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.HasOne(i => i.Category).WithMany(i => i.Books).HasForeignKey(i => i.CategoryId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.HasOne(i => i.Series).WithMany(i => i.Books).HasForeignKey(i => i.SeriesId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.HasOne(i => i.Publisher).WithMany(i => i.Books).HasForeignKey(i => i.PublisherId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
