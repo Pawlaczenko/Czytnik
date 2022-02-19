@@ -1,6 +1,9 @@
 ﻿using Czytnik.Services;
+using Czytnik_Model.Models;
 using Czytnik_Model.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,15 +15,21 @@ namespace Czytnik.Controllers
     public class CartController : Controller
     {
         private readonly ICartService _cartService;
+        private readonly UserManager<User> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CartController(ICartService cartService)
+        public CartController(ICartService cartService, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _cartService = cartService;
+            _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<IActionResult> Index()
         {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+
             var cartItems = await _cartService.GetCartItems();
-            if(cartItems == null) return View("Empty");
+            if(currentUser != null && cartItems == null) return View("Empty");
             return View(cartItems);
         }
         public IActionResult Empty()

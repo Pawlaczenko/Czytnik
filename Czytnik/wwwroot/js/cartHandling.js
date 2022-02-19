@@ -87,8 +87,9 @@
     deleteButtonClicked = true;
     const book = button.dataset.book;
 
-    if (isUserLogged == 'True') deleteRecord(button, book);
-    else {
+    if (isUserLogged == 'True') {
+      deleteRecord(button, book);
+    }else {
       let items = JSON.parse(myStorage.getItem('cartItems'));
       if (!items) return;
       items = items.filter(item => item.bookId != book);
@@ -97,6 +98,9 @@
       renderCartItemsFromLocalStorage();
       deleteButtonClicked = false;
       updateNavigationCart();
+      if(items.length == 0){
+        window.location.href = '/Cart/Empty';
+      }
     }
   };
 
@@ -298,6 +302,10 @@
         cartItemsCountElement.innerText = `${cartItemsCountElement.dataset.count} przedmioty`;
         setCartPrice();
         setCartPromotion();
+
+        if (cartItemsCountElement.dataset.count == 0) {
+          window.location.href = '/Cart/Empty';
+        }
       },
       error: function (err) {
         deleteButtonClicked = false;
