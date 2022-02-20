@@ -14,10 +14,10 @@
         grid-template-columns: 60% 40%;
         grid-template-areas:
         "content side";
+    }
 
-        .form__submit {
-            margin-top: 5rem;
-        }
+    .form__submit {
+        margin-top: 5rem;
     }
 
     width: Min(96rem, 90vw);
@@ -30,7 +30,7 @@
 
     @media only screen and (max-width: 800px) {
         grid-template-columns: 1fr;
-        grid-template-areas: 
+        grid-template-areas:
         "side"
         "content";
       }
@@ -38,7 +38,7 @@
     //aside
     &__side {
         grid-area: side;
-        background: 
+        background:
             url("../assets/svg/form_decoration.svg") top left no-repeat, var(--side-back-color);
         background-size: cover;
         background-blend-mode: soft-light;
@@ -72,7 +72,7 @@
         margin: 0 auto;
     }
 
-    //Kontent 
+    //Kontent
 
     &__content {
         grid-area: content;
@@ -164,14 +164,14 @@
 
         background-color: var(--color-grey-lightest);
         border-radius: 5px;
-        
+
         font-size: 1.6rem;
 
         &:focus {
             background-color: var(--color-white-dark);
         }
     }
-    
+
     &__errorMessage {
         display: none;
     }
