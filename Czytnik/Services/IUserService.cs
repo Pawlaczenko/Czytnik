@@ -20,5 +20,6 @@ namespace Czytnik.Services
         Task<bool> EditUserData(UserSettingsViewModel userData);
         Task<string> ChangePassword(UserSettingsViewModel userData);
         Task<string> DeleteAccount(UserSettingsViewModel userData);
+        Task<string> GetProfilePicture();
     }
 }

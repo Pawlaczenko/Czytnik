@@ -97,7 +97,7 @@
       myStorage.setItem('cartItems', JSON.stringify(items));
       renderCartItemsFromLocalStorage();
       deleteButtonClicked = false;
-      updateNavigationCart();
+        updateNavigationCart();
       if(items.length == 0){
         window.location.href = '/Cart/Empty';
       }

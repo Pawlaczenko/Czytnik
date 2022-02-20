@@ -1,4 +1,5 @@
-﻿<nav class="navigation">
+﻿@model dynamic
+<nav class="navigation">
   <div class="navigation__content wrapper">
     <button class="navigation__burger js-navigation__burger">
       <div class="navigation__burger-line"></div>
@@ -23,12 +24,13 @@
     </ul>
 
     <div class="navigation__buttons">
-      <partial name="_LoginPartial" />
-      <a href="/Cart" class="navigation__buttons-cart js-navigation-cart" data-logged="@(Model == null ? false : true)">
+      @*<partial name="_LoginPartial" />*@
+        @Html.PartialAsync("_LoginPartial", $"{Model.path}" ).Result
+      <a href="/Cart" class="navigation__buttons-cart js-navigation-cart" data-logged="@(Model.quantity == null ? false : true)">
         <svg class="navigation__buttons-cart-icon" viewBox="0 0 32 32">
           <use xlink:href="/assets/svg/sprite.svg#icon-cart"></use>
         </svg>
-        <div class="navigation__buttons-cart-quantity js-nav-cart-quantity">@(Model != null ? Model : "")</div>
+        <div class="navigation__buttons-cart-quantity js-nav-cart-quantity">@(Model.quantity != null ? Model.quantity : "")</div>
       </a>
     </div>
     <form class="navigation__search js-search-form" asp-controller="Search" asp-action="Index" method="GET">
@@ -59,16 +61,6 @@
                 Kategorie
             </a>
         </li>
-        @* <li class="navigation__mobile-item">
-            <a href="/Home/Kontakt" class="navigation__mobile-link navigation__links-link">
-                Kontakt
-            </a>
-        </li>
-        <li class="navigation__mobile-item">
-            <a href="/Blog" class="navigation__mobile-link navigation__links-link">
-                Blog
-            </a>
-        </li> *@
     </ul>
 
     <partial name="_MobileLoginPartial" />

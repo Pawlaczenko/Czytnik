@@ -5,7 +5,12 @@
 <section class="user wrapper">
     <header class="user__header">
         <figure class="user__figure">
-            <img src="~/assets/img/defaultProfilePicture.png" class="user__image" />
+            @if(Model.ProfilePicture == null || Model.ProfilePicture == "")
+            {
+                <img src="~/assets/img/defaultProfilePicture.png" class="user__image" alt="profile picture" />
+            } else {
+                <img src="~/uploads/@Model.ProfilePicture" class="user__image" alt="profile picture" />
+            }
         </figure>
         <p class="user__username">@Model.Username</p>
         <p class="user__name">@Model.FullName</p>
