@@ -1,12 +1,17 @@
 ﻿using Czytnik_DataAccess.Database;
 using Czytnik_Model.Models;
 using Czytnik_Model.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -18,13 +23,17 @@ namespace Czytnik.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private string[] permittedExtensions = { ".png", ".jpg", ".gif", ".jpeg" };
 
-        public UserService(AppDbContext dbContext, SignInManager<User> signInManager, IHttpContextAccessor accessor, UserManager<User> userManager)
+
+        public UserService(AppDbContext dbContext, SignInManager<User> signInManager, IHttpContextAccessor accessor, UserManager<User> userManager, IWebHostEnvironment webHostEnvironment)
         {
             _dbContext = dbContext;
             _httpContextAccessor = accessor;
             _userManager = userManager;
             _signInManager = signInManager;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<UserProfileViewModel> GetProfileInfo()
@@ -42,7 +51,7 @@ namespace Czytnik.Services
                 Username = currentUser.UserName,
                 UserReviews = GetUserReviews(4, "date_desc").Result,
                 Favourites = GetAllFavourites(0, 4, "").Result,
-                Orders = GetOrders(2, 0, "").Result
+                Orders = GetOrders(2, 0, "").Result,
             };
             return userInfoModel;
         }
@@ -77,7 +86,7 @@ namespace Czytnik.Services
                     break;
             }
 
-            if (count > 0) reviews = reviews.Take(count); 
+            if (count > 0) reviews = reviews.Take(count);
 
             var results = await reviews.ToListAsync();
             return results;
@@ -92,7 +101,7 @@ namespace Czytnik.Services
                 Birthdate = currentUser.BirthDate,
                 FirstName = currentUser.FirstName,
                 PhoneNumber = currentUser.PhoneNumber,
-                ProfilePicture = currentUser.ProfilePicture,
+                ProfilePath = currentUser.ProfilePicture,
                 SecondName = currentUser.SecondName,
                 Surname = currentUser.Surname
             };
@@ -113,6 +122,19 @@ namespace Czytnik.Services
                 currentUser.SecondName = userData.SecondName;
                 currentUser.Surname = userData.Surname;
                 currentUser.BirthDate = userData.Birthdate;
+
+                if(userData.ProfilePicture != null)
+                {
+                    string fileName = await UploadImage(userData.ProfilePicture);
+                    if (fileName == "")
+                        return false;
+                    if (currentUser.ProfilePicture != null && currentUser.ProfilePicture != "")
+                    {
+                        DeleteFileFromFolder(currentUser.ProfilePicture);
+                    }
+                    currentUser.ProfilePicture = fileName;
+                }
+                
 
                 await _userManager.UpdateAsync(currentUser);
                 await _dbContext.SaveChangesAsync();
@@ -160,7 +182,8 @@ namespace Czytnik.Services
 
                 await _signInManager.SignOutAsync();
                 var d = await _userManager.DeleteAsync(currentUser);
-                if (d.Succeeded) {
+                if (d.Succeeded)
+                {
                     await _dbContext.SaveChangesAsync();
                     return "";
                 }
@@ -201,8 +224,8 @@ namespace Czytnik.Services
         public async Task DeleteFavourite(int bookId)
         {
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-            var favourite = _dbContext.Favourites.Where(f => f.BookId == bookId && f.User==currentUser).FirstOrDefault();
-            if (currentUser != null && favourite!=null)
+            var favourite = _dbContext.Favourites.Where(f => f.BookId == bookId && f.User == currentUser).FirstOrDefault();
+            if (currentUser != null && favourite != null)
             {
                 _dbContext.Favourites.Remove(favourite);
                 await _dbContext.SaveChangesAsync();
@@ -219,7 +242,7 @@ namespace Czytnik.Services
                 Authors = f.Book.BookAuthors.Select(ba => $"{ba.Author.FirstName} {ba.Author.SecondName} {ba.Author.Surname}").ToList(),
             });
 
-            switch(sortBy)
+            switch (sortBy)
             {
                 case "title_desc":
                     favourites = favourites.OrderByDescending(f => f.Title);
@@ -254,9 +277,9 @@ namespace Czytnik.Services
                         .Where(oi => oi.OrderId == o.Id)
                         .Select(oi => oi.Price * oi.Quantity)
                         .Sum()
-            });
+                });
 
-            foreach(var order in orders)
+            foreach (var order in orders)
             {
                 order.CalculatedPrice = Math.Round(order.CalculatedPrice, 2);
             }
@@ -279,6 +302,98 @@ namespace Czytnik.Services
             if (count > 0) orders = orders.Skip(skip).Take(count);
             var results = await orders.ToListAsync();
             return results;
+        }
+
+        public async Task<string> UploadImage(IFormFile file)
+        {
+            long totalBytes = file.Length;
+            string ext = System.IO.Path.GetExtension(file.FileName).ToLowerInvariant();
+
+            if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
+            {
+                return "";
+            }
+
+            string fileName = RandomString(25) + ext;
+
+
+            byte[] buffer = new byte[16 * 1024];
+            using (FileStream output = System.IO.File.Create(GetPathAndFilename(fileName)))
+            {
+                using (Stream input = file.OpenReadStream())
+                {
+                    int readBytes;
+                    while ((readBytes = input.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        await output.WriteAsync(buffer, 0, readBytes);
+                        totalBytes += readBytes;
+                    }
+                }
+            }
+            return fileName;
+        }
+
+        private string GetPathAndFilename(string filename)
+        {
+            string path = _webHostEnvironment.WebRootPath + "\\uploads\\";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            return path + filename;
+        }
+
+        private string EnsureFilename(string fileName)
+        {
+            if (fileName.Contains("\\"))
+                fileName = fileName.Substring(fileName.LastIndexOf("\\") + 1);
+            return fileName;
+        }
+
+        static string RandomString(int length)
+        {
+            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            StringBuilder res = new StringBuilder();
+            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+            {
+                byte[] uintBuffer = new byte[sizeof(uint)];
+
+                while (length-- > 0)
+                {
+                    rng.GetBytes(uintBuffer);
+                    uint num = BitConverter.ToUInt32(uintBuffer, 0);
+                    res.Append(valid[(int)(num % (uint)valid.Length)]);
+                }
+            }
+
+            return res.ToString();
+        }
+
+        public void DeleteFileFromFolder(string fileName)
+        {
+
+            string strPhysicalFolder = _webHostEnvironment.WebRootPath + "\\uploads\\";
+
+            string strFileFullPath = strPhysicalFolder + fileName;
+
+            if (System.IO.File.Exists(strFileFullPath))
+            {
+                System.IO.File.Delete(strFileFullPath);
+            }
+
+        }
+
+        public async Task<string> GetProfilePicture()
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+
+            if (currentUser != null)
+            {
+                Console.WriteLine("_________");
+                Console.WriteLine(currentUser.ProfilePicture);
+                return currentUser.ProfilePicture.ToString();
+            }
+            return "";
         }
     }
 }

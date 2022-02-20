@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@model string
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
@@ -7,7 +8,14 @@
 {
     <div class="dropdown navigation__buttons-dropdown">
         <a class="dropdown__figure" asp-controller="User" asp-action="Profile">
-            <img class="dropdown__profile" src="~/assets/img/defaultProfilePicture.png" />
+            @if (Model == null || Model == "")
+            {
+                <img src="~/assets/img/defaultProfilePicture.png" class="dropdown__profile" alt="profile picture" />
+            }
+            else
+            {
+                <img src="~/uploads/@Model" class="dropdown__profile" alt="profile picture" />
+            }
         </a>
         <ul class="dropdown__content">
             <li class="dropdown__item">

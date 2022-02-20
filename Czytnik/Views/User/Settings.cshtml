@@ -10,10 +10,17 @@
     <div class="user-settings__error">@TempData["error"]</div>
     <div class="user-settings__info">@TempData["info"]</div>
     <div class="user-container user-container--settings">
-        <form class="user-settings__form settings-form" id="profileSettingsForm" method="post" asp-action="EditUser">
+        <form enctype="multipart/form-data" class="user-settings__form settings-form" id="profileSettingsForm" method="post" asp-action="EditUser" >
             <figure class="settings-form__figure">
-                <input type="file" accept="image/png, image/jpeg, image/gif" id="settingsImageInput" class="settings-form__image-input" />
-                <img src="~/assets/img/defaultProfilePicture.png" id="settingsImage" class="settings-form__image" />
+                <input type="file" accept="image/png, image/jpeg, image/gif" id="settingsImageInput" class="settings-form__image-input" name="file" asp-for="ProfilePath" />
+                @if (Model.ProfilePath == null || Model.ProfilePath == "")
+                {
+                    <img src="~/assets/img/defaultProfilePicture.png" id="settingsImage" class="settings-form__image" alt="profile picture" />
+                }
+                else
+                {
+                    <img src="~/uploads/@Model.ProfilePath" id="settingsImage" class="settings-form__image" alt="profile picture" />
+                }
                 <label for="settingsImageInput" class="settings-form__edit"></label>
             </figure>
             <h3 class="settings-form__heading">Ustawienia Profilu</h3>

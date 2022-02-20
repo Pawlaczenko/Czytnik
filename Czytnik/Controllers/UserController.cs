@@ -9,6 +9,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace Czytnik.Controllers
 {
@@ -82,7 +83,7 @@ namespace Czytnik.Controllers
             return Json(orders, new JsonSerializerOptions { PropertyNamingPolicy = null });
         }
         [HttpPost]
-        public async Task<IActionResult> EditUser(UserSettingsViewModel userData)
+        public async Task<IActionResult> EditUser(UserSettingsViewModel userData, IFormFile file)
         {
             if (!ModelState.IsValid)
             {
@@ -90,6 +91,7 @@ namespace Czytnik.Controllers
                 return RedirectToAction("Settings");
             }
 
+            userData.ProfilePicture = file;
             bool isComplete = await _userService.EditUserData(userData);
             if (!isComplete) TempData["error"] = "Podany użytkownik już istnieje";
             TempData["info"] = "Twoje dane zostały zmienione";
