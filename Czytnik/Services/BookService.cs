@@ -221,7 +221,8 @@ namespace Czytnik.Services
 
         private decimal CalculateDiscount(decimal price, int discount)
         {
-            var discountPercentage = ((decimal)discount / 100);
+            var percent = 100 - discount;
+            var discountPercentage = ((decimal)percent / 100);
             return Math.Round(price * discountPercentage, 2);
         }
 
