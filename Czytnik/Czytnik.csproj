@@ -101,6 +101,7 @@
   <ItemGroup>
     <Folder Include="Styles\layout\" />
     <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 
 	<ItemGroup>
