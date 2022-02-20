@@ -27,7 +27,7 @@
                 <span asp-validation-for="Input.Password" class="form__warning"></span>
                 <input asp-for="Input.Password" type="password" placeholder="Hasło" class="form__input form-control" id="passwordInput" required />
             </label>
-            <a asp-page="./ForgotPassword" class="form__forgot">Nie pamiętasz hasła?</a>
+            @* <a asp-page="./ForgotPassword" class="form__forgot">Nie pamiętasz hasła?</a> *@
             <input type="submit" class="form__submit button button--secondary button--medium" value="Zaloguj się" />
         </form>
     </div>
