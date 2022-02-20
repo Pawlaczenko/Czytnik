@@ -389,9 +389,7 @@ namespace Czytnik.Services
 
             if (currentUser != null)
             {
-                Console.WriteLine("_________");
-                Console.WriteLine(currentUser.ProfilePicture);
-                return currentUser.ProfilePicture.ToString();
+                return currentUser.ProfilePicture;
             }
             return "";
         }
