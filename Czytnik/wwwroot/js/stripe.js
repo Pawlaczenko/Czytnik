@@ -94,7 +94,7 @@
             elements,
             confirmParams: {
               // Make sure to change this to your payment completion page
-              return_url: 'https://localhost:5001/Checkout/Success',
+              return_url: 'https://wseilab520211214185240.azurewebsites.net/Checkout/Success',
             },
           });
 
